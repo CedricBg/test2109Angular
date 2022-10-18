@@ -1,0 +1,33 @@
+<div>
+<form [formGroup]="EmployeeForm" (ngSubmit)="AddEmployee()">
+  <H3>Ajout d'une personne</H3><br>
+
+  <p>Nom :<br><input nbInput formControlName="surName" shape="semi-round"></p>
+  <P *ngIf="EmployeeForm.controls['surName'].invalid && EmployeeForm.controls['surName'].touched">
+    Nom Obligatoire
+  </P>
+  <p>Prénom :<br><input nbInput formControlName="firstName" shape="semi-round"></p>
+  <p>BirthDate :<br><input type="date" formControlName="birthDate" shape="semi-round"></p>
+  <p>Entré en service :<br><input type="date" formControlName="entryService" shape="semi-round"></p>
+  <p>Nr° carte ministerielle :<br><input  nbInput formControlName="securityCard" shape="semi-round"></p>
+  <p>Nr° carte employée :<br><input nbInput formControlName="employeeCardNumber" shape="semi-round"></p>
+  <p>Nr de registre national :<br><input nbInput formControlName="registreNational" shape="semi-round"></p>
+  <span *ngIf="EmployeeForm.controls['registreNational'].invalid && EmployeeForm.controls['registreNational'].touched">
+    Registre  Obligatoire
+  </span>
+
+  <p>
+    <mat-checkbox formControlName="vehicle" value="1">Oui</mat-checkbox>
+</p>
+  <p>
+    <mat-checkbox formControlName="actif" value="1">Oui</mat-checkbox>
+  </p>
+
+
+
+
+  <button type="submit" nbButton>Entregistrer</button>
+
+</form>
+<a routerLink="../AllEmployees">all</a>
+</div>
