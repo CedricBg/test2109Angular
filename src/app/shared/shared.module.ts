@@ -11,6 +11,7 @@ import  localeFr from "@angular/common/locales/fr-BE";
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 registerLocaleData( localeFr , 'fr-BE');
 
@@ -32,6 +33,7 @@ registerLocaleData( localeFr , 'fr-BE');
     HttpClientModule,
     MatExpansionModule,
     MatCheckboxModule,
+    MatFormFieldModule,
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],
