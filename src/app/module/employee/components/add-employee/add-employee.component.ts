@@ -1,6 +1,6 @@
 import { Employee } from './../../../../models/Employee.models';
 import { EmployeeService } from './../../../../services/employee.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,11 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss']
 })
+
 export class AddEmployeeComponent implements OnInit {
 
   EmployeeForm : FormGroup
 
-  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder) { }
+  constructor(@Inject(EmployeeService) private _serviceEmployee : EmployeeService, private _builder : FormBuilder) { }
 
   ngOnInit(): void {
     this.EmployeeForm = this._builder.group({
