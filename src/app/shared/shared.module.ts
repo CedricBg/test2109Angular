@@ -1,17 +1,20 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSliderModule } from '@angular/material/slider';
-import { MatToolbarModule} from '@angular/material/toolbar';
-import { MatIconModule} from '@angular/material/icon';
-import { MatSidenavModule} from '@angular/material/sidenav';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatExpansionModule } from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule }  from '@angular/material/radio';
 import  localeFr from "@angular/common/locales/fr-BE";
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import {MatInputModule} from '@angular/material/input';
 
 registerLocaleData( localeFr , 'fr-BE');
 
@@ -34,6 +37,9 @@ registerLocaleData( localeFr , 'fr-BE');
     MatExpansionModule,
     MatCheckboxModule,
     MatFormFieldModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],
