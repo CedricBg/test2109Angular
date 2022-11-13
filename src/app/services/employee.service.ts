@@ -17,9 +17,9 @@ export class EmployeeService implements OnInit {
 
   insert(employee : Employee){
 
-    this._httpClient.post(environment.baseAdres+ "Employee/insert", employee).subscribe({
-      next : () =>{
-        console.log('ok');
+    this._httpClient.post<string>(environment.baseAdres+ "Employee/insert", employee).subscribe({
+      next : (data : string) =>{
+        console.log(data);
       },
       error : (error) =>{
         console.log(error.message)

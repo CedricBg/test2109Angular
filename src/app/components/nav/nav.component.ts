@@ -18,4 +18,8 @@ export class NavComponent implements OnInit {
   {
     this._authService.OpenDialog();
   }
+
+  Logout(): void {
+    this._authService.Logout();
+  }
 }

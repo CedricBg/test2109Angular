@@ -8,10 +8,7 @@ const routes: Routes = [
 
   { path : 'employee' , loadChildren :()=> import('./module/employee/employee.module').then(m => m.EmployeeModule) },
   { path : 'auth' , loadChildren: ()=> import('./module/auth/auth.module').then(m=>m.AuthModule)},
-  { path : 'index' , component : AppComponent , children : [
-    { path : 'navigation' , component : NavComponent}
-  ]},
-  { path : '', redirectTo : 'employee', pathMatch : 'full'},
+  { path : '', redirectTo : 'auth', pathMatch : 'full'},
 
 
 ];

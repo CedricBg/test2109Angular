@@ -1,4 +1,5 @@
 import { UserLogin } from './../models/userlogin.models';
+import { User } from './../models/user.models';
 import { Login } from './../models/login.models';
 import { LoginComponent } from './../module/auth/components/login/login.component';
 import { environment } from './../../environments/environment';
@@ -6,14 +7,15 @@ import { AddLogin } from './../models/AddLogin.models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private _httpClient : HttpClient, public dialog : MatDialog) { }
-  returnData! : string
+  constructor(private _httpClient : HttpClient,private _router : Router  ,public dialog : MatDialog) { }
+  returnData! : User
   AddLogin(form : AddLogin)
   {
     this._httpClient.post<string>(environment.baseAdres+ 'Employee/AddLogin', form).subscribe()
@@ -30,13 +32,27 @@ export class AuthService {
     const dialogRef = this.dialog.open(LoginComponent,diallogConfig);
   }
 
-  Login(user : Login)
+  Login(userin : Login)
   {
-    return this._httpClient.post<string>(environment.baseAdres+ 'Auth/login', user).subscribe({
-      next : (data : string)=> {
+    return this._httpClient.post<User>(environment.baseAdres+ 'Auth/login', userin).subscribe({
+      next : (data : User)=> {
         this.returnData = data
-
+        if(this.returnData != null)
+        {
+          sessionStorage.setItem('token' , this.returnData.token)
+          sessionStorage.setItem('firstName' , this.returnData.firstName)
+          sessionStorage.setItem('surMame', this.returnData.surName)
+          sessionStorage.setItem('id', this.returnData.id.toString())
+          sessionStorage.setItem('role', this.returnData.role)
+          this._router.navigate(["employee"])
+        }
       }
     })
+  }
+
+  Logout()
+  {
+    sessionStorage.clear();
+    this._router.navigate(["./"])
   }
 }
