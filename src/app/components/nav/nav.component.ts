@@ -7,11 +7,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-
+ isConnected : boolean
   constructor( private _authService : AuthService )
   {  }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
+    this._authService.connectedSubject.subscribe
+    ({
+      next : (data : boolean) => this.isConnected = data
+    })
   }
 
   Login()

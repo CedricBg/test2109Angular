@@ -1,12 +1,13 @@
 
-<div>
+<div *ngIf="!isConnected">
   <button (click)="Login()" mat-button>
     <mat-icon>
       login
     </mat-icon>
     Connexion
   </button>
-
+</div>
+<div *ngIf="isConnected">
 <button (click)="Logout()" mat-button>
   <mat-icon>
     logout

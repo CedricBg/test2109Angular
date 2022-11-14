@@ -1,4 +1,4 @@
-import { UserLogin } from './../models/userlogin.models';
+
 import { User } from './../models/user.models';
 import { Login } from './../models/login.models';
 import { LoginComponent } from './../module/auth/components/login/login.component';
@@ -8,11 +8,25 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private _isConnected : boolean
+  get isConnected() : boolean
+  {
+    return sessionStorage.getItem('token') != null ? true : false
+  }
+
+  connectedSubject : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isConnected)
+
+  emitSubject()
+  {
+    this.connectedSubject.next(this.isConnected)
+  }
 
   constructor(private _httpClient : HttpClient,private _router : Router  ,public dialog : MatDialog) { }
   returnData! : User
@@ -44,7 +58,11 @@ export class AuthService {
           sessionStorage.setItem('surMame', this.returnData.surName)
           sessionStorage.setItem('id', this.returnData.id.toString())
           sessionStorage.setItem('role', this.returnData.role)
+          this.emitSubject()
+          console.log(this.isConnected)
           this._router.navigate(["employee"])
+
+
         }
       }
     })
@@ -53,6 +71,8 @@ export class AuthService {
   Logout()
   {
     sessionStorage.clear();
+    this.emitSubject()
+    console.log(this.isConnected)
     this._router.navigate(["./"])
   }
 }

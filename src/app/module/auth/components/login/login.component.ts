@@ -11,16 +11,15 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   constructor(private _builder : FormBuilder, private _authService : AuthService) { }
-
   formLogin : FormGroup
 
   ngOnInit(): void
   {
-    this._initform()
 
+    this.initform()
   }
 
-  _initform()
+  initform()
   {
     this.formLogin = this._builder.group({
       login :['',Validators.required],
