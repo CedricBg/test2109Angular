@@ -43,8 +43,10 @@ export class AuthService {
     diallogConfig.autoFocus = true;
     diallogConfig.height = '200px';
     diallogConfig.width = '400px';
+
     const dialogRef = this.dialog.open(LoginComponent,diallogConfig);
   }
+
 
   Login(userin : Login)
   {
@@ -59,7 +61,6 @@ export class AuthService {
           sessionStorage.setItem('id', this.returnData.id.toString())
           sessionStorage.setItem('role', this.returnData.role)
           this.emitSubject()
-          console.log(this.isConnected)
           this._router.navigate(["employee"])
 
 
@@ -72,7 +73,6 @@ export class AuthService {
   {
     sessionStorage.clear();
     this.emitSubject()
-    console.log(this.isConnected)
     this._router.navigate(["./"])
   }
 }

@@ -1,10 +1,5 @@
-<mat-accordion *ngFor="let employee of listEmployee"  class="example-headers-align">
-  <mat-expansion-panel hideToggle>
-    <mat-expansion-panel-header>
-      <mat-panel-title>{{employee.firstName}} {{employee.surName}}</mat-panel-title>
-    </mat-expansion-panel-header>
-    <mat-panel-description >{{employee.entryService}} Voiture <span *ngIf="employee.vehicle"> Ok </span>   {{employee.birthDate | date}} {{employee.registreNational}} </mat-panel-description>
+<div *ngFor="let employee of listEmployee">
+      <mat-panel-title>{{employee.id}} {{employee.firstName}} {{employee.surName}} <button mat-button (click)="GetOne(employee.id)">Détails</button> </mat-panel-title>
 
-  </mat-expansion-panel>
+    </div>
 
-</mat-accordion>

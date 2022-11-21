@@ -1,4 +1,4 @@
-import { Employee } from './../../../../models/Employee.models';
+import { DetailedEmployee } from '../../../../models/DetailedEmployee.models';
 import { EmployeeService } from './../../../../services/employee.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
