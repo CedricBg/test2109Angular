@@ -1,3 +1,4 @@
+
 import { EmployeeComponent } from './employee.component';
 import { ListemployeeComponent } from './components/listemployee/listemployee.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
@@ -8,9 +9,11 @@ const routes: Routes = [
   { path : 'employee' , component : EmployeeComponent, children :[
     { path : 'addEmployee' , component : AddEmployeeComponent },
     { path : 'AllEmployees' , component : ListemployeeComponent},
+
   ]
 },
-{ path : '', redirectTo : 'employee', pathMatch : 'full'}
+{ path : '', redirectTo : 'employee', pathMatch : 'full'},
+{ path : '**', redirectTo : 'employee', pathMatch : 'full'}
 
 
 ];

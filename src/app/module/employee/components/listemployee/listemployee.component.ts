@@ -1,7 +1,8 @@
+import { DetailedEmployee } from './../../../../models/DetailedEmployee.models';
 import { Component, OnInit } from '@angular/core';
-import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Employee } from 'src/app/models/employee.models';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Component({
@@ -11,7 +12,13 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class ListemployeeComponent implements OnInit {
   listEmployee! : Employee[]
-  employee! : DetailedEmployee
+  SelectedEmployee! : DetailedEmployee
+  select : boolean = false
+
+
+
+
+  displayedColumns: string[] = ['surName', 'firstName','id'];
   constructor(private _serviceEmployee : EmployeeService) { }
 
   ngOnInit(): void {
@@ -23,17 +30,17 @@ export class ListemployeeComponent implements OnInit {
     this._serviceEmployee.get().subscribe({
       next : async (data : Employee[])=>{
         this.listEmployee = data
+
       }
     })
   }
-  GetOne(id : number)
-  {
 
+  GetOne(id: number)
+  {
+    this.select = true
     this._serviceEmployee.getOne(id).subscribe({
-      next : async (data : DetailedEmployee)=>
-      {
-          this.employee = data
-          console.log(data)
+      next : (data : DetailedEmployee) => {
+        this.SelectedEmployee = data
       }
     })
   }

@@ -15,6 +15,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 registerLocaleData( localeFr , 'fr-BE');
 
@@ -40,6 +42,8 @@ registerLocaleData( localeFr , 'fr-BE');
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],

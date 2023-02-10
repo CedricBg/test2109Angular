@@ -9,7 +9,7 @@ import { EmployeeComponent } from './employee.component';
   declarations: [
     AddEmployeeComponent,
     ListemployeeComponent,
-    EmployeeComponent
+    EmployeeComponent,
   ],
   imports: [
     EmployeeRoutingModule,

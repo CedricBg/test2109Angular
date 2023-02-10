@@ -62,8 +62,6 @@ export class AuthService {
           sessionStorage.setItem('role', this.returnData.role)
           this.emitSubject()
           this._router.navigate(["employee"])
-
-
         }
       }
     })

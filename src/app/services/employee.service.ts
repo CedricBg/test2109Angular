@@ -1,8 +1,9 @@
+import { Router } from '@angular/router';
 import { DetailedEmployee } from './../models/DetailedEmployee.models';
 import { environment } from './../../environments/environment';
 import { HttpClient} from '@angular/common/http';;
 import { Injectable, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Employee } from '../models/employee.models';
 
 
@@ -12,8 +13,8 @@ import { Employee } from '../models/employee.models';
 })
 export class EmployeeService implements OnInit {
 
-  constructor(private _httpClient : HttpClient) { }
-  emplo! : Employee
+  constructor(private _httpClient : HttpClient, private _route : Router ) { }
+
   ngOnInit(): void { }
 
   insert(employee : DetailedEmployee){

@@ -1,5 +1,5 @@
 <p>Bonjour {{name | titlecase}}</p>
 
-<div>Afficher la liste du personel <a routerLink="AllEmployees"><button mat-button >Select</button></a></div>
+<div *ngIf="linkOk == true">Liste du personel <a (click)="AllEmp()"><button mat-button >Select</button></a></div>
 
 <router-outlet></router-outlet>

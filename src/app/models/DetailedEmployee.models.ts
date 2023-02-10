@@ -9,5 +9,5 @@ export interface DetailedEmployee
     entryService: Date
     employeeCardNumber : string
     registreNational : string
-
+    phoneNumbers : number[]
 }
