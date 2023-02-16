@@ -4,7 +4,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import {MatExpansionModule } from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule }  from '@angular/material/radio';
 import  localeFr from "@angular/common/locales/fr-BE";
@@ -14,9 +14,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {  MatPaginatorModule } from '@angular/material/paginator';
+import { ɵ$localize } from '@angular/localize';
+import { FormsModule } from '@angular/forms';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { OrderModule } from 'ngx-order-pipe';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 registerLocaleData( localeFr , 'fr-BE');
 
@@ -44,8 +49,12 @@ registerLocaleData( localeFr , 'fr-BE');
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    FormsModule,
+    OrderModule,
+    NgxPaginationModule
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],
+
 })
 export class SharedModule { }

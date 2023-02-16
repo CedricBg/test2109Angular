@@ -28,7 +28,7 @@ export class AuthService {
     this.connectedSubject.next(this.isConnected)
   }
 
-  constructor(private _httpClient : HttpClient,private _router : Router  ,public dialog : MatDialog) { }
+  constructor(private _httpClient : HttpClient, private _router : Router, public dialog : MatDialog) { }
   returnData! : User
   AddLogin(form : AddLogin)
   {
@@ -45,6 +45,7 @@ export class AuthService {
     diallogConfig.width = '400px';
 
     const dialogRef = this.dialog.open(LoginComponent,diallogConfig);
+
   }
 
 
@@ -73,4 +74,6 @@ export class AuthService {
     this.emitSubject()
     this._router.navigate(["./"])
   }
+
+
 }

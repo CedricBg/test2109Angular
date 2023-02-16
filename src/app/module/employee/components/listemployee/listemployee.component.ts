@@ -1,8 +1,11 @@
+
 import { DetailedEmployee } from './../../../../models/DetailedEmployee.models';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import { Employee } from 'src/app/models/employee.models';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { BehaviorSubject } from 'rxjs';
+import { MatPaginator } from '@angular/material/paginator';
+
+
 
 
 @Component({
@@ -11,11 +14,25 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./listemployee.component.scss']
 })
 export class ListemployeeComponent implements OnInit {
-  listEmployee! : Employee[]
+  firstName: any
+  listEmployee : Employee[]
+
   SelectedEmployee! : DetailedEmployee
   select : boolean = false
 
-
+  //@HostListener('change')
+  ngModelChange()
+  {
+    if(this.firstName == "")
+    {
+      this.ngOnInit()
+    }
+    else{
+      this.listEmployee = this.listEmployee.filter(res=>{
+        return res.firstName.toLocaleLowerCase().match(this.firstName.toLocaleLowerCase())
+      })
+    }
+  }
 
 
   displayedColumns: string[] = ['surName', 'firstName','id'];
@@ -24,6 +41,8 @@ export class ListemployeeComponent implements OnInit {
   ngOnInit(): void {
     this.GetEmployee()
   }
+
+
 
   GetEmployee()
   {

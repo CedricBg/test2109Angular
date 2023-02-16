@@ -4,17 +4,21 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { SharedModule } from '../../shared/shared.module';
 import { ListemployeeComponent } from './components/listemployee/listemployee.component';
 import { EmployeeComponent } from './employee.component';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AddEmployeeComponent,
     ListemployeeComponent,
     EmployeeComponent,
+    UserProfileComponent,
   ],
   imports: [
     EmployeeRoutingModule,
     SharedModule,
+  ],
 
-  ]
 })
+
 export class EmployeeModule { }

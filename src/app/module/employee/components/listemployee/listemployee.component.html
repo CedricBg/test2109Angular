@@ -1,24 +1,27 @@
 
-        <table mat-table [dataSource]="listEmployee" class="mat-elevation-z8">
 
-          <ng-container matColumnDef="firstName">
-            <th mat-header-cell *matHeaderCellDef>Prénom</th>
-            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
-          </ng-container>
+<nav >
+  <input type="text" name="firstName" [(ngModel)]="firstName" (ngModelChange)="ngModelChange()"   placeholder="Enter FirstName" >
+</nav>
 
-          <ng-container matColumnDef="surName">
-            <th mat-header-cell *matHeaderCellDef>Nom</th>
-            <td mat-cell *matCellDef="let element"> {{element.surName}} </td>
-          </ng-container>
+      <table >
+          <thead>
+            <tr>
+              <th>Prénom</th>
+              <th>Nom</th>
+              <th>Détails</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let employee of listEmployee">
+              <td>{{employee.firstName}}</td>
+              <td>{{employee.surName}}</td>
+              <td><button mat-button (click)="GetOne(employee.id)"><mat-icon>launch</mat-icon></button></td>
+            </tr>
+          </tbody>
+      </table>
 
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element"><button mat-button (click)="GetOne(element.id)">Détails</button> </td>
-          </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
 
     <div class="details" *ngIf="select == true && SelectedEmployee != null">
       <p>Prénom : {{SelectedEmployee.firstName}}</p>

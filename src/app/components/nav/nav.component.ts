@@ -1,5 +1,9 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { UserProfileComponent } from 'src/app/module/employee/components/user-profile/user-profile.component';
+import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -8,15 +12,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavComponent implements OnInit {
  isConnected : boolean
-  constructor( private _authService : AuthService )
+ name! : string
+  constructor( private _authService : AuthService,public dialog : MatDialog,private _Router : Router )
   {  }
 
   ngOnInit(): void
   {
     this._authService.connectedSubject.subscribe
     ({
-      next : (data : boolean) => this.isConnected = data
+      next : (data : boolean) => {
+        this.isConnected = data
+        this.name = sessionStorage.getItem('firstName')
+      }
+
     })
+
   }
 
   Login()
@@ -24,7 +34,24 @@ export class NavComponent implements OnInit {
     this._authService.OpenDialog();
   }
 
-  Logout(): void {
-    this._authService.Logout();
+  AllEmp()
+  {
+    this._Router.navigateByUrl('employee/employee/AllEmployees')
   }
+
+
+  OpenDialog()
+  {
+    const diallogConfig = new MatDialogConfig;
+    diallogConfig.disableClose = false;
+    diallogConfig.position = {right:'10px', top:'10px'};
+    diallogConfig.autoFocus = true;
+    diallogConfig.height = '200px';
+    diallogConfig.width = '400px';
+
+    const dialogRef = this.dialog.open(UserProfileComponent,diallogConfig);
+  }
+
+
+
 }
