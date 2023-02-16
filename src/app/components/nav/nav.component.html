@@ -14,9 +14,11 @@
   </div>
 
 </div>
-  <div *ngIf="isConnected" class="menu">
+  <nav *ngIf="isConnected" class="menu">
     <ul>
-      <li><a (click)="AllEmp()">Select</a></li>
+      <li><a (click)="AllEmp()">Liste employées</a></li>
+      <li><a href="#">Select</a></li>
+      <li><a href="#" >Select</a></li>
     </ul>
-  </div>
+  </nav>
 
