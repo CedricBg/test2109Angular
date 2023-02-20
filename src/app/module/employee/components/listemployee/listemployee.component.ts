@@ -1,3 +1,4 @@
+import { Phone } from './../../../../models/phone.models';
 
 import { DetailedEmployee } from './../../../../models/DetailedEmployee.models';
 import { Component, HostListener, Input, OnInit, ViewChild } from '@angular/core';
@@ -16,7 +17,7 @@ import { MatPaginator } from '@angular/material/paginator';
 export class ListemployeeComponent implements OnInit {
   firstName: any
   listEmployee : Employee[]
-
+  disabledForm :boolean = true
   SelectedEmployee! : DetailedEmployee
   select : boolean = false
 
@@ -34,6 +35,18 @@ export class ListemployeeComponent implements OnInit {
     }
   }
 
+  ActivatedForm()
+  {
+    if(this.disabledForm == true)
+    {
+      this.disabledForm = false;
+    }
+    else
+    {
+      this.disabledForm = true;
+    }
+
+  }
 
   displayedColumns: string[] = ['surName', 'firstName','id'];
   constructor(private _serviceEmployee : EmployeeService) { }
@@ -41,8 +54,6 @@ export class ListemployeeComponent implements OnInit {
   ngOnInit(): void {
     this.GetEmployee()
   }
-
-
 
   GetEmployee()
   {
@@ -60,6 +71,7 @@ export class ListemployeeComponent implements OnInit {
     this._serviceEmployee.getOne(id).subscribe({
       next : (data : DetailedEmployee) => {
         this.SelectedEmployee = data
+        this.disabledForm = true
       }
     })
   }

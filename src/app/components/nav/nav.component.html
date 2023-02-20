@@ -16,9 +16,10 @@
 </div>
   <nav *ngIf="isConnected" class="menu">
     <ul>
-      <li><a (click)="AllEmp()">Liste employées</a></li>
-      <li><a href="#">Select</a></li>
-      <li><a href="#" >Select</a></li>
+      <li class="icons"><mat-icon class="icons">home</mat-icon><span class="aligned-with-icon">Accueil</span></li>
+      <li (click)="AllEmp()" class="icons"><mat-icon class="icons">people</mat-icon><span class="aligned-with-icon">Liste des employées</span> </li>
+      <li class="icons">Select</li>
+
     </ul>
   </nav>
 

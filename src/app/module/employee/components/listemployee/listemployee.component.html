@@ -1,10 +1,12 @@
 
 
-<nav >
+<div class="search">
+  <label>Entrez par prénom : </label>
   <input type="text" name="firstName" [(ngModel)]="firstName" (ngModelChange)="ngModelChange()"   placeholder="Enter FirstName" >
-</nav>
-
-      <table >
+</div>
+<div class="employees">
+  <mat-card class="table-card">
+      <table>
           <thead>
             <tr>
               <th>Prénom</th>
@@ -20,12 +22,43 @@
             </tr>
           </tbody>
       </table>
-
-
+    </mat-card>
 
     <div class="details" *ngIf="select == true && SelectedEmployee != null">
-      <p>Prénom : {{SelectedEmployee.firstName}}</p>
-      <p>Nom {{SelectedEmployee.surName}}</p>
+      <mat-card class="Detailed-card">
+        <div *ngIf="disabledForm == false" class="warning" >Modification du formulaire actif <mat-icon class="icons">warning</mat-icon></div>
+        <button mat-raised-button color="primary" (click)="ActivatedForm()"><mat-icon class="icons">border_color</mat-icon>Modifier les informations </button>
+        <form>
+          <div>
+          <mat-form-field>
+            <mat-label>Prénom : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.firstName}}">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Nom : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.surName}}">
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-form-field>
+            <mat-label>Date de naissance : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.birthDate| date}}">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Date entrée en service : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.entryService| date}}">
+          </mat-form-field>
+            <mat-checkbox [(ngModel)]="SelectedEmployee.vehicle" [disabled]="disabledForm" [ngModelOptions]="{standalone: true}">Véhicule</mat-checkbox>
+        </div>
+
+        <div *ngIf="SelectedEmployee.phones != null" >
+          <mat-form-field  *ngFor="let phone of SelectedEmployee.phones">
+            <mat-label>Phone : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{phone.number}}">
+          </mat-form-field>
+        </div>
+          <mat-form-field>
+            <mat-label>Phone : </mat-label><input class="input" matInput [disabled]="disabledForm" >
+          </mat-form-field>
+        </form>
+
+    </mat-card>
 
     </div>
-
+</div>

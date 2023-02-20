@@ -22,6 +22,7 @@ import { FormsModule } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { OrderModule } from 'ngx-order-pipe';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {MatCardModule} from '@angular/material/card';
 
 registerLocaleData( localeFr , 'fr-BE');
 
@@ -51,7 +52,8 @@ registerLocaleData( localeFr , 'fr-BE');
     MatPaginatorModule,
     FormsModule,
     OrderModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatCardModule,
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],

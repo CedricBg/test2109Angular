@@ -1,15 +1,45 @@
-table {
-  width: 50%;
+.search
+{
+  padding-left: 2vw;
+  padding-top: 2vw;
 }
-.mat-mdc-table {
+.table-card{
+  width: 25vw;
+  margin-left: 2vw;
+  margin-top: 2vw;
+}
+table{
   width: 100%;
-  max-height: 500px;
-  overflow: auto;
+  margin-left: 2vw;
+}
+th
+{
+  text-align: left;
+  padding-bottom: 1vh;
 }
 
 .details{
-  text-align: center;
-  width:30%;
-  border: 1px black solid;
+  width:60vw;
+  margin-left: 2vw;
+  margin-top: 2vw;
 }
 
+.Detailed-card button
+{
+  margin-left: 80%;
+}
+.employees{
+  display: flex;
+}
+.input
+{
+  color: black;
+}
+.warning{
+  color:red;
+  display: flex;
+  align-items: center;
+}
+.icons{
+  padding-right: 1vw;
+}

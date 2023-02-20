@@ -1,3 +1,5 @@
+import { Phone } from "./phone.models"
+
 export interface DetailedEmployee
 {
     firstName : string
@@ -9,5 +11,5 @@ export interface DetailedEmployee
     entryService: Date
     employeeCardNumber : string
     registreNational : string
-    phoneNumbers : number[]
+    phones : Phone[]
 }
