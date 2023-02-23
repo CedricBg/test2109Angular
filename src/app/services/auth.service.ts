@@ -54,6 +54,7 @@ export class AuthService {
     return this._httpClient.post<User>(environment.baseAdres+ 'Auth/login', userin).subscribe({
       next : (data : User)=> {
         this.returnData = data
+        console.log(this.returnData)
         if(this.returnData != null)
         {
           sessionStorage.setItem('token' , this.returnData.token)

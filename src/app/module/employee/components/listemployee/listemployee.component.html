@@ -26,8 +26,6 @@
 
     <div class="details" *ngIf="select == true && SelectedEmployee != null">
       <mat-card class="Detailed-card">
-        <div *ngIf="disabledForm == false" class="warning" >Modification du formulaire actif <mat-icon class="icons">warning</mat-icon></div>
-        <button mat-raised-button color="primary" (click)="ActivatedForm()"><mat-icon class="icons">border_color</mat-icon>Modifier les informations </button>
         <form>
           <div>
           <mat-form-field>
@@ -47,15 +45,18 @@
           </mat-form-field>
             <mat-checkbox [(ngModel)]="SelectedEmployee.vehicle" [disabled]="disabledForm" [ngModelOptions]="{standalone: true}">Véhicule</mat-checkbox>
         </div>
-
+        <div>
+          <mat-form-field *ngFor="let email of SelectedEmployee.emails">
+            <mat-label>Email : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{email.emailAddress}}">
+          </mat-form-field>
+        </div>
         <div *ngIf="SelectedEmployee.phones != null" >
           <mat-form-field  *ngFor="let phone of SelectedEmployee.phones">
             <mat-label>Phone : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{phone.number}}">
           </mat-form-field>
         </div>
-          <mat-form-field>
-            <mat-label>Phone : </mat-label><input class="input" matInput [disabled]="disabledForm" >
-          </mat-form-field>
+
+
         </form>
 
     </mat-card>

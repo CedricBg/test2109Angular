@@ -1,3 +1,4 @@
+import { Email } from "./email.models"
 import { Phone } from "./phone.models"
 
 export interface DetailedEmployee
@@ -12,4 +13,5 @@ export interface DetailedEmployee
     employeeCardNumber : string
     registreNational : string
     phones : Phone[]
+    emails : Email[]
 }
