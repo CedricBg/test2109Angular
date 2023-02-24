@@ -29,10 +29,10 @@
         <form>
           <div>
           <mat-form-field>
-            <mat-label>Prénom : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.firstName}}">
+            <mat-label>Prénom : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.firstName|titlecase}}">
           </mat-form-field>
           <mat-form-field>
-            <mat-label>Nom : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.surName}}">
+            <mat-label>Nom : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.surName|titlecase}}">
           </mat-form-field>
         </div>
 
@@ -55,8 +55,20 @@
             <mat-label>Phone : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{phone.number}}">
           </mat-form-field>
         </div>
-
-
+        <div>
+          <mat-form-field>
+            <mat-label>Rue : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.address.sreetAddress| titlecase}}">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Ville : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.address.city|titlecase}}">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Code Postal : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.address.zipCode}}">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Pays : </mat-label><input class="input" matInput [disabled]="disabledForm" value="{{SelectedEmployee.address.state|titlecase}}">
+          </mat-form-field>
+        </div>
         </form>
 
     </mat-card>

@@ -18,7 +18,6 @@ export class EmployeeService implements OnInit {
   ngOnInit(): void { }
 
   insert(employee : DetailedEmployee){
-
     this._httpClient.post<string>(environment.baseAdres+ "Employee/insert", employee).subscribe({
       next : (data : string) =>{
         console.log(data);

@@ -58,6 +58,7 @@ export class ListemployeeComponent implements OnInit {
     this._serviceEmployee.getOne(id).subscribe({
       next : (data : DetailedEmployee) => {
         this.SelectedEmployee = data
+        console.log(this.SelectedEmployee)
       }
     })
   }
