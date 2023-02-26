@@ -17,17 +17,22 @@ th
   text-align: left;
   padding-bottom: 1vh;
 }
-
 .details{
   width:60vw;
   margin-left: 2vw;
   margin-top: 2vw;
 }
-
-.Detailed-card button
+.Detailed-card .activateForm
 {
   margin-left: 80%;
 }
+
+.Detailed-card .sendButton
+{
+  margin-top: 1vw;
+  width:100%
+}
+
 .employees{
   display: flex;
 }

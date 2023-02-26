@@ -4,6 +4,7 @@ import { Phone } from "./phone.models"
 
 export interface DetailedEmployee
 {
+    id: number
     firstName : string
     surName : string
     birthDate : Date
