@@ -46,5 +46,11 @@ th
   align-items: center;
 }
 .icons{
-  padding-right: 1vw;
+  padding-right: 1%;
+}
+
+button.iconsCenter{
+  display: flex;
+  align-items: center;
+  padding-bottom: 1vh;
 }

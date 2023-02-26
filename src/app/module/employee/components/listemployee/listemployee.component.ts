@@ -1,3 +1,4 @@
+import { Email } from './../../../../models/email.models';
 import { Phone } from 'src/app/models/phone.models';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Component, OnInit } from '@angular/core';
@@ -30,9 +31,7 @@ export class ListemployeeComponent implements OnInit {
 
   SendInformationForm()
   {
-
     this.formEmployee = this._builder.group({
-
       firstName : [{value:this.SelectedEmployee.firstName, disabled: true},Validators.required],
       surName : [{value:this.SelectedEmployee.surName, disabled: true},Validators.required],
       birthDate : [{value:this.SelectedEmployee.birthDate, disabled: true},Validators.required],
@@ -53,8 +52,12 @@ export class ListemployeeComponent implements OnInit {
     this.SelectedEmployee.emails.forEach(e=>{
       let newcontrol = this.newEmail()
       newcontrol.patchValue(e)
-      console.log(newcontrol.value)
       this.emails.push(newcontrol)
+    })
+    this.SelectedEmployee.phones.forEach(e=>{
+      let newcontrol = this.newPhone()
+      newcontrol.patchValue(e)
+      this.phones.push(newcontrol)
     })
   }
 
@@ -63,35 +66,53 @@ export class ListemployeeComponent implements OnInit {
     return this.formEmployee.get("emails") as FormArray
   }
 
-  newEmail(): FormGroup
-  {
-    return this._builder.group({
-      emailAddress : [{value:'', disabled: true}]
-    })
-  }
   get phones(): FormArray
   {
     return this.formEmployee.controls["phones"] as FormArray
   }
 
-  AddEmail()
+  newEmail(): FormGroup
   {
-    const phoneForm = this._builder.group({
-      id : [''],
-      emailAddress : ['', Validators.required]
+    return this._builder.group({
+      id:[{value:'', disabled: true}],
+      emailAddress : [{value:'', disabled: true},Validators.required]
     })
-    this.emails.push(phoneForm)
+  }
+  newPhone(): FormGroup
+  {
+    return this._builder.group({
+      id:[{value:'', disabled: true}],
+      number: [{value:'', disabled: true},Validators.required]
+    })
   }
 
-  DeletePhones(id: number)
+  AddEmail()
   {
-    this.phones.removeAt(id)
+    const emailForm = this._builder.group({
+      id : [''],
+      emailAddress : ['', [Validators.required, Validators.email]]
+    })
+    this.emails.push(emailForm)
+  }
+  AddPhone()
+  {
+    const phoneform = this._builder.group({
+      id:[''],
+      number:['',[Validators.required,Validators.minLength(10)]]
+    })
+    this.phones.push(phoneform)
   }
 
   DeleteEmails(id: number)
   {
     this.emails.removeAt(id)
   }
+  DeletePhones(id: number)
+  {
+    this.phones.removeAt(id)
+  }
+
+
 
   GetEmployee()
   {
@@ -107,9 +128,7 @@ export class ListemployeeComponent implements OnInit {
     this.select = true
     this._serviceEmployee.getOne(id).subscribe({
       next : (data : DetailedEmployee) => {
-
         this.SelectedEmployee = data
-
         this.SendInformationForm()
 
       }
