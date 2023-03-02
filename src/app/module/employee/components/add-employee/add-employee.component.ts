@@ -1,4 +1,4 @@
-import { DetailedEmployee } from './../../../../models/DetailedEmployee.models';
+import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Component,EventEmitter,Inject,  OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -17,6 +17,7 @@ export class AddEmployeeComponent implements OnInit {
   listCountrys : Countrys[]
   formEmployee! : FormGroup
   SelectedEmployee : DetailedEmployee
+  employeeValues : DetailedEmployee
   constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _AddressService : AddressService)
    {}
     ngOnInit(): void {
@@ -25,6 +26,12 @@ export class AddEmployeeComponent implements OnInit {
       this.AddPhone()
       this.AddEmail()
     }
+  SubmitForm()
+  {
+
+    this.employeeValues = this.formEmployee.value
+    console.log(this.employeeValues)
+  }
   SendInformationForm()
   {
     this.formEmployee =  this._builder.group({
@@ -65,7 +72,7 @@ export class AddEmployeeComponent implements OnInit {
   }
   AddEmail()
   {
-    const emailForm = new FormControl('', [Validators.required, Validators.email])
+    const emailForm = new FormControl('',[Validators.required, Validators.email])
     this.emails.push(emailForm)
   }
   AddPhone()

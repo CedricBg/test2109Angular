@@ -1,6 +1,6 @@
 <div class="details">
   <mat-card class="Detailed-card">
-    <form [formGroup]="formEmployee" >
+    <form [formGroup]="formEmployee" (ngSubmit)="SubmitForm()">
       <div>
         <mat-form-field >
           <mat-label>Prénom : </mat-label><input formControlName="firstName" class="input" matInput>
