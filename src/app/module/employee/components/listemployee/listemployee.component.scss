@@ -22,35 +22,28 @@ th
   margin-left: 2vw;
   margin-top: 2vw;
 }
-.Detailed-card .activateForm
-{
-  margin-left: 80%;
-}
-
-.Detailed-card .sendButton
-{
-  margin-top: 1vw;
-  width:100%
-}
 
 .employees{
   display: flex;
 }
-.input
-{
-  color: black;
+.icons1{
+  padding:0;
+  margin: 0;
+  color: #007BFF;
 }
-.warning{
-  color:red;
+.icons2{
+  padding:0;
+  margin: 0;
+  color: #17A2B8;
+}
+.cards{
   display: flex;
-  align-items: center;
 }
-.icons{
-  padding-right: 1%;
-}
-
-button.iconsCenter{
+.AddPerson{
   display: flex;
-  align-items: center;
-  padding-bottom: 1vh;
+  justify-content: flex-end;
+}
+.AddPerson .icons{
+  padding-right: 1vw;
+  color: blue;
 }

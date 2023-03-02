@@ -1,5 +1,8 @@
-<div class="details">
+
+
+<div class="details" *ngIf="SelectedEmployee != null">
   <mat-card class="Detailed-card">
+    <button class="iconsCenter" mat-button (click)="GetOne(SelectedEmployee.id)"><mat-icon class="icons">cancel</mat-icon>Annuler les modifications</button>
     <form [formGroup]="formEmployee" >
       <div>
         <mat-form-field >
@@ -18,7 +21,6 @@
     </div>
 
     <div>
-
       <mat-form-field>
         <mat-label>Rue : </mat-label><input formControlName="sreetAddress" class="input" matInput>
       </mat-form-field>
@@ -38,38 +40,42 @@
       </mat-form-field>
     </div>
 
-    <div  formArrayName="emails">
-      <button mat-icon-button (click)="AddEmail()">
-        <mat-icon >add</mat-icon> Ajoutez une adresse mail
-      </button>
+    <div formArrayName="emails">
       <div *ngFor="let emailss of emails.controls; let i = index" >
-        <mat-form-field>
-          <mat-label>Email : </mat-label><input type="email" formControlName="i" class="input" matInput>
+        <mat-form-field [formGroupName]="i">
+          <mat-label >Email : </mat-label><input formControlName="emailAddress"   class="input" matInput>
         </mat-form-field>
-        <span *ngIf="i >= 1">
+        <span *ngIf="i >=1">
         <button mat-icon-button (click)="DeleteEmails(i)">
           <mat-icon class="icons">delete</mat-icon>
         </button>
       </span>
       </div>
-
+      <button mat-icon-button (click)="AddEmail()">
+        <mat-icon >add</mat-icon>
+      </button>
     </div>
 
     <div formArrayName="phones">
-      <button mat-icon-button (click)="AddPhone()">
-        <mat-icon >add</mat-icon> Ajoutez un numéro de téléphone
-      </button>
       <div *ngFor="let phone of phones.controls; let i = index" >
-      <mat-form-field>
-        <mat-label>Phone : </mat-label><input type="text" formControlName="i"  class="input" matInput>
+      <mat-form-field [formGroupName]="i">
+        <mat-label>Phone : </mat-label><input formControlName="number"  class="input" matInput>
       </mat-form-field>
-      <span *ngIf="i >= 1">
+      <span *ngIf="i >=1">
       <button mat-icon-button (click)="DeletePhones(i)">
         <mat-icon class="icons">delete</mat-icon>
       </button>
-      </span>
+    </span>
     </div>
+    <button mat-icon-button (click)="AddPhone()">
+      <mat-icon >add</mat-icon>
+    </button>
   </div>
+  <div>
+      <mat-form-field>
+        <mat-label>Nr de Badge : </mat-label><input formControlName="employeeCardNumber" class="input" matInput>
+      </mat-form-field>
+    </div>
     <div>
       <button mat-raised-button color="primary" class="sendButton">Envoyer</button>
     </div>

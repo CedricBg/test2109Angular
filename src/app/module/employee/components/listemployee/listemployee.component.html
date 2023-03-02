@@ -1,110 +1,68 @@
-
-
 <div class="search">
-  <label>Entrez par prénom : </label>
-  <input type="text" name="firstName" [(ngModel)]="firstName" (ngModelChange)="ngModelChange()"   placeholder="Enter FirstName" >
+  <label>Recherche : </label>
+  <input type="text" name="firstName" [(ngModel)]="surName" (ngModelChange)="ngModelChange()"   placeholder="Nom de famille" >
 </div>
+<div class = "cards">
 <div class="employees">
+
   <mat-card class="table-card">
+    <div class="AddPerson">
+      <mat-icon (click)="OpenformAddUser()" class="icons">person_add</mat-icon>
+
+    </div>
+    <hr>
       <table>
           <thead>
             <tr>
-              <th>Prénom</th>
               <th>Nom</th>
-              <th>Détails</th>
+              <th>Service</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let employee of listEmployee">
-              <td>{{employee.firstName}}</td>
-              <td>{{employee.surName}}</td>
-              <td><button mat-button (click)="GetOne(employee.id)"><mat-icon>launch</mat-icon></button></td>
+              <td>{{employee.firstName}} {{employee.surName}}</td>
+              <td></td>
+              <td>
+                <button mat-button (click)="GetOne(employee.id)"><mat-icon class="icons1">visibility</mat-icon></button>
+                <button mat-button (click)="OpenformUpdate(employee.id)"><mat-icon class="icons2">edit</mat-icon></button>
+              </td>
             </tr>
           </tbody>
       </table>
     </mat-card>
+</div>
+<div class="details" *ngIf="select == true && SelectedEmployee != null">
+  <mat-card class="Detailed-card">
+    <ul>
+      <li>Nom : {{SelectedEmployee.surName }}</li>
+      <li>Prénom : {{SelectedEmployee.firstName}}</li>
+      <li>Date de naissance : {{SelectedEmployee.birthDate| date:"dd/MM/yy"}} </li>
 
-    <div class="details" *ngIf="select == true && SelectedEmployee != null">
-      <mat-card class="Detailed-card">
-        <button class="iconsCenter" mat-button (click)="GetOne(SelectedEmployee.id)"><mat-icon class="icons">cancel</mat-icon>Annuler les modifications</button>
-        <form [formGroup]="formEmployee" >
+      <li>Rue : {{SelectedEmployee.address.sreetAddress}}</li>
+      <li>Ville : {{SelectedEmployee.address.city}}</li>
+      <li>Code Postal : {{SelectedEmployee.address.zipCode}}</li>
+      <li>Pays : {{SelectedEmployee.address.state}}</li>
+      <li>
+        Email :
+        <ul *ngFor="let emails of SelectedEmployee.emails; let i = index" >
+          <li>
+              {{emails.emailAddress}}
+          </li>
+        </ul>
+      </li>
+      <li>
+        Nr de téléphone :
+        <ul *ngFor="let phones of SelectedEmployee.phones; let i = index" >
+          <li>
+            {{phones.number}}
+          </li>
+        </ul>
+      </li>
+      <li>Nr de Badge : {{SelectedEmployee.employeeCardNumber}}</li>
+      <li>Date de création : {{SelectedEmployee.entryService|date:"dd/MM/yy"}}</li>
+    </ul>
+  </mat-card>
 
-          <div>
-            <mat-form-field>
-              <mat-label>Prénom : </mat-label><input formControlName="firstName" class="input" matInput>
-            </mat-form-field>
-            <mat-form-field>
-              <mat-label>Nom : </mat-label><input formControlName="surName" class="input" matInput >
-            </mat-form-field>
-          </div>
-
-        <div>
-          <mat-form-field>
-            <mat-label>Date de naissance : </mat-label><input formControlName="birthDate" class="input" matInput>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Date entrée en service : </mat-label><input formControlName="entryService" class="input" matInput>
-          </mat-form-field>
-            <mat-checkbox  formControlName="vehicle">Véhicule</mat-checkbox>
-        </div>
-
-        <div>
-          <mat-form-field>
-            <mat-label>Rue : </mat-label><input formControlName="sreetAddress" class="input" matInput>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Ville : </mat-label><input formControlName="city" class="input" matInput>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Code Postal : </mat-label><input formControlName="zipCode" class="input" matInput>
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Pays : </mat-label><input formControlName="state" class="input" matInput>
-          </mat-form-field>
-        </div>
-
-        <div formArrayName="emails">
-          <div *ngFor="let emailss of emails.controls; let i = index" >
-            <mat-form-field [formGroupName]="i">
-              <mat-label >Email : </mat-label><input formControlName="emailAddress"   class="input" matInput>
-            </mat-form-field>
-            <span *ngIf="i >=1">
-            <button mat-icon-button (click)="DeleteEmails(i)">
-              <mat-icon class="icons">delete</mat-icon>
-            </button>
-          </span>
-          </div>
-          <button mat-icon-button (click)="AddEmail()">
-            <mat-icon >add</mat-icon>
-          </button>
-        </div>
-
-        <div formArrayName="phones">
-          <div *ngFor="let phone of phones.controls ; let i = index" >
-          <mat-form-field [formGroupName]="i">
-            <mat-label>Phone : </mat-label><input formControlName="number"  class="input" matInput>
-          </mat-form-field>
-          <span *ngIf="i >=1">
-          <button mat-icon-button (click)="DeletePhones(i)">
-            <mat-icon class="icons">delete</mat-icon>
-          </button>
-        </span>
-        </div>
-        <button mat-icon-button (click)="AddPhone()">
-          <mat-icon >add</mat-icon>
-        </button>
-      </div>
-      <div>
-          <mat-form-field>
-            <mat-label>Nr de Badge : </mat-label><input formControlName="employeeCardNumber" class="input" matInput>
-          </mat-form-field>
-        </div>
-        <div>
-          <button mat-raised-button color="primary" class="sendButton">Envoyer</button>
-        </div>
-        </form>
-
-    </mat-card>
-
-    </div>
+</div>
 </div>

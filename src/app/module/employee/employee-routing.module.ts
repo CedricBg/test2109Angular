@@ -1,3 +1,4 @@
+import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
 
 import { EmployeeComponent } from './employee.component';
 import { ListemployeeComponent } from './components/listemployee/listemployee.component';
@@ -9,8 +10,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 const routes: Routes = [
   { path : 'employee' , component : EmployeeComponent, children :[
     { path : 'addEmployee' , component : AddEmployeeComponent },
-    { path : 'AllEmployees' , component : ListemployeeComponent},
-    { path : 'UserProfile' , component : UserProfileComponent }
+    { path : 'AllEmployees' , component : ListemployeeComponent },
+    { path : 'UserProfile' , component : UserProfileComponent },
+    { path : 'UpdateEmployee', component : UpdateEmployeeComponent},
 
   ]
 },

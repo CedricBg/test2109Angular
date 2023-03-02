@@ -6,6 +6,7 @@ import { ListemployeeComponent } from './components/listemployee/listemployee.co
 import { EmployeeComponent } from './employee.component';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     ListemployeeComponent,
     EmployeeComponent,
     UserProfileComponent,
+    UpdateEmployeeComponent,
   ],
   imports: [
     EmployeeRoutingModule,

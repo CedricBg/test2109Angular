@@ -1,3 +1,4 @@
+import { AddEmployeeComponent } from './../module/employee/components/add-employee/add-employee.component';
 import { Router } from '@angular/router';
 import { DetailedEmployee } from './../models/DetailedEmployee.models';
 import { environment } from './../../environments/environment';
@@ -13,28 +14,23 @@ import { Employee } from '../models/employee.models';
 })
 export class EmployeeService implements OnInit {
 
-  constructor(private _httpClient : HttpClient, private _route : Router ) { }
+  constructor(private _httpClient : HttpClient, private _route : Router) { }
 
   ngOnInit(): void { }
 
   insert(employee : DetailedEmployee){
-    this._httpClient.post<string>(environment.baseAdres+ "Employee/insert", employee).subscribe({
-      next : (data : string) =>{
-        console.log(data);
-      },
-      error : (error) =>{
-        console.log(error.message)
-      }
-    })
+    this._httpClient.post<string>(environment.baseAdres+ "Employee/insert", employee).subscribe()
   }
 
-  get() : Observable<Employee[]>{
+  get(): Observable<Employee[]>
+  {
     return this._httpClient.get<Employee[]>(environment.baseAdres+ 'Employee/all')
   }
 
-  getOne(id : number)
+  getOne(id : number): Observable<DetailedEmployee>
   {
     return this._httpClient.get<DetailedEmployee>(environment.baseAdres+ 'Employee/GetOne/'+id)
   }
+
 
 }
