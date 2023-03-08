@@ -79,4 +79,9 @@ surName: any
     diallogConfig.autoFocus = true;
     const dialogRef = this.dialog.open(AddEmployeeComponent,diallogConfig);
   }
+
+  DeleteUSer(id: number)
+  {
+    this._serviceEmployee.DeleteUser(id)
+  }
 }
