@@ -43,7 +43,6 @@ export class AuthService {
     diallogConfig.autoFocus = true;
     diallogConfig.height = '200px';
     diallogConfig.width = '400px';
-
     const dialogRef = this.dialog.open(LoginComponent,diallogConfig);
 
   }
@@ -54,7 +53,6 @@ export class AuthService {
     return this._httpClient.post<User>(environment.baseAdres+ 'Auth/login', userin).subscribe({
       next : (data : User)=> {
         this.returnData = data
-        console.log(this.returnData)
         if(this.returnData != null)
         {
           sessionStorage.setItem('token' , this.returnData.token)

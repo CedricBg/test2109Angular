@@ -3,12 +3,12 @@
 .nav{
   height: 10vh;
   display: flex;
-
+  background-color: #F5F5F5;
   justify-content: flex-start;
 }
 .nav{
   width:100vw;
-  border-bottom: 1px solid #dbe2ff ;
+
 }
 .nav h1{
   width: 50vw;
@@ -34,8 +34,8 @@
   margin-left: 4vw;
   padding-left: 1vw;
   padding-right: 1vw;
-  border-left: 1px solid #dbe2ff;
-  border-right: 1px solid #dbe2ff;
+  border-left: 1px solid #F5F5F5;;
+  border-right: 1px solid #F5F5F5;;
 }
 li.icons
 {

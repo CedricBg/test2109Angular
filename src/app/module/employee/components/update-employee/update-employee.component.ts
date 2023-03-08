@@ -43,7 +43,7 @@ export class UpdateEmployeeComponent implements OnInit {
       employeeCardNumber : [this.SelectedEmployee.employeeCardNumber,Validators.required],
       registreNational : [this.SelectedEmployee.registreNational,Validators.required],
       address : [this.SelectedEmployee.address,Validators.required],
-      actif : [this.SelectedEmployee.actif],
+
       vehicle : [this.SelectedEmployee.vehicle],
       sreetAddress : [this.SelectedEmployee.address ? this.SelectedEmployee.address.sreetAddress :''],
       city : [this.SelectedEmployee.address ? this.SelectedEmployee.address.city :''],
@@ -53,12 +53,12 @@ export class UpdateEmployeeComponent implements OnInit {
       emails : this._builder.array([]),
       phones : this._builder.array([]),
     })
-    this.SelectedEmployee.emails.forEach(e=>{
+    this.SelectedEmployee.email.forEach(e=>{
       let newcontrol = this.newEmail()
       newcontrol.patchValue(e)
       this.emails.push(newcontrol)
     })
-    this.SelectedEmployee.phones.forEach(e=>{
+    this.SelectedEmployee.phone.forEach(e=>{
       let newcontrol = this.newPhone()
       newcontrol.patchValue(e)
       this.phones.push(newcontrol)
@@ -107,19 +107,11 @@ export class UpdateEmployeeComponent implements OnInit {
   }
   AddEmail()
   {
-    const emailForm = this._builder.group({
-      id : [''],
-      emailAddress : ['', [Validators.required, Validators.email]]
-    })
-    this.emails.push(emailForm)
+    this.emails.push(this.newEmail())
   }
   AddPhone()
   {
-    const phoneform = this._builder.group({
-      id:[''],
-      number:['',[Validators.required,Validators.minLength(10)]]
-    })
-    this.phones.push(phoneform)
+    this.phones.push(this.newPhone())
   }
   DeleteEmails(id: number)
   {

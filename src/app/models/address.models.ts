@@ -1,9 +1,9 @@
 export interface Address
 {
-  id: number
+  id: number | null
   sreetAddress: string
   city: string
-  state: string
+  state: string |null
   stateId: number
   zipCode: string
 }

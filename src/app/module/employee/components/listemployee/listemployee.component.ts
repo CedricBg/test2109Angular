@@ -45,7 +45,8 @@ surName: any
     this.select = true
     this._serviceEmployee.getOne(id).subscribe({
         next : ( data : DetailedEmployee)  => {
-        this.SelectedEmployee =  data
+        this.SelectedEmployee = data
+        console.log(data)
       }
     })
   }

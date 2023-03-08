@@ -19,12 +19,14 @@ export class EmployeeService implements OnInit {
   ngOnInit(): void { }
 
   insert(employee : DetailedEmployee){
-    this._httpClient.post<string>(environment.baseAdres+ "Employee/insert", employee).subscribe()
+    console.log(employee)
+    this._httpClient.post<string>(environment.baseAdres+ 'Employee/insert', employee).subscribe()
   }
 
   get(): Observable<Employee[]>
   {
     return this._httpClient.get<Employee[]>(environment.baseAdres+ 'Employee/all')
+
   }
 
   getOne(id : number): Observable<DetailedEmployee>

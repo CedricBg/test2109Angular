@@ -13,7 +13,7 @@ export class AddressService {
 
 GetAllCountrys(): Observable<Countrys[]>
   {
-    return this._http.get<Countrys[]>(environment.baseAdres+ 'address/all')
+    return this._http.get<Countrys[]>(environment.baseAdres+ 'address/allCountrys')
   }
 }
 

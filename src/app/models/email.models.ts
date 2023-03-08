@@ -1,5 +1,5 @@
 export interface Email
 {
-  id : number
+  emailId : number
   emailAddress : string
 }

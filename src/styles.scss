@@ -37,3 +37,17 @@ $test2109-theme: mat.define-light-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.content
+{
+height: 94vh;
+}
+footer{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  height : 6vh;
+  background-color:#333333;
+  color: white;
+}
+

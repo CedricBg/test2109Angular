@@ -45,7 +45,7 @@
       <li>Pays : {{SelectedEmployee.address.state}}</li>
       <li>
         Email :
-        <ul *ngFor="let emails of SelectedEmployee.emails; let i = index" >
+        <ul *ngFor="let emails of SelectedEmployee.email; let i = index" >
           <li>
               {{emails.emailAddress}}
           </li>
@@ -53,7 +53,7 @@
       </li>
       <li>
         Nr de téléphone :
-        <ul *ngFor="let phones of SelectedEmployee.phones; let i = index" >
+        <ul *ngFor="let phones of SelectedEmployee.phone; let i = index" >
           <li>
             {{phones.number}}
           </li>

@@ -1,10 +1,14 @@
+import { Address } from './../../../../models/address.models';
+
+import { InformationsService } from './../../../../services/informations.service';
+import { Observable } from 'rxjs';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Component,EventEmitter,Inject,  OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Countrys } from 'src/app/models/countrys.models';
 import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { Role } from 'src/app/models/role.models';
 
 
 @Component({
@@ -15,22 +19,23 @@ import { EmployeeService } from 'src/app/services/employee.service';
 
 export class AddEmployeeComponent implements OnInit {
   listCountrys : Countrys[]
+  listRoles: Role[]
   formEmployee! : FormGroup
-  SelectedEmployee : DetailedEmployee
-  employeeValues : DetailedEmployee
-  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _AddressService : AddressService)
-   {}
+  adress! : FormGroup
+
+  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _AddressService : AddressService, private _InformationService : InformationsService)
+   {
+
+   }
     ngOnInit(): void {
+      this.GetListRoles()
       this.GetListCountrys()
       this.SendInformationForm()
-      this.AddPhone()
-      this.AddEmail()
     }
+
   SubmitForm()
   {
-
-    this.employeeValues = this.formEmployee.value
-    console.log(this.employeeValues)
+      this._serviceEmployee.insert(this.formEmployee.value)
   }
   SendInformationForm()
   {
@@ -38,57 +43,93 @@ export class AddEmployeeComponent implements OnInit {
       firstName : ['',Validators.required],
       surName : ['',Validators.required],
       birthDate : ['',Validators.required],
-      securityCard : [''],
-      employeeCardNumber : [''],
       registreNational : ['',Validators.required],
-      address : ['',Validators.required],
-      actif : [''],
-      vehicle : [''],
+      vehicle : [true],
+      IsDeleted : [false],
+      email : this._builder.array([
+        this._builder.group({
+          emailAddress : ['',Validators.required],
+
+        })
+      ]),
+      phone : this._builder.array([
+        this._builder.group({
+          number: ['',Validators.required],
+
+        })
+      ]),
+      address : this._builder.group({
       sreetAddress : [''],
       city : [''],
-      state : [''],
       stateId : [''],
-      zipCode : [''],
-      emails : this._builder.array([]),
-      phones : this._builder.array([]),
+      zipCode : [''],}),
+      role : this._builder.group({
+        name : [''],
+        diminName : [''],
+        roleId : ['']
+      }),
     })
+
   }
   GetListCountrys()
   {
     this._AddressService.GetAllCountrys().subscribe({
       next :  (data: Countrys[]) =>{
           this.listCountrys =  data
+
       }
     })
   }
-   get  emails(): FormArray
+  GetListRoles()
   {
-     return  this.formEmployee.get("emails") as  FormArray
+    this._InformationService.GetRoles().subscribe({
+      next: (data : Role[])=> {
+          this.listRoles = data
+
+      }
+    })
+  }
+   get email(): FormArray
+  {
+     return  this.formEmployee.get("email") as  FormArray
   }
 
-  get phones(): FormArray
+
+  newEmail(): FormGroup
   {
-    return this.formEmployee.controls["phones"] as FormArray
+    return this._builder.group({
+      emailAddress : ['',Validators.required],
+
+    })
+  }
+  newPhone(): FormGroup
+  {
+    return this._builder.group({
+
+      number: ['',Validators.required],
+
+    })
+  }
+
+  get phone(): FormArray
+  {
+    return this.formEmployee.controls["phone"] as FormArray
   }
   AddEmail()
   {
-    const emailForm = new FormControl('',[Validators.required, Validators.email])
-    this.emails.push(emailForm)
+    this.email.push(this.newEmail())
   }
   AddPhone()
   {
-    const phoneform = this._builder.group({
-      number:['',[Validators.required,Validators.minLength(10)]]
-    })
-    this.phones.push(phoneform)
+    this.phone.push(this.newPhone())
   }
   DeleteEmails(id: number)
   {
-    this.emails.removeAt(id)
+    this.email.removeAt(id)
   }
   DeletePhones(id: number)
   {
-    this.phones.removeAt(id)
+    this.phone.removeAt(id)
   }
 }
 
