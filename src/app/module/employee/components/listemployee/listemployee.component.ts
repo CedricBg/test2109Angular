@@ -6,7 +6,7 @@ import { Employee } from 'src/app/models/employee.models';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-listemployee',
@@ -18,26 +18,28 @@ surName: any
   listEmployee : Employee[]
   SelectedEmployee! : DetailedEmployee
   select : boolean = false
-  pageEvent: PageEvent
-
+  subscriptionUpdate: Subscription
+  subscriptionAll: Subscription
 
   displayedColumns: string[] = ['surName', 'firstName','id'];
 
   constructor(private _serviceEmployee : EmployeeService, public dialog : MatDialog) { }
 
-
   ngOnInit(): void {
     this.GetEmployee()
-
+    this.subscriptionUpdate = this._serviceEmployee.getUpdateData().subscribe(newData => {
+      this.SelectedEmployee = newData
+    })
+    this.subscriptionAll = this._serviceEmployee.getAllData().subscribe(newData =>{
+      this.listEmployee = newData
+    })
   }
 
   async GetEmployee()
   {
-    this._serviceEmployee.get().subscribe({
-      next : async (data : Employee[])=>{
-        this.listEmployee =  data
-      }
-    })
+    this._serviceEmployee.get()
+
+
   }
 
   GetOne(id: number)
@@ -46,7 +48,6 @@ surName: any
     this._serviceEmployee.getOne(id).subscribe({
         next : ( data : DetailedEmployee)  => {
         this.SelectedEmployee = data
-        console.log(data)
       }
     })
   }
@@ -79,7 +80,6 @@ surName: any
     diallogConfig.autoFocus = true;
     const dialogRef = this.dialog.open(AddEmployeeComponent,diallogConfig);
   }
-
   DeleteUSer(id: number)
   {
     this._serviceEmployee.DeleteUser(id)

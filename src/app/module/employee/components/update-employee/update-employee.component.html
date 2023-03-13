@@ -3,7 +3,7 @@
 <div class="details" *ngIf="SelectedEmployee != null">
   <mat-card class="Detailed-card">
     <button class="iconsCenter" mat-button (click)="GetOne(SelectedEmployee.id)"><mat-icon class="icons">cancel</mat-icon>Annuler les modifications</button>
-    <form [formGroup]="formEmployee" >
+    <form [formGroup]="formEmployee" (ngSubmit)="updateUser()" >
       <div>
         <mat-form-field >
           <mat-label>Prénom : </mat-label><input formControlName="firstName" class="input" matInput>
@@ -20,7 +20,7 @@
         <mat-checkbox  formControlName="vehicle">Véhicule</mat-checkbox>
     </div>
 
-    <div>
+    <div formGroupName="address" >
       <mat-form-field>
         <mat-label>Rue : </mat-label><input formControlName="sreetAddress" class="input" matInput>
       </mat-form-field>
@@ -31,7 +31,7 @@
         <mat-label>Code Postal : </mat-label><input formControlName="zipCode" class="input" matInput>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Pays : </mat-label><input matInput [matAutocomplete]="autoNationality" formControlName="state" class="input">
+        <mat-label>Pays : </mat-label><input matInput [matAutocomplete]="autoNationality"  formControlName="state" class="input">
         <mat-autocomplete #autoNationality="matAutocomplete" >
           <mat-option *ngFor="let elt of listCountrys" [value]="elt.country" >
                 {{elt.country}}
@@ -39,43 +39,58 @@
         </mat-autocomplete>
       </mat-form-field>
     </div>
+    <div formGroupName="role" >
+      <mat-form-field>
+      <mat-label>Role : </mat-label><input matInput [matAutocomplete]="auto" formControlName="name" class="input">
+      <mat-autocomplete #auto="matAutocomplete" >
+        <mat-option *ngFor="let elt of listRoles"  [value]="elt.name" >
+              {{elt.name}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
 
-    <div formArrayName="emails">
-      <div *ngFor="let emailss of emails.controls; let i = index" >
+    <div formArrayName="email">
+      <div *ngFor="let emailss of email.controls; let i = index" >
         <mat-form-field [formGroupName]="i">
-          <mat-label >Email : </mat-label><input formControlName="emailAddress"   class="input" matInput>
+          <mat-label >Email : </mat-label><input formControlName="emailAddress"  class="input" matInput>
         </mat-form-field>
         <span *ngIf="i >=1">
-        <button mat-icon-button (click)="DeleteEmails(i)">
+        <span mat-icon-button (click)="DeleteEmails(i)">
           <mat-icon class="icons">delete</mat-icon>
-        </button>
+        </span>
       </span>
       </div>
-      <button mat-icon-button (click)="AddEmail()">
+      <span mat-icon-button (click)="AddEmail()">
         <mat-icon >add</mat-icon>
-      </button>
+      </span>
     </div>
 
-    <div formArrayName="phones">
-      <div *ngFor="let phone of phones.controls; let i = index" >
+    <div formArrayName="phone">
+      <div *ngFor="let phone of phone.controls; let i = index" >
       <mat-form-field [formGroupName]="i">
         <mat-label>Phone : </mat-label><input formControlName="number"  class="input" matInput>
       </mat-form-field>
       <span *ngIf="i >=1">
-      <button mat-icon-button (click)="DeletePhones(i)">
+      <span mat-icon-button (click)="DeletePhones(i)">
         <mat-icon class="icons">delete</mat-icon>
-      </button>
+      </span>
     </span>
     </div>
-    <button mat-icon-button (click)="AddPhone()">
+    <span mat-icon-button (click)="AddPhone()">
       <mat-icon >add</mat-icon>
-    </button>
+    </span>
   </div>
   <div>
-      <mat-form-field>
-        <mat-label>Nr de Badge : </mat-label><input formControlName="employeeCardNumber" class="input" matInput>
-      </mat-form-field>
-    </div>
+    <mat-form-field>
+      <mat-label>Nr de Badge personnel : </mat-label><input formControlName="employeeCardNumber" class="input" matInput>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Nr de carte ministériel : </mat-label><input formControlName="securityCard" class="input" matInput>
+    </mat-form-field>
+  </div>
     <div>
       <button mat-raised-button color="primary" class="sendButton">Envoyer</button>
     </div>

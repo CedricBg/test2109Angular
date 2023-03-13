@@ -24,15 +24,16 @@
               <td>{{employee.firstName}} {{employee.surName}}</td>
               <td></td>
               <td>
-                <button mat-button (click)="GetOne(employee.id)"><mat-icon class="icons1">visibility</mat-icon></button>
-                <button mat-button (click)="OpenformUpdate(employee.id)"><mat-icon class="icons2">edit</mat-icon></button>
-                <button mat-button (click)="DeleteUSer(employee.id)"><mat-icon class="icons2">delete</mat-icon></button>
+                <button mat-button   type="button" (click)="GetOne(employee.id)"><mat-icon class="icons1">visibility</mat-icon></button>
+                <button  mat-button  type="button" (click)="OpenformUpdate(employee.id)"><mat-icon class="icons2">edit</mat-icon></button>
+                <button *ngIf="employee.id > 1" type="button" mat-button (click)="DeleteUSer(employee.id)"><mat-icon class="icons2">delete</mat-icon></button>
               </td>
             </tr>
           </tbody>
       </table>
     </mat-card>
 </div>
+
 <div class="details" *ngIf="select == true && SelectedEmployee != null">
   <mat-card class="Detailed-card">
     <ul>

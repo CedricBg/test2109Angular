@@ -1,14 +1,15 @@
-import { Address } from './../../../../models/address.models';
-
-import { InformationsService } from './../../../../services/informations.service';
+import { Address } from 'src/app/models/address.models';
+import { InformationsService } from 'src/app/services/informations.service';
 import { Observable } from 'rxjs';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
-import { Component,EventEmitter,Inject,  OnInit, Output } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Countrys } from 'src/app/models/countrys.models';
 import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { Role } from 'src/app/models/role.models';
+import { Role } from 'src/app/models/Role.models';
+;
+
 
 
 @Component({
@@ -19,7 +20,7 @@ import { Role } from 'src/app/models/role.models';
 
 export class AddEmployeeComponent implements OnInit {
   listCountrys : Countrys[]
-  listRoles: Role[]
+  listRoles: Role[] = []
   formEmployee! : FormGroup
   adress! : FormGroup
 
@@ -35,9 +36,11 @@ export class AddEmployeeComponent implements OnInit {
 
   SubmitForm()
   {
+      this._serviceEmployee.getSectedCountry(this.listCountrys, this.formEmployee)
+      this._serviceEmployee.getSelectedRole(this.listRoles, this.formEmployee)
       this._serviceEmployee.insert(this.formEmployee.value)
   }
-  SendInformationForm()
+   SendInformationForm()
   {
     this.formEmployee =  this._builder.group({
       firstName : ['',Validators.required],
@@ -49,22 +52,21 @@ export class AddEmployeeComponent implements OnInit {
       email : this._builder.array([
         this._builder.group({
           emailAddress : ['',Validators.required],
-
         })
       ]),
       phone : this._builder.array([
         this._builder.group({
           number: ['',Validators.required],
-
         })
       ]),
       address : this._builder.group({
       sreetAddress : [''],
       city : [''],
-      stateId : [''],
+      state : ['Belgium'],
       zipCode : [''],}),
+
       role : this._builder.group({
-        name : [''],
+        name : ['Agent statique'],
         diminName : [''],
         roleId : ['']
       }),
@@ -73,7 +75,7 @@ export class AddEmployeeComponent implements OnInit {
   }
   GetListCountrys()
   {
-    this._AddressService.GetAllCountrys().subscribe({
+     this._AddressService.GetAllCountrys().subscribe({
       next :  (data: Countrys[]) =>{
           this.listCountrys =  data
 
@@ -83,8 +85,8 @@ export class AddEmployeeComponent implements OnInit {
   GetListRoles()
   {
     this._InformationService.GetRoles().subscribe({
-      next: (data : Role[])=> {
-          this.listRoles = data
+      next:  (data : Role[])=> {
+          this.listRoles =  data
 
       }
     })
@@ -105,9 +107,7 @@ export class AddEmployeeComponent implements OnInit {
   newPhone(): FormGroup
   {
     return this._builder.group({
-
       number: ['',Validators.required],
-
     })
   }
 
@@ -115,6 +115,7 @@ export class AddEmployeeComponent implements OnInit {
   {
     return this.formEmployee.controls["phone"] as FormArray
   }
+
   AddEmail()
   {
     this.email.push(this.newEmail())

@@ -1,4 +1,4 @@
-import { Role } from './role.models';
+import { Role } from './Role.models';
 import { Address } from './address.models';
 import { Email } from "./email.models"
 import { Phone } from "./phone.models"

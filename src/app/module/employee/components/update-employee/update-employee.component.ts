@@ -1,3 +1,5 @@
+import { InformationsService } from './../../../../services/informations.service';
+import { Role } from './../../../../models/Role.models';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -15,14 +17,16 @@ import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 })
 export class UpdateEmployeeComponent implements OnInit {
   firstName: any
-  listEmployee : Employee[]
-  SelectedEmployee! : DetailedEmployee
-  formEmployee! : FormGroup
+  listEmployee: Employee[]
+  SelectedEmployee!: DetailedEmployee
+  formEmployee!: FormGroup
   idToModify!: number
-  listCountrys : Countrys[]
-  idEmployee : number
+  listCountrys: Countrys[]
+  idEmployee: number
+  listRoles: Role[]
+  selectedRole!: string
 
-  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _AddressService : AddressService,
+  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _InfoService : InformationsService,private _AddressService : AddressService,
     private dialogRef: MatDialogRef<UpdateEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) data: number
     ){
@@ -30,8 +34,9 @@ export class UpdateEmployeeComponent implements OnInit {
     }
   ngOnInit(): void {
     this.GetListCountrys()
-
+    this.GetRoles()
     this.GetOne(this.idEmployee)
+
   }
   async SendInformationForm()
   {
@@ -39,30 +44,45 @@ export class UpdateEmployeeComponent implements OnInit {
       firstName : [this.SelectedEmployee.firstName,Validators.required],
       surName : [this.SelectedEmployee.surName,Validators.required],
       birthDate : [this.SelectedEmployee.birthDate,Validators.required],
-      securityCard : [this.SelectedEmployee.securityCard,Validators.required],
-      employeeCardNumber : [this.SelectedEmployee.employeeCardNumber,Validators.required],
+      securityCard : [this.SelectedEmployee.securityCard],
+      employeeCardNumber : [this.SelectedEmployee.employeeCardNumber],
       registreNational : [this.SelectedEmployee.registreNational,Validators.required],
-      address : [this.SelectedEmployee.address,Validators.required],
-
       vehicle : [this.SelectedEmployee.vehicle],
-      sreetAddress : [this.SelectedEmployee.address ? this.SelectedEmployee.address.sreetAddress :''],
-      city : [this.SelectedEmployee.address ? this.SelectedEmployee.address.city :''],
-      state : [this.SelectedEmployee.address ? this.SelectedEmployee.address.state :''],
-      stateId : [this.SelectedEmployee.address ? this.SelectedEmployee.address.id :''],
-      zipCode : [this.SelectedEmployee.address ? this.SelectedEmployee.address.zipCode :''],
-      emails : this._builder.array([]),
-      phones : this._builder.array([]),
+      email : this._builder.array([]),
+      phone : this._builder.array([]),
+      address : this._builder.group({
+        AddressId: [ this.SelectedEmployee.address.addressId],
+        sreetAddress : [this.SelectedEmployee.address.sreetAddress],
+        city : [ this.SelectedEmployee.address.city],
+        state : [this.SelectedEmployee.address.state],
+        stateId : [this.SelectedEmployee.address.stateId],
+        zipCode : [this.SelectedEmployee.address.zipCode],
+      }),
+      role : this._builder.group({
+        name : [this.SelectedEmployee.role.name],
+        diminName : [this.SelectedEmployee.role.diminName],
+        roleId : [this.SelectedEmployee.role.roleId]
+      }),
     })
     this.SelectedEmployee.email.forEach(e=>{
       let newcontrol = this.newEmail()
       newcontrol.patchValue(e)
-      this.emails.push(newcontrol)
+      this.email.push(newcontrol)
     })
     this.SelectedEmployee.phone.forEach(e=>{
       let newcontrol = this.newPhone()
       newcontrol.patchValue(e)
-      this.phones.push(newcontrol)
+      this.phone.push(newcontrol)
     })
+  }
+
+  GetRoles()
+  {
+    this._InfoService.GetRoles().subscribe({
+      next: (data: Role[]) =>{
+        this.listRoles = data
+      }
+    });
   }
 
   GetListCountrys()
@@ -73,52 +93,62 @@ export class UpdateEmployeeComponent implements OnInit {
       }
     })
   }
-  GetOne(id: number)
+  async GetOne(id: number)
   {
     this._serviceEmployee.getOne(id).subscribe({
-        next : ( data : DetailedEmployee)  => {
-        this.SelectedEmployee =  data
+        next : async ( data : DetailedEmployee)  => {
+        this.SelectedEmployee = await data
         this.SendInformationForm()
       }
     })
   }
-  get emails(): FormArray
+  get email(): FormArray
   {
-    return this.formEmployee.get("emails") as FormArray
+    return this.formEmployee.get("email") as FormArray
   }
 
-  get phones(): FormArray
+  get phone(): FormArray
   {
-    return this.formEmployee.controls["phones"] as FormArray
+    return this.formEmployee.controls["phone"] as FormArray
   }
+
   newEmail(): FormGroup
   {
     return this._builder.group({
-      id:[{value:'', disabled: true}],
-      emailAddress : ['',Validators.required]
+      emailAddress: ['',Validators.required],
+
     })
   }
+
+
+
   newPhone(): FormGroup
   {
     return this._builder.group({
-      id:[{value:'', disabled: true}],
-      number: ['',Validators.required]
+      number: ['',Validators.required],
     })
   }
   AddEmail()
   {
-    this.emails.push(this.newEmail())
+    this.email.push(this.newEmail())
   }
   AddPhone()
   {
-    this.phones.push(this.newPhone())
+    this.phone.push(this.newPhone())
   }
   DeleteEmails(id: number)
   {
-    this.emails.removeAt(id)
+    this.email.removeAt(id)
   }
   DeletePhones(id: number)
   {
-    this.phones.removeAt(id)
+    this.phone.removeAt(id)
+  }
+  updateUser()
+  {
+    this._serviceEmployee.getSelectedRole(this.listRoles, this.formEmployee)
+    this._serviceEmployee.getSectedCountry(this.listCountrys, this.formEmployee)
+    this.formEmployee.value['id'] = this.SelectedEmployee.id
+    return this._serviceEmployee.UpdateUser(this.formEmployee.value)
   }
 }

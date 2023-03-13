@@ -33,9 +33,9 @@
         <mat-label>Code Postal : </mat-label><input formControlName="zipCode" class="input" matInput>
       </mat-form-field>
       <mat-form-field>
-        <mat-label>Pays : </mat-label><input matInput [matAutocomplete]="autoNationality" formControlName="stateId" class="input">
+        <mat-label>Pays : </mat-label><input matInput [matAutocomplete]="autoNationality" formControlName="state" class="input">
         <mat-autocomplete #autoNationality="matAutocomplete" >
-          <mat-option *ngFor="let elt of listCountrys" [value]="elt.id" >
+          <mat-option *ngFor="let elt of listCountrys" [value]="elt.country" >
                 {{elt.country}}
           </mat-option>
         </mat-autocomplete>
@@ -43,39 +43,40 @@
     </div>
     <div formGroupName="role" >
       <mat-form-field>
-      <mat-label>Role : </mat-label><input matInput [matAutocomplete]="auto" formControlName="roleId" class="input">
+      <mat-label>Role : </mat-label><input matInput [matAutocomplete]="auto" formControlName="name" class="input">
       <mat-autocomplete #auto="matAutocomplete" >
-        <mat-option *ngFor="let elt of listRoles"  [value]="elt.roleId" >
+        <mat-option *ngFor="let elt of listRoles"  [value]="elt.name" >
               {{elt.name}}
         </mat-option>
       </mat-autocomplete>
-    </mat-form-field></div>
+    </mat-form-field>
+  </div>
     <div formArrayName="email" >
-      <button mat-icon-button (click)="AddEmail()">
+      <span mat-icon-button (click)="AddEmail()">
         <mat-icon >add</mat-icon> Ajoutez une adresse mail
-      </button>
+      </span>
       <div *ngFor="let emailAddress of email.controls; let i = index" [formGroupName]="i"  >
         <mat-form-field >
           <mat-label>Email : </mat-label><input type="email" formControlName="emailAddress"  class="input" matInput>
         </mat-form-field>
         <span *ngIf="i >= 1">
           <button mat-icon-button type="button" (click)="DeleteEmails(i)">
-            <mat-icon class="icons">delete</mat-icon>
+            <mat-icon type="button" class="icons">delete</mat-icon>
           </button>
         </span>
       </div>
     </div>
 
     <div formArrayName="phone" >
-      <button mat-icon-button (click)="AddPhone()">
+      <button mat-icon-button type="button" (click)="AddPhone()">
         <mat-icon >add</mat-icon> Ajoutez un numéro de téléphone
       </button>
       <div *ngFor="let number of phone.controls; let i = index" [formGroupName]="i"  >
       <mat-form-field>
-        <mat-label>Phone : </mat-label><input type="text" formControlName="number"   class="input" matInput>
+        <mat-label>Phone : </mat-label><input type="text" formControlName="number" class="input" matInput>
       </mat-form-field>
       <span *ngIf="i >= 1">
-      <button mat-icon-button  (click)="DeletePhones(i)">
+      <button mat-icon-button type="button"  (click)="DeletePhones(i)">
         <mat-icon class="icons">delete</mat-icon>
       </button>
       </span>
