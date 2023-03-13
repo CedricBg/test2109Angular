@@ -1,13 +1,10 @@
+import { Role } from "./Role.models"
+
 export class  Employee
 {
- id : number
- surName : string
- firstName : string
+ id: number
+ surName: string
+ firstName: string
+ role: Role
 
- constructor(id,surName,firstName)
- {
-  this.id=id
-  this.firstName = firstName
-  this.surName = surName
- }
 }

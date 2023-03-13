@@ -2,6 +2,7 @@
 {
   padding-left: 2vw;
   padding-top: 2vw;
+  padding-bottom: 2vw;
 }
 .table-card{
   width: 25vw;
@@ -10,26 +11,28 @@
 }
 table{
   width: 100%;
-  margin-left: 2vw;
 }
+
 th
 {
   text-align: left;
+  padding-left: 2vw;
   padding-bottom: 1vh;
 }
-.details{
-  width:60vw;
-  margin-left: 2vw;
-  margin-top: 2vw;
+td{
+  padding-left: 1vw;
 }
 
 .employees{
-  display: flex;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 10px;
 }
 .icons1{
   padding:0;
   margin: 0;
-  color: #007BFF;
+  color: #3F51B5;
 }
 .icons2{
   padding:0;
@@ -38,12 +41,75 @@ th
 }
 .cards{
   display: flex;
+  padding-left: 2vw;
 }
 .AddPerson{
   display: flex;
   justify-content: flex-end;
 }
+.AddPerson button{
+  width: 100%;
+}
 .AddPerson .icons{
-  padding-right: 1vw;
-  color: blue;
+
+  color: rgb(129, 129, 158);
+}
+
+.AddPerson .icons:hover{
+  color: #17A2B8;
+}
+
+
+
+.card {
+  margin-left: 2vw;
+  width:50vw;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+.card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1vw;
+}
+
+.details h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.details p {
+  font-size: 18px;
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.details p i {
+  margin-right: 10px;
+}
+
+.position {
+  color: #555;
+  font-weight: bold;
+}
+
+.email, .phone {
+  color: #999;
 }

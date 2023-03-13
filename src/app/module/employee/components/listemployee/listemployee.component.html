@@ -1,14 +1,15 @@
 <div class="search">
-  <label>Recherche : </label>
-  <input type="text" name="firstName" [(ngModel)]="surName" (ngModelChange)="ngModelChange()"   placeholder="Nom de famille" >
+
+  <mat-form-field>
+    <mat-label>Recherche : </mat-label>
+  <input  type="text" name="firstName" [(ngModel)]="surName" (ngModelChange)="ngModelChange()"   placeholder="Nom de famille" matInput >
+</mat-form-field>
 </div>
+
 <div class = "cards">
 <div class="employees">
-
-  <mat-card class="table-card">
     <div class="AddPerson">
-      <mat-icon (click)="OpenformAddUser()" class="icons">person_add</mat-icon>
-
+      <button mat-button type="button" (click)="OpenformAddUser()"><mat-icon  class="icons">person_add</mat-icon></button>
     </div>
     <hr>
       <table>
@@ -21,46 +22,44 @@
           </thead>
           <tbody>
             <tr *ngFor="let employee of listEmployee">
-              <td>{{employee.firstName}} {{employee.surName}}</td>
-              <td></td>
+              <td>{{employee.firstName | titlecase }} {{employee.surName | titlecase}}</td>
+              <td>{{employee.role.name}}</td>
               <td>
                 <button mat-button   type="button" (click)="GetOne(employee.id)"><mat-icon class="icons1">visibility</mat-icon></button>
                 <button  mat-button  type="button" (click)="OpenformUpdate(employee.id)"><mat-icon class="icons2">edit</mat-icon></button>
-                <button *ngIf="employee.id > 1" type="button" mat-button (click)="DeleteUSer(employee.id)"><mat-icon class="icons2">delete</mat-icon></button>
+                <button *ngIf="employee.id > 1" type="button" mat-button (click)="DeleteUSer(employee.id)"><mat-icon class="icons3">delete</mat-icon></button>
               </td>
             </tr>
           </tbody>
       </table>
-    </mat-card>
+
 </div>
 
-<div class="details" *ngIf="select == true && SelectedEmployee != null">
+<div class="de" *ngIf="select == true && SelectedEmployee != null">
+  <div class="card">
+    <img src="path/to/profile-picture.jpg" alt="Profile picture">
+    <div class="details">
+      <h2>{{SelectedEmployee.surName}} {{SelectedEmployee.firstName}}</h2>
+      <p class="position">{{SelectedEmployee.role.name}}</p>
+
+      <p  *ngFor="let emails of SelectedEmployee.email; let i = index" class="email">
+        <i class="far fa-envelope"></i> {{emails.emailAddress}}</p>
+
+      <p *ngFor="let phones of SelectedEmployee.phone; let i = index"  class="phone"><i class="fas fa-phone"></i> {{phones.number}}</p>
+    </div>
+
+    <div class="details">
+      <p>{{SelectedEmployee.birthDate| date:"dd/MM/yy"}}</p>
+    </div>
+  </div>
   <mat-card class="Detailed-card">
     <ul>
-      <li>Nom : {{SelectedEmployee.surName }}</li>
-      <li>Prénom : {{SelectedEmployee.firstName}}</li>
-      <li>Date de naissance : {{SelectedEmployee.birthDate| date:"dd/MM/yy"}} </li>
+      <li>Date de naissance :  </li>
 
       <li>Rue : {{SelectedEmployee.address.sreetAddress}}</li>
       <li>Ville : {{SelectedEmployee.address.city}}</li>
       <li>Code Postal : {{SelectedEmployee.address.zipCode}}</li>
       <li>Pays : {{SelectedEmployee.address.state}}</li>
-      <li>
-        Email :
-        <ul *ngFor="let emails of SelectedEmployee.email; let i = index" >
-          <li>
-              {{emails.emailAddress}}
-          </li>
-        </ul>
-      </li>
-      <li>
-        Nr de téléphone :
-        <ul *ngFor="let phones of SelectedEmployee.phone; let i = index" >
-          <li>
-            {{phones.number}}
-          </li>
-        </ul>
-      </li>
       <li>Nr de Badge : {{SelectedEmployee.employeeCardNumber}}</li>
       <li>Date de création : {{SelectedEmployee.entryService|date:"dd/MM/yy"}}</li>
     </ul>
