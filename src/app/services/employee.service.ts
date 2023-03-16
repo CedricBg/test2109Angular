@@ -1,10 +1,11 @@
+import { Language } from './../models/language.models';
 import { Countrys } from 'src/app/models/countrys.models';
 import { FormGroup } from '@angular/forms';
 import { AddEmployeeComponent } from './../module/employee/components/add-employee/add-employee.component';
 import { Router } from '@angular/router';
 import { DetailedEmployee } from './../models/DetailedEmployee.models';
 import { environment } from './../../environments/environment';
-import { HttpClient} from '@angular/common/http';;
+import { HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';;
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Employee } from '../models/employee.models';
@@ -65,10 +66,10 @@ export class EmployeeService implements OnInit {
     return this._httpClient.put(environment.baseAdres + 'Employee/update', employee).subscribe({
       next : (data : DetailedEmployee) =>{
         this.isUpdatedSubject.next(data)
+        this.get()
       }
     })
   }
-
   getSelectedRole(listRoles: Role[], formEmployee: FormGroup)
   {
     const role = listRoles.find(f => f.name === formEmployee.value['role'].name)
@@ -78,6 +79,12 @@ export class EmployeeService implements OnInit {
   {
     const adress = listCountrys.find(f => f.country === formEmployee.value['address'].state)
     this.getFormGroup('address',formEmployee ).value['stateId'] = adress ? adress.id : null
+  }
+
+  getLanguages(listLanguage: Language[],formEmployee: FormGroup )
+  {
+    const language = listLanguage.find(f => f.name === formEmployee.value['language'].name)
+    this.getFormGroup('language',formEmployee ).value['id'] = language ? language.id : null
   }
 
   getFormGroup(fg: string, formEmployee: FormGroup)

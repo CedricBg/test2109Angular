@@ -1,3 +1,4 @@
+import { Language } from './language.models';
 import { Role } from './Role.models';
 import { Address } from './address.models';
 import { Email } from "./email.models"
@@ -19,4 +20,5 @@ export interface DetailedEmployee
     phone: Phone[]
     email: Email[]
     IsDeleted: Boolean
+    language: Language
 }
