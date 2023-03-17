@@ -2,12 +2,13 @@ import { Address } from 'src/app/models/address.models';
 import { InformationsService } from 'src/app/services/informations.service';
 import { Observable } from 'rxjs';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
-import { Component, OnInit,  } from '@angular/core';
+import { Component, Inject, OnInit,  } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Countrys } from 'src/app/models/countrys.models';
 import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Role } from 'src/app/models/Role.models';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 ;
 
 
@@ -19,19 +20,25 @@ import { Role } from 'src/app/models/Role.models';
 })
 
 export class AddEmployeeComponent implements OnInit {
-  listCountrys : Countrys[]
+  listCountrys : Countrys[] = []
   listRoles: Role[] = []
   formEmployee! : FormGroup
   adress! : FormGroup
 
-  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _AddressService : AddressService, private _InformationService : InformationsService)
-   {
+  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _AddressService : AddressService, private _InformationService : InformationsService, public dialogRef: MatDialogRef<AddEmployeeComponent>,
+    @Inject(MAT_DIALOG_DATA) data)
+    {
 
-   }
+    }
+
     ngOnInit(): void {
       this.GetListRoles()
       this.GetListCountrys()
       this.SendInformationForm()
+    }
+
+    CloseDialogBox(): void {
+      this.dialogRef.close();
     }
 
   SubmitForm()

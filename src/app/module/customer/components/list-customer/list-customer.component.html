@@ -1,0 +1,61 @@
+<div class="contentList">
+    <div class="search">
+
+      <mat-form-field>
+        <mat-label>Recherche : </mat-label>
+      <input  type="text" name="nameCustomer" [(ngModel)]="nameCustomer" (ngModelChange)="ngModelChange()"  placeholder="Nom du client" matInput >
+    </mat-form-field>
+    </div>
+    <div class = "cards">
+    <div class="employees">
+      <div class="AddPerson">
+        <button mat-button type="button" (click)=" OpenformAddUser()" ><mat-icon  class="icons">person_add</mat-icon></button>
+      </div>
+      <hr>
+        <table>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Service</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let client of listCustomers">
+                <td>{{client.nameCustomer| titlecase }}</td>
+                <td></td>
+                <td>
+                  <button mat-button   type="button"><mat-icon (click)="GetOne(client.id)" class="icons1">visibility</mat-icon></button>
+                  <button  mat-button  type="button"><mat-icon (click)="OpenformUpdate(client.id)" class="icons2">edit</mat-icon></button>
+                  <button *ngIf="client.id > 1" type="button" mat-button ><mat-icon class="icons3">delete</mat-icon></button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+  </div>
+
+  <div class="rep" *ngIf="select == true && SelectedClient != null">
+    <div class="card">
+      <div class="details">
+        <h2>{{SelectedClient.nameCustomer}} </h2>
+        <p  *ngFor="let phone of SelectedClient.emergencyPhone; let i = index" class="email">
+          <i class="far fa-envelope"></i> {{phone.number}}</p>
+
+
+        <p *ngFor="let phones of SelectedClient.generalPhone; let i = index"  class="phone">
+          <i class="fas fa-phone"></i>{{phones.number}}
+        </p>
+
+    </div>
+    <div class="details">
+      <p class="position">Adresse :</p>
+      <p class="email"><i class="far fa-envelope"></i>Rue : {{SelectedClient.address.sreetAddress}}</p>
+      <p class="email"><i class="far fa-envelope"></i>Code Postal : {{SelectedClient.address.zipCode}}</p>
+      <p class="email"><i class="far fa-envelope"></i>Pays : {{SelectedClient.address.state}}</p>
+      <p class="email"><i class="far fa-envelope"></i>Ville : {{SelectedClient.address.city}}</p>
+
+    </div>
+    </div>
+  </div>
+</div>
+</div>

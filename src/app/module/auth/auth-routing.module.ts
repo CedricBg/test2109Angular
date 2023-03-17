@@ -1,5 +1,4 @@
 import { AddloginComponent } from './components/addlogin/addlogin.component';
-import { AddLogin } from './../../models/AddLogin.models';
 import { AuthComponent } from './auth.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';

@@ -38,7 +38,10 @@ export class NavComponent implements OnInit {
   {
     this._Router.navigateByUrl('employee/employee/AllEmployees')
   }
-
+  Customers()
+  {
+    this._Router.navigateByUrl('customer/listcustomer')
+  }
 
   OpenDialog()
   {
@@ -48,7 +51,6 @@ export class NavComponent implements OnInit {
     diallogConfig.autoFocus = true;
     diallogConfig.height = '200px';
     diallogConfig.width = '400px';
-
     const dialogRef = this.dialog.open(UserProfileComponent,diallogConfig);
   }
 

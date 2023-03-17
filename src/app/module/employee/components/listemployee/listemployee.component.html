@@ -6,6 +6,7 @@
 </mat-form-field>
 </div>
 
+
 <div class = "cards">
 <div class="employees">
     <div class="AddPerson">
@@ -34,28 +35,27 @@
       </table>
 </div>
 
-<div class="rep" *ngIf="select == true && SelectedEmployee != null">
-  <div class="card">
-    <img src="./lucy.jpg" alt="Profile picture">
+  <div class="rep" *ngIf="select == true && SelectedEmployee != null">
+    <div class="card">
+      <div class="details">
+        <h2>{{SelectedEmployee.surName}} {{SelectedEmployee.firstName}}</h2>
+        <p class="position">{{SelectedEmployee.role.name}}</p>
+        <p  *ngFor="let emails of SelectedEmployee.email; let i = index" class="email">
+          <i class="far fa-envelope"></i> {{emails.emailAddress}}</p>
+        <p *ngFor="let phones of SelectedEmployee.phone; let i = index"  class="phone"><i class="fas fa-phone"></i>{{phones.number}}
+        </p>
+
+
+    </div>
     <div class="details">
-      <h2>{{SelectedEmployee.surName}} {{SelectedEmployee.firstName}}</h2>
-      <p class="position">{{SelectedEmployee.role.name}}</p>
-      <p  *ngFor="let emails of SelectedEmployee.email; let i = index" class="email">
-        <i class="far fa-envelope"></i> {{emails.emailAddress}}</p>
-      <p *ngFor="let phones of SelectedEmployee.phone; let i = index"  class="phone"><i class="fas fa-phone"></i>{{phones.number}}
-      </p>
-
-
+      <p class="position">Adresse :</p>
+      <p class="email"><i class="far fa-envelope"></i> Date de naissance: {{SelectedEmployee.birthDate| date:"dd/MM/yy"}}</p>
+      <p class="email"><i class="far fa-envelope"></i>Rue : {{SelectedEmployee.address.sreetAddress}}</p>
+      <p class="email"><i class="far fa-envelope"></i>Code Postal : {{SelectedEmployee.address.zipCode}}</p>
+      <p class="email"><i class="far fa-envelope"></i>Pays : {{SelectedEmployee.address.state}}</p>
+      <p class="email"><i class="far fa-envelope"></i>Ville : {{SelectedEmployee.address.city}}</p>
+      <p class="email">Nr de Badge : {{SelectedEmployee.employeeCardNumber}}</p>
+    </div>
+    </div>
   </div>
-  <div class="details">
-    <p class="position">Adresse :</p>
-    <p class="email"><i class="far fa-envelope"></i> Date de naissance: {{SelectedEmployee.birthDate| date:"dd/MM/yy"}}</p>
-    <p class="email"><i class="far fa-envelope"></i>Rue : {{SelectedEmployee.address.sreetAddress}}</p>
-    <p class="email"><i class="far fa-envelope"></i>Code Postal : {{SelectedEmployee.address.zipCode}}</p>
-    <p class="email"><i class="far fa-envelope"></i>Pays : {{SelectedEmployee.address.state}}</p>
-    <p class="email"><i class="far fa-envelope"></i>Ville : {{SelectedEmployee.address.city}}</p>
-    <p class="email">Nr de Badge : {{SelectedEmployee.employeeCardNumber}}</p>
-  </div>
-  </div>
-</div>
 </div>

@@ -7,11 +7,14 @@ import { NavComponent } from './components/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule} from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { CustomerComponent } from './module/customer/customer.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent
+    NavComponent,
+    CustomerComponent
   ],
   imports: [
     BrowserModule,

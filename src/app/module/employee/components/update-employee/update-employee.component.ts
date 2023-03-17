@@ -43,6 +43,9 @@ export class UpdateEmployeeComponent implements OnInit {
     this.GetOne(this.idEmployee)
 
   }
+  CloseDialogBox(): void {
+    this.dialogRef.close();
+  }
   async SendInformationForm()
   {
     this.formEmployee = await this._builder.group({

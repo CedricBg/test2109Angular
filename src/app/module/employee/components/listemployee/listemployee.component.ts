@@ -14,14 +14,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./listemployee.component.scss']
 })
 export class ListemployeeComponent implements OnInit {
-surName: any
-  listEmployee : Employee[]
+  surName: any
+  listEmployee : Employee[] = []
   SelectedEmployee! : DetailedEmployee
   select : boolean = false
   subscriptionUpdate: Subscription
   subscriptionAll: Subscription
 
-  displayedColumns: string[] = ['surName', 'firstName','id'];
 
   constructor(private _serviceEmployee : EmployeeService, public dialog : MatDialog) { }
 
@@ -35,11 +34,9 @@ surName: any
     })
   }
 
-  async GetEmployee()
+  GetEmployee()
   {
     this._serviceEmployee.get()
-
-
   }
 
   GetOne(id: number)
@@ -53,13 +50,13 @@ surName: any
   }
 
   ngModelChange()
-
   {
     if(this.surName == "")
     {
       this.ngOnInit()
     }
     else{
+      console.log(this.listEmployee)
       this.listEmployee = this.listEmployee.filter(res=>{
         return res.surName.toLocaleLowerCase().match(this.surName.toLocaleLowerCase())
       })

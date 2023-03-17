@@ -2,8 +2,12 @@
 
 <div class="details" *ngIf="SelectedEmployee != null">
   <mat-card class="Detailed-card">
-    <button class="iconsCenter" mat-button (click)="GetOne(SelectedEmployee.id)"><mat-icon class="icons">cancel</mat-icon>Annuler les modifications</button>
+    <div>
+      <button class="iconsCenter" mat-raised-button (click)="CloseDialogBox()" color="warning" class="sendButton">Fermer</button>
+    </div>
+
     <form [formGroup]="formEmployee" (ngSubmit)="updateUser()" >
+      <mat-dialog-content>
       <div>
         <mat-form-field >
           <mat-label>Prénom : </mat-label><input formControlName="firstName" class="input" matInput>
@@ -101,10 +105,12 @@
       <mat-label>Nr de carte ministériel: </mat-label><input formControlName="securityCard" class="input" matInput>
     </mat-form-field>
   </div>
+</mat-dialog-content>
     <div>
       <button mat-raised-button color="primary" class="sendButton">Envoyer</button>
     </div>
     </form>
+
 
 </mat-card>
 
