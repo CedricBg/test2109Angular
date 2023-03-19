@@ -1,6 +1,6 @@
+import { Customers } from './../../../../models/customer/customers.models';
 import { AddCustomerComponent } from './../add-customer/add-customer.component';
 import { UpdateCustomerComponent } from './../update-customer/update-customer.component';
-import { Customer } from './../../../../models/customer/customers.models';
 import { CustomerAll } from './../../../../models/customer/customerAll.models';
 import { CustomerService } from './../../../../services/customer.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,9 +13,9 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 })
 export class ListCustomerComponent implements OnInit {
   nameCustomer: string = ""
-  listCustomers: CustomerAll[] = []
+  listCustomers: CustomerAll[]
   customerName: string
-  SelectedClient: Customer
+  SelectedClient: Customers
   select : boolean = false
 
   constructor(private _CustService: CustomerService, public dialog : MatDialog) { }
@@ -36,7 +36,7 @@ export class ListCustomerComponent implements OnInit {
   {
     this.select = true
     this._CustService.GetOne(id).subscribe({
-      next: (data: Customer)=>{
+      next: (data: Customers)=>{
         this.SelectedClient = data
       }
     })
@@ -58,9 +58,8 @@ export class ListCustomerComponent implements OnInit {
   {
     const diallogConfig = new MatDialogConfig;
     diallogConfig.data = id
-    diallogConfig.disableClose = false;
+    diallogConfig.disableClose = true;
     diallogConfig.restoreFocus = true;
-
     const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
   }
   OpenformAddUser()
