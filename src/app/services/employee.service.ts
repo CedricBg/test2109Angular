@@ -70,26 +70,6 @@ export class EmployeeService implements OnInit {
       }
     })
   }
-  getSelectedRole(listRoles: Role[], formEmployee: FormGroup)
-  {
-    const role = listRoles.find(f => f.name === formEmployee.value['role'].name)
-    this.getFormGroup('role',formEmployee).value['roleId'] = role ? role.roleId : null
-  }
-  getSectedCountry(listCountrys: Countrys[],formEmployee: FormGroup )
-  {
-    const adress = listCountrys.find(f => f.country === formEmployee.value['address'].state)
-    this.getFormGroup('address',formEmployee ).value['stateId'] = adress ? adress.id : null
-  }
 
-  getLanguages(listLanguage: Language[],formEmployee: FormGroup )
-  {
-    const language = listLanguage.find(f => f.name === formEmployee.value['language'].name)
-    this.getFormGroup('language',formEmployee ).value['id'] = language ? language.id : null
-  }
-
-  getFormGroup(fg: string, formEmployee: FormGroup)
-  {
-    return formEmployee.get(fg) as FormGroup
-  }
 
 }

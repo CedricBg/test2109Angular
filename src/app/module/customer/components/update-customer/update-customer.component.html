@@ -1,1 +1,19 @@
-<p>update-customer works!</p>
+<div class="details">
+  <mat-card class="Detailed-card">
+    <form [formGroup]="FormClient" (ngSubmit)="updateClient()">
+      <div>
+        <button class="iconsCenter" mat-raised-button (click)="CloseDialogBox()" color="warning" class="sendButton">Fermer</button>
+      </div>
+      <mat-dialog-content>
+        <div>
+          <mat-form-field >
+            <mat-label>Company:</mat-label><input formControlName="nameCustomer" class="input" matInput>
+          </mat-form-field>
+        </div>
+
+      </mat-dialog-content>
+
+
+    </form>
+  </mat-card>
+</div>

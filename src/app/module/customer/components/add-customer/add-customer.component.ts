@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Customers } from 'src/app/models/customer/customers.models';
 
 @Component({
   selector: 'app-add-customer',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddCustomerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialogRef: MatDialogRef<AddCustomerComponent>,
+    @Inject(MAT_DIALOG_DATA) data: Customers)
+    {
+
+    }
 
   ngOnInit(): void {
   }
 
+  CloseDialogBox(): void {
+    this.dialogRef.close();
+  }
 }

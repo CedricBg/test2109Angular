@@ -25,7 +25,7 @@ export class AddEmployeeComponent implements OnInit {
   formEmployee! : FormGroup
   adress! : FormGroup
 
-  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _AddressService : AddressService, private _InformationService : InformationsService, public dialogRef: MatDialogRef<AddEmployeeComponent>,
+  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _InfoService: InformationsService ,private _AddressService : AddressService, private _InformationService : InformationsService, public dialogRef: MatDialogRef<AddEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) data)
     {
 
@@ -43,9 +43,10 @@ export class AddEmployeeComponent implements OnInit {
 
   SubmitForm()
   {
-      this._serviceEmployee.getSectedCountry(this.listCountrys, this.formEmployee)
-      this._serviceEmployee.getSelectedRole(this.listRoles, this.formEmployee)
+      this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
+      this._InfoService.getSelectedRole(this.listRoles, this.formEmployee)
       this._serviceEmployee.insert(this.formEmployee.value)
+      this.CloseDialogBox()
   }
    SendInformationForm()
   {

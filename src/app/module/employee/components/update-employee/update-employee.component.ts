@@ -41,7 +41,6 @@ export class UpdateEmployeeComponent implements OnInit {
     this.GetListCountrys()
     this.GetRoles()
     this.GetOne(this.idEmployee)
-
   }
   CloseDialogBox(): void {
     this.dialogRef.close();
@@ -119,6 +118,7 @@ export class UpdateEmployeeComponent implements OnInit {
     this._serviceEmployee.getOne(id).subscribe({
         next : async ( data : DetailedEmployee)  => {
         this.SelectedEmployee = await data
+        console.log(this.SelectedEmployee)
         this.SendInformationForm()
       }
     })
@@ -137,16 +137,15 @@ export class UpdateEmployeeComponent implements OnInit {
   {
     return this._builder.group({
       emailAddress: ['',Validators.required],
+      emailId:[null]
 
     })
   }
-
-
-
   newPhone(): FormGroup
   {
     return this._builder.group({
       number: ['',Validators.required],
+      phoneId: [null]
     })
   }
   AddEmail()
@@ -167,11 +166,12 @@ export class UpdateEmployeeComponent implements OnInit {
   }
   updateUser()
   {
-
-    this._serviceEmployee.getSelectedRole(this.listRoles, this.formEmployee)
-    this._serviceEmployee.getSectedCountry(this.listCountrys, this.formEmployee)
-    this._serviceEmployee.getLanguages(this.listLanguages, this.formEmployee)
+    this._InfoService.getSelectedRole(this.listRoles, this.formEmployee)
+    this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
+    this._InfoService.getLanguages(this.listLanguages, this.formEmployee)
     this.formEmployee.value['id'] = this.SelectedEmployee.id
+    console.log(this.formEmployee.value)
+    this.CloseDialogBox()
     return this._serviceEmployee.UpdateUser(this.formEmployee.value)
   }
 
