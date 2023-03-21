@@ -4,7 +4,7 @@ import { Address } from './address.models';
 import { Email } from "./email.models"
 import { Phone } from "./phone.models"
 
-export interface DetailedEmployee
+export class DetailedEmployee
 {
     id: number
     firstName: string

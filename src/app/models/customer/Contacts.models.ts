@@ -1,4 +1,4 @@
-export interface ContactPerson
+export interface Contacts
 {
   id: number
   firstName: string

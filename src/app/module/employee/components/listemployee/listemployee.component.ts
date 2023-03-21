@@ -66,7 +66,7 @@ export class ListemployeeComponent implements OnInit {
   {
     const diallogConfig = new MatDialogConfig;
     diallogConfig.data = id
-    diallogConfig.disableClose = true;
+    diallogConfig.disableClose = false;
     diallogConfig.autoFocus = true;
     const dialogRef = this.dialog.open(UpdateEmployeeComponent,diallogConfig);
   }

@@ -1,3 +1,4 @@
+
 import { EmployeeService } from 'src/app/services/employee.service';
 import { CustomerService } from './../../../../services/customer.service';
 import { Role } from 'src/app/models/Role.models';
@@ -5,9 +6,7 @@ import { Language } from './../../../../models/language.models';
 import { InformationsService } from 'src/app/services/informations.service';
 import { AddressService } from './../../../../services/address.service';
 import { Countrys } from './../../../../models/countrys.models';
-import { ContactPerson } from './../../../../models/customer/contactPerson.models';
-import { Phone } from './../../../../models/phone.models';
-import { Email } from './../../../../models/email.models';
+import { Contacts } from '../../../../models/customer/Contacts.models';
 import { Customers } from './../../../../models/customer/customers.models';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl } from '@angular/forms';
 import { Component,Inject, OnInit } from '@angular/core';
@@ -19,100 +18,155 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./update-customer.component.scss']
 })
 export class UpdateCustomerComponent implements OnInit {
-  FormClient!: FormGroup
+  formClient!: FormGroup
   selectedClient: Customers
-  listContact: ContactPerson[] = []
+  listContact: Contacts[] = []
   listCountrys: Countrys[] = []
   listLanguage: Language[]=[]
   listRoles: Role[] = []
-  IdClient: number
+  idClient: number
 
   constructor(private _builder : FormBuilder, private _AddressService: AddressService,private _infoService: InformationsService,private _serviceEmployee: EmployeeService,private _customerService: CustomerService,
     private dialogRef: MatDialogRef<UpdateCustomerComponent>,
     @Inject(MAT_DIALOG_DATA) data: number
   ){
-    this.IdClient = data
+    this.idClient = data;
   }
 
   ngOnInit(): void {
+    this.GetOne(this.idClient);
     this.GetListCountrys()
-    this.GetLanguage()
-    this.GetOne(this.IdClient)
   }
 
+  GetOne(id: number) {
+    this._customerService.GetOne(id).subscribe({
+      next: (data: Customers) => {
+        this.selectedClient = data;
+        console.log(this.selectedClient)
+        this.SendInformationForm();
+      },
+      error: (err: any) => {
+        console.log(err);
+      },
+    });
+  }
 
-  async SendInformationForm()
+  SendInformationForm()
   {
-    this.FormClient = await this._builder.group({
-      nameCustomer: [this.selectedClient.nameCustomer,Validators.required],
-      vat: [this.selectedClient.vatNumber,Validators.required],
-      emergencyEmail: this._builder.array([]),
-      generalEmail: this._builder.array([]),
-      emergencyPhone: this._builder.array([]),
-      generalPhone: this._builder.array([]),
-      language: this._builder.array([]),
-      contactPerson: this._builder.array([]),
-      address : this._builder.array([]),
-      role: this._builder.group({
-        name: [this.selectedClient.role.name,Validators.required],
-        diminName: [this.selectedClient.role.diminName],
-        roleId: [this.selectedClient.role.roleId]
+    this.formClient = this._builder.group({
+      nameCustomer: [this.selectedClient.nameCustomer, Validators.maxLength(20)],
+      site: this._builder.array([]),
+
+    })
+
+
+    this.selectedClient.site.forEach(e=>{
+      e.emergencyEmail.forEach(l=>{
+        let newcontrol = this.newEmail()
+        newcontrol.patchValue(e)
+        this.emergencyEmail.push(newcontrol)
+      })
+      e.generalPhone.forEach(l=>{
+        let newcontrol = this.newPhone()
+        newcontrol.patchValue(e)
+        this.generalPhone.push(newcontrol)
+      })
+      e.generalEmail.forEach(l=>{
+        let newcontrol = this.newEmail()
+        newcontrol.patchValue(e)
+        this.generalEmail.push(newcontrol)
+      })
+      e.emergencyPhone.forEach(l=>{
+        let newcontrol = this.newPhone()
+        newcontrol.patchValue(e)
+        this.emergencyPhone.push(newcontrol)
+      })
+      e.contacts.forEach(l=>{
+        let newcontrol = this.newContact()
+        newcontrol.patchValue(e)
+        this.contacts.push(newcontrol)
       })
     })
-
-    this.AllSelectedEmail(this.GeteArray("emergencyEmail"),this.selectedClient.emergencyEmail)
-    this.AllSelectedEmail(this.GeteArray("generalEmail"),this.selectedClient.generalEmail)
-    this.AllSelectedPhone(this.GeteArray("emergencyPhone"),this.selectedClient.emergencyPhone)
-    this.AllSelectedPhone(this.GeteArray("generalPhone"),this.selectedClient.generalPhone)
   }
 
-  CloseDialogBox(): void {
-    this.dialogRef.close();
+  get site(): FormArray
+  {
+    return this.formClient.get("site") as FormArray
   }
 
-  AllSelectedEmail(name: FormArray, client: Email[])
+  get contacts(): FormArray
   {
-      client.forEach(e=>{
-      let newcontrol = this.newEmail()
-      newcontrol.patchValue(e)
-      name.push(newcontrol)
-    })
+    return this.formClient.get("contacts") as FormArray
   }
-  AllSelectedPhone(name: FormArray, client: Phone[])
+  get emergencyEmail(): FormArray
   {
-      client.forEach(e=>{
-      let newcontrol = this.newPhone()
-      newcontrol.patchValue(e)
-      name.push(newcontrol)
-    })
+    return this.formClient.get("emergencyEmail") as FormArray
   }
-  GeteArray(name: string) : FormArray
+  get generalEmail(): FormArray
   {
-    return this.FormClient.get(name) as FormArray
+    return this.formClient.get("generalEmail") as FormArray
   }
-  newAdress()
+  get emergencyPhone(): FormArray
+  {
+    return this.formClient.get("emergencyPhone") as FormArray
+  }
+  get generalPhone(): FormArray
+  {
+    return this.formClient.get("generalPhone") as FormArray
+  }
+  get address(): FormArray
+  {
+    return this.formClient.get("address") as FormArray
+  }
+
+  newSite(): FormGroup
   {
     return this._builder.group({
-      AddressId: [''],
-        sreetAddress: [''],
-        city: [''],
-        state: [''],
-        stateId: [''],
-        zipCode: [''],
+      siteId:[null],
+      name: ['',Validators.required],
+      vatNumber: [''],
+      EmergencyPhone: this._builder.array([]),
+      generalPhone: this._builder.array([]),
+      emergencyEmail: this._builder.array([]),
+      generalEmail: this._builder.array([]),
+      contacts: this._builder.array([]),
+      language: this._builder.group({
+          id: [null],
+          name: ['',Validators.required]
+      }),
+      address :this._builder.group({
+          sreetAddress: ['',Validators.required],
+        city: ['',Validators.required],
+        state: ['',Validators.required],
+        zipCode: ['',Validators.required],
+        stateId: ['',Validators.required],
+        addressId: [null]
+      })
+    })
+  }
+
+  newContact(): FormGroup
+  {
+    return this._builder.group({
+      firstName: ['',Validators.required],
+      id: [null]
     })
   }
   newEmail(): FormGroup
   {
     return this._builder.group({
       emailAddress: ['',Validators.required],
+      emailId:[null]
     })
   }
   newPhone(): FormGroup
   {
     return this._builder.group({
       number: ['',Validators.required],
+      phoneId: [null]
     })
   }
+
   GetListCountrys()
   {
     this._AddressService.GetAllCountrys().subscribe({
@@ -121,30 +175,5 @@ export class UpdateCustomerComponent implements OnInit {
       }
     })
   }
- GetOne(id: number)
-  {
-    this._customerService.GetOne(id).subscribe({
-      next:  (data: Customers) =>{
-        this.selectedClient =  data
-        this.SendInformationForm()
-      }
-    })
-  }
-  GetLanguage()
-  {
-    this._infoService.GetLanguages().subscribe({
-      next : (data: Language[]) =>{
-        this.listLanguage = data
-      }
-    })
-  }
-  updateClient()
-  {
-    this._infoService.getSelectedRole(this.listRoles, this.FormClient)
-    this._infoService.getSectedCountry(this.listCountrys, this.FormClient)
-    this._infoService.getLanguages(this.listLanguage, this.FormClient)
-    this.CloseDialogBox()
-    return this._customerService.UpdateUser(this.FormClient.value)
-  }
-
 }
+

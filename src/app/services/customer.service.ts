@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs';
-import { CustomerAll } from './../models/customer/customerAll.models';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,9 +14,9 @@ export class CustomerService {
 
   constructor(private _httpClient : HttpClient, private _route : Router) { }
 
-  GetAll(): Observable<CustomerAll[]>
+  GetAll(): Observable<Customers[]>
   {
-    return this._httpClient.get<CustomerAll[]>(environment.baseAdres +'customer/')
+    return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
   }
 
   GetOne(id: number): Observable<Customers>

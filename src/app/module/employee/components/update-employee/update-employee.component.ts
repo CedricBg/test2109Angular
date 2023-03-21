@@ -19,8 +19,8 @@ import { Observable } from 'rxjs';
 export class UpdateEmployeeComponent implements OnInit {
   firstName: any
   listEmployee: Employee[]
-  SelectedEmployee!: DetailedEmployee
-  formEmployee!: FormGroup
+  SelectedEmployee: DetailedEmployee
+  formEmployee: FormGroup
   idToModify!: number
   listCountrys: Countrys[]
   idEmployee: number
@@ -45,9 +45,9 @@ export class UpdateEmployeeComponent implements OnInit {
   CloseDialogBox(): void {
     this.dialogRef.close();
   }
-  async SendInformationForm()
+   SendInformationForm()
   {
-    this.formEmployee = await this._builder.group({
+    this.formEmployee =  this._builder.group({
       firstName: [this.SelectedEmployee.firstName,Validators.required],
       surName: [this.SelectedEmployee.surName,Validators.required],
       birthDate: [this.SelectedEmployee.birthDate,Validators.required],
@@ -113,12 +113,11 @@ export class UpdateEmployeeComponent implements OnInit {
       }
     })
   }
-  async GetOne(id: number)
+  GetOne(id: number)
   {
     this._serviceEmployee.getOne(id).subscribe({
-        next : async ( data : DetailedEmployee)  => {
-        this.SelectedEmployee = await data
-        console.log(this.SelectedEmployee)
+        next : ( data : DetailedEmployee)  => {
+        this.SelectedEmployee = data
         this.SendInformationForm()
       }
     })
@@ -141,6 +140,7 @@ export class UpdateEmployeeComponent implements OnInit {
 
     })
   }
+
   newPhone(): FormGroup
   {
     return this._builder.group({
@@ -170,7 +170,6 @@ export class UpdateEmployeeComponent implements OnInit {
     this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
     this._InfoService.getLanguages(this.listLanguages, this.formEmployee)
     this.formEmployee.value['id'] = this.SelectedEmployee.id
-    console.log(this.formEmployee.value)
     this.CloseDialogBox()
     return this._serviceEmployee.UpdateUser(this.formEmployee.value)
   }
