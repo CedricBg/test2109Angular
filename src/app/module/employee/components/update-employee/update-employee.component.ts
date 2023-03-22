@@ -102,7 +102,7 @@ export class UpdateEmployeeComponent implements OnInit {
       next: (data: Role[]) =>{
         this.listRoles = data
       }
-    });
+    })
   }
 
   GetListCountrys()
@@ -137,7 +137,6 @@ export class UpdateEmployeeComponent implements OnInit {
     return this._builder.group({
       emailAddress: ['',Validators.required],
       emailId:[null]
-
     })
   }
 
@@ -173,6 +172,4 @@ export class UpdateEmployeeComponent implements OnInit {
     this.CloseDialogBox()
     return this._serviceEmployee.UpdateUser(this.formEmployee.value)
   }
-
-
 }

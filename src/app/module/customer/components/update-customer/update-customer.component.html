@@ -1,10 +1,36 @@
 <div class="details">
   <mat-card class="Detailed-card">
       <div>
-        <button class="iconsCenter" mat-raised-button  color="warning" class="sendButton">Fermer</button>
+        <button class="iconsCenter" mat-raised-button  color="warning" (click)="CloseDialogBox()" class="sendButton">Fermer</button>
       </div>
       <form [formGroup]="formClient" *ngIf="formClient">
+        <mat-form-field >
+          <mat-label>Nom Client : </mat-label><input formControlName="nameCustomer" class="input" matInput>
+        </mat-form-field>
 
+        <div formArrayName="site">
+          <div *ngFor="let siteControl of formClient.get('site')['controls']; let i = index" >
+            <p>Site : {{selectedClient.site[i].name}}</p>
+            <mat-form-field [formGroupName]="i">
+              <mat-label>Nom: </mat-label><input formControlName="name" class="input" matInput>
+            </mat-form-field>
+            <mat-form-field [formGroupName]="i">
+              <mat-label>Tva: </mat-label><input formControlName="vatNumber" class="input" matInput>
+            </mat-form-field>
+            <div>
+              <p>Personne de contact(s) pour le site nr° {{i + 1}}</p>
+            <div *ngFor="let contact of siteControl.get('contacts').controls; let a = index">
+              <div [formGroupName]="a" >
+
+                <mat-form-field [formGroup]="contact">
+                <mat-label>Nom </mat-label><input id="firstName" class="input" formControlName="firstName" matInput>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+          </div>
+        </div>
       </form>
   </mat-card>
 </div>

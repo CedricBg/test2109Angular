@@ -15,7 +15,7 @@ export class Site
   creationDate: Date | null
   isDeleted: boolean| null
   language: Language
-  adress: Address
+  address: Address
   contacts: Contacts[]
 
 }
