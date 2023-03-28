@@ -22,10 +22,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let employee of listEmployee">
+            <tr *ngFor="let employee of listEmployee" >
               <td>{{employee.firstName | titlecase }} {{employee.surName | titlecase}}</td>
               <td>{{employee.role.name}}</td>
-              <td>
+              <td *ngIf="role == 'ADM' || employee.id > 1">
                 <button mat-button   type="button" (click)="GetOne(employee.id)"><mat-icon class="icons1">visibility</mat-icon></button>
                 <button  mat-button  type="button" (click)="OpenformUpdate(employee.id)"><mat-icon class="icons2">edit</mat-icon></button>
                 <button *ngIf="employee.id > 1" type="button" mat-button (click)="DeleteUSer(employee.id)"><mat-icon class="icons3">delete</mat-icon></button>

@@ -60,8 +60,10 @@ export class AuthService {
           sessionStorage.setItem('surMame', this.returnData.surName)
           sessionStorage.setItem('id', this.returnData.id.toString())
           sessionStorage.setItem('role', this.returnData.role)
+          sessionStorage.setItem('dimin', this.returnData.dimin)
           this.emitSubject()
-          this._router.navigate(["employee"])
+          console.log(this.returnData)
+          this._router.navigate([this.returnData.dimin])
         }
       }
     })

@@ -8,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path : 'employee' , component : EmployeeComponent, children :[
+  { path : '' , component : EmployeeComponent, children :[
     { path : 'addEmployee' , component : AddEmployeeComponent },
     { path : 'AllEmployees' , component : ListemployeeComponent },
     { path : 'UserProfile' , component : UserProfileComponent },
@@ -16,7 +16,7 @@ const routes: Routes = [
 
   ]
 },
-{ path : '', redirectTo : 'employee', pathMatch : 'full'},
+
 { path : '**', redirectTo : 'employee', pathMatch : 'full'}
 
 

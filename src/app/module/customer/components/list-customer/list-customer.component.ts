@@ -4,6 +4,7 @@ import { UpdateCustomerComponent } from './../update-customer/update-customer.co
 import { CustomerService } from './../../../../services/customer.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Site } from 'src/app/models/customer/site.models';
 
 @Component({
   selector: 'app-list-customer',
@@ -15,7 +16,8 @@ export class ListCustomerComponent implements OnInit {
   listCustomers: Customers[]
   customerName: string
   SelectedClient: Customers
-
+  selectedSiteName: string
+  siteSelected: Site
   select : boolean = false
 
   constructor(private _CustService: CustomerService, public dialog : MatDialog) { }
@@ -32,14 +34,24 @@ export class ListCustomerComponent implements OnInit {
       }
     })
   }
-  GetOne(id:number)
+  GetSit(id: number): number
   {
-    this.select = true
-    this._CustService.GetOne(id).subscribe({
-      next: (data: Customers)=>{
-        this.SelectedClient = data
-      }
-    })
+    const client = this.listCustomers.find(c=>c.id == id)
+    const site =  client.site.find(c=>c.name == this.selectedSiteName)
+    return site.siteId
+  }
+  GetOne(id: number)
+  {
+    if(this.selectedSiteName)
+    {
+      const idsite =  this.GetSit(id)
+      this.select = true
+      this._CustService.GetOne(idsite).subscribe({
+        next: (data: Site)=>{
+          this.siteSelected = data
+        }
+      })
+    }
   }
 
   ngModelChange()
@@ -56,11 +68,14 @@ export class ListCustomerComponent implements OnInit {
   }
   OpenformUpdate(id: number)
   {
-    const diallogConfig = new MatDialogConfig;
-    diallogConfig.data = id
-    diallogConfig.disableClose = false;
-    diallogConfig.restoreFocus = true;
-    const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
+    if(this.siteSelected)
+    {
+      const diallogConfig = new MatDialogConfig;
+      diallogConfig.data = id
+      diallogConfig.disableClose = true;
+      diallogConfig.restoreFocus = true;
+      const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
+    }
   }
   OpenformAddUser()
   {

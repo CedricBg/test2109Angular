@@ -1,3 +1,4 @@
+import { Language } from './../../../../models/language.models';
 import { Address } from 'src/app/models/address.models';
 import { InformationsService } from 'src/app/services/informations.service';
 import { Observable } from 'rxjs';
@@ -9,7 +10,7 @@ import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Role } from 'src/app/models/Role.models';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-;
+
 
 
 
@@ -24,6 +25,7 @@ export class AddEmployeeComponent implements OnInit {
   listRoles: Role[] = []
   formEmployee! : FormGroup
   adress! : FormGroup
+  listLanguages: Language[] = []
 
   constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _InfoService: InformationsService ,private _AddressService : AddressService, private _InformationService : InformationsService, public dialogRef: MatDialogRef<AddEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) data)
@@ -33,6 +35,7 @@ export class AddEmployeeComponent implements OnInit {
 
     ngOnInit(): void {
       this.GetListRoles()
+      this.GetLanguages()
       this.GetListCountrys()
       this.SendInformationForm()
     }
@@ -43,10 +46,13 @@ export class AddEmployeeComponent implements OnInit {
 
   SubmitForm()
   {
+    if(this.formEmployee.valid)
+    {
       this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
       this._InfoService.getSelectedRole(this.listRoles, this.formEmployee)
       this._serviceEmployee.insert(this.formEmployee.value)
       this.CloseDialogBox()
+    }
   }
    SendInformationForm()
   {
@@ -62,6 +68,9 @@ export class AddEmployeeComponent implements OnInit {
           emailAddress : ['',Validators.required],
         })
       ]),
+      language:this._builder.group({
+        name: ['']
+      }),
       phone : this._builder.array([
         this._builder.group({
           number: ['',Validators.required],
@@ -80,12 +89,19 @@ export class AddEmployeeComponent implements OnInit {
       }),
     })
   }
+  GetLanguages()
+  {
+    this._InfoService.GetLanguages().subscribe({
+      next: (data: Language[]) =>{
+        this.listLanguages = data
+      }
+    })
+  }
   GetListCountrys()
   {
      this._AddressService.GetAllCountrys().subscribe({
       next :  (data: Countrys[]) =>{
-          this.listCountrys =  data
-
+          this.listCountrys = data
       }
     })
   }
@@ -94,7 +110,6 @@ export class AddEmployeeComponent implements OnInit {
     this._InformationService.GetRoles().subscribe({
       next:  (data : Role[])=> {
           this.listRoles =  data
-
       }
     })
   }

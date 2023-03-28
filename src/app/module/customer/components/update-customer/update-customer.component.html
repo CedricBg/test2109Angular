@@ -3,34 +3,76 @@
       <div>
         <button class="iconsCenter" mat-raised-button  color="warning" (click)="CloseDialogBox()" class="sendButton">Fermer</button>
       </div>
+      <mat-dialog-content>
       <form [formGroup]="formClient" *ngIf="formClient">
         <mat-form-field >
           <mat-label>Nom Client : </mat-label><input formControlName="nameCustomer" class="input" matInput>
         </mat-form-field>
-
-        <div formArrayName="site">
-          <div *ngFor="let siteControl of formClient.get('site')['controls']; let i = index" >
-            <p>Site : {{selectedClient.site[i].name}}</p>
-            <mat-form-field [formGroupName]="i">
+            <p>Site : {{selectedClient.name}}</p>
+            <mat-form-field >
               <mat-label>Nom: </mat-label><input formControlName="name" class="input" matInput>
             </mat-form-field>
-            <mat-form-field [formGroupName]="i">
+            <mat-form-field>
               <mat-label>Tva: </mat-label><input formControlName="vatNumber" class="input" matInput>
             </mat-form-field>
-            <div>
-              <p>Personne de contact(s) pour le site nr° {{i + 1}}</p>
-            <div *ngFor="let contact of siteControl.get('contacts').controls; let a = index">
-              <div [formGroupName]="a" >
 
-                <mat-form-field [formGroup]="contact">
-                <mat-label>Nom </mat-label><input id="firstName" class="input" formControlName="firstName" matInput>
+
+
+            <div formGroupName="contacts">
+              <mat-form-field>
+              <mat-label>Nom </mat-label><input matInput [matAutocomplete]="contact" formControlName="firstName" class="input">
+              <mat-autocomplete #contact="matAutocomplete">
+                <mat-option *ngFor="let contact of formClient.get('contacts')['controls']; let a = index">
+                      {{contact.firstName}}
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </div>
-          </div>
-        </div>
 
-          </div>
-        </div>
+            <div formGroupName="emergencyEmail">
+              <mat-form-field>
+              <mat-label>Adresse mail: </mat-label><input matInput [matAutocomplete]="nation" formControlName="emailAddress" class="input">
+              <mat-autocomplete #nation="matAutocomplete">
+                <mat-option *ngFor="let email of formClient.get('emergencyEmail')['controls']; let a = index">
+                      {{email.emailAddress}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div formGroupName="generalEmail">
+              <mat-form-field>
+              <mat-label>Adresse mail: </mat-label><input matInput [matAutocomplete]="mails" formControlName="emailAddress" class="input">
+              <mat-autocomplete #mails="matAutocomplete">
+                <mat-option *ngFor="let email of formClient.get('generalEmail')['controls']; let a = index">
+                      {{email.emailAddress}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div formGroupName="generalPhone">
+              <mat-form-field>
+              <mat-label>Nom </mat-label><input matInput [matAutocomplete]="number" formControlName="number" class="input">
+              <mat-autocomplete #number="matAutocomplete">
+                <mat-option *ngFor="let phone of formClient.get('generalPhone')['controls']; let a = index">
+                      {{phone.number}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
+            <div formGroupName="emergencyPhone">
+              <mat-form-field>
+              <mat-label>Nom </mat-label><input matInput [matAutocomplete]="phone" formControlName="number" class="input">
+              <mat-autocomplete #phone="matAutocomplete">
+                <mat-option *ngFor="let phone of formClient.get('emergencyPhone')['controls']; let a = index">
+                      {{phone.number}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
       </form>
+    </mat-dialog-content>
   </mat-card>
 </div>

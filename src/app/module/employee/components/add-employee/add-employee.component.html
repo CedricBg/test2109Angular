@@ -23,6 +23,16 @@
         <mat-checkbox  formControlName="vehicle">Véhicule
         </mat-checkbox>
       </div>
+      <div formGroupName="language">
+        <mat-form-field>
+          <mat-label>Langue(s): </mat-label><input matInput [matAutocomplete]="nation" formControlName="name" class="input">
+          <mat-autocomplete #nation="matAutocomplete">
+            <mat-option *ngFor="let language of listLanguages" [value]="language.name">
+                {{language.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
       <div formGroupName="address">
         <mat-form-field>
           <mat-label>Rue : </mat-label><input formControlName="sreetAddress" class="input" matInput>

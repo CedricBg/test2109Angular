@@ -1,7 +1,7 @@
 
 <div class="nav">
 
-  <h1>Site de Test securité</h1>
+  <h1>{{title}}</h1>
 
   <div class="login" *ngIf="!isConnected">
     <button (click)="Login()" mat-raised-button color="primary">Connexion</button>
@@ -14,10 +14,5 @@
   </div>
 
 </div>
-  <nav *ngIf="isConnected" class="menu">
-    <ul>
-      <li (click)="AllEmp()" class="icons"><mat-icon class="icons">people</mat-icon><span class="aligned-with-icon">Liste des employées</span> </li>
-      <li (click)="Customers()" class="icons"><mat-icon class="icons">people</mat-icon><span class="aligned-with-icon">Liste des Clients</span> </li>
-    </ul>
-  </nav>
+
 

@@ -1,3 +1,4 @@
+import { Site } from './../models/customer/site.models';
 import { Observable } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -19,9 +20,9 @@ export class CustomerService {
     return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
   }
 
-  GetOne(id: number): Observable<Customers>
+  GetOne(id: number): Observable<Site>
   {
-    return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id)
+    return this._httpClient.get<Site>(environment.baseAdres+'customer/'+id)
   }
   UpdateUser(client: Customers)
   {

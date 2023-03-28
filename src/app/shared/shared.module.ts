@@ -18,10 +18,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import {  MatPaginatorModule } from '@angular/material/paginator';
 import { OrderModule } from 'ngx-order-pipe';
-import {NgxPaginationModule} from 'ngx-pagination';
-import {MatCardModule} from '@angular/material/card';
+import { NgxPaginationModule} from 'ngx-pagination';
+import { MatCardModule} from '@angular/material/card';
 import { PageEvent } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule} from '@angular/material/select';
 
 registerLocaleData( localeFr , 'fr-BE');
 
@@ -53,7 +54,8 @@ registerLocaleData( localeFr , 'fr-BE');
     OrderModule,
     NgxPaginationModule,
     MatCardModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSelectModule
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],

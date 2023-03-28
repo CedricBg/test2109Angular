@@ -20,11 +20,13 @@ export class ListemployeeComponent implements OnInit {
   select : boolean = false
   subscriptionUpdate: Subscription
   subscriptionAll: Subscription
+  role: string
 
 
   constructor(private _serviceEmployee : EmployeeService, public dialog : MatDialog) { }
 
   ngOnInit(): void {
+    this.role = sessionStorage.getItem('dimin')
     this.GetEmployee()
     this.subscriptionUpdate = this._serviceEmployee.getUpdateData().subscribe(newData => {
       this.SelectedEmployee = newData
@@ -66,7 +68,7 @@ export class ListemployeeComponent implements OnInit {
   {
     const diallogConfig = new MatDialogConfig;
     diallogConfig.data = id
-    diallogConfig.disableClose = false;
+    diallogConfig.disableClose = true;
     diallogConfig.autoFocus = true;
     const dialogRef = this.dialog.open(UpdateEmployeeComponent,diallogConfig);
   }

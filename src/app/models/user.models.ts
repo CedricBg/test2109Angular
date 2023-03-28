@@ -5,5 +5,6 @@ export interface User
   surName: string
   token: string
   role: string
+  dimin: string
 
 }

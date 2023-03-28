@@ -1,3 +1,4 @@
+import { Site } from './../../../../models/customer/site.models';
 import { Contacts } from './../../../../models/customer/Contacts.models';
 
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -19,7 +20,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class UpdateCustomerComponent implements OnInit {
   formClient!: FormGroup
-  selectedClient: Customers
+  selectedClient: Site
   listContact: Contacts[] = []
   listCountrys: Countrys[] = []
   listLanguage: Language[]=[]
@@ -41,7 +42,7 @@ export class UpdateCustomerComponent implements OnInit {
 
   GetOne(id: number) {
     this._customerService.GetOne(id).subscribe({
-      next: (data: Customers) => {
+      next: (data: Site) => {
         this.selectedClient = data;
         this.SendInformationForm();
       },
@@ -54,51 +55,44 @@ export class UpdateCustomerComponent implements OnInit {
   SendInformationForm()
   {
     this.formClient = this._builder.group({
-      nameCustomer: [this.selectedClient.nameCustomer, Validators.maxLength(20)],
-      site: this._builder.array([
-      ]),
+      nameCustomer: [this.selectedClient.name, Validators.maxLength(20)],
+      contacts: this._builder.group([]),
+      emergencyEmail: this._builder.array([]),
+      generalEmail: this._builder.array([]),
     })
 
-    this.selectedClient.site.forEach(e=> {
-      const newSiteControl = this.newSite();
+      const newSiteControl = this.formClient
       const contacts = this.getArray(newSiteControl, "contacts")
-
-
       const emergencyEmailArray = this.getArray(newSiteControl, "emergencyEmail")
       const generalEmailArray = this.getArray(newSiteControl, "generalEmail")
       const emergencyPhoneArray = this.getArray(newSiteControl, "emergencyPhone")
       const generalPhoneArray = this.getArray(newSiteControl, "generalPhone")
 
-      e.contacts.forEach((control, index) => {
+      this.selectedClient.contacts.forEach((control, index) => {
         let newcontrol = this.newContact()
         newcontrol.patchValue(control)
         contacts.push(newcontrol);
       });
-      e.emergencyEmail.forEach((control, index) => {
+      this.selectedClient.emergencyEmail.forEach((control, index) => {
         let newcontrol = this.newEmail()
         newcontrol.patchValue(control)
         emergencyEmailArray.push(newcontrol);
       });
-      e.generalEmail.forEach((control, index) => {
+      this.selectedClient.generalEmail.forEach((control, index) => {
         let newcontrol = this.newEmail()
         newcontrol.patchValue(control)
         generalEmailArray.push(newcontrol);
       });
-      e.emergencyPhone.forEach((control, index) => {
+      this.selectedClient.emergencyPhone.forEach((control, index) => {
         let newcontrol = this.newPhone()
         newcontrol.patchValue(control)
         emergencyPhoneArray.push(newcontrol);
       });
-      e.generalPhone.forEach((control, index) => {
+      this.selectedClient.generalPhone.forEach((control, index) => {
         let newcontrol = this.newPhone()
         newcontrol.patchValue(control)
         generalPhoneArray.push(newcontrol);
       });
-      newSiteControl.patchValue(e);
-      this.site.push(newSiteControl);
-
-    })
-
   }
 
 

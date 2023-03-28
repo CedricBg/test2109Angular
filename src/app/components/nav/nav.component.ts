@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
  isConnected : boolean
  name! : string
+ title: string = 'Site de Test securité'
   constructor( private _authService : AuthService,public dialog : MatDialog,private _Router : Router )
   {  }
 
@@ -24,7 +25,6 @@ export class NavComponent implements OnInit {
         this.isConnected = data
         this.name = sessionStorage.getItem('firstName')
       }
-
     })
 
   }
@@ -34,14 +34,7 @@ export class NavComponent implements OnInit {
     this._authService.OpenDialog();
   }
 
-  AllEmp()
-  {
-    this._Router.navigateByUrl('employee/employee/AllEmployees')
-  }
-  Customers()
-  {
-    this._Router.navigateByUrl('customer/listcustomer')
-  }
+
 
   OpenDialog()
   {
@@ -53,7 +46,4 @@ export class NavComponent implements OnInit {
     diallogConfig.width = '400px';
     const dialogRef = this.dialog.open(UserProfileComponent,diallogConfig);
   }
-
-
-
 }

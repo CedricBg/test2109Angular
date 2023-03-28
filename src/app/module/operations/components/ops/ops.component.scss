@@ -1,0 +1,28 @@
+
+.menu ul {
+  display: flex;
+  font-family: 'Poppins', sans-serif;
+  list-style: none;
+  padding-left: 30vw;
+  padding-bottom: 1vh;
+}
+.menu ul li {
+  margin-left: 4vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-left: 1px solid #F5F5F5;;
+  border-right: 1px solid #F5F5F5;;
+}
+li.icons
+{
+  display: flex;
+    align-items: center;
+}
+.aligned-with-icon
+{
+  margin-left: 4px;
+}
+.icons
+{
+  padding-left: 1vw;
+}

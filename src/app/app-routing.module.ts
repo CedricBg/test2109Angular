@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'employee' , loadChildren: ()=> import('./module/employee/employee.module').then(m => m.EmployeeModule) },
   { path: 'auth' ,     loadChildren: ()=> import('./module/auth/auth.module').then(m=>m.AuthModule)},
   { path: 'customer',   loadChildren: ()=> import('./module/customer/customer.module').then(m=> m.CustomerModule)},
+  { path: 'OPS',   loadChildren: ()=> import('./module/operations/operations.module').then(m=> m.OperationsModule)},
   { path: '', redirectTo : 'auth', pathMatch : 'full'},
 
 
