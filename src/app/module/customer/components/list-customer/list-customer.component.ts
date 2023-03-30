@@ -48,7 +48,29 @@ export class ListCustomerComponent implements OnInit {
       this.select = true
       this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
-          this.siteSelected = data
+          this.siteSelected =  data
+        }
+      })
+    }
+  }
+
+  UpdateOne(id: number)
+  {
+    if(this.selectedSiteName)
+    {
+      const idsite =  this.GetSit(id)
+      this.select = true
+      this._CustService.GetOne(idsite).subscribe({
+        next: (data: Site)=>{
+          this.siteSelected =  data
+          if(this.selectedSiteName)
+            {
+              const diallogConfig =  new MatDialogConfig;
+              diallogConfig.data =  this.siteSelected
+              diallogConfig.disableClose = true;
+              diallogConfig.restoreFocus = true;
+              const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
+            }
         }
       })
     }
@@ -66,17 +88,7 @@ export class ListCustomerComponent implements OnInit {
       })
     }
   }
-  OpenformUpdate(id: number)
-  {
-    if(this.siteSelected)
-    {
-      const diallogConfig = new MatDialogConfig;
-      diallogConfig.data = id
-      diallogConfig.disableClose = true;
-      diallogConfig.restoreFocus = true;
-      const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
-    }
-  }
+
   OpenformAddUser()
   {
     const diallogConfig = new MatDialogConfig;
