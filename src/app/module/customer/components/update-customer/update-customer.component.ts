@@ -7,7 +7,7 @@ import { Language } from './../../../../models/language.models';
 import { InformationsService } from 'src/app/services/informations.service';
 import { AddressService } from './../../../../services/address.service';
 import { Countrys } from './../../../../models/countrys.models';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl, AbstractControl } from '@angular/forms';
 import { Component,Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -30,7 +30,6 @@ export class UpdateCustomerComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: Site
   ){
     this.selectedClient = data;
-
   }
 
   ngOnInit(): void {
@@ -59,38 +58,77 @@ export class UpdateCustomerComponent implements OnInit {
           id: [null],
           name: ['',Validators.required]
       }),
-
     })
 
       this.selectedClient.generalContacts.forEach(e => {
         let newcontrol = this.newContact()
         newcontrol.patchValue(e)
-        this.generalContacts.push(newcontrol);
+        const phoneControl = newcontrol.get('phone') as FormArray
+        const emailControl = newcontrol.get('email') as FormArray
+          e.phone.forEach(y =>{
+            const newPhone = this.newPhone();
+            newPhone.patchValue(y)
+            phoneControl.push(newPhone)
+          })
+          e.email.forEach(a=>{
+            const newEmail = this.newEmail();
+            newEmail.patchValue(a)
+            emailControl.push(newEmail)
+          })
+          this.generalContacts.push(newcontrol);
+
       });
+
       this.selectedClient.emergencyContacts.forEach(e => {
         let newcontrol = this.newContact()
         newcontrol.patchValue(e)
-        this.emergencyContacts.push(newcontrol);
+        const phoneControl = newcontrol.get('phone') as FormArray
+        const emailControl = newcontrol.get('email') as FormArray
+          e.phone.forEach(y =>{
+            const newPhone = this.newPhone();
+            newPhone.patchValue(y)
+            phoneControl.push(newPhone)
+          })
+          e.email.forEach(a=>{
+            const newEmail = this.newEmail();
+            newEmail.patchValue(a)
+            emailControl.push(newEmail)
+          })
+          this.emergencyContacts.push(newcontrol);
+
       });
   }
-
-
 
   get emergencyContacts(): FormArray
   {
     return this.formClient.get("emergencyContacts") as FormArray
   }
 
-
   get generalContacts(): FormArray
   {
     return this.formClient.get("generalContacts") as FormArray
+  }
+
+  getPhoneControls(contact: AbstractControl): AbstractControl[] {
+    const phoneArray = contact.get('phone') as FormArray;
+    return phoneArray.controls;
+  }
+
+  getEmailControls(contact: AbstractControl): AbstractControl[] {
+    const emailArray = contact.get('email') as FormArray;
+    return emailArray.controls;
   }
 
   newContact(): FormGroup
   {
     return this._builder.group({
       firstName: ['',Validators.required],
+      lastName: ['',Validators.required],
+      reponsible: ['',Validators.required],
+      emergencyContact: ['',Validators.required],
+      nightContact: ['',Validators.required],
+      email: this._builder.array([]),
+      phone: this._builder.array([]),
       id: [null]
     })
   }
