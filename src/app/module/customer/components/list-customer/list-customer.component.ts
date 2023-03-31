@@ -40,6 +40,7 @@ export class ListCustomerComponent implements OnInit {
     const site =  client.site.find(c=>c.name == this.selectedSiteName)
     return site.siteId
   }
+
   GetOne(id: number)
   {
     if(this.selectedSiteName)

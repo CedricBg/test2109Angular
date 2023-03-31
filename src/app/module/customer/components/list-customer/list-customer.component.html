@@ -49,8 +49,8 @@
       <div class="cards2">
         <h1>{{siteSelected.name}}</h1>
         <div class="contcards2">
-
-          <div >
+          <div class="detailsCard2">
+            <p class="email" *ngIf="siteSelected.language != null">Langue de contact: <b>{{siteSelected.language.name}} </b></p>
             <p class="position">Adresse:</p>
             <p class="email"><i class="far fa-envelope"></i>Rue : {{siteSelected.address.sreetAddress}}</p>
             <p class="email">Code Postal : {{siteSelected.address.zipCode}}</p>
@@ -59,22 +59,41 @@
           </div>
           <div class="detailsCard2">
 
-            <p class="email" *ngIf="siteSelected.language != null"><i class="far fa-envelope"></i>Langue de contact: {{siteSelected.language.name}} </p>
           </div>
 
-
-          <div  class="detailsCard2">
-            <p *ngIf="siteSelected.emergencyContacts" class="email">Email: </p>
-            <p class="email" *ngFor="let elt of siteSelected.emergencyContacts; let i = index">
-              <i class="fas fa-phone"></i>{{elt.firstName}}
-            </p>
-
-            <p *ngIf="siteSelected.generalContacts.length != 0" class="email">Email d'urgence:</p>
-            <p class="email" *ngFor="let elt of siteSelected.generalContacts; let i = index">
-              <i class="fas fa-phone"></i>{{elt.firstName}}
-            </p>
-
+          <div class="detailsCard2">
+            <p>Contact(s): </p>
+            <p *ngIf="siteSelected.generalContacts.length != 0" class="email"></p>
+            <div class="email" *ngFor="let elt of siteSelected.generalContacts; let i = index">
+              <p>{{elt.firstName}} {{elt.lastName}}</p>
+              <p *ngIf="elt.email.length >0"  class="email">Email: </p>
+              <p *ngFor="let elt1 of elt.email">
+                <i class="fas fa-phone"></i>{{elt1.emailAddress}}
+              </p>
+              <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
+                 <p *ngFor="let elt1 of elt.phone">
+                  <i class="fas fa-phone"></i>{{elt1.number}}
+                 </p>
+                 ------------------------------------------
+          </div>
         </div>
+
+          <div class="detailsCard2">
+            <p>Contact(s) en cas d'urgence: </p>
+            <div  class="email" *ngFor="let elt of siteSelected.emergencyContacts; let i = index" >
+              <p>{{elt.firstName}} {{elt.lastName}}</p>
+              <p *ngIf="elt.email.length >0"  class="email">Email: </p>
+              <p *ngFor="let elt1 of elt.email">
+                <i class="fas fa-phone"></i>{{elt1.emailAddress}}
+              </p>
+              <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
+                 <p *ngFor="let elt1 of elt.phone">
+                  <i class="fas fa-phone"></i>{{elt1.number}}
+                 </p>
+                 ------------------------------------------
+            </div>
+          </div>
+
       </div>
     </div>
   </div>
