@@ -49,6 +49,7 @@ export class ListCustomerComponent implements OnInit {
       this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
           this.siteSelected =  data
+          console.log(this.siteSelected)
         }
       })
     }

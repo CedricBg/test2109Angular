@@ -7,15 +7,13 @@ export class Site
 {
   siteId: number
   name: string
-  emergencyPhone: Phone[]
-  generalPhone: Phone[]
-  emergencyEmail: Email[]
-  generalEmail: Email[]
   vatNumber: string
+  emergencyContacts: Contacts[]
+  generalContacts: Contacts[]
   creationDate: Date | null
   isDeleted: boolean| null
   language: Language
   address: Address
-  contacts: Contacts[]
+
 
 }

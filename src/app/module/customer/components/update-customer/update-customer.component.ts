@@ -44,11 +44,9 @@ export class UpdateCustomerComponent implements OnInit {
       siteId:[this.selectedClient.siteId],
       name: [this.selectedClient.name,Validators.required],
       vatNumber: [this.selectedClient.vatNumber],
-      emergencyPhone: this._builder.array([]),
-      generalPhone: this._builder.array([]),
-      emergencyEmail: this._builder.array([]),
-      generalEmail: this._builder.array([]),
-      contacts: this._builder.array([]),
+      emergencyContacts: this._builder.array([]),
+      generalContacts: this._builder.array([]),
+
       address: this._builder.group({
         addressId: [this.selectedClient.address.addressId],
         sreetAddress: [this.selectedClient.address.sreetAddress,Validators.required],
@@ -64,48 +62,29 @@ export class UpdateCustomerComponent implements OnInit {
 
     })
 
-      this.selectedClient.contacts.forEach(e => {
+      this.selectedClient.generalContacts.forEach(e => {
         let newcontrol = this.newContact()
         newcontrol.patchValue(e)
-        this.contacts.push(newcontrol);
+        this.generalContacts.push(newcontrol);
       });
-      this.selectedClient.emergencyEmail.forEach((control, index) => {
-        let newcontrol = this.newEmail()
-        newcontrol.patchValue(control)
-        this.getArray(this.formClient,'emergencyEmailArray').push(newcontrol);
-      });
-      this.selectedClient.generalEmail.forEach((control, index) => {
-        let newcontrol = this.newEmail()
-        newcontrol.patchValue(control)
-        this.getArray(this.formClient,'generalEmailArray').push(newcontrol);
-      });
-      this.selectedClient.emergencyPhone.forEach((control, index) => {
-        let newcontrol = this.newPhone()
-        newcontrol.patchValue(control)
-        this.getArray(this.formClient,'emergencyPhoneArray').push(newcontrol);
-      });
-      this.selectedClient.generalPhone.forEach((control, index) => {
-        let newcontrol = this.newPhone()
-        newcontrol.patchValue(control)
-        this.getArray(this.formClient,'generalPhoneArray').push(newcontrol);
+      this.selectedClient.emergencyContacts.forEach(e => {
+        let newcontrol = this.newContact()
+        newcontrol.patchValue(e)
+        this.emergencyContacts.push(newcontrol);
       });
   }
 
 
 
-  get site(): FormArray
+  get emergencyContacts(): FormArray
   {
-    return this.formClient.get("site") as FormArray
-  }
-  getArray(array: FormGroup, name: string): FormArray
-  {
-    return array.get(name) as FormArray
+    return this.formClient.get("emergencyContacts") as FormArray
   }
 
 
-  get contacts(): FormArray
+  get generalContacts(): FormArray
   {
-    return this.formClient.get("contacts") as FormArray
+    return this.formClient.get("generalContacts") as FormArray
   }
 
   newContact(): FormGroup

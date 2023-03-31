@@ -35,57 +35,23 @@
 
 
 
-              <div formArrayName="contacts">
-                <div *ngFor="let contact of contacts.controls; let i = index">
+              <div formArrayName="emergencyContacts">
+                <div *ngFor="let contact of emergencyContacts.controls; let i = index">
                   <mat-form-field [formGroupName]="i">
-                    <mat-label >Nom </mat-label><input matInput  formControlName="firstName" class="input">
+                    <mat-label >Nom </mat-label><input matInput formControlName="firstName" class="input">
                   </mat-form-field>
                 </div>
               </div>
 
-            <div formGroupName="emergencyEmail">
-              <mat-form-field>
-              <mat-label>Adresse mail: </mat-label><input matInput [matAutocomplete]="nation" formControlName="emailAddress" class="input">
-              <mat-autocomplete #nation="matAutocomplete">
-                <mat-option *ngFor="let email of formClient.get('emergencyEmail')['controls']; let a = index">
-                      {{email.emailAddress}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
+              <div formArrayName="generalContacts">
+                <div *ngFor="let contact of generalContacts.controls; let i = index">
+                  <mat-form-field [formGroupName]="i">
+                    <mat-label >Nom </mat-label><input matInput formControlName="firstName" class="input">
+                  </mat-form-field>
+                </div>
+              </div>
 
-            <div formGroupName="generalEmail">
-              <mat-form-field>
-              <mat-label>Adresse mail: </mat-label><input matInput [matAutocomplete]="mails" formControlName="emailAddress" class="input">
-              <mat-autocomplete #mails="matAutocomplete">
-                <mat-option *ngFor="let email of formClient.get('generalEmail')['controls']; let a = index">
-                      {{email.emailAddress}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
 
-            <div formGroupName="generalPhone">
-              <mat-form-field>
-              <mat-label>Nom </mat-label><input matInput [matAutocomplete]="number" formControlName="number" class="input">
-              <mat-autocomplete #number="matAutocomplete">
-                <mat-option *ngFor="let phone of formClient.get('generalPhone')['controls']; let a = index">
-                      {{phone.number}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
-
-            <div formGroupName="emergencyPhone">
-              <mat-form-field>
-              <mat-label>Téléphone d'urgence </mat-label><input matInput [matAutocomplete]="phone" formControlName="number" class="input">
-              <mat-autocomplete #phone="matAutocomplete">
-                <mat-option *ngFor="let phone of formClient.get('emergencyPhone')['controls']; let a = index">
-                      {{phone.number}}
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </div>
       </form>
     </mat-dialog-content>
   </mat-card>
