@@ -8,8 +8,7 @@ export class Site
   siteId: number
   name: string
   vatNumber: string
-  emergencyContacts: Contacts[]
-  generalContacts: Contacts[]
+  contactSite: Contacts[]
   creationDate: Date | null
   isDeleted: boolean| null
   language: Language

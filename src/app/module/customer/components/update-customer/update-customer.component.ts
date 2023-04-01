@@ -43,8 +43,7 @@ export class UpdateCustomerComponent implements OnInit {
       siteId:[this.selectedClient.siteId],
       name: [this.selectedClient.name,Validators.required],
       vatNumber: [this.selectedClient.vatNumber],
-      emergencyContacts: this._builder.array([]),
-      generalContacts: this._builder.array([]),
+      contactSite: this._builder.array([]),
 
       address: this._builder.group({
         addressId: [this.selectedClient.address.addressId],
@@ -60,7 +59,7 @@ export class UpdateCustomerComponent implements OnInit {
       }),
     })
 
-      this.selectedClient.generalContacts.forEach(e => {
+      this.selectedClient.contactSite.forEach(e => {
         let newcontrol = this.newContact()
         newcontrol.patchValue(e)
         const phoneControl = newcontrol.get('phone') as FormArray
@@ -75,38 +74,15 @@ export class UpdateCustomerComponent implements OnInit {
             newEmail.patchValue(a)
             emailControl.push(newEmail)
           })
-          this.generalContacts.push(newcontrol);
+          this.contactSite.push(newcontrol);
 
       });
-
-      this.selectedClient.emergencyContacts.forEach(e => {
-        let newcontrol = this.newContact()
-        newcontrol.patchValue(e)
-        const phoneControl = newcontrol.get('phone') as FormArray
-        const emailControl = newcontrol.get('email') as FormArray
-          e.phone.forEach(y =>{
-            const newPhone = this.newPhone();
-            newPhone.patchValue(y)
-            phoneControl.push(newPhone)
-          })
-          e.email.forEach(a=>{
-            const newEmail = this.newEmail();
-            newEmail.patchValue(a)
-            emailControl.push(newEmail)
-          })
-          this.emergencyContacts.push(newcontrol);
-
-      });
+      console.log(this.contactSite.value)
   }
 
-  get emergencyContacts(): FormArray
+  get contactSite(): FormArray
   {
-    return this.formClient.get("emergencyContacts") as FormArray
-  }
-
-  get generalContacts(): FormArray
-  {
-    return this.formClient.get("generalContacts") as FormArray
+    return this.formClient.get("contactSite") as FormArray
   }
 
   getPhoneControls(contact: AbstractControl): AbstractControl[] {

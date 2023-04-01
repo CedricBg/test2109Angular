@@ -33,17 +33,18 @@
             </div>
 
 
-
-
-              <div formArrayName="emergencyContacts">
+              <div formArrayName="contactSite">
                 <p>Contact d'urgences:</p>
-                <div *ngFor="let contact of emergencyContacts.controls; let i = index">
+                <div *ngFor="let contact of contactSite.controls; let i = index">
                   <mat-form-field [formGroupName]="i">
                     <mat-label >Prénom: </mat-label><input matInput formControlName="firstName" class="input">
                   </mat-form-field >
                   <mat-form-field [formGroupName]="i">
                     <mat-label >Nom: </mat-label><input matInput formControlName="lastName" class="input">
                   </mat-form-field >
+                  <br>
+                  <mat-checkbox  formControlName="nightContact">Contact de nuit</mat-checkbox><br>
+                  <mat-checkbox  formControlName="emergencyContact">Contact d'urgence</mat-checkbox>
                   <div formGroupName="{{i}}">
                     <div formArrayName="phone">
                       <div *ngFor="let phone of getPhoneControls(contact); let j = index">
@@ -58,35 +59,6 @@
                         <mat-form-field [formGroupName]="j">
                           <mat-label>Email:</mat-label>
                           <input matInput formControlName="emailAddress">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div formArrayName="generalContacts">
-                <p>Contact(s):</p>
-                <div *ngFor="let contact of generalContacts.controls; let i = index">
-                  <mat-form-field [formGroupName]="i">
-                    <mat-label >Prénom: </mat-label><input matInput formControlName="firstName" class="input">
-                  </mat-form-field>
-                  <mat-form-field [formGroupName]="i">
-                    <mat-label >Nom: </mat-label><input matInput formControlName="lastName" class="input">
-                  </mat-form-field>
-                  <div formGroupName="{{i}}">
-                    <div formArrayName="phone">
-                      <div *ngFor="let phone of getPhoneControls(contact); let j = index">
-                        <mat-form-field [formGroupName]="j">
-                          <mat-label>Téléphone:</mat-label>
-                          <input matInput formControlName="number">
-                        </mat-form-field>
-                      </div>
-                    </div>
-                    <div formArrayName="email">
-                      <div *ngFor="let email of getEmailControls(contact); let j = index">
-                        <mat-form-field [formGroupName]="j">
-                          <mat-label>Email:</mat-label><input matInput formControlName="emailAddress">
                         </mat-form-field>
                       </div>
                     </div>

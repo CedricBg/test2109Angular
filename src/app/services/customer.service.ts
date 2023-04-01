@@ -22,7 +22,7 @@ export class CustomerService {
 
   GetOne(id: number): Observable<Site>
   {
-    return this._httpClient.get<Site>(environment.baseAdres+'customer/'+id)
+    return this._httpClient.get<Site>(environment.baseAdres+'customer/site/'+id)
   }
   UpdateUser(client: Customers)
   {

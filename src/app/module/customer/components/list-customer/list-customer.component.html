@@ -63,9 +63,12 @@
 
           <div class="detailsCard2">
             <p>Contact(s): </p>
-            <p *ngIf="siteSelected.generalContacts.length != 0" class="email"></p>
-            <div class="email" *ngFor="let elt of siteSelected.generalContacts; let i = index">
+            <p *ngIf="siteSelected.contactSite.length != 0" class="email"></p>
+            <div class="email" *ngFor="let elt of siteSelected.contactSite; let i = index">
               <p>{{elt.firstName}} {{elt.lastName}}</p>
+              <mat-checkbox [checked]= elt.nightContact>Contact de nuit</mat-checkbox><br>
+              <mat-checkbox [checked]= elt.emergencyContact>Contact d'urgence</mat-checkbox><br>
+
               <p *ngIf="elt.email.length >0"  class="email">Email: </p>
               <p *ngFor="let elt1 of elt.email">
                 <i class="fas fa-phone"></i>{{elt1.emailAddress}}
@@ -77,22 +80,6 @@
                  ------------------------------------------
           </div>
         </div>
-
-          <div class="detailsCard2">
-            <p>Contact(s) en cas d'urgence: </p>
-            <div  class="email" *ngFor="let elt of siteSelected.emergencyContacts; let i = index" >
-              <p>{{elt.firstName}} {{elt.lastName}}</p>
-              <p *ngIf="elt.email.length >0"  class="email">Email: </p>
-              <p *ngFor="let elt1 of elt.email">
-                <i class="fas fa-phone"></i>{{elt1.emailAddress}}
-              </p>
-              <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
-                 <p *ngFor="let elt1 of elt.phone">
-                  <i class="fas fa-phone"></i>{{elt1.number}}
-                 </p>
-                 ------------------------------------------
-            </div>
-          </div>
 
       </div>
     </div>
