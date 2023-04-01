@@ -62,12 +62,12 @@
           </div>
 
           <div class="detailsCard2">
-            <p>Contact(s): </p>
+
             <p *ngIf="siteSelected.contactSite.length != 0" class="email"></p>
             <div class="email" *ngFor="let elt of siteSelected.contactSite; let i = index">
+              <div *ngIf="!elt.emergencyContact && !elt.nightContact">
+                <p>Contact(s): </p>
               <p>{{elt.firstName}} {{elt.lastName}}</p>
-              <mat-checkbox [checked]= elt.nightContact>Contact de nuit</mat-checkbox><br>
-              <mat-checkbox [checked]= elt.emergencyContact>Contact d'urgence</mat-checkbox><br>
 
               <p *ngIf="elt.email.length >0"  class="email">Email: </p>
               <p *ngFor="let elt1 of elt.email">
@@ -78,6 +78,36 @@
                   <i class="fas fa-phone"></i>{{elt1.number}}
                  </p>
                  ------------------------------------------
+              </div>
+
+              <div *ngIf="elt.emergencyContact">
+                <p>Contact en cas d'urgence: </p>
+              <p>{{elt.firstName}} {{elt.lastName}}</p>
+
+              <p *ngIf="elt.email.length >0"  class="email">Email: </p>
+              <p *ngFor="let elt1 of elt.email">
+                <i class="fas fa-phone"></i>{{elt1.emailAddress}}
+              </p>
+              <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
+                 <p *ngFor="let elt1 of elt.phone">
+                  <i class="fas fa-phone"></i>{{elt1.number}}
+                 </p>
+                 ------------------------------------------
+              </div>
+              <div *ngIf="elt.nightContact">
+                <p>Contact de nuit: </p>
+              <p>{{elt.firstName}} {{elt.lastName}}</p>
+
+              <p *ngIf="elt.email.length >0"  class="email">Email: </p>
+              <p *ngFor="let elt1 of elt.email">
+                <i class="fas fa-phone"></i>{{elt1.emailAddress}}
+              </p>
+              <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
+                 <p *ngFor="let elt1 of elt.phone">
+                  <i class="fas fa-phone"></i>{{elt1.number}}
+                 </p>
+                 ------------------------------------------
+              </div>
           </div>
         </div>
 

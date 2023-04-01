@@ -77,9 +77,12 @@ export class UpdateCustomerComponent implements OnInit {
           this.contactSite.push(newcontrol);
 
       });
-      console.log(this.contactSite.value)
-  }
 
+  }
+  Send()
+  {
+    console.log(this.formClient.value)
+  }
   get contactSite(): FormArray
   {
     return this.formClient.get("contactSite") as FormArray

@@ -31,6 +31,7 @@ export class ListCustomerComponent implements OnInit {
     this._CustService.GetAll().subscribe({
       next : (data: Customers[]) =>{
         this.listCustomers = data
+        console.log( this.listCustomers)
       }
     })
   }

@@ -4,7 +4,7 @@
         <button class="iconsCenter" mat-raised-button  color="warning" (click)="CloseDialogBox()" class="sendButton">Fermer</button>
       </div>
       <mat-dialog-content>
-      <form [formGroup]="formClient" *ngIf="formClient">
+      <form [formGroup]="formClient" (ngSubmit)="Send()" *ngIf="formClient">
         <mat-form-field >
           <mat-label>Nom : </mat-label><input formControlName="name" class="input" matInput>
         </mat-form-field>
@@ -42,9 +42,10 @@
                   <mat-form-field [formGroupName]="i">
                     <mat-label >Nom: </mat-label><input matInput formControlName="lastName" class="input">
                   </mat-form-field >
-                  <br>
-                  <mat-checkbox  formControlName="nightContact">Contact de nuit</mat-checkbox><br>
-                  <mat-checkbox  formControlName="emergencyContact">Contact d'urgence</mat-checkbox>
+                  <p>Contact</p>
+                  <p [formGroupName]="i"><mat-checkbox  formControlName="nightContact">de nuit</mat-checkbox></p>
+                  <p [formGroupName]="i"><mat-checkbox  formControlName="emergencyContact">d'urgence</mat-checkbox></p>
+                  <p [formGroupName]="i"><mat-checkbox  formControlName="reponsible">Responsable</mat-checkbox></p>
                   <div formGroupName="{{i}}">
                     <div formArrayName="phone">
                       <div *ngFor="let phone of getPhoneControls(contact); let j = index">
@@ -65,6 +66,7 @@
                   </div>
                 </div>
               </div>
+              <button mat-button type="submit">Envoyer</button>
       </form>
     </mat-dialog-content>
   </mat-card>
