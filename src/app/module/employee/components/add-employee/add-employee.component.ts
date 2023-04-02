@@ -50,6 +50,7 @@ export class AddEmployeeComponent implements OnInit {
     {
       this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
       this._InfoService.getSelectedRole(this.listRoles, this.formEmployee)
+      this._InfoService.getLanguages(this.listLanguages, this.formEmployee)
       this._serviceEmployee.insert(this.formEmployee.value)
       this.CloseDialogBox()
     }
@@ -69,7 +70,8 @@ export class AddEmployeeComponent implements OnInit {
         })
       ]),
       language:this._builder.group({
-        name: ['']
+        name: [''],
+        id:['']
       }),
       phone : this._builder.array([
         this._builder.group({

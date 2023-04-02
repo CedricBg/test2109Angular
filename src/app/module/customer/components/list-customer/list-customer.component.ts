@@ -5,6 +5,7 @@ import { CustomerService } from './../../../../services/customer.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Site } from 'src/app/models/customer/site.models';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-customer',
@@ -19,22 +20,23 @@ export class ListCustomerComponent implements OnInit {
   selectedSiteName: string
   siteSelected: Site
   select : boolean = false
+  subscriptionUpdate: Subscription
+  subscriptionUpdateCustomer: Subscription
 
   constructor(private _CustService: CustomerService, public dialog : MatDialog) { }
 
   ngOnInit(): void {
-    this.GetAll()
-  }
-
-  GetAll()
-  {
     this._CustService.GetAll().subscribe({
-      next : (data: Customers[]) =>{
+      next : (data: Customers[])=>{
         this.listCustomers = data
-        console.log( this.listCustomers)
       }
     })
+    this.subscriptionUpdate = this._CustService.getUpdateData().subscribe(newData => {
+      this.siteSelected = newData
+    })
   }
+
+
   GetSit(id: number): number
   {
     const client = this.listCustomers.find(c=>c.id == id)
@@ -51,7 +53,6 @@ export class ListCustomerComponent implements OnInit {
       this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
           this.siteSelected =  data
-          console.log(this.siteSelected)
         }
       })
     }
@@ -66,6 +67,7 @@ export class ListCustomerComponent implements OnInit {
       this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
           this.siteSelected =  data
+
           if(this.selectedSiteName)
             {
               const diallogConfig =  new MatDialogConfig;

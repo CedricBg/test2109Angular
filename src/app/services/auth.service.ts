@@ -62,7 +62,6 @@ export class AuthService {
           sessionStorage.setItem('role', this.returnData.role)
           sessionStorage.setItem('dimin', this.returnData.dimin)
           this.emitSubject()
-          console.log(this.returnData)
           this._router.navigate([this.returnData.dimin])
         }
       }

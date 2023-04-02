@@ -10,6 +10,7 @@ import { Countrys } from './../../../../models/countrys.models';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl, AbstractControl } from '@angular/forms';
 import { Component,Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Customers } from 'src/app/models/customer/customers.models';
 
 @Component({
   selector: 'app-update-customer',
@@ -24,16 +25,18 @@ export class UpdateCustomerComponent implements OnInit {
   listLanguage: Language[]=[]
   listRoles: Role[] = []
   index: number = 0
+  updatedCustomer: Customers
 
   constructor(private _builder : FormBuilder, private _AddressService: AddressService,private _infoService: InformationsService,private _serviceEmployee: EmployeeService,private _customerService: CustomerService,
     private dialogRef: MatDialogRef<UpdateCustomerComponent>,
     @Inject(MAT_DIALOG_DATA) data: Site
   ){
     this.selectedClient = data;
+    console.log(this.selectedClient)
   }
 
   ngOnInit(): void {
-
+    this.GetLanguages()
     this.GetListCountrys()
     this.SendInformationForm()
   }
@@ -54,14 +57,15 @@ export class UpdateCustomerComponent implements OnInit {
         stateId: [this.selectedClient.address.stateId,Validators.required],
       }),
       language: this._builder.group({
-          id: [null],
-          name: ['',Validators.required]
+          id: [this.selectedClient.language.id],
+          name: [this.selectedClient.language.name,Validators.required]
       }),
     })
 
       this.selectedClient.contactSite.forEach(e => {
         let newcontrol = this.newContact()
         newcontrol.patchValue(e)
+        console.log(e)
         const phoneControl = newcontrol.get('phone') as FormArray
         const emailControl = newcontrol.get('email') as FormArray
           e.phone.forEach(y =>{
@@ -82,6 +86,10 @@ export class UpdateCustomerComponent implements OnInit {
   Send()
   {
     console.log(this.formClient.value)
+    this._infoService.getSectedCountry(this.listCountrys,this.formClient)
+    this._infoService.getLanguages(this.listLanguage,this.formClient)
+    return this._customerService.UpdateUser(this.formClient.value)
+
   }
   get contactSite(): FormArray
   {
@@ -108,9 +116,10 @@ export class UpdateCustomerComponent implements OnInit {
       nightContact: ['',Validators.required],
       email: this._builder.array([]),
       phone: this._builder.array([]),
-      id: [null]
+      contactId: [null]
     })
   }
+
   newEmail(): FormGroup
   {
     return this._builder.group({
@@ -125,7 +134,15 @@ export class UpdateCustomerComponent implements OnInit {
       phoneId: [null]
     })
   }
-
+  GetLanguages()
+  {
+    this._infoService.GetLanguages().subscribe({
+      next : (data: Language[])=>
+      {
+        this.listLanguage = data
+      }
+    })
+  }
   GetListCountrys()
   {
     this._AddressService.GetAllCountrys().subscribe({

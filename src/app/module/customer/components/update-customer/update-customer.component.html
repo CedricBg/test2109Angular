@@ -12,6 +12,17 @@
               <mat-label>Tva: </mat-label><input formControlName="vatNumber" class="input" matInput>
             </mat-form-field>
 
+            <div formGroupName="language">
+              <mat-form-field>
+                <mat-label>Langue de contact: </mat-label><input matInput [matAutocomplete]="lang"  formControlName="name" class="input">
+                <mat-autocomplete #lang="matAutocomplete" >
+                  <mat-option *ngFor="let elt of listLanguage" [value]="elt.name" >
+                      {{elt.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+
             <div formGroupName="address" >
             <mat-form-field>
               <mat-label>Pays: </mat-label><input matInput [matAutocomplete]="autoNationality"  formControlName="state" class="input">
