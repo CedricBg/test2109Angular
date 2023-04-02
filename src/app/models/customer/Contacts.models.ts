@@ -8,7 +8,7 @@ export interface Contacts
   lastName: string
   email: Email[]
   phone: Phone[]
-  reponsible: boolean
+  responsible: boolean
   emergencyContact: boolean
   nightContact: boolean
 }

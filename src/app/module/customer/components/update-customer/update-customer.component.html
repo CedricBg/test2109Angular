@@ -6,7 +6,7 @@
       <mat-dialog-content>
       <form [formGroup]="formClient" (ngSubmit)="Send()" *ngIf="formClient">
         <mat-form-field >
-          <mat-label>Nom : </mat-label><input formControlName="name" class="input" matInput>
+          <mat-label>Nom du site: </mat-label><input formControlName="name" class="input" matInput>
         </mat-form-field>
             <mat-form-field>
               <mat-label>Tva: </mat-label><input formControlName="vatNumber" class="input" matInput>
@@ -56,7 +56,8 @@
                   <p>Contact</p>
                   <p [formGroupName]="i"><mat-checkbox  formControlName="nightContact">de nuit</mat-checkbox></p>
                   <p [formGroupName]="i"><mat-checkbox  formControlName="emergencyContact">d'urgence</mat-checkbox></p>
-                  <p [formGroupName]="i"><mat-checkbox  formControlName="reponsible">Responsable</mat-checkbox></p>
+                  <p [formGroupName]="i"><mat-checkbox  formControlName="responsible">Responsable</mat-checkbox></p>
+
                   <div formGroupName="{{i}}">
                     <div formArrayName="phone">
                       <div *ngFor="let phone of getPhoneControls(contact); let j = index">

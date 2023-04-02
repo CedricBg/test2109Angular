@@ -111,7 +111,7 @@ export class UpdateCustomerComponent implements OnInit {
     return this._builder.group({
       firstName: ['',Validators.required],
       lastName: ['',Validators.required],
-      reponsible: ['',Validators.required],
+      responsible: ['',Validators.required],
       emergencyContact: ['',Validators.required],
       nightContact: ['',Validators.required],
       email: this._builder.array([]),
