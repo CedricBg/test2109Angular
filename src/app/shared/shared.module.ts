@@ -23,6 +23,8 @@ import { MatCardModule} from '@angular/material/card';
 import { PageEvent } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule} from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
+
 
 registerLocaleData( localeFr , 'fr-BE');
 
@@ -55,7 +57,8 @@ registerLocaleData( localeFr , 'fr-BE');
     NgxPaginationModule,
     MatCardModule,
     MatAutocompleteModule,
-    MatSelectModule
+    MatSelectModule,
+    MatStepperModule,
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],

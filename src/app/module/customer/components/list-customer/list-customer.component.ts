@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Site } from 'src/app/models/customer/site.models';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-customer',
@@ -23,7 +24,7 @@ export class ListCustomerComponent implements OnInit {
   subscriptionUpdate: Subscription
   subscriptionUpdateCustomer: Subscription
 
-  constructor(private _CustService: CustomerService, public dialog : MatDialog) { }
+  constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router) { }
 
   ngOnInit(): void {
     this._CustService.GetAll().subscribe({
@@ -35,8 +36,6 @@ export class ListCustomerComponent implements OnInit {
       this.siteSelected = newData
     })
   }
-
-
   GetSit(id: number): number
   {
     const client = this.listCustomers.find(c=>c.id == id)
@@ -96,10 +95,15 @@ export class ListCustomerComponent implements OnInit {
 
   OpenformAddUser()
   {
-    const diallogConfig = new MatDialogConfig;
-    diallogConfig.disableClose = true;
-    diallogConfig.autoFocus = true;
-    const dialogRef = this.dialog.open(AddCustomerComponent,diallogConfig);
+    this.select = false
+    this.siteSelected = null
+    this._Router.navigateByUrl('OPS/customer/listcustomer/addCustomer')
+    //const diallogConfig = new MatDialogConfig;
+    //diallogConfig.disableClose = true;
+    //diallogConfig.autoFocus = true;
+    //diallogConfig.height = '70vh';
+    //diallogConfig.minWidth = '80vw';
+    //const dialogRef = this.dialog.open(AddCustomerComponent,diallogConfig);
   }
 
 }

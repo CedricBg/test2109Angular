@@ -1,9 +1,80 @@
-<div class="details">
-  <mat-card class="Detailed-card">
-    <form>
-      <div>
-        <button class="iconsCenter" mat-raised-button (click)="CloseDialogBox()" color="warning" class="sendButton">Fermer</button>
-      </div>
+
+
+<div >
+  <mat-horizontal-stepper class="custom-stepper" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="formClient" >
+      <form [formGroup]="formClient">
+        <ng-template matStepLabel><span *ngIf="IdClient != 0">Création nouveau client:</span> <span class="erreur" *ngIf="IdClient == 0">Erreur le nom est déjà utiliser</span></ng-template>
+        <mat-form-field appearance="fill">
+          <mat-label>Nom de la firme</mat-label>
+          <input formControlName="nameCustomer" matInput>
+          </mat-form-field>
+          <div>
+            <button mat-button (click)="CreateCompany()" matStepperNext>Suivant</button>
+          </div>
+      </form>
+    </mat-step>
+
+  <mat-step [stepControl]="formClientSite" >
+    <form *ngIf="IdClient != 0" [formGroup]="formClientSite">
+      <ng-template matStepLabel><span *ngIf="IdClient != 0">Entrez le nom le Site:</span></ng-template>
+      <span class="inputClient">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom du site</mat-label>
+        <input class="inputClient" matInput formControlName="name">
+      </mat-form-field>
+    </span>
+    <span class="inputClient">
+      <mat-form-field   appearance="fill">
+        <mat-label>Nr° de Tva:</mat-label>
+        <input  matInput formControlName="vatNumber">
+      </mat-form-field>
+    </span>
+    <p class="inputClient" formGroupName="language">
+      <mat-form-field  appearance="fill">
+        <mat-label>Langue de contact: </mat-label><input matInput [matAutocomplete]="lang"  formControlName="name" class="input">
+        <mat-autocomplete #lang="matAutocomplete" >
+          <mat-option *ngFor="let elt of listLanguage" [value]="elt.name" >
+              {{elt.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </p>
+    <div  formGroupName="address">
+      <p class="inputClient">Adresse:</p>
+      <span class="inputClient">
+      <mat-form-field  appearance="fill">
+        <mat-label >Rue + nr° : </mat-label><input formControlName="sreetAddress" class="input" matInput>
+      </mat-form-field>
+    </span>
+      <span class="inputClient">
+      <mat-form-field  appearance="fill">
+        <mat-label>Ville : </mat-label><input formControlName="city" class="input" matInput>
+      </mat-form-field>
+    </span>
+    <span class="inputClient">
+      <mat-form-field  appearance="fill">
+        <mat-label>Code Postal : </mat-label><input formControlName="zipCode" class="input" matInput>
+      </mat-form-field>
+
+    </span>
+    <span class="inputClient">
+      <mat-form-field  appearance="fill">
+        <mat-label>Pays : </mat-label><input matInput [matAutocomplete]="autoNationality" formControlName="state" class="input">
+        <mat-autocomplete #autoNationality="matAutocomplete" >
+          <mat-option *ngFor="let elt of listCountrys" [value]="elt.country" >
+                {{elt.country}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </span>
+
+    </div>
     </form>
-  </mat-card>
+    <div>
+      <button *ngIf="IdClient == 0" mat-button matStepperPrevious>Retour</button>
+      <button *ngIf="IdClient != 0" (click)="CreateSite()" mat-button matStepperNext>Suivant</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
 </div>

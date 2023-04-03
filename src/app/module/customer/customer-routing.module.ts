@@ -7,8 +7,9 @@ import { CustomerComponent } from './customer.component';
 
 const routes: Routes = [
   { path: '', component: CustomerComponent, children :[
-    { path: 'listcustomer',component: ListCustomerComponent},
-    { path: 'addCustomer', component: AddCustomerComponent},
+    { path: 'listcustomer',component: ListCustomerComponent,children:[
+      { path: 'addCustomer', component: AddCustomerComponent }
+    ]},
     { path: 'updateCustomer', component: UpdateCustomerComponent}]
   },
   { path : '', redirectTo : 'employee', pathMatch : 'full'},

@@ -1,6 +1,4 @@
 
-
-
 .search
 {
   padding-left: 2vw;
@@ -52,6 +50,9 @@ td{
   display: flex;
   justify-content: flex-end;
 }
+.AddPerson a{
+  width: 100%;
+}
 .AddPerson button{
   width: 100%;
 }
@@ -63,8 +64,6 @@ td{
 .AddPerson .icons:hover{
   color: #17A2B8;
 }
-
-
 
 .card {
   margin-left: 2vw;
@@ -79,18 +78,9 @@ td{
   font-family: Arial, sans-serif;
 }
 
-.cards2{
+.cards1{
   padding-left: 2vw;
   height:50vh;
-}
-.contcards2{
-display: flex;
-}
-.detailsCard2
-{
-  margin: 1vw;
-}
-.cards2 {
   margin-left: 2vw;
   width:50vw;
   background-color: #f2f2f2;
@@ -101,3 +91,25 @@ display: flex;
   align-items: center;
   font-family: Arial, sans-serif;
 }
+.contcards2{
+display: flex;
+}
+.detailsCard2
+{
+  margin: 1vw;
+}
+.cards2 {
+  padding-left: 2vw;
+  height:50vh;
+  margin-left: 2vw;
+  width:50vw;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  flex-direction: row;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+

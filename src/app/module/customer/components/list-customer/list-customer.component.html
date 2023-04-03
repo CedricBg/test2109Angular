@@ -5,10 +5,10 @@
       <input  type="text" name="nameCustomer" [(ngModel)]="nameCustomer" (ngModelChange)="ngModelChange()"  placeholder="Nom du client" matInput >
     </mat-form-field>
   </div>
-  <div class = "cards">
+  <div class ="cards">
     <div class="employees">
       <div class="AddPerson">
-        <button mat-button type="button" (click)="OpenformAddUser()" ><mat-icon  class="icons">person_add</mat-icon></button>
+        <button mat-button type="button" (click)="OpenformAddUser()"><mat-icon class="icons">person_add</mat-icon></button>
       </div>
       <hr>
       <table>
@@ -27,7 +27,7 @@
                 <mat-form-field appearance="fill">
                   <mat-label>--Sélectionnez un site--</mat-label>
                   <mat-select [(value)]="selectedSiteName">
-                    <mat-option *ngFor="let elt of client.site"  [value]="elt.name" >
+                    <mat-option *ngFor="let elt of client.site"   [value]="elt.name" >
                       {{elt.name}}
                     </mat-option>
                   </mat-select>
@@ -45,8 +45,15 @@
       </table>
     </div>
 
+    <div class="rep" *ngIf="select == false && siteSelected == null ">
+      <div class="cards1">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
     <div class="rep" *ngIf="select == true && siteSelected != null ">
       <div class="cards2">
+
         <h1>{{siteSelected.name}}</h1>
         <div class="contcards2">
           <div class="detailsCard2">
