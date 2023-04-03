@@ -11,6 +11,6 @@ export class Site
   isDeleted: boolean| null
   language: Language
   address: Address
-
+  customerIdCreate: number
 
 }

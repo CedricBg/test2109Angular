@@ -8,6 +8,7 @@ import { Customers } from 'src/app/models/customer/customers.models';
 import { Language } from 'src/app/models/language.models';
 import { Role } from 'src/app/models/Role.models';
 import { InformationsService } from 'src/app/services/informations.service';
+import { Site } from 'src/app/models/customer/site.models';
 
 @Component({
   selector: 'app-add-customer',
@@ -19,10 +20,12 @@ export class AddCustomerComponent implements OnInit {
   formClientSite!: FormGroup
   isLinear: boolean
   customer: string
-  IdClient!: number
+  idClient!: number
+  idSite!: number
   isEditable: boolean = false
   listLanguage: Language[] = []
   listCountrys: Countrys[] = []
+  siteCreated: Site = new Site()
   constructor(private _builder: FormBuilder, private _custService : CustomerService, private _infoService: InformationsService, private _addressService: AddressService
    )
     {
@@ -58,15 +61,16 @@ export class AddCustomerComponent implements OnInit {
       name: ['',[Validators.required,Validators.minLength(3)]],
       vatNumber: [''],
       language:this._builder.group({
-        name: [''],
+        name: ['',Validators.required],
         id:['']
       }),
       address : this._builder.group({
-        sreetAddress : [''],
-        city : [''],
-        state : ['Belgium'],
-        zipCode : [''],
+        sreetAddress : ['',Validators.required],
+        city : ['',Validators.required],
+        state : ['Belgium',Validators.required],
+        zipCode : ['',Validators.required],
       }),
+
 
     })
   }
@@ -78,7 +82,15 @@ export class AddCustomerComponent implements OnInit {
       this._infoService.getSectedCountry(this.listCountrys, this.formClientSite)
       //this._InfoService.getSelectedRole(this.listRoles, this.formClientSite)
       this._infoService.getLanguages(this.listLanguage, this.formClientSite)
-      console.log(this.formClientSite.value)
+      this.siteCreated = this.formClientSite.value
+      this.siteCreated.customerIdCreate = this.idClient
+      this._custService.CreateSite(this.siteCreated).subscribe({
+        next: (data : number) =>{
+          this.idSite = data
+          console.log(this.idSite)
+        }
+      })
+
     }
   }
 
@@ -89,8 +101,8 @@ export class AddCustomerComponent implements OnInit {
       this.customer = this.formClient.get('nameCustomer').value
       this._custService.CreateCompany(this.customer).subscribe({
         next : (data: number)=>{
-          this.IdClient = data
-          console.log(this.IdClient)
+          this.idClient = data
+          console.log(this.idClient)
         }
       })
     }

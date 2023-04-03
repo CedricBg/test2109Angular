@@ -42,13 +42,21 @@ export class CustomerService {
   }
 
   CreateCompany(customer: string){
+    return this._httpClient.post<number>(environment.baseAdres +'customer/addCustomer/', JSON.stringify(customer), this.JsonHeader())
+  }
+
+  private JsonHeader()
+  {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    console.log(customer)
-    return this._httpClient.post<number>(environment.baseAdres +'customer/add/', JSON.stringify(customer), httpOptions)
+    return httpOptions
+  }
 
+  CreateSite(site: Site)
+  {
+    return this._httpClient.post<number>(environment.baseAdres + 'customer/addSite/', JSON.stringify(site),this.JsonHeader())
   }
 }

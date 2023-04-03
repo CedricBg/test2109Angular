@@ -4,7 +4,7 @@
   <mat-horizontal-stepper class="custom-stepper" [linear]="isLinear" #stepper>
     <mat-step [stepControl]="formClient" >
       <form [formGroup]="formClient">
-        <ng-template matStepLabel><span *ngIf="IdClient != 0">Création nouveau client:</span> <span class="erreur" *ngIf="IdClient == 0">Erreur le nom est déjà utiliser</span></ng-template>
+        <ng-template matStepLabel><span *ngIf="idClient != 0">Création nouveau client:</span> <span class="erreur" *ngIf="idClient == 0">Erreur le nom est déjà utiliser</span></ng-template>
         <mat-form-field appearance="fill">
           <mat-label>Nom de la firme</mat-label>
           <input formControlName="nameCustomer" matInput>
@@ -16,8 +16,8 @@
     </mat-step>
 
   <mat-step [stepControl]="formClientSite" >
-    <form *ngIf="IdClient != 0" [formGroup]="formClientSite">
-      <ng-template matStepLabel><span *ngIf="IdClient != 0">Entrez le nom le Site:</span></ng-template>
+    <form *ngIf="idClient != 0" [formGroup]="formClientSite">
+      <ng-template matStepLabel><span *ngIf="idClient != 0">Entrez le nom le Site:</span></ng-template>
       <span class="inputClient">
       <mat-form-field appearance="fill">
         <mat-label>Nom du site</mat-label>
@@ -72,8 +72,8 @@
     </div>
     </form>
     <div>
-      <button *ngIf="IdClient == 0" mat-button matStepperPrevious>Retour</button>
-      <button *ngIf="IdClient != 0" (click)="CreateSite()" mat-button matStepperNext>Suivant</button>
+      <button *ngIf="idClient == 0" mat-button matStepperPrevious>Retour</button>
+      <button *ngIf="idClient != 0" (click)="CreateSite()" mat-button matStepperNext>Suivant</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>
