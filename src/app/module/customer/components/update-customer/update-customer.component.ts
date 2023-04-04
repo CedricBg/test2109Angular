@@ -87,7 +87,8 @@ export class UpdateCustomerComponent implements OnInit {
   {
     this._infoService.getSectedCountry(this.listCountrys,this.formClient)
     this._infoService.getLanguages(this.listLanguage,this.formClient)
-    console.log(this.formClient.value)
+
+    this.CloseDialogBox()
     return this._customerService.UpdateUser(this.formClient.value)
 
   }
