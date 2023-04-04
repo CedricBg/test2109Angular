@@ -66,6 +66,11 @@
                           <mat-label>Téléphone:</mat-label>
                           <input matInput formControlName="number">
                         </mat-form-field>
+                        <span *ngIf="j >= 1">
+                          <button mat-icon-button type="button" (click)="DeletePhones(j)">
+                            <mat-icon type="button" class="icons">delete</mat-icon>
+                          </button>
+                        </span>
                       </div>
                     </div>
                     <div formArrayName="email">
@@ -74,6 +79,12 @@
                           <mat-label>Email:</mat-label>
                           <input matInput formControlName="emailAddress">
                         </mat-form-field>
+                        <span *ngIf="j >= 1">
+                          <button mat-icon-button type="button" (click)="DeleteEmails(j)">
+                            <mat-icon type="button" class="icons">delete</mat-icon>
+                          </button>
+                        </span>
+
                       </div>
                     </div>
                   </div>

@@ -24,6 +24,8 @@ export class UpdateCustomerComponent implements OnInit {
   listCountrys: Countrys[] = []
   listLanguage: Language[]=[]
   listRoles: Role[] = []
+  emailArray: FormArray
+  phoneArray: FormArray
   index: number = 0
   updatedCustomer: Customers
 
@@ -32,7 +34,6 @@ export class UpdateCustomerComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data: Site
   ){
     this.selectedClient = data;
-    console.log(this.selectedClient)
   }
 
   ngOnInit(): void {
@@ -65,7 +66,6 @@ export class UpdateCustomerComponent implements OnInit {
       this.selectedClient.contactSite.forEach(e => {
         let newcontrol = this.newContact()
         newcontrol.patchValue(e)
-        console.log(e)
         const phoneControl = newcontrol.get('phone') as FormArray
         const emailControl = newcontrol.get('email') as FormArray
           e.phone.forEach(y =>{
@@ -87,6 +87,7 @@ export class UpdateCustomerComponent implements OnInit {
   {
     this._infoService.getSectedCountry(this.listCountrys,this.formClient)
     this._infoService.getLanguages(this.listLanguage,this.formClient)
+    console.log(this.formClient.value)
     return this._customerService.UpdateUser(this.formClient.value)
 
   }
@@ -96,13 +97,21 @@ export class UpdateCustomerComponent implements OnInit {
   }
 
   getPhoneControls(contact: AbstractControl): AbstractControl[] {
-    const phoneArray = contact.get('phone') as FormArray;
-    return phoneArray.controls;
+    this.phoneArray = contact.get('phone') as FormArray;
+    return this.phoneArray.controls;
   }
 
   getEmailControls(contact: AbstractControl): AbstractControl[] {
-    const emailArray = contact.get('email') as FormArray;
-    return emailArray.controls;
+    this.emailArray = contact.get('email') as FormArray;
+    return this.emailArray.controls;
+  }
+  DeleteEmails(id: number)
+  {
+    this.emailArray.removeAt(id)
+  }
+  DeletePhones(id: number)
+  {
+    this.phoneArray.removeAt(id)
   }
 
   newContact(): FormGroup
@@ -142,6 +151,7 @@ export class UpdateCustomerComponent implements OnInit {
       }
     })
   }
+
   GetListCountrys()
   {
     this._AddressService.GetAllCountrys().subscribe({
@@ -150,6 +160,7 @@ export class UpdateCustomerComponent implements OnInit {
       }
     })
   }
+
   CloseDialogBox(): void {
     this.dialogRef.close();
   }
