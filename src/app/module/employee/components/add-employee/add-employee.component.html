@@ -69,7 +69,7 @@
         </span>
         <div *ngFor="let emailAddress of email.controls; let i = index" [formGroupName]="i"  >
           <mat-form-field >
-            <mat-label>Email : </mat-label><input type="email" formControlName="emailAddress"  class="input" matInput>
+            <mat-label>Email : </mat-label><input type="email" formControlName="emailAddress"  class="input"  matInput>
           </mat-form-field>
           <span *ngIf="i >= 1">
             <button mat-icon-button type="button" (click)="DeleteEmails(i)">

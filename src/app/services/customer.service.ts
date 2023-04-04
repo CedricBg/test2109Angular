@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customers } from '../models/customer/customers.models';
+import { ContactPerson } from '../models/customer/ContactPerson.models';
 
 
 
@@ -58,5 +59,15 @@ export class CustomerService {
   CreateSite(site: Site)
   {
     return this._httpClient.post<number>(environment.baseAdres + 'customer/addSite/', JSON.stringify(site),this.JsonHeader())
+  }
+
+  AddContactCreateSite(contact: ContactPerson)
+  {
+    console.log(contact)
+    return this._httpClient.post<number>(environment.baseAdres + 'customer/addContact/',contact).subscribe({
+      next :(data: number)=>{
+        console.log(data)
+      }
+    })
   }
 }

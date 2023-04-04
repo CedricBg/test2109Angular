@@ -115,7 +115,7 @@ export class AddEmployeeComponent implements OnInit {
       }
     })
   }
-   get email(): FormArray
+  get email(): FormArray
   {
      return  this.formEmployee.get("email") as  FormArray
   }

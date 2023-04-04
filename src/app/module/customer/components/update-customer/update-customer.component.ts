@@ -1,5 +1,5 @@
 import { Site } from './../../../../models/customer/site.models';
-import { Contacts } from './../../../../models/customer/Contacts.models';
+import { ContactPerson } from '../../../../models/customer/ContactPerson.models';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { CustomerService } from './../../../../services/customer.service';
 import { Role } from 'src/app/models/Role.models';
@@ -20,7 +20,7 @@ import { Customers } from 'src/app/models/customer/customers.models';
 export class UpdateCustomerComponent implements OnInit {
   formClient!: FormGroup
   selectedClient: Site
-  listContact: Contacts[] = []
+  listContact: ContactPerson[] = []
   listCountrys: Countrys[] = []
   listLanguage: Language[]=[]
   listRoles: Role[] = []
@@ -85,7 +85,6 @@ export class UpdateCustomerComponent implements OnInit {
   }
   Send()
   {
-    console.log(this.formClient.value)
     this._infoService.getSectedCountry(this.listCountrys,this.formClient)
     this._infoService.getLanguages(this.listLanguage,this.formClient)
     return this._customerService.UpdateUser(this.formClient.value)

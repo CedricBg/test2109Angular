@@ -4,7 +4,7 @@
   <mat-horizontal-stepper class="custom-stepper" [linear]="isLinear" #stepper>
     <mat-step [stepControl]="formClient" >
       <form [formGroup]="formClient">
-        <ng-template matStepLabel><span *ngIf="idClient != 0">Création nouveau client:</span> <span class="erreur" *ngIf="idClient == 0">Erreur le nom est déjà utiliser</span></ng-template>
+        <ng-template matStepLabel><span *ngIf="idClient != 0 && idSite != 0">Création nouveau client:</span><span class="erreur" *ngIf="idSite == 0">Le nom du site est déjà utilisé</span> <span class="erreur" *ngIf="idClient == 0">Erreur le nom est déjà utiliser</span></ng-template>
         <mat-form-field appearance="fill">
           <mat-label>Nom de la firme</mat-label>
           <input formControlName="nameCustomer" matInput>
@@ -17,7 +17,7 @@
 
   <mat-step [stepControl]="formClientSite" >
     <form *ngIf="idClient != 0" [formGroup]="formClientSite">
-      <ng-template matStepLabel><span *ngIf="idClient != 0">Entrez le nom le Site:</span></ng-template>
+      <ng-template matStepLabel><span *ngIf="idClient != 0 && idSite != 0">Créez le premier site du client:</span></ng-template>
       <span class="inputClient">
       <mat-form-field appearance="fill">
         <mat-label>Nom du site</mat-label>
@@ -40,7 +40,7 @@
         </mat-autocomplete>
       </mat-form-field>
     </p>
-    <div  formGroupName="address">
+    <div formGroupName="address">
       <p class="inputClient">Adresse:</p>
       <span class="inputClient">
       <mat-form-field  appearance="fill">
@@ -74,6 +74,66 @@
     <div>
       <button *ngIf="idClient == 0" mat-button matStepperPrevious>Retour</button>
       <button *ngIf="idClient != 0" (click)="CreateSite()" mat-button matStepperNext>Suivant</button>
+    </div>
+  </mat-step>
+  <mat-step  [stepControl]="formContactPerson">
+    <form *ngIf="idSite" [formGroup]="formContactPerson">
+      <div formGroupName="ContactPerson">
+      <ng-template matStepLabel><span *ngIf="idClient != 0 && idSite != 0">Ajout d'un contact:</span></ng-template>
+      <span class="inputClient">
+        <mat-form-field appearance="fill">
+          <mat-label>Prénom:</mat-label>
+          <input  matInput formControlName="FirstName">
+        </mat-form-field>
+      </span>
+      <span class="inputClient">
+        <mat-form-field appearance="fill">
+        <mat-label>Nom de famille:</mat-label>
+        <input  matInput formControlName="LastName">
+        </mat-form-field>
+      </span>
+      <span class="inputClient">
+        <mat-checkbox  formControlName="Responsible">Responsble du site</mat-checkbox>
+        <mat-checkbox  formControlName="EmergencyContact">Contact en cas d'urgence</mat-checkbox>
+        <mat-checkbox  formControlName="NightContact">Contact de nuit</mat-checkbox>
+      </span>
+      <div class="MailPhone">
+        <div class="inputClient" formArrayName="Email">
+          <span mat-icon-button (click)="AddEmail()">
+            <mat-icon >add</mat-icon> Ajoutez une adresse mail
+          </span>
+          <div *ngFor="let emailAddres of Email.controls; let i = index" [formGroupName]="i">
+            <mat-form-field appearance="fill">
+              <mat-label>Email: </mat-label><input  type="email" formControlName="emailAddress" class="input" matInput>
+            </mat-form-field>
+            <span *ngIf="i >= 1">
+              <button mat-icon-button type="button" (click)="DeleteEmails(i)">
+                <mat-icon type="button" class="icons">delete</mat-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+        <div class="inputClient" formArrayName="Phone">
+          <span mat-icon-button (click)="AddPhone()">
+            <mat-icon >add</mat-icon> Ajoutez nr° de téléphone
+          </span>
+          <div *ngFor="let number of Phone.controls; let i = index" [formGroupName]="i">
+            <mat-form-field appearance="fill" >
+              <mat-label>Téléphone: </mat-label><input  type="tel" formControlName="number" class="input" matInput>
+            </mat-form-field>
+            <span *ngIf="i >= 1">
+              <button mat-icon-button type="button" (click)="DeletePhones(i)">
+                <mat-icon type="button" class="icons">delete</mat-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+    <div>
+      <button *ngIf="idSite == 0" mat-button matStepperPrevious>Retour</button>
+      <button *ngIf="idSite != 0" mat-button (click)="AjoutcontactSite()" matStepperNext>Finir</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

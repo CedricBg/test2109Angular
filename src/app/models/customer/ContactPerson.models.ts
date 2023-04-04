@@ -1,9 +1,9 @@
 import { Email } from "../email.models"
 import { Phone } from "../phone.models"
 
-export interface Contacts
+export class ContactPerson
 {
-  id: number
+  contactId: number | null
   firstName: string
   lastName: string
   email: Email[]
@@ -11,4 +11,5 @@ export interface Contacts
   responsible: boolean
   emergencyContact: boolean
   nightContact: boolean
+  siteId: number | null
 }

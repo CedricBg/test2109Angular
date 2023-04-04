@@ -169,7 +169,7 @@ export class UpdateEmployeeComponent implements OnInit {
     this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
     this._InfoService.getLanguages(this.listLanguages, this.formEmployee)
     this.formEmployee.value['id'] = this.SelectedEmployee.id
-    this.CloseDialogBox()
+
     return this._serviceEmployee.UpdateUser(this.formEmployee.value)
   }
 }
