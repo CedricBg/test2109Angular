@@ -32,12 +32,12 @@
     </span>
     <p class="inputClient" formGroupName="language">
       <mat-form-field  appearance="fill">
-        <mat-label>Langue de contact: </mat-label><input matInput [matAutocomplete]="lang"  formControlName="name" class="input">
-        <mat-autocomplete #lang="matAutocomplete" >
+        <mat-label>Langue de contact: </mat-label>
+        <mat-select formControlName="name" >
           <mat-option *ngFor="let elt of listLanguage" [value]="elt.name" >
               {{elt.name}}
           </mat-option>
-        </mat-autocomplete>
+        </mat-select>
       </mat-form-field>
     </p>
     <div formGroupName="address">
@@ -60,12 +60,12 @@
     </span>
     <span class="inputClient">
       <mat-form-field  appearance="fill">
-        <mat-label>Pays : </mat-label><input matInput [matAutocomplete]="autoNationality" formControlName="state" class="input">
-        <mat-autocomplete #autoNationality="matAutocomplete" >
+        <mat-label>Pays: </mat-label>
+        <mat-select formControlName="state" >
           <mat-option *ngFor="let elt of listCountrys" [value]="elt.country" >
                 {{elt.country}}
           </mat-option>
-        </mat-autocomplete>
+        </mat-select>
       </mat-form-field>
     </span>
 

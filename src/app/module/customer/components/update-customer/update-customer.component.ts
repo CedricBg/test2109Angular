@@ -44,11 +44,10 @@ export class UpdateCustomerComponent implements OnInit {
   async SendInformationForm()
   {
     this.formClient = await this._builder.group({
-      siteId:[this.selectedClient.siteId],
-      name: [this.selectedClient.name,Validators.required],
-      vatNumber: [this.selectedClient.vatNumber],
+    siteId:[this.selectedClient.siteId],
+    name: [this.selectedClient.name,Validators.required],
+    vatNumber: [this.selectedClient.vatNumber],
       contactSite: this._builder.array([]),
-
       address: this._builder.group({
         addressId: [this.selectedClient.address.addressId],
         sreetAddress: [this.selectedClient.address.sreetAddress,Validators.required],
@@ -63,34 +62,47 @@ export class UpdateCustomerComponent implements OnInit {
       }),
     })
 
-      this.selectedClient.contactSite.forEach(e => {
-        let newcontrol = this.newContact()
-        newcontrol.patchValue(e)
-        const phoneControl = newcontrol.get('phone') as FormArray
-        const emailControl = newcontrol.get('email') as FormArray
-          e.phone.forEach(y =>{
-            const newPhone = this.newPhone();
-            newPhone.patchValue(y)
-            phoneControl.push(newPhone)
-          })
-          e.email.forEach(a=>{
-            const newEmail = this.newEmail();
-            newEmail.patchValue(a)
-            emailControl.push(newEmail)
-          })
-          this.contactSite.push(newcontrol);
-
+      this.selectedClient.contactSite.forEach(contact => {
+        const contactForm = this.createContactForm(contact);
+        this.contactSite.push(contactForm);
       });
-
   }
+
+private createContactForm(contact: ContactPerson): FormGroup {
+  const phoneArray = this._builder.array([]) as FormArray;
+  contact.phone.forEach(phone => {
+    const phoneGroup = this._builder.group({
+      number: [phone.number, Validators.required],
+    });
+    phoneArray.push(phoneGroup);
+  });
+
+  const emailArray = this._builder.array([]) as FormArray;
+  contact.email.forEach(email => {
+    const emailGroup = this._builder.group({
+      emailAddress: [email.emailAddress, Validators.required],
+    });
+    emailArray.push(emailGroup);
+  });
+
+  return this._builder.group({
+    phone: phoneArray,
+    email: emailArray,
+    firstName: [contact.firstName,Validators.required],
+    lastName: [contact.lastName,Validators.required],
+    responsible: [contact.responsible,Validators.required],
+    emergencyContact: [contact.emergencyContact,Validators.required],
+    nightContact: [contact.nightContact,Validators.required],
+    contactId: [contact.contactId],
+  });
+}
+
   Send()
   {
     this._infoService.getSectedCountry(this.listCountrys,this.formClient)
     this._infoService.getLanguages(this.listLanguage,this.formClient)
-
     this.CloseDialogBox()
     return this._customerService.UpdateUser(this.formClient.value)
-
   }
   get contactSite(): FormArray
   {
@@ -98,21 +110,41 @@ export class UpdateCustomerComponent implements OnInit {
   }
 
   getPhoneControls(contact: AbstractControl): AbstractControl[] {
-    this.phoneArray = contact.get('phone') as FormArray;
-    return this.phoneArray.controls;
+    const phoneArray = contact.get('phone') as FormArray;
+    return phoneArray.controls;
   }
 
   getEmailControls(contact: AbstractControl): AbstractControl[] {
-    this.emailArray = contact.get('email') as FormArray;
-    return this.emailArray.controls;
+    const emailArray = contact.get('email') as FormArray;
+    return emailArray.controls;
   }
-  DeleteEmails(id: number)
-  {
-    this.emailArray.removeAt(id)
+  AddEmail(idinstance: number) {
+    const instance = this.contactSite.controls[idinstance]
+    const array = instance.get('email') as FormArray;
+    const email = this._builder.group({
+      emailAddress: ['', Validators.required]
+    });
+
+    array.push(email);
   }
-  DeletePhones(id: number)
+
+  AddPhone(idinstance: number) {
+    const instance = this.contactSite.controls[idinstance]
+    const array = instance.get('phone') as FormArray;
+    const phone = this._builder.group({
+      number: ['', Validators.required]
+    });
+    array.push(phone);
+  }
+
+
+  Delete(idinstance: number, id: number,nominstance: string)
   {
-    this.phoneArray.removeAt(id)
+    const instance = this.contactSite.controls[idinstance]
+
+    const array = instance.get(nominstance) as FormArray;
+
+    array.removeAt(id)
   }
 
   newContact(): FormGroup
@@ -123,9 +155,10 @@ export class UpdateCustomerComponent implements OnInit {
       responsible: ['',Validators.required],
       emergencyContact: ['',Validators.required],
       nightContact: ['',Validators.required],
+      contactId: [null],
       email: this._builder.array([]),
       phone: this._builder.array([]),
-      contactId: [null]
+
     })
   }
 

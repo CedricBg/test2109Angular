@@ -36,9 +36,9 @@
 
             </td>
             <td>
-              <button mat-button (click)="GetOne(client.id)"  type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
-              <button  mat-button (click)="UpdateOne(client.id)"  type="button"><mat-icon  class="icons2">edit</mat-icon></button>
-              <button *ngIf="client.id > 1" type="button" mat-button ><mat-icon class="icons3">delete</mat-icon></button>
+              <button mat-button (click)="GetOne(client.id)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
+              <button  mat-button (click)="UpdateOne(client.id)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
+              <button mat-button  (click)="Delete(client.id)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
             </td>
           </tr>
         </tbody>

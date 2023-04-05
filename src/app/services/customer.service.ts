@@ -16,23 +16,30 @@ export class CustomerService {
 
   constructor(private _httpClient : HttpClient, private _route : Router) { }
   private isUpdatedSubject: Subject<Site> = new Subject<Site>()
-  private CreateCompanySubject: Subject<number> = new Subject<number>()
 
-  GetAll()
+
+  Delete(id: number)
   {
-    return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
-
+    console.log(id)
+    return this._httpClient.put<string>(environment.baseAdres +'customer/delete/'+id, JSON.stringify(id), this.JsonHeader())
   }
+
   getUpdateData()
   {
     return this.isUpdatedSubject.asObservable();
   }
 
+  GetAll()
+  {
+    return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
+  }
 
   GetOne(id: number): Observable<Site>
   {
     return this._httpClient.get<Site>(environment.baseAdres+'customer/site/'+id)
   }
+
+
   UpdateUser(client: Site)
   {
     this._httpClient.put<Site>(environment.baseAdres +'customer/site', client).subscribe({

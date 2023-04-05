@@ -24,6 +24,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule} from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 registerLocaleData( localeFr , 'fr-BE');
@@ -59,6 +60,7 @@ registerLocaleData( localeFr , 'fr-BE');
     MatAutocompleteModule,
     MatSelectModule,
     MatStepperModule,
+    MatSnackBarModule,
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],

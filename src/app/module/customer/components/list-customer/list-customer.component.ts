@@ -27,13 +27,20 @@ export class ListCustomerComponent implements OnInit {
   constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router) { }
 
   ngOnInit(): void {
+
     this._CustService.GetAll().subscribe({
-      next : (data: Customers[])=>{
+      next: (data: any )=>{
         this.listCustomers = data
       }
     })
+
     this.subscriptionUpdate = this._CustService.getUpdateData().subscribe(newData => {
       this.siteSelected = newData
+      this._CustService.GetAll().subscribe({
+        next: (data: any )=>{
+          this.listCustomers = data
+        }
+      })
     })
   }
   GetSit(id: number): number
@@ -106,4 +113,12 @@ export class ListCustomerComponent implements OnInit {
     //const dialogRef = this.dialog.open(AddCustomerComponent,diallogConfig);
   }
 
+  Delete(id: number)
+  {
+    this._CustService.Delete(id).subscribe({
+      next : (data: string)=>{
+
+      }
+    })
+  }
 }

@@ -125,12 +125,11 @@ export class AddCustomerComponent implements OnInit {
   AjoutcontactSite()
   {
       this._custService.AddContactCreateSite(this.formContactPerson.get('ContactPerson').value)
-      this.Customers()
+      this._Router.navigateByUrl('OPS/customer/listcustomer')
   }
-  Customers()
-  {
-    this._Router.navigateByUrl('OPS/customer/listcustomer')
-  }
+
+
+
 
   get Email(): FormArray
   {

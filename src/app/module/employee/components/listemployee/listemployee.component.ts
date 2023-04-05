@@ -58,7 +58,6 @@ export class ListemployeeComponent implements OnInit {
       this.ngOnInit()
     }
     else{
-      console.log(this.listEmployee)
       this.listEmployee = this.listEmployee.filter(res=>{
         return res.surName.toLocaleLowerCase().match(this.surName.toLocaleLowerCase())
       })
