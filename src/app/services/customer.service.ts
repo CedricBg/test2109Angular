@@ -31,14 +31,13 @@ export class CustomerService {
 
   GetAll()
   {
-    return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
+    return  this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
   }
 
   GetOne(id: number): Observable<Site>
   {
     return this._httpClient.get<Site>(environment.baseAdres+'customer/site/'+id)
   }
-
 
   UpdateUser(client: Site)
   {

@@ -2,11 +2,14 @@ import { Customers } from 'src/app/models/customer/customers.models';
 import { AddCustomerComponent } from './../add-customer/add-customer.component';
 import { UpdateCustomerComponent } from './../update-customer/update-customer.component';
 import { CustomerService } from './../../../../services/customer.service';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Site } from 'src/app/models/customer/site.models';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatPaginator } from '@angular/material/paginator';
+import { merge, of, forkJoin } from 'rxjs';import { first, startWith, switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-list-customer',
@@ -15,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class ListCustomerComponent implements OnInit {
   nameCustomer: string = ""
-  listCustomers: Customers[]
+  listCustomers!: Customers[]
   customerName: string
   SelectedClient: Customers
   selectedSiteName: string
@@ -23,26 +26,35 @@ export class ListCustomerComponent implements OnInit {
   select : boolean = false
   subscriptionUpdate: Subscription
   subscriptionUpdateCustomer: Subscription
+  pagedData!: any[]
 
-  constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router) { }
+  length = 50;
+  pageSize = 10;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-
-    this._CustService.GetAll().subscribe({
-      next: (data: any )=>{
+    this.subscriptionUpdate = this._CustService.getUpdateData().subscribe(newData => {
+      this.siteSelected = newData
+    })
+    this._CustService.GetAll().pipe(first()).subscribe({
+      next : (data: Customers[])=>{
         this.listCustomers = data
+        this.getPageData()
       }
     })
 
-    this.subscriptionUpdate = this._CustService.getUpdateData().subscribe(newData => {
-      this.siteSelected = newData
-      this._CustService.GetAll().subscribe({
-        next: (data: any )=>{
-          this.listCustomers = data
-        }
-      })
-    })
   }
+  ngAfterViewInit() {
+    this.paginator.page.subscribe(() => this.getPageData());
+  }
+
+  getPageData() {
+    const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+    const endIndex = startIndex + this.paginator.pageSize;
+    this.pagedData = this.listCustomers.slice(startIndex, endIndex);
+  }
+
   GetSit(id: number): number
   {
     const client = this.listCustomers.find(c=>c.id == id)
@@ -59,6 +71,7 @@ export class ListCustomerComponent implements OnInit {
       this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
           this.siteSelected =  data
+
         }
       })
     }
