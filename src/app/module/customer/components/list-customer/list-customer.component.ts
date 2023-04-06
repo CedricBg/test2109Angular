@@ -28,7 +28,7 @@ export class ListCustomerComponent implements OnInit {
   subscriptionUpdateCustomer: Subscription
   pagedData!: any[]
 
-  length = 50;
+  length: number
   pageSize = 10;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef) { }
@@ -50,6 +50,7 @@ export class ListCustomerComponent implements OnInit {
   }
 
   getPageData() {
+    this.length =  this.listCustomers.length
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     const endIndex = startIndex + this.paginator.pageSize;
     this.pagedData = this.listCustomers.slice(startIndex, endIndex);
@@ -86,7 +87,6 @@ export class ListCustomerComponent implements OnInit {
       this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
           this.siteSelected =  data
-
           if(this.selectedSiteName)
             {
               const diallogConfig =  new MatDialogConfig;
@@ -107,23 +107,17 @@ export class ListCustomerComponent implements OnInit {
       this.ngOnInit()
     }
     else{
-      this.listCustomers = this.listCustomers.filter(res=>{
+      this.pagedData = this.listCustomers.filter(res=>{
         return res.nameCustomer.toLocaleLowerCase().match(this.nameCustomer.toLocaleLowerCase())
       })
     }
   }
 
-  OpenformAddUser()
+  FormAddUser()
   {
     this.select = false
     this.siteSelected = null
     this._Router.navigateByUrl('OPS/customer/listcustomer/addCustomer')
-    //const diallogConfig = new MatDialogConfig;
-    //diallogConfig.disableClose = true;
-    //diallogConfig.autoFocus = true;
-    //diallogConfig.height = '70vh';
-    //diallogConfig.minWidth = '80vw';
-    //const dialogRef = this.dialog.open(AddCustomerComponent,diallogConfig);
   }
 
   Delete(id: number)
