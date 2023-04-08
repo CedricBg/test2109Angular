@@ -1,19 +1,76 @@
 
 
-<div >
+<div>
   <mat-horizontal-stepper class="custom-stepper" [linear]="isLinear" #stepper>
     <mat-step [stepControl]="formClient" >
       <form [formGroup]="formClient">
         <ng-template matStepLabel><span *ngIf="idClient != 0 && idSite != 0">Création nouveau client:</span><span class="erreur" *ngIf="idSite == 0">Le nom du site est déjà utilisé</span> <span class="erreur" *ngIf="idClient == 0">Erreur le nom est déjà utiliser</span></ng-template>
+        <span class="inputClient">
         <mat-form-field appearance="fill">
           <mat-label>Nom de la firme</mat-label>
           <input formControlName="nameCustomer" matInput>
-          </mat-form-field>
-          <div>
-            <button mat-button (click)="CreateCompany()" matStepperNext>Suivant</button>
+        </mat-form-field>
+      </span>
+        <div formGroupName="contact">
+          <span class="inputClient">
+            <mat-form-field appearance="fill">
+              <mat-label>Prénom:</mat-label>
+              <input  matInput formControlName="FirstName">
+            </mat-form-field>
+          </span>
+          <span class="inputClient">
+            <mat-form-field appearance="fill">
+            <mat-label>Nom de famille:</mat-label>
+            <input  matInput formControlName="LastName">
+            </mat-form-field>
+          </span>
+
+          <div class="MailPhone">
+            <div class="inputClient" formArrayName="email">
+
+              <div *ngFor="let emailAddres of email.controls; let i = index" [formGroupName]="i">
+                <mat-form-field appearance="fill">
+                  <mat-label>Email: </mat-label><input  type="email" formControlName="emailAddress" class="input" matInput>
+                </mat-form-field>
+                <span *ngIf="i >= 1">
+                  <button mat-icon-button type="button" (click)="DeleteEmail(i)">
+                    <mat-icon type="button" class="icons">delete</mat-icon>
+                  </button>
+                </span>
+              </div>
+              <span mat-icon-button (click)="AddEmails()">
+                <mat-icon >add</mat-icon> Ajoutez une adresse mail
+              </span>
+            </div>
+            <div class="inputClient" formArrayName="phone">
+
+              <div *ngFor="let number of phone.controls; let i = index" [formGroupName]="i">
+                <mat-form-field appearance="fill" >
+                  <mat-label>Téléphone: </mat-label><input  type="tel" formControlName="number" class="input" matInput>
+                </mat-form-field>
+                <span *ngIf="i >= 1">
+                  <button mat-icon-button type="button" (click)="DeletePhone(i)">
+                    <mat-icon type="button" class="icons">delete</mat-icon>
+                  </button>
+                </span>
+              </div>
+              <span mat-icon-button (click)="AddPhones()">
+                <mat-icon >add</mat-icon> Ajoutez nr° de téléphone
+              </span>
+            </div>
           </div>
-      </form>
-    </mat-step>
+          <div class="checkbox">
+            <mat-checkbox class="inputClient" formControlName="Responsible">Responsble du site</mat-checkbox>
+            <mat-checkbox class="inputClient" formControlName="EmergencyContact">Contact en cas d'urgence</mat-checkbox>
+            <mat-checkbox class="inputClient" formControlName="NightContact">Contact de nuit</mat-checkbox>
+          </div>
+        </div>
+    </form>
+
+          <div class="checkbox">
+            <button mat-button type="button" (click)="CreateCompany()" matStepperNext>Suivant</button>
+          </div>
+  </mat-step>
 
   <mat-step [stepControl]="formClientSite" >
     <form *ngIf="idClient != 0" [formGroup]="formClientSite">
@@ -21,7 +78,7 @@
       <span class="inputClient">
       <mat-form-field appearance="fill">
         <mat-label>Nom du site</mat-label>
-        <input class="inputClient" matInput formControlName="name">
+        <input matInput formControlName="name">
       </mat-form-field>
     </span>
     <span class="inputClient">

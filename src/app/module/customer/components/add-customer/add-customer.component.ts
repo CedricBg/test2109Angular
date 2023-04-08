@@ -11,6 +11,7 @@ import { InformationsService } from 'src/app/services/informations.service';
 import { Site } from 'src/app/models/customer/site.models';
 import { ContactPerson } from 'src/app/models/customer/ContactPerson.models';
 import { Route, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-add-customer',
@@ -22,7 +23,7 @@ export class AddCustomerComponent implements OnInit {
   formClientSite!: FormGroup
   formContactPerson!: FormGroup
   isLinear: boolean
-  customer: string
+  customer!: Customers
   idClient!: number
   idSite!: number
   isEditable: boolean = false
@@ -30,11 +31,9 @@ export class AddCustomerComponent implements OnInit {
   listLanguage: Language[] = []
   listCountrys: Countrys[] = []
   siteCreated: Site = new Site()
-  constructor(private _builder: FormBuilder,private _Router : Router, private _custService : CustomerService, private _infoService: InformationsService, private _addressService: AddressService
-   )
-    {
 
-    }
+  constructor(private _builder: FormBuilder,private _Router : Router, private _custService : CustomerService, private _infoService: InformationsService, private _addressService: AddressService
+   ) {}
 
   ngOnInit(): void {
     this.sendCompany()
@@ -57,6 +56,24 @@ export class AddCustomerComponent implements OnInit {
   {
     this.formClient = this._builder.group({
       nameCustomer: ['', [Validators.required, Validators.minLength(3)]],
+      contact: this._builder.group({
+        FirstName: ['', Validators.required],
+        LastName: ['', Validators.required],
+        Responsible: [false],
+        EmergencyContact: [false],
+        NightContact: [false],
+        SiteId:[this.idSite],
+        email: this._builder.array([
+          this._builder.group({
+            emailAddress: ['', Validators.required],
+          })
+        ]),
+        phone: this._builder.array([
+          this._builder.group({
+            number: ['',Validators.required],
+          })
+        ])
+      }),
     })
     this.isLinear = true;
   }
@@ -95,11 +112,8 @@ export class AddCustomerComponent implements OnInit {
     }
   }
 
-
-
   AddContactPersonSite()
   {
-    console.log(this.idSite)
     this.formContactPerson = this._builder.group({
       ContactPerson: this._builder.group({
         FirstName: ['', Validators.required],
@@ -128,8 +142,14 @@ export class AddCustomerComponent implements OnInit {
       this._Router.navigateByUrl('OPS/customer/listcustomer')
   }
 
-
-
+  get email(): FormArray
+  {
+    return this.formClient.get('contact.email') as FormArray;
+  }
+  get phone(): FormArray
+  {
+    return this.formClient.get('contact.phone') as FormArray;
+  }
 
   get Email(): FormArray
   {
@@ -154,6 +174,20 @@ export class AddCustomerComponent implements OnInit {
     this.Phone.push(phone);
   }
 
+  AddEmails() {
+    const email = this._builder.group({
+      emailAddress: ['', Validators.required]
+    });
+    this.email.push(email);
+  }
+
+  AddPhones() {
+    const phone = this._builder.group({
+      number: ['', Validators.required]
+    });
+    this.phone.push(phone);
+  }
+
   DeleteEmails(id: number)
   {
     this.Email.removeAt(id)
@@ -163,16 +197,20 @@ export class AddCustomerComponent implements OnInit {
     this.Phone.removeAt(id)
   }
 
+  DeleteEmail(id: number)
+  {
+    this.email.removeAt(id)
+  }
+  DeletePhone(id: number)
+  {
+    this.phone.removeAt(id)
+  }
+
   CreateCompany()
   {
     if(this.formClient.valid)
     {
-      this.customer = this.formClient.get('nameCustomer').value
-      this._custService.CreateCompany(this.customer).subscribe({
-        next : (data: number)=>{
-          this.idClient = data
-        }
-      })
+      this._custService.CreateCompany(this.formClient.value)
     }
   }
 }

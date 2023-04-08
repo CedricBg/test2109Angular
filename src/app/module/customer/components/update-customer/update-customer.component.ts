@@ -47,18 +47,18 @@ export class UpdateCustomerComponent implements OnInit {
     siteId:[this.selectedClient.siteId],
     name: [this.selectedClient.name,Validators.required],
     vatNumber: [this.selectedClient.vatNumber],
-      contactSite: this._builder.array([]),
-      address: this._builder.group({
-        addressId: [this.selectedClient.address.addressId],
-        sreetAddress: [this.selectedClient.address.sreetAddress,Validators.required],
-        city: [this.selectedClient.address.city,Validators.required],
-        state: [this.selectedClient.address.state,Validators.required],
-        zipCode: [this.selectedClient.address.zipCode,Validators.required],
-        stateId: [this.selectedClient.address.stateId,Validators.required],
+    contactSite: this._builder.array([]),
+    address: this._builder.group({
+      addressId: [this.selectedClient.address.addressId],
+      sreetAddress: [this.selectedClient.address.sreetAddress,Validators.required],
+      city: [this.selectedClient.address.city,Validators.required],
+      state: [this.selectedClient.address.state,Validators.required],
+      zipCode: [this.selectedClient.address.zipCode,Validators.required],
+      stateId: [this.selectedClient.address.stateId,Validators.required],
       }),
-      language: this._builder.group({
-          id: [this.selectedClient.language.id],
-          name: [this.selectedClient.language.name,Validators.required]
+    language: this._builder.group({
+      id: [this.selectedClient.language.id],
+      name: [this.selectedClient.language.name,Validators.required]
       }),
     })
 
@@ -141,9 +141,7 @@ private createContactForm(contact: ContactPerson): FormGroup {
   Delete(idinstance: number, id: number,nominstance: string)
   {
     const instance = this.contactSite.controls[idinstance]
-
     const array = instance.get(nominstance) as FormArray;
-
     array.removeAt(id)
   }
 

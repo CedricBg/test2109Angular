@@ -5,7 +5,7 @@ import { CustomerService } from './../../../../services/customer.service';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Site } from 'src/app/models/customer/site.models';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { merge, of, forkJoin } from 'rxjs';import { first, startWith, switchMap } from 'rxjs/operators';
@@ -27,21 +27,29 @@ export class ListCustomerComponent implements OnInit {
   subscriptionUpdate: Subscription
   subscriptionUpdateCustomer: Subscription
   pagedData!: any[]
-
+  private customers$ = new Observable<Customers[]>()
   length: number
   pageSize = 10;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.subscriptionUpdate = this._CustService.getUpdateData().subscribe(newData => {
-      this.siteSelected = newData
-    })
-    this._CustService.GetAll().pipe(first()).subscribe({
+    this._CustService.getAllCustomers().pipe(first()).subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
+        console.log(this.listCustomers.sort(e=>e.id))
         this.getPageData()
       }
+    })
+    this.subscriptionUpdate = this._CustService.getUpdateData().subscribe(newData => {
+      this.siteSelected = newData
+
+    })
+    this.subscriptionUpdateCustomer = this._CustService.getAddCustomer().subscribe(newData =>{
+      console.log(newData)
+      this.listCustomers = newData
+      this.listCustomers.sort(e=>e.id)
+      this.getPageData()
     })
 
   }
@@ -124,8 +132,13 @@ export class ListCustomerComponent implements OnInit {
   {
     this._CustService.Delete(id).subscribe({
       next : (data: string)=>{
-
+        const body = data;
+        console.log(body)
       }
     })
+  }
+  UpdateCustomer()
+  {
+
   }
 }

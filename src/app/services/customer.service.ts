@@ -2,7 +2,7 @@ import { Site } from './../models/customer/site.models';
 import { Observable, Subject } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customers } from '../models/customer/customers.models';
 import { ContactPerson } from '../models/customer/ContactPerson.models';
@@ -14,13 +14,15 @@ import { ContactPerson } from '../models/customer/ContactPerson.models';
 })
 export class CustomerService {
 
-  constructor(private _httpClient : HttpClient, private _route : Router) { }
+
   private isUpdatedSubject: Subject<Site> = new Subject<Site>()
+  private isAddCustSubject: Subject<Customers[]> = new Subject<Customers[]>()
+
+  constructor(private _httpClient : HttpClient, private _route : Router) {  }
 
 
   Delete(id: number)
   {
-    console.log(id)
     return this._httpClient.put<string>(environment.baseAdres +'customer/delete/'+id, JSON.stringify(id), this.JsonHeader())
   }
 
@@ -29,9 +31,14 @@ export class CustomerService {
     return this.isUpdatedSubject.asObservable();
   }
 
-  GetAll()
+  getAddCustomer()
   {
-    return  this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
+    return this.isAddCustSubject.asObservable();
+  }
+
+  getAllCustomers()
+  {
+    return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
   }
 
   GetOne(id: number): Observable<Site>
@@ -48,8 +55,17 @@ export class CustomerService {
     })
   }
 
-  CreateCompany(customer: string){
-    return this._httpClient.post<number>(environment.baseAdres +'customer/addCustomer/', JSON.stringify(customer), this.JsonHeader())
+  CreateCompany(customer: Customers){
+    return this._httpClient.post<number>(environment.baseAdres +'customer/addCustomer/', customer, this.JsonHeader()).subscribe({
+      next: ()=>{
+        this.getAllCustomers().subscribe({
+          next : (data: Customers[])=>
+          {
+            this.isAddCustSubject.next(data)
+          }
+        })
+      }
+    })
   }
 
   private JsonHeader()
