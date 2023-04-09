@@ -5,6 +5,7 @@ import { AddCustomerComponent } from './components/add-customer/add-customer.com
 import { UpdateCustomerComponent } from './components/update-customer/update-customer.component';
 import { ListCustomerComponent } from './components/list-customer/list-customer.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { UpdateSiteComponent } from './components/update-site/update-site.component';
 
 
 
@@ -13,6 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     AddCustomerComponent,
     UpdateCustomerComponent,
     ListCustomerComponent,
+    UpdateSiteComponent,
 
   ],
   imports: [

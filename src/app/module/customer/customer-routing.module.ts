@@ -8,7 +8,8 @@ import { CustomerComponent } from './customer.component';
 const routes: Routes = [
   { path: '', component: CustomerComponent, children :[
     { path: 'listcustomer',component: ListCustomerComponent,children:[
-      { path: 'addCustomer', component: AddCustomerComponent }
+      { path: 'addCustomer', component: AddCustomerComponent },
+      { path: 'UpdateCustomer', component: UpdateCustomerComponent}
     ]},
     { path: 'updateCustomer', component: UpdateCustomerComponent}]
   },

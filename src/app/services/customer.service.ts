@@ -1,5 +1,6 @@
+
 import { Site } from './../models/customer/site.models';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable,OnInit } from '@angular/core';
@@ -17,9 +18,24 @@ export class CustomerService {
 
   private isUpdatedSubject: Subject<Site> = new Subject<Site>()
   private isAddCustSubject: Subject<Customers[]> = new Subject<Customers[]>()
-
+  private customerSubject : Subject<Customers> = new Subject<Customers>()
+  customer: Customers
   constructor(private _httpClient : HttpClient, private _route : Router) {  }
 
+  private JsonHeader()
+  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return httpOptions
+  }
+
+  emitSubject()
+  {
+    this.customerSubject.next(this.customer)
+  }
 
   Delete(id: number)
   {
@@ -36,6 +52,11 @@ export class CustomerService {
     return this.isAddCustSubject.asObservable();
   }
 
+  GetACustomer()
+  {
+    return this.customerSubject.asObservable();
+  }
+
   getAllCustomers()
   {
     return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
@@ -46,6 +67,15 @@ export class CustomerService {
     return this._httpClient.get<Site>(environment.baseAdres+'customer/site/'+id)
   }
 
+  GetOneCustomer(id: number)
+  {
+    return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
+      next: (data: Customers) =>{
+        this.customerSubject.next(data)
+      }
+    })
+  }
+
   UpdateUser(client: Site)
   {
     this._httpClient.put<Site>(environment.baseAdres +'customer/site', client).subscribe({
@@ -53,6 +83,11 @@ export class CustomerService {
         this.isUpdatedSubject.next(data)
       }
     })
+  }
+
+  UpdateCustomer(customer: Customers)
+  {
+    return this._httpClient.put<Boolean>(environment.baseAdres +'customer/update', customer, this.JsonHeader())
   }
 
   CreateCompany(customer: Customers){
@@ -66,16 +101,6 @@ export class CustomerService {
         })
       }
     })
-  }
-
-  private JsonHeader()
-  {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return httpOptions
   }
 
   CreateSite(site: Site)

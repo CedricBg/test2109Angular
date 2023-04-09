@@ -1,3 +1,4 @@
+import { UpdateSiteComponent } from './../update-site/update-site.component';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { AddCustomerComponent } from './../add-customer/add-customer.component';
 import { UpdateCustomerComponent } from './../update-customer/update-customer.component';
@@ -19,7 +20,6 @@ import { merge, of, forkJoin } from 'rxjs';import { first, startWith, switchMap 
 export class ListCustomerComponent implements OnInit {
   nameCustomer: string = ""
   listCustomers!: Customers[]
-  customerName: string
   SelectedClient: Customers
   selectedSiteName: string
   siteSelected: Site
@@ -30,6 +30,7 @@ export class ListCustomerComponent implements OnInit {
   private customers$ = new Observable<Customers[]>()
   length: number
   pageSize = 10;
+  customer: Customers
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef) { }
 
@@ -37,7 +38,6 @@ export class ListCustomerComponent implements OnInit {
     this._CustService.getAllCustomers().pipe(first()).subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
-        console.log(this.listCustomers.sort(e=>e.id))
         this.getPageData()
       }
     })
@@ -51,8 +51,8 @@ export class ListCustomerComponent implements OnInit {
       this.listCustomers.sort(e=>e.id)
       this.getPageData()
     })
-
   }
+
   ngAfterViewInit() {
     this.paginator.page.subscribe(() => this.getPageData());
   }
@@ -80,7 +80,6 @@ export class ListCustomerComponent implements OnInit {
       this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
           this.siteSelected =  data
-
         }
       })
     }
@@ -101,7 +100,7 @@ export class ListCustomerComponent implements OnInit {
               diallogConfig.data =  this.siteSelected
               diallogConfig.disableClose = true;
               diallogConfig.restoreFocus = true;
-              const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
+              const dialogRef = this.dialog.open(UpdateSiteComponent,diallogConfig);
             }
         }
       })
@@ -133,12 +132,19 @@ export class ListCustomerComponent implements OnInit {
     this._CustService.Delete(id).subscribe({
       next : (data: string)=>{
         const body = data;
-        console.log(body)
+
       }
     })
+    this.subscriptionUpdateCustomer = this._CustService.getAddCustomer().subscribe(newData =>{
+      this.listCustomers = newData
+      this.listCustomers.sort(e=>e.id)
+      this.getPageData()
+    })
   }
-  UpdateCustomer()
+  UpdateCustomer(id: number)
   {
+        this._CustService.GetOneCustomer(id)
+        this._Router.navigate(['OPS/customer/listcustomer/UpdateCustomer'])
 
   }
 }

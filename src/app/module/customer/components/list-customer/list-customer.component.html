@@ -1,4 +1,5 @@
 <div class="contentList">
+
   <div class="search">
     <mat-form-field>
       <mat-label>Recherche : </mat-label>
@@ -17,13 +18,17 @@
 
           <tr>
             <th>Nom</th>
+            <th>client(s)</th>
             <th>Site(s)</th>
             <th>Actions par site</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let client of pagedData">
-            <td >{{client.nameCustomer| titlecase }}</td>
+            <td><button mat-button  (click)="Delete(client.id)" type="button"><mat-icon class="icons3">delete</mat-icon></button><a><u>{{client.nameCustomer| titlecase }}</u></a></td>
+            <td>
+              <button  mat-button (click)="UpdateCustomer(client.id)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
+            </td>
             <td>
               <div>
                 <mat-form-field appearance="fill">
@@ -39,7 +44,7 @@
             <td>
               <button mat-button (click)="GetOne(client.id)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
               <button  mat-button (click)="UpdateOne(client.id)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
-              <button mat-button  (click)="Delete(client.id)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
+              <button mat-button type="button"><mat-icon class="icons3">delete</mat-icon></button>
             </td>
           </tr>
         </tbody>
