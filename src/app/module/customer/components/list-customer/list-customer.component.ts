@@ -46,9 +46,8 @@ export class ListCustomerComponent implements OnInit {
 
     })
     this.subscriptionUpdateCustomer = this._CustService.getAddCustomer().subscribe(newData =>{
-      console.log(newData)
       this.listCustomers = newData
-      this.listCustomers.sort(e=>e.id)
+      this.listCustomers.sort(e=>e.customerId)
       this.getPageData()
     })
   }
@@ -66,7 +65,7 @@ export class ListCustomerComponent implements OnInit {
 
   GetSit(id: number): number
   {
-    const client = this.listCustomers.find(c=>c.id == id)
+    const client = this.listCustomers.find(c=>c.customerId == id)
     const site =  client.site.find(c=>c.name == this.selectedSiteName)
     return site.siteId
   }
@@ -137,12 +136,14 @@ export class ListCustomerComponent implements OnInit {
     })
     this.subscriptionUpdateCustomer = this._CustService.getAddCustomer().subscribe(newData =>{
       this.listCustomers = newData
-      this.listCustomers.sort(e=>e.id)
+      this.listCustomers.sort(e=>e.customerId)
       this.getPageData()
     })
   }
   UpdateCustomer(id: number)
   {
+    this.select = false
+    this.siteSelected = null
         this._CustService.GetOneCustomer(id)
         this._Router.navigate(['OPS/customer/listcustomer/UpdateCustomer'])
 

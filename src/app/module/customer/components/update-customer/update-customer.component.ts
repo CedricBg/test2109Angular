@@ -25,7 +25,7 @@ export class UpdateCustomerComponent implements OnInit {
     this._custService.GetACustomer().subscribe({
       next : (data : Customers)=>{
         this.customer = data
-        console.log(this.customer)
+        this.formulaire()
       }
     })
 
@@ -34,26 +34,104 @@ export class UpdateCustomerComponent implements OnInit {
   formulaire()
   {
     this.formCustomer = this._builder.group({
+      customerId : [this.customer.customerId],
+      nameCustomer: [this.customer.nameCustomer,Validators.required],
       contact: this._builder.group({
-        firstName: ['',Validators.required],
-      lastName: ['',Validators.required],
-      responsible: ['',Validators.required],
-      emergencyContact: ['',Validators.required],
-      nightContact: ['',Validators.required],
-      contactId: [null],
-      email: this._builder.array([]),
-      phone: this._builder.array([]),
+        firstName: [this.customer.contact == null ? '':this.customer.contact.firstName ,Validators.required],
+        lastName: [this.customer.contact == null ? '': this.customer.contact.lastName,Validators.required],
+        responsible: [this.customer.contact == null ? false: [this.customer.contact.responsible,Validators.required, Validators.minLength(5)]],
+        emergencyContact: [this.customer.contact == null ? false :this.customer.contact.emergencyContact ,Validators.required],
+        nightContact: [ this.customer.contact == null ? false: this.customer.contact.nightContact ,Validators.required],
+        contactId: [this.customer.contact == null ? '':this.customer.contact.contactId ],
+        email: this._builder.array([]),
+        phone: this._builder.array([]),
       })
     })
+    if(this.customer.contact != null)
+    {
+      if(this.customer.contact.email != null)
+      {
+        this.customer.contact.email.forEach(mail => {
+          let newControl = this.newEmail()
+          newControl.patchValue(mail)
+          this.email.push(newControl)
+        });
+      }
+      else
+      {
+        this.email.push(this.newEmail())
+      }
+
+      if(this.customer.contact.phone != null)
+      {
+        this.customer.contact.phone.forEach(phone =>{
+          let newControl = this.newPhone()
+          newControl.patchValue(phone)
+          this.phone.push(newControl)
+        })
+      }
+      else
+      {
+        this.phone.push(this.newPhone())
+      }
+    }
+    else{
+      this.email.push(this.newEmail())
+      this.phone.push(this.newPhone())
+    }
+  }
+
+  Send(id: number)
+  {
+    this.formCustomer.get('customerId').patchValue(id)
+    if(this.formCustomer.valid)
+    {
+      console.log(this.formCustomer.value)
+    }
   }
 
   get email(): FormArray
   {
-    return this.formCustomer.get('contact/email') as FormArray
+    const group = this.formCustomer.get('contact') as FormGroup
+    return group.get("email") as FormArray
   }
 
   get phone() : FormArray
   {
-    return this.formCustomer.get('contact/phone') as FormArray
+    const group = this.formCustomer.get('contact') as FormGroup
+    return group.get("phone") as FormArray
   }
+
+  newEmail(): FormGroup
+  {
+    return this._builder.group({
+      emailAddress: ['',Validators.required],
+      emailId:[null]
+    })
+  }
+  newPhone(): FormGroup
+  {
+    return this._builder.group({
+      number: ['',[Validators.required,Validators.minLength(10)]],
+      phoneId: [null]
+    })
+  }
+
+  AddEmail()
+  {
+    this.email.push(this.newEmail())
+  }
+  AddPhone()
+  {
+    this.phone.push(this.newPhone())
+  }
+  DeleteEmails(id: number)
+  {
+    this.email.removeAt(id)
+  }
+  DeletePhones(id: number)
+  {
+    this.phone.removeAt(id)
+  }
+
 }

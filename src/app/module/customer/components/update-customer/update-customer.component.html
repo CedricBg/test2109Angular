@@ -1,3 +1,69 @@
 
 
-<div *ngIf="customer != null ">{{customer.nameCustomer}}</div>
+<div *ngIf="customer != null ">
+  <mat-horizontal-stepper class="custom-stepper"  #stepper>
+    <form [formGroup]="formCustomer" (ngSubmit)="Send(customer.customerId)">
+      <mat-step [stepControl]="formCustomer" >
+      <mat-form-field class="input">
+        <mat-label>Nom:</mat-label><input formControlName="nameCustomer" matInput>
+      </mat-form-field>
+      <div formGroupName="contact">
+        <p class="input"><u>Personne de contact:</u></p>
+        <mat-form-field class="input">
+          <mat-label>Nom:</mat-label><input formControlName="lastName" matInput>
+        </mat-form-field>
+        <mat-form-field class="input">
+          <mat-label>Nom:</mat-label><input formControlName="firstName" matInput>
+        </mat-form-field>
+        <section class="mail">
+        <div formArrayName="email">
+          <p *ngFor="let adress of email.controls; let i = index">
+            <mat-form-field class="input" [formGroupName]="i" >
+              <mat-label >Email: </mat-label><input formControlName="emailAddress" matInput>
+            </mat-form-field>
+              <span *ngIf="i >=1" mat-icon-button (click)="DeleteEmails(i)">
+                <mat-icon class="icons">delete</mat-icon>
+            </span>
+          </p>
+          <span mat-icon-button (click)="AddEmail()">
+            <mat-icon >add</mat-icon> Ajoutez une adresse mail
+          </span>
+        </div>
+        <div formArrayName="phone">
+
+          <p *ngFor="let number of phone.controls; let i = index">
+            <mat-form-field class="input" [formGroupName]="i" >
+              <mat-label >Téléphone: </mat-label><input formControlName="number" matInput>
+            </mat-form-field>
+              <span *ngIf="i >=1" mat-icon-button (click)="DeletePhones(i)">
+                <mat-icon class="icons">delete</mat-icon>
+              </span>
+          </p>
+          <span mat-icon-button (click)="AddPhone()">
+            <mat-icon >add</mat-icon>Ajoutez une adresse téléphone
+          </span>
+
+        </div>
+
+    </section>
+    <div>
+      <mat-checkbox class="checkbox" formControlName="responsible">Responsble du site</mat-checkbox>
+      <mat-checkbox class="checkbox" formControlName="emergencyContact">Contact en cas d'urgence</mat-checkbox>
+      <mat-checkbox class="checkboxtClient" formControlName="nightContact">Contact de nuit</mat-checkbox>
+    </div>
+    <div>
+      <button mat-button type="button" matStepperNext>Suivant</button>
+    </div>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="formCustomer" >
+    <ng-template matStepLabel><span >Ajouter in site</span></ng-template>
+    <div>
+      <button mat-button type="button" matStepperPrevious>Retour</button>
+      <button mat-button type="button" matStepperNext>Suivant</button>
+    </div>
+  </mat-step>
+
+    </form>
+  </mat-horizontal-stepper>
+</div>

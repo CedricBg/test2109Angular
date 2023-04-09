@@ -25,9 +25,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let client of pagedData">
-            <td><button mat-button  (click)="Delete(client.id)" type="button"><mat-icon class="icons3">delete</mat-icon></button><a><u>{{client.nameCustomer| titlecase }}</u></a></td>
+            <td><button mat-button  (click)="Delete(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button><a><u>{{client.nameCustomer| titlecase }}</u></a></td>
             <td>
-              <button  mat-button (click)="UpdateCustomer(client.id)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
+              <button  mat-button (click)="UpdateCustomer(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
             </td>
             <td>
               <div>
@@ -42,8 +42,8 @@
               </div>
             </td>
             <td>
-              <button mat-button (click)="GetOne(client.id)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
-              <button  mat-button (click)="UpdateOne(client.id)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
+              <button mat-button (click)="GetOne(client.customerId)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
+              <button  mat-button (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
               <button mat-button type="button"><mat-icon class="icons3">delete</mat-icon></button>
             </td>
           </tr>
