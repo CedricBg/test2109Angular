@@ -38,7 +38,6 @@ export class ListCustomerComponent implements OnInit {
     this._CustService.getAllCustomers().pipe(first()).subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
-
         this.getPageData()
       }
     })
@@ -87,6 +86,7 @@ export class ListCustomerComponent implements OnInit {
     }
   }
 
+
   UpdateOne(id: number)
   {
     if(this.selectedSiteName)
@@ -108,7 +108,6 @@ export class ListCustomerComponent implements OnInit {
       })
     }
   }
-
   ngModelChange()
   {
     if(this.nameCustomer == "")
@@ -120,6 +119,16 @@ export class ListCustomerComponent implements OnInit {
         return res.nameCustomer.toLocaleLowerCase().match(this.nameCustomer.toLocaleLowerCase())
       })
     }
+  }
+
+  AddSite(id: number)
+  {
+    //Iffichage permet de précisé que l'on va remplacé les donnèes affichées
+    this.select = false
+    this.siteSelected = null
+    //pour l'observable vers addSitepour lui passer le client pour le nouveau site
+    this._CustService.GetOneforsiteCustomer(id)
+    this._Router.navigate(['OPS/customer/listcustomer/addSite'])
   }
 
   FormAddUser()
@@ -149,6 +158,5 @@ export class ListCustomerComponent implements OnInit {
     this.siteSelected = null
         this._CustService.GetOneCustomer(id)
         this._Router.navigate(['OPS/customer/listcustomer/UpdateCustomer'])
-
   }
 }

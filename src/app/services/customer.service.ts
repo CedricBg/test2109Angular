@@ -18,7 +18,8 @@ export class CustomerService {
 
   private isUpdatedSubject: Subject<Site> = new Subject<Site>()
   private isAddCustSubject: Subject<Customers[]> = new Subject<Customers[]>()
-  private customerSubject : Subject<Customers> = new Subject<Customers>()
+  private customerSubject = new Subject<Customers>()
+  private isUpdatesite = new Subject<Customers>()
   customer: Customers
   constructor(private _httpClient : HttpClient, private _route : Router) {  }
 
@@ -52,9 +53,32 @@ export class CustomerService {
     return this.isAddCustSubject.asObservable();
   }
 
+  GetaCustomerForUpdateSite()
+  {
+    return this.isUpdatesite.asObservable();
+  }
+
   GetACustomer()
   {
     return this.customerSubject.asObservable();
+  }
+
+  async GetOneforsiteCustomer(id: number)
+  {
+    return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
+      next:  (data: Customers) =>{
+        this.isUpdatesite.next(data)
+      }
+    })
+  }
+
+  GetOneCustomer(id: number)
+  {
+    return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
+      next: (data: Customers) =>{
+        this.customerSubject.next(data)
+      }
+    })
   }
 
   getAllCustomers()
@@ -67,14 +91,7 @@ export class CustomerService {
     return this._httpClient.get<Site>(environment.baseAdres+'customer/site/'+id)
   }
 
-  GetOneCustomer(id: number)
-  {
-    return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
-      next: (data: Customers) =>{
-        this.customerSubject.next(data)
-      }
-    })
-  }
+
 
   UpdateUser(client: Site)
   {
@@ -114,10 +131,8 @@ export class CustomerService {
 
   AddContactCreateSite(contact: ContactPerson)
   {
-    console.log(contact)
     return this._httpClient.post<number>(environment.baseAdres + 'customer/addContact/',contact).subscribe({
       next :(data: number)=>{
-        console.log(data)
       }
     })
   }

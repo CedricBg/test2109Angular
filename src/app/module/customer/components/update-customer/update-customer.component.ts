@@ -1,7 +1,8 @@
+import { NgSwitchDefault } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Form, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs';
+import { Subscription, distinctUntilChanged, first } from 'rxjs';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { CustomerService } from 'src/app/services/customer.service';
 
@@ -16,11 +17,11 @@ export class UpdateCustomerComponent implements OnInit {
 
   formCustomer : FormGroup
   customer!: Customers
+  private subscription: Subscription;
   constructor(private _builder: FormBuilder,private _custService: CustomerService, private _router  : Router
 ){
 
   }
-
   ngOnInit(): void {
     this._custService.GetACustomer().subscribe({
       next : (data : Customers)=>{
@@ -28,7 +29,6 @@ export class UpdateCustomerComponent implements OnInit {
         this.formulaire()
       }
     })
-
   }
 
   formulaire()
@@ -88,7 +88,6 @@ export class UpdateCustomerComponent implements OnInit {
     {
       console.log(this.formCustomer.value)
       this._custService.UpdateCustomer(this.formCustomer.value)
-
     }
   }
 
@@ -137,3 +136,5 @@ export class UpdateCustomerComponent implements OnInit {
   }
 
 }
+
+
