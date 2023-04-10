@@ -38,6 +38,7 @@ export class ListCustomerComponent implements OnInit {
     this._CustService.getAllCustomers().pipe(first()).subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
+
         this.getPageData()
       }
     })
@@ -45,18 +46,20 @@ export class ListCustomerComponent implements OnInit {
       this.siteSelected = newData
 
     })
+
     this.subscriptionUpdateCustomer = this._CustService.getAddCustomer().subscribe(newData =>{
       this.listCustomers = newData
-      this.listCustomers.sort(e=>e.customerId)
       this.getPageData()
     })
   }
 
   ngAfterViewInit() {
     this.paginator.page.subscribe(() => this.getPageData());
+
   }
 
   getPageData() {
+
     this.length =  this.listCustomers.length
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     const endIndex = startIndex + this.paginator.pageSize;

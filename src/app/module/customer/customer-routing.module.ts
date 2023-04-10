@@ -4,12 +4,14 @@ import { ListCustomerComponent } from './components/list-customer/list-customer.
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerComponent } from './customer.component';
+import { AddSiteComponent } from './components/add-site/add-site.component';
 
 const routes: Routes = [
   { path: '', component: CustomerComponent, children :[
     { path: 'listcustomer',component: ListCustomerComponent,children:[
       { path: 'addCustomer', component: AddCustomerComponent },
-      { path: 'UpdateCustomer', component: UpdateCustomerComponent}
+      { path: 'UpdateCustomer', component: UpdateCustomerComponent},
+      { path: 'addSite', component: AddSiteComponent}
     ]},
     { path: 'updateCustomer', component: UpdateCustomerComponent}]
   },

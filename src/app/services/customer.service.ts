@@ -87,7 +87,11 @@ export class CustomerService {
 
   UpdateCustomer(customer: Customers)
   {
-    return this._httpClient.put<Boolean>(environment.baseAdres +'customer/update', customer, this.JsonHeader())
+    return this._httpClient.put<Customers[]>(environment.baseAdres +'customer/', JSON.stringify(customer), this.JsonHeader()).subscribe({
+      next : (data: Customers[]) =>{
+        this.isAddCustSubject.next(data)
+      }
+    })
   }
 
   CreateCompany(customer: Customers){

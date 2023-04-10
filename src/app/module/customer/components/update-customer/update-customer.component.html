@@ -1,19 +1,16 @@
+<div class="container" *ngIf="customer != null ">
 
-
-<div *ngIf="customer != null ">
-  <mat-horizontal-stepper class="custom-stepper"  #stepper>
     <form [formGroup]="formCustomer" (ngSubmit)="Send(customer.customerId)">
-      <mat-step [stepControl]="formCustomer" >
       <mat-form-field class="input">
         <mat-label>Nom:</mat-label><input formControlName="nameCustomer" matInput>
       </mat-form-field>
       <div formGroupName="contact">
-        <p class="input"><u>Personne de contact:</u></p>
+        <h3 class="input"><u>Personne de contact:</u></h3>
         <mat-form-field class="input">
           <mat-label>Nom:</mat-label><input formControlName="lastName" matInput>
         </mat-form-field>
         <mat-form-field class="input">
-          <mat-label>Nom:</mat-label><input formControlName="firstName" matInput>
+          <mat-label>Prénom:</mat-label><input formControlName="firstName" matInput>
         </mat-form-field>
         <section class="mail">
         <div formArrayName="email">
@@ -26,7 +23,7 @@
             </span>
           </p>
           <span mat-icon-button (click)="AddEmail()">
-            <mat-icon >add</mat-icon> Ajoutez une adresse mail
+            <mat-icon >add</mat-icon> Ajoutez une adresse mail:
           </span>
         </div>
         <div formArrayName="phone">
@@ -46,24 +43,12 @@
         </div>
 
     </section>
-    <div>
+    <div class="checkbox">
       <mat-checkbox class="checkbox" formControlName="responsible">Responsble du site</mat-checkbox>
       <mat-checkbox class="checkbox" formControlName="emergencyContact">Contact en cas d'urgence</mat-checkbox>
       <mat-checkbox class="checkboxtClient" formControlName="nightContact">Contact de nuit</mat-checkbox>
     </div>
-    <div>
-      <button mat-button type="button" matStepperNext>Suivant</button>
     </div>
-    </div>
-  </mat-step>
-  <mat-step [stepControl]="formCustomer" >
-    <ng-template matStepLabel><span >Ajouter in site</span></ng-template>
-    <div>
-      <button mat-button type="button" matStepperPrevious>Retour</button>
-      <button mat-button type="button" matStepperNext>Suivant</button>
-    </div>
-  </mat-step>
-
+    <button class="button" mat-button>Modifier</button>
     </form>
-  </mat-horizontal-stepper>
 </div>

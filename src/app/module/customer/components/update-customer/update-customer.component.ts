@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Form, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -16,7 +16,7 @@ export class UpdateCustomerComponent implements OnInit {
 
   formCustomer : FormGroup
   customer!: Customers
-  constructor(private _builder: FormBuilder,private _custService: CustomerService
+  constructor(private _builder: FormBuilder,private _custService: CustomerService, private _router  : Router
 ){
 
   }
@@ -39,10 +39,10 @@ export class UpdateCustomerComponent implements OnInit {
       contact: this._builder.group({
         firstName: [this.customer.contact == null ? '':this.customer.contact.firstName ,Validators.required],
         lastName: [this.customer.contact == null ? '': this.customer.contact.lastName,Validators.required],
-        responsible: [this.customer.contact == null ? false: [this.customer.contact.responsible,Validators.required, Validators.minLength(5)]],
-        emergencyContact: [this.customer.contact == null ? false :this.customer.contact.emergencyContact ,Validators.required],
+        responsible:      [this.customer.contact == null ? false: this.customer.contact.responsible,[Validators.required, Validators.minLength(5)]],
+        emergencyContact: [this.customer.contact == null ? false : this.customer.contact.emergencyContact ,Validators.required],
         nightContact: [ this.customer.contact == null ? false: this.customer.contact.nightContact ,Validators.required],
-        contactId: [this.customer.contact == null ? '':this.customer.contact.contactId ],
+        contactId: [this.customer.contact == null ? 0:this.customer.contact.contactId ],
         email: this._builder.array([]),
         phone: this._builder.array([]),
       })
@@ -87,6 +87,8 @@ export class UpdateCustomerComponent implements OnInit {
     if(this.formCustomer.valid)
     {
       console.log(this.formCustomer.value)
+      this._custService.UpdateCustomer(this.formCustomer.value)
+
     }
   }
 
