@@ -11,7 +11,7 @@ import { InformationsService } from 'src/app/services/informations.service';
 import { Site } from 'src/app/models/customer/site.models';
 import { ContactPerson } from 'src/app/models/customer/ContactPerson.models';
 import { Route, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, first } from 'rxjs';
 
 @Component({
   selector: 'app-add-customer',
@@ -30,14 +30,14 @@ export class AddCustomerComponent implements OnInit {
   newContact: ContactPerson
   listLanguage: Language[] = []
   listCountrys: Countrys[] = []
-  siteCreated: Site = new Site()
+  siteCreated: Site
 
   constructor(private _builder: FormBuilder,private _Router : Router, private _custService : CustomerService, private _infoService: InformationsService, private _addressService: AddressService
    ) {}
 
   ngOnInit(): void {
     this.sendCompany()
-    this.SendSite()
+
 
     this._infoService.GetLanguages().subscribe({
       next: (data: Language[]) =>{
@@ -49,7 +49,6 @@ export class AddCustomerComponent implements OnInit {
         this.listCountrys = data
       }
     })
-
   }
 
   sendCompany()
@@ -76,6 +75,7 @@ export class AddCustomerComponent implements OnInit {
       }),
     })
     this.isLinear = true;
+    this.SendSite()
   }
 
   SendSite()
@@ -100,10 +100,14 @@ export class AddCustomerComponent implements OnInit {
   {
     if(this.formClientSite.valid)
     {
+
       this._infoService.getSectedCountry(this.listCountrys, this.formClientSite)
       this._infoService.getLanguages(this.listLanguage, this.formClientSite)
       this.siteCreated = this.formClientSite.value
+      this.siteCreated.customerIdCreate = this.formClientSite.value
       this.siteCreated.customerIdCreate = this.idClient
+      console.log(this.siteCreated)
+
       this._custService.CreateSite(this.siteCreated).subscribe({
         next: (data : number) =>{
           this.idSite = data
@@ -212,6 +216,12 @@ export class AddCustomerComponent implements OnInit {
     if(this.formClient.valid)
     {
       this._custService.CreateCompany(this.formClient.value)
+      this._custService.GetIdCustAdd().subscribe({
+        next : (data: number) =>{
+
+          this.idClient = data
+        }
+      })
     }
   }
 }

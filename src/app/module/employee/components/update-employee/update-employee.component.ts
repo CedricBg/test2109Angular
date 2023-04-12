@@ -3,13 +3,15 @@ import { InformationsService } from 'src/app/services/informations.service';
 import { Role } from 'src/app/models/Role.models';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Countrys } from 'src/app/models/countrys.models';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Employee } from 'src/app/models/employee.models';
 import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Observable } from 'rxjs';
+import { DialogConfig } from '@angular/cdk/dialog';
+import { AddloginComponent } from 'src/app/module/auth/components/addlogin/addlogin.component';
 
 @Component({
   selector: 'app-update-employee',
@@ -30,7 +32,7 @@ export class UpdateEmployeeComponent implements OnInit {
 
 
 
-  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _InfoService : InformationsService,private _AddressService : AddressService,
+  constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _InfoService : InformationsService, public dialog : MatDialog ,private _AddressService : AddressService,
     private dialogRef: MatDialogRef<UpdateEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) data: number
     ){
@@ -171,5 +173,21 @@ export class UpdateEmployeeComponent implements OnInit {
     this.formEmployee.value['id'] = this.SelectedEmployee.id
 
     return this._serviceEmployee.UpdateUser(this.formEmployee.value)
+  }
+  uploadFile(event: any)
+  {
+    const day = new Date()
+    const formData = new FormData();
+    formData.append('file',event.target.files[0],event.target.files[0].name+day.getTime())
+    this._serviceEmployee.UploadPoto(formData)
+  }
+
+  AddLogin(id: number)
+  {
+    let dialogRef = new MatDialogConfig;
+    dialogRef.height = '200px'
+    dialogRef.width = '400px'
+    dialogRef.data = id
+    const dialog = this.dialog.open(AddloginComponent,dialogRef);
   }
 }

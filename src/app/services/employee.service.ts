@@ -5,7 +5,7 @@ import { AddEmployeeComponent } from './../module/employee/components/add-employ
 import { Router } from '@angular/router';
 import { DetailedEmployee } from './../models/DetailedEmployee.models';
 import { environment } from './../../environments/environment';
-import { HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';;
+import { HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';;
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { Employee } from '../models/employee.models';
@@ -25,6 +25,16 @@ export class EmployeeService implements OnInit {
   private isUpdatedSubject: Subject<DetailedEmployee> = new Subject<DetailedEmployee>()
   private AllSubject: Subject<Employee[]> = new Subject<Employee[]>()
 
+  private JsonHeader()
+  {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/file'
+      })
+    };
+    return httpOptions
+  }
+
   getUpdateData()
   {
     return this.isUpdatedSubject.asObservable();
@@ -38,6 +48,18 @@ export class EmployeeService implements OnInit {
     this._httpClient.post<string>(environment.baseAdres+ 'Employee/insert', employee).subscribe(value =>{
       this.get()
     })
+  }
+
+  UploadPoto(file: FormData)
+  {
+    console.log(file)
+    this._httpClient.post<string>(environment.baseAdres+ 'Employee/uploadFile', file).subscribe(
+      {
+        next : (data: string)=> {
+          console.log(data)
+        }
+      }
+    )
   }
 
   get()

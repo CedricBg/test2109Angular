@@ -1,1 +1,14 @@
-<p>addlogin works!</p>
+<section>
+  <h2>Entrez ici le mot de passe et le login</h2>
+  <form [formGroup]="formLogin">
+    <mat-form-field>
+      <mat-label>login</mat-label>
+      <input formControlName="login" matInput>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mot de passe</mat-label>
+      <input formControlName="password" matInput>
+    </mat-form-field>
+    <button mat-raised-button [disabled]="!formLogin.valid" color="primary" (click)="sendform()" >Send</button>
+  </form>
+</section>

@@ -111,7 +111,13 @@
     </div>
     </form>
 
+      <div>
+        <input type="file" (change)="uploadFile($event)" >
+      </div>
 
+      <section>
+        <button type="button" (click)="AddLogin(SelectedEmployee.id)" mat-raised-button color="primary">Ajouter les accès</button>
+      </section>
 </mat-card>
 
 </div>

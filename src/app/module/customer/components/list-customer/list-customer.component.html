@@ -31,10 +31,10 @@
             </td>
             <td>
               <div>
-                <mat-form-field appearance="fill">
+                <mat-form-field >
                   <mat-label>--Sélectionnez un site--</mat-label>
                   <mat-select [(value)]="selectedSiteName">
-                    <mat-option *ngFor="let elt of client.site"   [value]="elt.name" >
+                    <mat-option *ngFor="let elt of client.site"  [value]="elt.name" >
                       {{elt.name}}
                     </mat-option>
                   </mat-select>

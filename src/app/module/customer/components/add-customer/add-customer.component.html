@@ -136,7 +136,7 @@
   <mat-step  [stepControl]="formContactPerson">
     <form *ngIf="idSite" [formGroup]="formContactPerson">
       <div formGroupName="ContactPerson">
-      <ng-template matStepLabel><span *ngIf="idClient != 0 && idSite != 0">Ajout d'un contact:</span></ng-template>
+      <ng-template matStepLabel><span *ngIf="idSite != 0">Ajout d'un contact:</span></ng-template>
       <span class="inputClient">
         <mat-form-field appearance="fill">
           <mat-label>Prénom:</mat-label>

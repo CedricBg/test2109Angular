@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   CloseDialogBox(): void {
-    this.dialogRef.close();
+  this.dialogRef.close();
   }
 
   initform()

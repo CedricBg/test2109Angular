@@ -19,7 +19,8 @@ export class CustomerService {
   private isUpdatedSubject: Subject<Site> = new Subject<Site>()
   private isAddCustSubject: Subject<Customers[]> = new Subject<Customers[]>()
   private customerSubject = new Subject<Customers>()
-  private isUpdatesite = new Subject<Customers>()
+  private isUpdatesiteSubject = new Subject<Customers>()
+  private isAddCustomerSubject = new Subject<number>()
   customer: Customers
   constructor(private _httpClient : HttpClient, private _route : Router) {  }
 
@@ -55,7 +56,7 @@ export class CustomerService {
 
   GetaCustomerForUpdateSite()
   {
-    return this.isUpdatesite.asObservable();
+    return this.isUpdatesiteSubject.asObservable();
   }
 
   GetACustomer()
@@ -63,23 +64,16 @@ export class CustomerService {
     return this.customerSubject.asObservable();
   }
 
-  async GetOneforsiteCustomer(id: number)
+  GetOneforsiteCustomer(id: number)
   {
     return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
       next:  (data: Customers) =>{
-        this.isUpdatesite.next(data)
+        this.isUpdatesiteSubject.next(data)
       }
     })
   }
 
-  GetOneCustomer(id: number)
-  {
-    return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
-      next: (data: Customers) =>{
-        this.customerSubject.next(data)
-      }
-    })
-  }
+
 
   getAllCustomers()
   {
@@ -91,7 +85,19 @@ export class CustomerService {
     return this._httpClient.get<Site>(environment.baseAdres+'customer/site/'+id)
   }
 
+  GetIdCustAdd()
+  {
+    return this.isAddCustomerSubject.asObservable()
+  }
 
+  GetOneCustomer(id: number)
+  {
+    return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
+      next: (data: Customers) =>{
+        this.customerSubject.next(data)
+      }
+    })
+  }
 
   UpdateUser(client: Site)
   {
@@ -104,8 +110,9 @@ export class CustomerService {
 
   UpdateCustomer(customer: Customers)
   {
-    return this._httpClient.put<Customers[]>(environment.baseAdres +'customer/', JSON.stringify(customer), this.JsonHeader()).subscribe({
+    this._httpClient.put<Customers[]>(environment.baseAdres +'customer/', JSON.stringify(customer), this.JsonHeader()).subscribe({
       next : (data: Customers[]) =>{
+        console.log(data)
         this.isAddCustSubject.next(data)
       }
     })
@@ -113,7 +120,8 @@ export class CustomerService {
 
   CreateCompany(customer: Customers){
     return this._httpClient.post<number>(environment.baseAdres +'customer/addCustomer/', customer, this.JsonHeader()).subscribe({
-      next: ()=>{
+      next: (data: number)=>{
+        this.isAddCustomerSubject.next(data)
         this.getAllCustomers().subscribe({
           next : (data: Customers[])=>
           {
