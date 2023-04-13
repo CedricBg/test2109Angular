@@ -13,9 +13,8 @@
         <button mat-button type="button" (click)="FormAddUser()"><mat-icon class="icons">person_add</mat-icon></button>
       </div>
       <hr>
-      <table>
+      <table *ngIf="pagedData != null">
         <thead>
-
           <tr>
             <th>Nom</th>
             <th>client(s)</th>
@@ -30,7 +29,7 @@
               <button  mat-button (click)="UpdateCustomer(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
             </td>
             <td>
-              <div>
+              <div *ngIf="client.site != null">
                 <mat-form-field >
                   <mat-label>--Sélectionnez un site--</mat-label>
                   <mat-select [(value)]="selectedSiteName">
@@ -44,7 +43,7 @@
             <td>
               <button mat-button (click)="AddSite(client.customerId)" type="button"><mat-icon  class="icons1">add</mat-icon></button>
               <button mat-button (click)="GetOne(client.customerId)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
-              <button  mat-button (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
+              <button mat-button (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
               <button mat-button type="button"><mat-icon class="icons3">delete</mat-icon></button>
             </td>
           </tr>

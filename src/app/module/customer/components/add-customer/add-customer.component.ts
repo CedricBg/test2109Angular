@@ -56,15 +56,15 @@ export class AddCustomerComponent implements OnInit {
     this.formClient = this._builder.group({
       nameCustomer: ['', [Validators.required, Validators.minLength(3)]],
       contact: this._builder.group({
-        FirstName: ['', Validators.required],
-        LastName: ['', Validators.required],
+        FirstName: ['', [Validators.required, Validators.minLength(8)]],
+        LastName: ['',  [Validators.required, Validators.minLength(8)]],
         Responsible: [false],
         EmergencyContact: [false],
         NightContact: [false],
         SiteId:[this.idSite],
         email: this._builder.array([
           this._builder.group({
-            emailAddress: ['', Validators.required],
+            emailAddress: ['', [Validators.required,Validators.email]],
           })
         ]),
         phone: this._builder.array([
@@ -95,12 +95,10 @@ export class AddCustomerComponent implements OnInit {
       }),
     })
   }
-
   CreateSite()
   {
     if(this.formClientSite.valid)
     {
-
       this._infoService.getSectedCountry(this.listCountrys, this.formClientSite)
       this._infoService.getLanguages(this.listLanguage, this.formClientSite)
       this.siteCreated = this.formClientSite.value
@@ -111,7 +109,10 @@ export class AddCustomerComponent implements OnInit {
       this._custService.CreateSite(this.siteCreated).subscribe({
         next: (data : number) =>{
           this.idSite = data
+          //Appel formulaire
           this.AddContactPersonSite()
+          //creation de la nouvelle liste customers pour mise a jour de vue
+          this._custService.getAllCustomersOnCreateSite()
         }
       })
     }
@@ -129,12 +130,12 @@ export class AddCustomerComponent implements OnInit {
         SiteId:[this.idSite],
         Email: this._builder.array([
           this._builder.group({
-            emailAddress: ['', Validators.required],
+            emailAddress: ['', [Validators.required,Validators.email]],
           })
         ]),
         Phone: this._builder.array([
           this._builder.group({
-            number: ['',Validators.required],
+            number: ['', [Validators.required,Validators.minLength(10)]]
           })
         ]),
       })
@@ -167,28 +168,28 @@ export class AddCustomerComponent implements OnInit {
 
   AddEmail() {
     const email = this._builder.group({
-      emailAddress: ['', Validators.required]
+      emailAddress: ['', [Validators.required,Validators.email]],
     });
     this.Email.push(email);
   }
 
   AddPhone() {
     const phone = this._builder.group({
-      number: ['', Validators.required]
+      number: ['', [Validators.required,Validators.minLength(10)]]
     });
     this.Phone.push(phone);
   }
 
   AddEmails() {
     const email = this._builder.group({
-      emailAddress: ['', Validators.required]
+      emailAddress: ['', [Validators.required,Validators.email]],
     });
     this.email.push(email);
   }
 
   AddPhones() {
     const phone = this._builder.group({
-      number: ['', Validators.required]
+      number: ['', [Validators.required,Validators.minLength(10)]]
     });
     this.phone.push(phone);
   }
@@ -218,7 +219,6 @@ export class AddCustomerComponent implements OnInit {
       this._custService.CreateCompany(this.formClient.value)
       this._custService.GetIdCustAdd().subscribe({
         next : (data: number) =>{
-
           this.idClient = data
         }
       })

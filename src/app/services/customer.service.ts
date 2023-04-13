@@ -18,6 +18,8 @@ export class CustomerService {
 
   private isUpdatedSubject: Subject<Site> = new Subject<Site>()
   private isAddCustSubject: Subject<Customers[]> = new Subject<Customers[]>()
+  private isUpdateCustSubject: Subject<Customers[]> = new Subject<Customers[]>()
+  private isCreatesiteSubject: Subject<Customers[]> = new Subject<Customers[]>()
   private customerSubject = new Subject<Customers>()
   private isUpdatesiteSubject = new Subject<Customers>()
   private isAddCustomerSubject = new Subject<number>()
@@ -54,6 +56,11 @@ export class CustomerService {
     return this.isAddCustSubject.asObservable();
   }
 
+  GetUpdateCustomer()
+  {
+    return this.isUpdateCustSubject.asObservable()
+  }
+
   GetaCustomerForUpdateSite()
   {
     return this.isUpdatesiteSubject.asObservable();
@@ -62,6 +69,11 @@ export class CustomerService {
   GetACustomer()
   {
     return this.customerSubject.asObservable();
+  }
+
+  GetCustomersList()
+  {
+    return this.isCreatesiteSubject.asObservable()
   }
 
   GetOneforsiteCustomer(id: number)
@@ -73,11 +85,19 @@ export class CustomerService {
     })
   }
 
-
-
   getAllCustomers()
   {
     return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
+  }
+
+  getAllCustomersOnCreateSite()
+  {
+    return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/').subscribe({
+      next: (data: Customers[])=>{
+        console.log(data)
+        this.isCreatesiteSubject.next(data)
+      }
+    })
   }
 
   GetOne(id: number): Observable<Site>
@@ -112,8 +132,7 @@ export class CustomerService {
   {
     this._httpClient.put<Customers[]>(environment.baseAdres +'customer/', JSON.stringify(customer), this.JsonHeader()).subscribe({
       next : (data: Customers[]) =>{
-        console.log(data)
-        this.isAddCustSubject.next(data)
+        this.isUpdateCustSubject.next(data)
       }
     })
   }
@@ -139,8 +158,9 @@ export class CustomerService {
 
   AddContactCreateSite(contact: ContactPerson)
   {
-    return this._httpClient.post<number>(environment.baseAdres + 'customer/addContact/',contact).subscribe({
-      next :(data: number)=>{
+    return this._httpClient.post<Customers[]>(environment.baseAdres + 'customer/addContact/',contact).subscribe({
+      next :(data: Customers[])=>{
+        this.isAddCustSubject.next(data);
       }
     })
   }

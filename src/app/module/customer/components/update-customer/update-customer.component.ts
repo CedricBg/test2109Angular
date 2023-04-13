@@ -86,8 +86,8 @@ export class UpdateCustomerComponent implements OnInit {
     this.formCustomer.get('customerId').patchValue(id)
     if(this.formCustomer.valid)
     {
-      console.log(this.formCustomer.value)
       this._custService.UpdateCustomer(this.formCustomer.value)
+      this._router.navigateByUrl('OPS/customer/listcustomer')
     }
   }
 

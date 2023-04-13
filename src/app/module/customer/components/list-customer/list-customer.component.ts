@@ -26,8 +26,10 @@ export class ListCustomerComponent implements OnInit {
   select : boolean = false
   subscriptionUpdate: Subscription
   subscriptionUpdateCustomer: Subscription
+  subscriptionAddCustomer: Subscription
+  subscriptionAddSite: Subscription
+
   pagedData!: any[]
-  private customers$ = new Observable<Customers[]>()
   length: number
   pageSize = 10;
   customer: Customers
@@ -41,42 +43,72 @@ export class ListCustomerComponent implements OnInit {
         this.getPageData()
       }
     })
+
+    //Retour Update Site
     this.subscriptionUpdate = this._CustService.getUpdateData().subscribe(newData => {
       this.siteSelected = newData
-
+      this._CustService.getAllCustomers().subscribe(data=>{
+        this.listCustomers = data
+        this.getPageData()
+        }
+      )
     })
 
-    this.subscriptionUpdateCustomer = this._CustService.getAddCustomer().subscribe(newData =>{
+    //Abonnement à la nouvelle liste de customers sur la add csutomer apres création d'un customer
+    this.subscriptionAddCustomer = this._CustService.getAddCustomer().subscribe({
+      next : (data: Customers[])=>{
+        this.listCustomers = data
+        this.getPageData()
+      }
+    })
+
+    //Retour update Customer
+    this.subscriptionUpdateCustomer = this._CustService.GetUpdateCustomer().subscribe(newData =>{
       this.listCustomers = newData
       this.getPageData()
     })
+
+    //Abonnement à la nouvelle liste customers pour mise a jour de la vue apres création d'un site dans AddCustumer.ts
+    this.subscriptionAddSite = this._CustService.GetCustomersList().subscribe({
+      next : (data: Customers[])=>{
+        this.listCustomers = data
+        this.getPageData()
+      }
+    })
   }
 
+  ngOnDestroy(){
+    this.subscriptionUpdate.unsubscribe()
+    this.subscriptionAddCustomer.unsubscribe()
+    this.subscriptionUpdateCustomer.unsubscribe()
+    this.subscriptionAddSite.unsubscribe()
+  }
   ngAfterViewInit() {
     this.paginator.page.subscribe(() => this.getPageData());
-
   }
-
-  getPageData() {
-
+  //gestion du pager
+   getPageData() {
     this.length =  this.listCustomers.length
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     const endIndex = startIndex + this.paginator.pageSize;
-    this.pagedData = this.listCustomers.slice(startIndex, endIndex);
+    this.pagedData =  this.listCustomers.slice(startIndex, endIndex);
   }
 
   GetSit(id: number): number
   {
     const client = this.listCustomers.find(c=>c.customerId == id)
+    console.log(client)
     const site =  client.site.find(c=>c.name == this.selectedSiteName)
     return site.siteId
   }
 
   GetOne(id: number)
   {
-    if(this.selectedSiteName)
+    console.log(this.selectedSiteName)
+    if(this.selectedSiteName != undefined)
     {
       const idsite =  this.GetSit(id)
+      //pour la gestion de la vue et savoir quoi afficher à mettre a null pour chaque nouveau composant a afficher
       this.select = true
       this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
@@ -85,29 +117,31 @@ export class ListCustomerComponent implements OnInit {
       })
     }
   }
-
 
   UpdateOne(id: number)
   {
-    if(this.selectedSiteName)
+    //selectedSiteName est mis a jour par séléection dans le html
+    if(this.selectedSiteName != undefined)
     {
       const idsite =  this.GetSit(id)
       this.select = true
       this._CustService.GetOne(idsite).subscribe({
-        next: (data: Site)=>{
+        next: (data: Site)=>
+        {
           this.siteSelected =  data
-          if(this.selectedSiteName)
-            {
-              const diallogConfig =  new MatDialogConfig;
-              diallogConfig.data =  this.siteSelected
-              diallogConfig.disableClose = true;
-              diallogConfig.restoreFocus = true;
-              const dialogRef = this.dialog.open(UpdateSiteComponent,diallogConfig);
-            }
+          if(this.siteSelected)
+          {
+            const diallogConfig =  new MatDialogConfig;
+            diallogConfig.data =  this.siteSelected
+            diallogConfig.disableClose = true;
+            diallogConfig.restoreFocus = true;
+            const dialogRef = this.dialog.open(UpdateSiteComponent,diallogConfig);
+          }
         }
       })
     }
   }
+
   ngModelChange()
   {
     if(this.nameCustomer == "")
@@ -123,7 +157,7 @@ export class ListCustomerComponent implements OnInit {
 
   AddSite(id: number)
   {
-    //Iffichage permet de précisé que l'on va remplacé les donnèes affichées
+    //Affichage permet de précisé que l'on va remplacé les donnèes affichées
     this.select = false
     this.siteSelected = null
     //pour l'observable vers addSitepour lui passer le client pour le nouveau site
@@ -142,15 +176,15 @@ export class ListCustomerComponent implements OnInit {
   {
     this._CustService.Delete(id).subscribe({
       next : (data: string)=>{
-        const body = data;
-
+        const body = data
+        this._CustService.getAllCustomers().subscribe(data=>{
+          this.listCustomers = data
+          this.getPageData()
+          }
+        )
       }
     })
-    this.subscriptionUpdateCustomer = this._CustService.getAddCustomer().subscribe(newData =>{
-      this.listCustomers = newData
-      this.listCustomers.sort(e=>e.customerId)
-      this.getPageData()
-    })
+
   }
   UpdateCustomer(id: number)
   {
@@ -158,5 +192,11 @@ export class ListCustomerComponent implements OnInit {
     this.siteSelected = null
         this._CustService.GetOneCustomer(id)
         this._Router.navigate(['OPS/customer/listcustomer/UpdateCustomer'])
-  }
+
+      }
+
 }
+function ngOnDestroy() {
+  throw new Error('Function not implemented.');
+}
+
