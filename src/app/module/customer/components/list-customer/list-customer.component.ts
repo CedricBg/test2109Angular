@@ -31,7 +31,6 @@ export class ListCustomerComponent implements OnInit {
 
   pagedData!: any[]
   length: number
-  pageSize = 10;
   customer: Customers
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef) { }
@@ -96,18 +95,26 @@ export class ListCustomerComponent implements OnInit {
 
   GetSit(id: number): number
   {
-    const client = this.listCustomers.find(c=>c.customerId == id)
-    console.log(client)
-    const site =  client.site.find(c=>c.name == this.selectedSiteName)
-    return site.siteId
+    try
+    {
+      const client = this.listCustomers.find(c=>c.customerId == id)
+      const site =  client.site.find(c=>c.name == this.selectedSiteName)
+      return site.siteId
+    }
+    catch
+    {
+      return 0
+    }
+
   }
 
   GetOne(id: number)
   {
-    console.log(this.selectedSiteName)
     if(this.selectedSiteName != undefined)
     {
-      const idsite =  this.GetSit(id)
+      const idsite: number =  this.GetSit(id)
+      if(idsite != 0)
+      {
       //pour la gestion de la vue et savoir quoi afficher à mettre a null pour chaque nouveau composant a afficher
       this.select = true
       this._CustService.GetOne(idsite).subscribe({
@@ -116,16 +123,19 @@ export class ListCustomerComponent implements OnInit {
         }
       })
     }
+    }
   }
 
   UpdateOne(id: number)
   {
-    //selectedSiteName est mis a jour par séléection dans le html
+    //selectedSiteName est mis a jour par sélection dans le html
     if(this.selectedSiteName != undefined)
     {
-      const idsite =  this.GetSit(id)
-      this.select = true
-      this._CustService.GetOne(idsite).subscribe({
+      const idsite: number =  this.GetSit(id)
+      if(idsite != 0)
+      {
+        this.select = true
+        this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>
         {
           this.siteSelected =  data
@@ -139,7 +149,12 @@ export class ListCustomerComponent implements OnInit {
           }
         }
       })
+      }
+      else{
+        return 0
+      }
     }
+    return 0
   }
 
   ngModelChange()
@@ -163,6 +178,18 @@ export class ListCustomerComponent implements OnInit {
     //pour l'observable vers addSitepour lui passer le client pour le nouveau site
     this._CustService.GetOneforsiteCustomer(id)
     this._Router.navigate(['OPS/customer/listcustomer/addSite'])
+  }
+
+  DeleteSite(id: number)
+  {
+    const site = this.GetSit(id)
+    if(site != 0){
+      this._CustService.DeleteSite(site).subscribe({
+        next: (data: string)=>{
+          console.log(data)
+        }
+      })
+    }
   }
 
   FormAddUser()

@@ -1,32 +1,28 @@
-<div class="contentList">
-
-  <div class="search">
-    <mat-form-field>
-      <mat-label class="matLabel">Recherche<mat-icon class="icons2">search</mat-icon></mat-label>
-      <input  type="text" name="nameCustomer" [(ngModel)]="nameCustomer" (ngModelChange)="ngModelChange()"  placeholder="Nom du client" matInput >
-    </mat-form-field>
-  </div>
-  <div class ="cards">
-    <div  class="employees">
-
+<div class ="cards">
+  <div  class="employees">
+    <section iv class="divTable">
       <div class="AddPerson">
-        <button mat-button type="button" (click)="FormAddUser()"><mat-icon class="icons">person_add</mat-icon></button>
+        <mat-form-field>
+          <mat-label class="matLabel">Recherche<mat-icon class="icons2">search</mat-icon></mat-label>
+          <input  type="text" name="nameCustomer" [(ngModel)]="nameCustomer" (ngModelChange)="ngModelChange()"  placeholder="Nom du client" matInput >
+        </mat-form-field>
+          <button mat-button type="button" (click)="FormAddUser()"><mat-icon class="icons">person_add</mat-icon> Ajouter un client</button>
       </div>
-      <hr>
       <table *ngIf="pagedData != null">
         <thead>
           <tr>
             <th>Nom</th>
             <th>client(s)</th>
-            <th>Site(s)</th>
+            <th>Site a modifier</th>
             <th>Actions par site</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let client of pagedData">
-            <td><button mat-button  (click)="Delete(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button><a><u>{{client.nameCustomer| titlecase }}</u></a></td>
+            <td><a><u>{{client.nameCustomer| titlecase }}</u></a></td>
             <td>
-              <button  mat-button (click)="UpdateCustomer(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
+              <button class="buttonIcons"  (click)="Delete(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
+              <button class="buttonIcons" (click)="UpdateCustomer(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
             </td>
             <td>
               <div *ngIf="client.site != null">
@@ -41,30 +37,27 @@
               </div>
             </td>
             <td>
-              <button mat-button (click)="AddSite(client.customerId)" type="button"><mat-icon  class="icons1">add</mat-icon></button>
-              <button mat-button (click)="GetOne(client.customerId)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
-              <button mat-button (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
-              <button mat-button type="button"><mat-icon class="icons3">delete</mat-icon></button>
+              <button class="buttonIcons" (click)="AddSite(client.customerId)" type="button"><mat-icon  class="icons1">add</mat-icon></button>
+              <button  class="buttonIcons" (click)="GetOne(client.customerId)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
+              <button class="buttonIcons" (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
+              <button class="buttonIcons" (click)="DeleteSite(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
             </td>
           </tr>
         </tbody>
       </table>
-
-      <div>
-        <mat-paginator class="paginator" #paginator [pageSize]="4" [length]="length"></mat-paginator>
-        </div>
-    </div>
-
-    <div class="rep" *ngIf="select == false && siteSelected == null ">
-      <div class="cards1">
-        <router-outlet></router-outlet>
+      <div class="paginator">
+        <mat-paginator class="paginator" #paginator [pageSize]="8" [length]="length"></mat-paginator>
       </div>
-    </div>
-
-    <div class="rep" *ngIf="select == true && siteSelected != null ">
-      <div class="cards2">
-
-        <h1>{{siteSelected.name}}</h1>
+    </section>
+  </div>
+  <div class="rep" *ngIf="select == false && siteSelected == null ">
+    <section iv class="cards1">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+  <div class="rep" *ngIf="select == true && siteSelected != null ">
+    <div class="cards2">
+      <h3>Site : {{siteSelected.name}}</h3>
         <div class="contcards2">
           <div class="detailsCard2">
             <p class="email" *ngIf="siteSelected.language != null">Langue de contact: <b>{{siteSelected.language.name}} </b></p>
@@ -76,59 +69,49 @@
             <p> Nr° de Tva: {{siteSelected.vatNumber}}</p>
           </div>
           <div class="detailsCard2">
-
           </div>
-
           <div class="detailsCard2">
-
-            <p *ngIf="siteSelected.contactSite.length != 0" class="email"></p>
+            <p *ngIf="siteSelected.contactSite.length != 0" class="email">
+            </p>
             <div class="email" *ngFor="let elt of siteSelected.contactSite; let i = index">
               <div *ngIf="!elt.emergencyContact && !elt.nightContact">
                 <p>Contact(s): </p>
-              <p>{{elt.firstName}} {{elt.lastName}}</p>
-
-              <p *ngIf="elt.email.length >0"  class="email">Email: </p>
-              <p *ngFor="let elt1 of elt.email">
-                <i class="fas fa-phone"></i>{{elt1.emailAddress}}
-              </p>
-              <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
-                 <p *ngFor="let elt1 of elt.phone">
+                <p>{{elt.firstName}} {{elt.lastName}}</p>
+                <p *ngIf="elt.email.length >0"  class="email">Email: </p>
+                <p *ngFor="let elt1 of elt.email">
+                  <i class="fas fa-phone"></i>{{elt1.emailAddress}}
+                </p>
+                <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
+                <p *ngFor="let elt1 of elt.phone">
                   <i class="fas fa-phone"></i>{{elt1.number}}
-                 </p>
-                 ------------------------------------------
+                </p>
               </div>
-
               <div *ngIf="elt.emergencyContact">
                 <p>Contact en cas d'urgence: </p>
               <p>{{elt.firstName}} {{elt.lastName}}</p>
-
               <p *ngIf="elt.email.length >0"  class="email">Email: </p>
               <p *ngFor="let elt1 of elt.email">
                 <i class="fas fa-phone"></i>{{elt1.emailAddress}}
               </p>
               <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
-                 <p *ngFor="let elt1 of elt.phone">
-                  <i class="fas fa-phone"></i>{{elt1.number}}
-                 </p>
-                 ------------------------------------------
-              </div>
-              <div *ngIf="elt.nightContact">
-                <p>Contact de nuit: </p>
+              <p *ngFor="let elt1 of elt.phone">
+                <i class="fas fa-phone"></i>{{elt1.number}}
+              </p>
+            </div>
+            <div *ngIf="elt.nightContact">
+              <p>Contact de nuit: </p>
               <p>{{elt.firstName}} {{elt.lastName}}</p>
-
               <p *ngIf="elt.email.length >0"  class="email">Email: </p>
               <p *ngFor="let elt1 of elt.email">
                 <i class="fas fa-phone"></i>{{elt1.emailAddress}}
               </p>
               <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
-                 <p *ngFor="let elt1 of elt.phone">
-                  <i class="fas fa-phone"></i>{{elt1.number}}
-                 </p>
-                 ------------------------------------------
-              </div>
+              <p *ngFor="let elt1 of elt.phone">
+                <i class="fas fa-phone"></i>{{elt1.number}}
+              </p>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
