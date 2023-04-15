@@ -1,6 +1,6 @@
 <div class ="cards">
   <div  class="employees">
-    <section iv class="divTable">
+    <section class="divTable">
       <div class="AddPerson">
         <mat-form-field>
           <mat-label class="matLabel">Recherche<mat-icon class="icons2">search</mat-icon></mat-label>
@@ -12,7 +12,7 @@
         <thead>
           <tr>
             <th>Nom</th>
-            <th>client(s)</th>
+            <th>client</th>
             <th>Site a modifier</th>
             <th>Actions par site</th>
           </tr>
@@ -51,7 +51,7 @@
     </section>
   </div>
   <div class="rep" *ngIf="select == false && siteSelected == null ">
-    <section iv class="cards1">
+    <section class="cards1">
       <router-outlet></router-outlet>
     </section>
   </div>

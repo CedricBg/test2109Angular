@@ -20,4 +20,5 @@ export class OpsComponent implements OnInit {
   {
     this._Router.navigateByUrl('OPS/customer/listcustomer')
   }
+
 }
