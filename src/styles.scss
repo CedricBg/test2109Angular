@@ -35,13 +35,19 @@ $test2109-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  margin: 0;
+  margin: 0;
+  font-family: 'DM Serif Display', serif;
+  background-color: #FBFBFB;
+}
+
 
 .content
 {
 height: 94vh;
 }
+
 footer{
   display: flex;
   justify-content: center;

@@ -30,9 +30,9 @@ td{
 }
 
 .employees{
-  background-color: #f2f2f2;
+  background-color: white;
+  box-shadow: 0px 1px 1px 2px #f5f5ea;
   border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 10px;
 }
 .icons1{
@@ -53,6 +53,11 @@ td{
 .AddPerson a{
   width: 100%;
 }
+AddPerson button:hover
+{
+  background-color:black;
+}
+
 .AddPerson button{
   width: 100%;
 }
@@ -62,15 +67,15 @@ td{
 }
 
 .AddPerson .icons:hover{
-  color: #17A2B8;
+  color: #f5f5ea;
 }
 
 .card {
   margin-left: 2vw;
   width:50vw;
-  background-color: #f2f2f2;
+  background-color: white;
   border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 1px 2px #f5f5ea;
   padding: 20px;
   display: flex;
   flex-direction: row;
@@ -83,9 +88,9 @@ td{
   height:50vh;
   margin-left: 2vw;
   width:50vw;
-  background-color: #f2f2f2;
+  background-color: white;
   border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 1px 2px #f5f5ea;
   padding: 20px;
   flex-direction: row;
   align-items: center;
@@ -103,9 +108,9 @@ display: flex;
   height:50vh;
   margin-left: 2vw;
   width:50vw;
-  background-color: #f2f2f2;
+  background-color: white;
   border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px 1px #f5f5ea;
   padding: 20px;
   flex-direction: row;
   align-items: center;
@@ -113,6 +118,15 @@ display: flex;
 }
 .paginator
 {
-  background-color: #f2f2f2;
+  background-color: white;
 }
 
+.matLabel
+{
+  display: flex;
+  justify-content:left;
+}
+
+.icons2{
+padding-left:55%;
+}
