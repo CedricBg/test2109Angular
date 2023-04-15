@@ -2,7 +2,7 @@ import { Language } from './../../../../models/language.models';
 import { InformationsService } from 'src/app/services/informations.service';
 import { Role } from 'src/app/models/Role.models';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Countrys } from 'src/app/models/countrys.models';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
@@ -12,6 +12,13 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { Observable } from 'rxjs';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { AddloginComponent } from 'src/app/module/auth/components/addlogin/addlogin.component';
+import * as dayjs from 'dayjs';
+import * as timezone from 'dayjs/plugin/timezone';
+import * as utc from 'dayjs/plugin/utc';
+
+
+
+
 
 @Component({
   selector: 'app-update-employee',
@@ -39,6 +46,8 @@ export class UpdateEmployeeComponent implements OnInit {
       this.idEmployee = data
     }
   ngOnInit(): void {
+    dayjs.extend(utc);
+    dayjs.extend(timezone)
     this.GetLanguage()
     this.GetListCountrys()
     this.GetRoles()
@@ -49,10 +58,11 @@ export class UpdateEmployeeComponent implements OnInit {
   }
    SendInformationForm()
   {
+    const utcDate = dayjs.utc(this.SelectedEmployee.birthDate);
     this.formEmployee =  this._builder.group({
       firstName: [this.SelectedEmployee.firstName,Validators.required],
       surName: [this.SelectedEmployee.surName,Validators.required],
-      birthDate: [this.SelectedEmployee.birthDate,Validators.required],
+      birthDate: [ utcDate.utc().local().toISOString().substring(0,10),Validators.required],
       securityCard: [this.SelectedEmployee.securityCard],
       employeeCardNumber: [this.SelectedEmployee.employeeCardNumber],
       registreNational: [this.SelectedEmployee.registreNational,Validators.required],
@@ -87,6 +97,7 @@ export class UpdateEmployeeComponent implements OnInit {
       newcontrol.patchValue(e)
       this.phone.push(newcontrol)
     })
+
   }
 
   GetLanguage()
@@ -124,6 +135,8 @@ export class UpdateEmployeeComponent implements OnInit {
       }
     })
   }
+
+
   get email(): FormArray
   {
     return this.formEmployee.get("email") as FormArray
@@ -167,6 +180,7 @@ export class UpdateEmployeeComponent implements OnInit {
   }
   updateUser()
   {
+    console.log(this.formEmployee.value)
     this._InfoService.getSelectedRole(this.listRoles, this.formEmployee)
     this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
     this._InfoService.getLanguages(this.listLanguages, this.formEmployee)
