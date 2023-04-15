@@ -9,8 +9,9 @@ import { AddressService } from './../../../../services/address.service';
 import { Countrys } from './../../../../models/countrys.models';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl, AbstractControl } from '@angular/forms';
 import { Component,Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Customers } from 'src/app/models/customer/customers.models';
+import { AddPersonComponent } from '../add-person/add-person.component';
 
 @Component({
   selector: 'app-update-site',
@@ -29,7 +30,7 @@ export class UpdateSiteComponent implements OnInit {
   index: number = 0
   updatedCustomer: Customers
 
-  constructor(private _builder : FormBuilder, private _AddressService: AddressService,private _infoService: InformationsService,private _serviceEmployee: EmployeeService,private _customerService: CustomerService,
+  constructor(public dialog: MatDialog, private _builder : FormBuilder, private _AddressService: AddressService,private _infoService: InformationsService,private _serviceEmployee: EmployeeService,private _customerService: CustomerService,
     private dialogRef: MatDialogRef<UpdateSiteComponent>,
     @Inject(MAT_DIALOG_DATA) data: Site
   ){
@@ -195,6 +196,18 @@ private createContactForm(contact: ContactPerson): FormGroup {
 
   CloseDialogBox(): void {
     this.dialogRef.close();
+  }
+
+
+
+  AddPerson(id: number)
+  {
+    const diallogConfig =  new MatDialogConfig;
+    diallogConfig.data = id;
+    diallogConfig.height = '350px';
+    diallogConfig.width = '600px';
+    diallogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(AddPersonComponent,diallogConfig);
   }
 }
 

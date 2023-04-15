@@ -1,0 +1,59 @@
+<button (click)="CloseDialogBox()" mat-raised-button  color="primary">Fermer</button>
+<form *ngIf="idSite" [formGroup]="formContactPerson">
+  <div formGroupName="ContactPerson">
+  <ng-template matStepLabel><span *ngIf="idSite != 0">Ajout d'un contact:</span></ng-template>
+  <span class="inputClient">
+    <mat-form-field appearance="fill">
+      <mat-label>Prénom:</mat-label>
+      <input  matInput formControlName="FirstName">
+    </mat-form-field>
+  </span>
+  <span class="inputClient">
+    <mat-form-field appearance="fill">
+    <mat-label>Nom de famille:</mat-label>
+    <input  matInput formControlName="LastName">
+    </mat-form-field>
+  </span>
+
+  <div class="MailPhone">
+    <div class="inputClient" formArrayName="Email">
+      <span mat-icon-button (click)="AddEmail()">
+        <mat-icon >add</mat-icon> Ajoutez une adresse mail
+      </span>
+      <div *ngFor="let emailAddres of Email.controls; let i = index" [formGroupName]="i">
+        <mat-form-field appearance="fill">
+          <mat-label>Email: </mat-label><input  type="email" formControlName="emailAddress" class="input" matInput>
+        </mat-form-field>
+        <span *ngIf="i >= 1">
+          <button mat-icon-button type="button" (click)="DeleteEmails(i)">
+            <mat-icon type="button" class="icons">delete</mat-icon>
+          </button>
+        </span>
+      </div>
+    </div>
+    <div class="inputClient" formArrayName="Phone">
+      <span mat-icon-button (click)="AddPhone()">
+        <mat-icon >add</mat-icon> Ajoutez nr° de téléphone
+      </span>
+      <div *ngFor="let number of Phone.controls; let i = index" [formGroupName]="i">
+        <mat-form-field appearance="fill" >
+          <mat-label>Téléphone: </mat-label><input  type="tel" formControlName="number" class="input" matInput>
+        </mat-form-field>
+        <span *ngIf="i >= 1">
+          <button mat-icon-button type="button" (click)="DeletePhones(i)">
+            <mat-icon type="button" class="icons">delete</mat-icon>
+          </button>
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+  <span class="inputClient">
+    <mat-checkbox class="checkbox"  formControlName="Responsible">Responsble du site</mat-checkbox>
+    <mat-checkbox class="checkbox" formControlName="EmergencyContact">Contact en cas d'urgence</mat-checkbox>
+    <mat-checkbox class="checkbox" formControlName="NightContact">Contact de nuit</mat-checkbox>
+  </span>
+</div>
+<button class="button" (click)="Sendform()" mat-raised-button color="primary">Envoyer</button>
+</form>

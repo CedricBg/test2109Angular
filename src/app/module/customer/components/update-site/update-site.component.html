@@ -3,7 +3,6 @@
       <div class="close">
         <button class="iconsCenter" mat-raised-button  color="warning" (click)="CloseDialogBox()" class="sendButton">Fermer</button>
       </div>
-
       <form [formGroup]="formClient" (ngSubmit)="Send()" *ngIf="formClient">
         <mat-dialog-content>
         <mat-form-field>
@@ -34,32 +33,29 @@
               </mat-select>
             </mat-form-field>
             <mat-form-field class="input">
-              <mat-label>Rue + nr°: </mat-label><input formControlName="sreetAddress" class="input" matInput>
+              <mat-label>Rue + nr°: </mat-label><input formControlName="sreetAddress" matInput>
             </mat-form-field>
             <mat-form-field class="input">
-              <mat-label>Code Postal: </mat-label><input formControlName="zipCode" class="input" matInput>
+              <mat-label>Code Postal: </mat-label><input formControlName="zipCode" matInput>
             </mat-form-field>
             <mat-form-field class="input">
-              <mat-label>Ville: </mat-label><input formControlName="city" class="input" matInput>
+              <mat-label>Ville: </mat-label><input formControlName="city" matInput>
             </mat-form-field>
             </div>
-
-
               <div  formArrayName="contactSite">
                 <p>Contact d'urgences:</p>
-                <div class="card-contacts" *ngFor="let contact of contactSite.controls; let i = index">
+                <div  class="card-contacts" *ngFor="let contact of contactSite.controls; let i = index">
                   <mat-form-field [formGroupName]="i">
-                    <mat-label >Prénom: </mat-label><input matInput formControlName="firstName" class="input">
+                    <mat-label >Prénom: </mat-label><input matInput formControlName="firstName">
                   </mat-form-field >
                   <mat-form-field class="input" [formGroupName]="i">
-                    <mat-label >Nom: </mat-label><input matInput formControlName="lastName" class="input">
+                    <mat-label >Nom: </mat-label><input matInput formControlName="lastName">
                   </mat-form-field >
                   <span class="input" [formGroupName]="i"><mat-checkbox  formControlName="nightContact">de nuit</mat-checkbox></span>
                   <span class="input" [formGroupName]="i"><mat-checkbox  formControlName="emergencyContact">d'urgence</mat-checkbox></span>
                   <span class="input" [formGroupName]="i"><mat-checkbox  formControlName="responsible">Responsable</mat-checkbox></span>
-
-                  <div formGroupName="{{i}}">
-                    <div formArrayName="phone">
+                  <div class="groupehoneEmail" formGroupName="{{i}}">
+                    <div  formArrayName="phone">
                       <span mat-icon-button (click)="AddPhone(i)">
                         <mat-icon >add</mat-icon> Ajoutez nr° de téléphone
                       </span>
@@ -75,7 +71,7 @@
                         </span>
                       </div>
                     </div>
-                    <div formArrayName="email">
+                    <div class="contPhone" formArrayName="email">
                       <span mat-icon-button (click)="AddEmail(i)">
                         <mat-icon >add</mat-icon> Ajoutez un email
                       </span>
@@ -89,8 +85,8 @@
                             <mat-icon type="button" class="icons">delete</mat-icon>
                           </button>
                         </span>
-                      </div>
                     </div>
+                   </div>
                   </div>
                 </div>
               </div>
@@ -99,6 +95,8 @@
               <button mat-raised-button color="primary" type="submit">Envoyer</button>
             </div>
       </form>
-
+      <div class="send">
+        <button mat-raised-button (click)="AddPerson(selectedClient.siteId)" color="primary" type="button">Ajouter un contact</button>
+      </div>
   </mat-card>
 </div>
