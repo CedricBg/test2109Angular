@@ -42,9 +42,11 @@
               <mat-label>Ville: </mat-label><input formControlName="city" matInput>
             </mat-form-field>
             </div>
-              <div  formArrayName="contactSite">
-                <p>Contact d'urgences:</p>
-                <div  class="card-contacts" *ngFor="let contact of contactSite.controls; let i = index">
+              <div formArrayName="contactSite">
+                <div class="card-contacts" *ngFor="let contact of contactSite.controls; let i = index">
+                  <button mat-icon-button type="button" >
+                    <mat-icon (click)="DeleteContact(contact.get('contactId').value)" type="button" class="icons">delete</mat-icon>
+                  </button>
                   <mat-form-field [formGroupName]="i">
                     <mat-label >Prénom: </mat-label><input matInput formControlName="firstName">
                   </mat-form-field >

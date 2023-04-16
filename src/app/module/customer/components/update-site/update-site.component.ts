@@ -7,7 +7,7 @@ import { Language } from './../../../../models/language.models';
 import { InformationsService } from 'src/app/services/informations.service';
 import { AddressService } from './../../../../services/address.service';
 import { Countrys } from './../../../../models/countrys.models';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl, AbstractControl, FormGroupName } from '@angular/forms';
 import { Component,Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Customers } from 'src/app/models/customer/customers.models';
@@ -198,7 +198,14 @@ private createContactForm(contact: ContactPerson): FormGroup {
     this.dialogRef.close();
   }
 
-
+  DeleteContact(id: number)
+  {
+    return this._customerService.DeleteContact(id).subscribe({
+      next: (data: string)=>{
+        console.log(data)
+      }
+    })
+  }
 
   AddPerson(id: number)
   {

@@ -95,6 +95,7 @@ export class ListCustomerComponent implements OnInit {
 
   GetSit(id: number): number
   {
+    console.log(id)
     try
     {
       const client = this.listCustomers.find(c=>c.customerId == id)

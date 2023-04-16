@@ -160,6 +160,12 @@ export class CustomerService {
   {
     return this._httpClient.delete(environment.baseAdres+'customer/deleteSite/'+id)
   }
+
+  DeleteContact(id: number)
+  {
+    return this._httpClient.delete(environment.baseAdres+'customer/deleteContact/'+id)
+  }
+
   AddContactCreateSite(contact: ContactPerson)
   {
     return this._httpClient.post<Customers[]>(environment.baseAdres + 'customer/addContact/',contact).subscribe({
