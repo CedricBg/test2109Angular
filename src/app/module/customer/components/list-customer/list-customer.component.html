@@ -22,7 +22,7 @@
             <td><a><u>{{client.nameCustomer| titlecase }}</u></a></td>
             <td>
               <button class="buttonIcons"  (click)="Delete(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
-              <button class="buttonIcons" (click)="UpdateCustomer(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
+              <button class="buttonIcons" (click)="UpdateCustomer(client.customerId)" type="button"><mat-icon  class="icons2">edit_square</mat-icon></button>
             </td>
             <td>
               <div *ngIf="client.site != null">
@@ -39,7 +39,7 @@
             <td>
               <button class="buttonIcons" (click)="AddSite(client.customerId)" type="button"><mat-icon  class="icons1">add</mat-icon></button>
               <button  class="buttonIcons" (click)="GetOne(client.customerId)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
-              <button class="buttonIcons" (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit</mat-icon></button>
+              <button class="buttonIcons" (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit_square</mat-icon></button>
               <button class="buttonIcons" (click)="DeleteSite(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
             </td>
           </tr>

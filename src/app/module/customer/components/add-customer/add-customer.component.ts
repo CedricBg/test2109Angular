@@ -58,8 +58,8 @@ export class AddCustomerComponent implements OnInit {
     this.formClient = this._builder.group({
       nameCustomer: ['', [Validators.required, Validators.minLength(3)]],
       contact: this._builder.group({
-        FirstName: ['', [Validators.required, Validators.minLength(8)]],
-        LastName: ['',  [Validators.required, Validators.minLength(8)]],
+        FirstName: ['', Validators.required],
+        LastName: ['',  Validators.required],
         Responsible: [false],
         EmergencyContact: [false],
         NightContact: [false],

@@ -18,7 +18,4 @@ export class EmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.name = sessionStorage.getItem('firstName')
   }
-
-
-
 }

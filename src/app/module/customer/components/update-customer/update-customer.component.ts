@@ -34,15 +34,15 @@ export class UpdateCustomerComponent implements OnInit {
   formulaire()
   {
     this.formCustomer = this._builder.group({
-      customerId : [this.customer.customerId],
-      nameCustomer: [this.customer.nameCustomer,Validators.required],
+      customerId :      [this.customer.customerId],
+      nameCustomer:     [this.customer.nameCustomer,Validators.required],
       contact: this._builder.group({
-        firstName: [this.customer.contact == null ? '':this.customer.contact.firstName ,Validators.required],
-        lastName: [this.customer.contact == null ? '': this.customer.contact.lastName,Validators.required],
+        firstName:        [this.customer.contact == null ? '':this.customer.contact.firstName ,Validators.required],
+        lastName:         [this.customer.contact == null ? '': this.customer.contact.lastName,Validators.required],
         responsible:      [this.customer.contact == null ? false: this.customer.contact.responsible,[Validators.required, Validators.minLength(5)]],
         emergencyContact: [this.customer.contact == null ? false : this.customer.contact.emergencyContact ,Validators.required],
-        nightContact: [ this.customer.contact == null ? false: this.customer.contact.nightContact ,Validators.required],
-        contactId: [this.customer.contact == null ? 0:this.customer.contact.contactId ],
+        nightContact:     [this.customer.contact == null ? false: this.customer.contact.nightContact ,Validators.required],
+        contactId:        [this.customer.contact == null ? 0:this.customer.contact.contactId ],
         email: this._builder.array([]),
         phone: this._builder.array([]),
       })

@@ -24,10 +24,7 @@ export class ListCustomerComponent implements OnInit {
   selectedSiteName: string
   siteSelected: Site
   select : boolean = false
-  subscriptionUpdate: Subscription
-  subscriptionUpdateCustomer: Subscription
-  subscriptionAddCustomer: Subscription
-  subscriptionAddSite: Subscription
+  private subscriptions: Subscription[] = [];
 
   pagedData!: any[]
   length: number
@@ -44,43 +41,43 @@ export class ListCustomerComponent implements OnInit {
     })
 
     //Retour Update Site
-    this.subscriptionUpdate = this._CustService.getUpdateData().subscribe(newData => {
+    this.subscriptions.push(this._CustService.getUpdateData().subscribe(newData => {
       this.siteSelected = newData
       this._CustService.getAllCustomers().subscribe(data=>{
         this.listCustomers = data
         this.getPageData()
         }
       )
-    })
+    }))
 
     //Abonnement à la nouvelle liste de customers sur la add csutomer apres création d'un customer
-    this.subscriptionAddCustomer = this._CustService.getAddCustomer().subscribe({
+    this.subscriptions.push(this._CustService.getAddCustomer().subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
         this.getPageData()
       }
-    })
+    }))
 
     //Retour update Customer
-    this.subscriptionUpdateCustomer = this._CustService.GetUpdateCustomer().subscribe(newData =>{
+    this.subscriptions.push(this._CustService.GetUpdateCustomer().subscribe(newData =>{
       this.listCustomers = newData
       this.getPageData()
-    })
+    }))
 
     //Abonnement à la nouvelle liste customers pour mise a jour de la vue apres création d'un site dans AddCustumer.ts
-    this.subscriptionAddSite = this._CustService.GetCustomersList().subscribe({
+    this.subscriptions.push(this._CustService.GetCustomersList().subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
         this.getPageData()
       }
-    })
+    }))
   }
 
   ngOnDestroy(){
-    this.subscriptionUpdate.unsubscribe()
-    this.subscriptionAddCustomer.unsubscribe()
-    this.subscriptionUpdateCustomer.unsubscribe()
-    this.subscriptionAddSite.unsubscribe()
+    this.subscriptions.forEach(subscription  => {
+      subscription.unsubscribe()
+
+    })
   }
   ngAfterViewInit() {
     this.paginator.page.subscribe(() => this.getPageData());
@@ -95,7 +92,6 @@ export class ListCustomerComponent implements OnInit {
 
   GetSit(id: number): number
   {
-    console.log(id)
     try
     {
       const client = this.listCustomers.find(c=>c.customerId == id)

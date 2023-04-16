@@ -52,8 +52,9 @@ constructor(private _builder: FormBuilder,private _customer: CustomerService ,pr
   {
     if(this.formContactPerson.valid)
     {
-      this._customer.AddContactCreateSite(this.formContactPerson.get('ContactPerson').value)
-      this._Router.navigateByUrl('OPS/customer/listcustomer')
+      this._customer.AddContactSite(this.formContactPerson.get('ContactPerson').value)
+      this.CloseDialogBox()
+
     }
   }
 

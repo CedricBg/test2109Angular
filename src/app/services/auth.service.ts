@@ -43,7 +43,6 @@ export class AuthService {
     diallogConfig.autoFocus = true;
     diallogConfig.height = '300';
     diallogConfig.width = '400px';
-
     const dialogRef = this.dialog.open(LoginComponent,diallogConfig);
 
   }

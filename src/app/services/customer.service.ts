@@ -15,7 +15,6 @@ import { ContactPerson } from '../models/customer/ContactPerson.models';
 })
 export class CustomerService {
 
-
   private isUpdatedSubject: Subject<Site> = new Subject<Site>()
   private isAddCustSubject: Subject<Customers[]> = new Subject<Customers[]>()
   private isUpdateCustSubject: Subject<Customers[]> = new Subject<Customers[]>()
@@ -23,6 +22,7 @@ export class CustomerService {
   private customerSubject = new Subject<Customers>()
   private isUpdatesiteSubject = new Subject<Customers>()
   private isAddCustomerSubject = new Subject<number>()
+  private isDeletedContactSubject = new Subject<Site>()
   customer: Customers
   constructor(private _httpClient : HttpClient, private _route : Router) {  }
 
@@ -119,6 +119,7 @@ export class CustomerService {
     })
   }
 
+
   UpdateUser(client: Site)
   {
     this._httpClient.put<Site>(environment.baseAdres +'customer/site', client).subscribe({
@@ -161,17 +162,38 @@ export class CustomerService {
     return this._httpClient.delete(environment.baseAdres+'customer/deleteSite/'+id)
   }
 
+
   DeleteContact(id: number)
   {
-    return this._httpClient.delete(environment.baseAdres+'customer/deleteContact/'+id)
+    return this._httpClient.delete<Site>(environment.baseAdres+'customer/deleteContact/'+id).subscribe({
+      next: (data: Site)=>{
+        this.isDeletedContactSubject.next(data);
+      }
+    })
   }
-
+  GetDeleteContact()
+  {
+    return this.isDeletedContactSubject.asObservable()
+  }
+  //Ici on récupère une liste de Customers quand ajoute une persone de contact a la création d'un site
   AddContactCreateSite(contact: ContactPerson)
   {
     return this._httpClient.post<Customers[]>(environment.baseAdres + 'customer/addContact/',contact).subscribe({
       next :(data: Customers[])=>{
+        console.log(data)
         this.isAddCustSubject.next(data);
       }
     })
   }
+  //Ici on récupère un site quand on fait ajoute une person de contact via la mise a jour d'un site
+  AddContactSite(contact: ContactPerson)
+  {
+    return this._httpClient.post<Site>(environment.baseAdres + 'customer/addContactsite/',contact).subscribe({
+      next :(data: Site)=>{
+        console.log(data)
+        this.isUpdatedSubject.next(data)
+      }
+    })
+  }
+
 }

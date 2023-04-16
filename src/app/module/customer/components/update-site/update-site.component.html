@@ -44,9 +44,11 @@
             </div>
               <div formArrayName="contactSite">
                 <div class="card-contacts" *ngFor="let contact of contactSite.controls; let i = index">
+                  <div>
                   <button mat-icon-button type="button" >
-                    <mat-icon (click)="DeleteContact(contact.get('contactId').value)" type="button" class="icons">delete</mat-icon>
+                    <mat-icon (click)="DeleteContact(contact.get('contactId').value)" type="button" class="icons">close</mat-icon>
                   </button>
+                </div>
                   <mat-form-field [formGroupName]="i">
                     <mat-label >Prénom: </mat-label><input matInput formControlName="firstName">
                   </mat-form-field >

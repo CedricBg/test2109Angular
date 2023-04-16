@@ -48,7 +48,6 @@ export class AddEmployeeComponent implements OnInit {
   {
     if(this.formEmployee.valid)
     {
-      console.log(this.formEmployee.value)
       this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
       this._InfoService.getSelectedRole(this.listRoles, this.formEmployee)
       this._InfoService.getLanguages(this.listLanguages, this.formEmployee)
