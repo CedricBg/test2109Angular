@@ -59,22 +59,7 @@
                   <span class="input" [formGroupName]="i"><mat-checkbox  formControlName="emergencyContact">d'urgence</mat-checkbox></span>
                   <span class="input" [formGroupName]="i"><mat-checkbox  formControlName="responsible">Responsable</mat-checkbox></span>
                   <div class="groupehoneEmail" formGroupName="{{i}}">
-                    <div  formArrayName="phone">
-                      <span mat-icon-button (click)="AddPhone(i)">
-                        <mat-icon >add</mat-icon> Ajoutez nr° de téléphone
-                      </span>
-                      <div *ngFor="let phone of getPhoneControls(contact); let j = index">
-                        <mat-form-field [formGroupName]="j">
-                          <mat-label>Téléphone:</mat-label>
-                          <input matInput formControlName="number">
-                        </mat-form-field>
-                        <span *ngIf="j >= 1">
-                          <button mat-icon-button type="button" (click)="Delete(i,j,'phone')">
-                            <mat-icon type="button" class="icons">delete</mat-icon>
-                          </button>
-                        </span>
-                      </div>
-                    </div>
+
                     <div class="contPhone" formArrayName="email">
                       <span mat-icon-button (click)="AddEmail(i)">
                         <mat-icon >add</mat-icon> Ajoutez un email
@@ -91,6 +76,22 @@
                         </span>
                     </div>
                    </div>
+                   <div  formArrayName="phone">
+                    <span mat-icon-button (click)="AddPhone(i)">
+                      <mat-icon >add</mat-icon> Ajoutez nr° de téléphone
+                    </span>
+                    <div *ngFor="let phone of getPhoneControls(contact); let j = index">
+                      <mat-form-field [formGroupName]="j">
+                        <mat-label>Téléphone:</mat-label>
+                        <input matInput formControlName="number">
+                      </mat-form-field>
+                      <span *ngIf="j >= 1">
+                        <button mat-icon-button type="button" (click)="Delete(i,j,'phone')">
+                          <mat-icon type="button" class="icons">delete</mat-icon>
+                        </button>
+                      </span>
+                    </div>
+                  </div>
                   </div>
                 </div>
               </div>

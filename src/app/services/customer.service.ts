@@ -94,7 +94,6 @@ export class CustomerService {
   {
     return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/').subscribe({
       next: (data: Customers[])=>{
-        console.log(data)
         this.isCreatesiteSubject.next(data)
       }
     })
@@ -180,17 +179,15 @@ export class CustomerService {
   {
     return this._httpClient.post<Customers[]>(environment.baseAdres + 'customer/addContact/',contact).subscribe({
       next :(data: Customers[])=>{
-        console.log(data)
         this.isAddCustSubject.next(data);
       }
     })
   }
-  //Ici on récupère un site quand on fait ajoute une person de contact via la mise a jour d'un site
+  //Ici on récupère un site quand on ajoute une person de contact via la mise a jour d'un site
   AddContactSite(contact: ContactPerson)
   {
     return this._httpClient.post<Site>(environment.baseAdres + 'customer/addContactsite/',contact).subscribe({
       next :(data: Site)=>{
-        console.log(data)
         this.isUpdatedSubject.next(data)
       }
     })

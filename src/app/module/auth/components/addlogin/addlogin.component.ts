@@ -41,7 +41,6 @@ export class AddloginComponent implements OnInit {
 
     if(this.formLogin.valid)
     {
-      console.log(this.formLogin.value)
       const form: AddRegisterForm = this.formLogin.value
       form.id = this.idEmployee
       this._auth.AddLogin(form)

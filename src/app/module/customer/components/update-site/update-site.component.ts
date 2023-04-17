@@ -57,7 +57,6 @@ export class UpdateSiteComponent implements OnInit {
     ).subscribe({
       next: (data: Site) =>
       {
-        console.log(data)
         this.selectedClient = data
         this.UpdateInformationForm()
       }
