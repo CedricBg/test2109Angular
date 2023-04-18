@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerComponent } from './customer.component';
 import { AddSiteComponent } from './components/add-site/add-site.component';
+import { AdminCustomerComponent } from './components/admin-customer/admin-customer.component';
 
 const routes: Routes = [
   { path: '', component: CustomerComponent, children :[
@@ -15,6 +16,7 @@ const routes: Routes = [
     ]},
     { path: 'updateCustomer', component: UpdateCustomerComponent}]
   },
+  { path: 'customer', component: AdminCustomerComponent},
   { path : '', redirectTo : 'employee', pathMatch : 'full'},
   { path : '**', redirectTo : 'employee', pathMatch : 'full'}
 ];

@@ -1,0 +1,17 @@
+
+
+
+<section class="content-table">
+  <p class="titre">Rapport du  {{laDate}}</p>
+  <angular-editor [config]="editorConfig"  [(ngModel)]="htmlContent">
+    <ng-template #customButtons let-executeCommandFn="executeCommandFn">
+      <ae-toolbar-set>
+        <ae-button iconClass="fa fa-table"  title="Ajouter des lignes"
+                   (buttonClick)="executeCommandFn('insertHtml', addRow())">
+        </ae-button>
+      </ae-toolbar-set>
+    </ng-template>
+  </angular-editor>
+</section>
+
+

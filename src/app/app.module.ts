@@ -10,11 +10,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomerComponent } from './module/customer/customer.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    CustomerComponent
+    CustomerComponent,
+
   ],
   imports: [
     BrowserModule,

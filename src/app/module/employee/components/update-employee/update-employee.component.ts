@@ -180,7 +180,6 @@ export class UpdateEmployeeComponent implements OnInit {
   }
   updateUser()
   {
-    console.log(this.formEmployee.value)
     this._InfoService.getSelectedRole(this.listRoles, this.formEmployee)
     this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
     this._InfoService.getLanguages(this.listLanguages, this.formEmployee)
@@ -192,7 +191,7 @@ export class UpdateEmployeeComponent implements OnInit {
   {
     const day = new Date()
     const formData = new FormData();
-    formData.append('file',event.target.files[0],event.target.files[0].name+day.getTime())
+    formData.append('file',event.target.files[0],event.target.files[0].name)
     this._serviceEmployee.UploadPoto(formData)
   }
 
