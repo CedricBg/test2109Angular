@@ -1,4 +1,4 @@
-import { WeekDay } from '@angular/common';
+import { TitleCasePipe, UpperCasePipe, WeekDay } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, SecurityContext } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -33,50 +33,87 @@ export class TextEditorComponent implements OnInit {
         {class: 'calibri', name: 'Calibri'},
         {class: 'comic-sans-ms', name: 'Comic Sans MS'}
       ],
-      customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
+
     sanitize: true,
     toolbarPosition: 'top',
-    toolbarHiddenButtons: [[]]
+    toolbarHiddenButtons: [[],['insertImage','insertVideo']]
   }
 
   constructor() {}
   laDate: any = new Date().toLocaleDateString()
-  agent : string = sessionStorage.getItem('firstName')+' '+sessionStorage.getItem('surMame')
+  agent : string = sessionStorage.getItem('firstName').toLowerCase()+' '+sessionStorage.getItem('surMame').toLowerCase()
   htmlContent: string =
-  '<h1 style="text-align: center;">Rapport</h1><p style="padding-left:2vw;"><b>'+ this.laDate +'</b></p><br>'+`
+  '<h1 style="text-align: center;">Rapport de ' +this.agent+'</h1><p style="padding-left:2vw;"><b><u>Nr° de carte ministérielle</u></b> : </p><br><p style="padding-left:2vw;"><b>'+ this.laDate +'</b></p><br>'+`
+<br>
 
   <table>
     <thead>
       <tr>
-        <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 10vw;background-color:#b9bfbf;"><u>Heure de début</u></th>
-        <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 7vw;background-color:#b9bfbf;"><u>Heure de fin</u></th>
-        <th style="border-bottom:1px black solid; width: 90vw; height: 3vh; background-color:#b9bfbf;"><u>Message</u></th>
+        <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 10vw;background-color:#00468C;color:#F5DEB3;"><u>Heure de début</u></th>
+        <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 7vw;background-color:#00468C;color:#F5DEB3;"><u>Heure de fin</u></th>
+        <th style="border-bottom:1px black solid; width: 90vw; height: 3vh; background-color:#00468C; color:#F5DEB3;"><u>Message</u></th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;">07:30</td>
-        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;">08:00</td>
-        <td style="border-bottom:1px black solid; height: 3vh;">Ronde d'ouverture</td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
       </tr>
       <tr>
-        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;">08:00</td>
-        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;">09:00</td>
-        <td style="border-bottom:1px black solid; height: 3vh;">Ronde de fermeture</td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
+      </tr>
+      <tr>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;text-align:center;"></td>
+        <td style="border-bottom:1px black solid; height: 3vh;"></td>
       </tr>
     </tbody>
   </table>

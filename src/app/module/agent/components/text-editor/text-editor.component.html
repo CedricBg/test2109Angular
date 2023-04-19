@@ -2,7 +2,6 @@
 
 
 <section class="content-table">
-  <p class="titre">Rapport du  {{laDate}}</p>
   <angular-editor [config]="editorConfig"  [(ngModel)]="htmlContent">
     <ng-template #customButtons let-executeCommandFn="executeCommandFn">
       <ae-toolbar-set>
@@ -12,6 +11,7 @@
       </ae-toolbar-set>
     </ng-template>
   </angular-editor>
+  {{htmlContent}}
 </section>
 
 
