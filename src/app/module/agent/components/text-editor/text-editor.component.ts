@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, SecurityContex
 import { FormGroup } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { cwd } from 'process';
 
 
 
@@ -34,7 +35,7 @@ export class TextEditorComponent implements OnInit {
         {class: 'comic-sans-ms', name: 'Comic Sans MS'}
       ],
 
-    sanitize: true,
+    sanitize: false,
     toolbarPosition: 'top',
     toolbarHiddenButtons: [[],['insertImage','insertVideo']]
   }
@@ -46,12 +47,12 @@ export class TextEditorComponent implements OnInit {
   '<h1 style="text-align: center;">Rapport de ' +this.agent+'</h1><p style="padding-left:2vw;"><b><u>Nr° de carte ministérielle</u></b> : </p><br><p style="padding-left:2vw;"><b>'+ this.laDate +'</b></p><br>'+`
 <br>
 
-  <table>
+  <table style="width:100%;">
     <thead>
       <tr>
-        <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 10vw;background-color:#00468C;color:#F5DEB3;"><u>Heure de début</u></th>
-        <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 7vw;background-color:#00468C;color:#F5DEB3;"><u>Heure de fin</u></th>
-        <th style="border-bottom:1px black solid; width: 90vw; height: 3vh; background-color:#00468C; color:#F5DEB3;"><u>Message</u></th>
+        <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 10%;background-color:#00468C;color:#F5DEB3;">Heure de début</th>
+        <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 10%;background-color:#00468C;color:#F5DEB3;">Heure de fin</th>
+        <th style="border-bottom:1px black solid; width: 100%; height: 3vh; background-color:#00468C; color:#F5DEB3;">Message</th>
       </tr>
     </thead>
     <tbody>
@@ -121,7 +122,7 @@ export class TextEditorComponent implements OnInit {
 
 
   addRow() {
-    console.log('test')
+
     const table = document.querySelector('table');
     const tbody = table.querySelector('tbody');
     const newRow = `
@@ -152,6 +153,7 @@ export class TextEditorComponent implements OnInit {
     </tr>
     `;
     tbody.insertAdjacentHTML('beforeend', newRow);
+    console.log(this.htmlContent)
   }
 
   ngOnInit(): void {
