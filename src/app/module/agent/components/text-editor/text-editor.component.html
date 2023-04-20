@@ -8,10 +8,13 @@
         <ae-button iconClass="fa fa-table"  title="Ajouter des lignes"
                    (buttonClick)="executeCommandFn('insertHtml', addRow())">
         </ae-button>
+        <ae-button iconClass="fa fa-send"  title="Ajouter des lignes"
+                   (buttonClick)="executeCommandFn('insertHtml', SendRapport())">
+        </ae-button>
       </ae-toolbar-set>
     </ng-template>
   </angular-editor>
-
+  {{htmlContent}}
 </section>
 
 

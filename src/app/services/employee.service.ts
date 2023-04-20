@@ -1,3 +1,4 @@
+import { Pdf } from './../models/customer/Pdf.models';
 import { Language } from './../models/language.models';
 import { Countrys } from 'src/app/models/countrys.models';
 import { FormGroup } from '@angular/forms';
@@ -93,5 +94,8 @@ export class EmployeeService implements OnInit {
     })
   }
 
-
+  SendRapport(pdf: Pdf)
+  {
+    return this._httpClient.post(environment.baseAdres + 'pdf', pdf).subscribe()
+  }
 }
