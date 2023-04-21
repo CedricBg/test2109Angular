@@ -1,6 +1,8 @@
 
+import { Time } from '@angular/common';
 import { Component, OnInit, } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { Timestamp } from 'rxjs';
 import { Pdf } from 'src/app/models/customer/Pdf.models';
 import { EmployeeService } from 'src/app/services/employee.service';
 
@@ -15,12 +17,14 @@ import { EmployeeService } from 'src/app/services/employee.service';
 export class TextEditorComponent implements OnInit {
 
   laDate: any = new Date().toLocaleDateString()
-  agent : string = sessionStorage.getItem('firstName').toLowerCase()+' '+sessionStorage.getItem('surMame').toLowerCase()
-
-  title: string = this.agent+"laDate"
+  firstName: string = sessionStorage.getItem('firstName').toLowerCase()
+  surName : string = sessionStorage.getItem('surMame').toLowerCase()
+  agent : string = this.firstName+'_'+this.surName
+  timeStamp: any = Date.now()
+  title: string = this.agent+"_"+this.timeStamp
   pdf: Pdf = {
     intPdf: 0,
-    title: this.title,
+    title: '',
     content: ''
   }
   ngOnInit(): void {
@@ -39,7 +43,7 @@ export class TextEditorComponent implements OnInit {
       translate: 'yes',
       enableToolbar: true,
       showToolbar: true,
-      defaultParagraphSeparator: 'th',
+      defaultParagraphSeparator: '',
 
       fonts: [
         {class: 'arial', name: 'Arial'},
@@ -50,13 +54,14 @@ export class TextEditorComponent implements OnInit {
 
     sanitize: false,
     toolbarPosition: 'top',
-    toolbarHiddenButtons: [[],['fontSize','insertImage','insertVideo']]
+    toolbarHiddenButtons: [['link',
+    'unlink',],['insertHorizontalRule','removeFormat','insertImage','fontSize','insertVideo']]
   }
 
   constructor(private _employee: EmployeeService) {}
 
   htmlContent: string =
-  '<h1 style="text-align: center;">Rapport de ' +this.agent+'</h1><p style="padding-left:2vw;"><b><u>Nr° de carte ministérielle</u></b> : </p><br><p style="padding-left:2vw;"><b>'+ this.laDate +'</b></p><br>'+`
+  '<h1 style="text-align: center;">Rapport de ' +this.firstName+' '+this.surName+'</h1><p style="padding-left:2vw;"><b><u>Nr° de carte ministérielle</u></b> : </p><br><p style="padding-left:2vw;"><b>'+ this.laDate +'</b></p><br>'+`
 <br>
 
   <table style="width:100%;">
@@ -69,43 +74,108 @@ export class TextEditorComponent implements OnInit {
     </thead>
     <tbody>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"><br></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
+      </tr>
+      <tr style="display: table-row;" >
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
 
@@ -113,45 +183,44 @@ export class TextEditorComponent implements OnInit {
   </table>
   `
 
-
   addRow() {
 
     const table = document.querySelector('table');
     const tbody = table.querySelector('tbody');
     const newRow = `
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
       <tr style="display: table-row;" >
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all;"></td>
-        <td style="border-bottom:1px black solid;  text-align:center; word-break: break-all; "></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all;"></td>
+        <td style="border-bottom:1px black solid; vertical-align: top; text-align:center; word-break: break-all; "></td>
         <td style="border-bottom:1px black solid;  height: 20px; word-break: break-all;"></td>
       </tr>
     `;
@@ -159,11 +228,16 @@ export class TextEditorComponent implements OnInit {
 
   }
 
-
   SendRapport()
   {
-    this.pdf.content = this.htmlContent
-    this._employee.SendRapport(this.pdf)
+    console.log(this.pdf.title)
+    if(this.pdf.title == '')
+    {
+      console.log(this.pdf.title)
+      this.pdf.content = this.htmlContent
+      this.pdf.title=  this.title,
+      this._employee.SendRapport(this.pdf)
+    }
   }
 }
 
