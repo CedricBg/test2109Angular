@@ -2,6 +2,7 @@
 import { Time } from '@angular/common';
 import { Component, OnInit, } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { notEqual } from 'assert';
 import { Timestamp } from 'rxjs';
 import { Pdf } from 'src/app/models/customer/Pdf.models';
 import { EmployeeService } from 'src/app/services/employee.service';
@@ -230,14 +231,13 @@ export class TextEditorComponent implements OnInit {
 
   SendRapport()
   {
-    console.log(this.pdf.title)
-    if(this.pdf.title == '')
-    {
-      console.log(this.pdf.title)
+    console.log(this.pdf.content)
+    console.log(this.title)
+
       this.pdf.content = this.htmlContent
-      this.pdf.title=  this.title,
+      this.pdf.title =  this.title,
       this._employee.SendRapport(this.pdf)
-    }
+
   }
 }
 
