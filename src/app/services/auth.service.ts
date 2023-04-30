@@ -15,6 +15,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
+  constructor(private _httpClient : HttpClient, private _router : Router, public dialog : MatDialog) { }
+
   private _isConnected : boolean
   get isConnected() : boolean
   {
@@ -28,7 +30,7 @@ export class AuthService {
     this.connectedSubject.next(this.isConnected)
   }
 
-  constructor(private _httpClient : HttpClient, private _router : Router, public dialog : MatDialog) { }
+
   returnData! : User
   AddLogin(form : AddLogin)
   {
@@ -62,7 +64,14 @@ export class AuthService {
           sessionStorage.setItem('role', this.returnData.role)
           sessionStorage.setItem('dimin', this.returnData.dimin)
           this.emitSubject()
-          this._router.navigate([this.returnData.dimin])
+          if(this.returnData.dimin == "SB")
+          {
+            this._router.navigate(["agent"])
+          }
+          else
+          {
+            this._router.navigate([this.returnData.dimin])
+          }
         }
       }
     })

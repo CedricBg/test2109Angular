@@ -1,0 +1,20 @@
+<div class="connected" *ngIf="isWorking == false">
+  <div>
+    <mat-form-field appearance="fill">
+      <mat-label>Client</mat-label>
+      <mat-select [(ngModel)]="customer">
+        <mat-option *ngFor="let cust of listCustomers" [value]="cust.nameCustomer">
+          {{cust.nameCustomer}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button [disabled]="customer == null" mat-raised-button color="primary" (click)="StartWork()" >Prise de service</button>
+  </div>
+</div>
+<div class="connected" *ngIf="isWorking == true">
+  <button mat-raised-button color="primary" (click)="EndWork()" >Fin de service</button>
+  <section>
+    <app-text-editor></app-text-editor>
+  </section>
+</div>
+<router-outlet></router-outlet>

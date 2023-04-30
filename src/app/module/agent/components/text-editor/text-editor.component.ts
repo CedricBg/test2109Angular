@@ -231,9 +231,6 @@ export class TextEditorComponent implements OnInit {
 
   SendRapport()
   {
-    console.log(this.pdf.content)
-    console.log(this.title)
-
       this.pdf.content = this.htmlContent
       this.pdf.title =  this.title,
       this._employee.SendRapport(this.pdf)
