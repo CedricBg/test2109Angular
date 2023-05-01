@@ -8,13 +8,13 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <button [disabled]="customer == null" mat-raised-button color="primary" (click)="StartWork()" >Prise de service</button>
+    <button [disabled]="customer == null" mat-raised-button color="primary" (click)="StartWork()">Prise de service</button>
   </div>
 </div>
 <div class="connected" *ngIf="isWorking == true">
   <button mat-raised-button color="primary" (click)="EndWork()" >Fin de service</button>
   <section>
-    <app-text-editor></app-text-editor>
+    <app-text-editor [customer]="customer"></app-text-editor>
   </section>
 </div>
 <router-outlet></router-outlet>

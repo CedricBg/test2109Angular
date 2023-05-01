@@ -2,7 +2,7 @@
 
 
 <section class="content-table">
-  <angular-editor [config]="editorConfig" autofocus  [(ngModel)]="htmlContent">
+  <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent">
     <ng-template #customButtons let-executeCommandFn="executeCommandFn">
       <ae-toolbar-set>
         <ae-button iconClass="fa fa-table"  title="Ajouter des lignes"
