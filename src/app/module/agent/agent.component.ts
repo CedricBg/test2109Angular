@@ -34,8 +34,10 @@ export class AgentComponent implements OnInit {
               this.isWorking = data.isWorking
               //Oui l'agent travail on récupère alors le nom du client pour le rapport text-editor via un @Input
               //Important si l'agent a quitté le site et reviens plus tard on recharge le rapport
-              const cust =  this.listCustomers.find(c=>c.customerId === data.customerId)
-              this.customer = cust.nameCustomer
+              if(data.customerId){
+                const cust =  this.listCustomers.find(c=>c.customerId === data.customerId)
+                this.customer = cust.nameCustomer
+              }
             }
           })
       }

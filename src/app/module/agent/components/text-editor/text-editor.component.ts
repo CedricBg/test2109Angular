@@ -60,17 +60,18 @@ export class TextEditorComponent implements OnInit {
     'unlink',],['insertHorizontalRule','removeFormat','insertImage','fontSize','insertVideo']]
   }
 
-  constructor(private _employee: EmployeeService,private ngZone: NgZone) {
+  constructor(private _employee: EmployeeService) {
     this.htmlContent = ''
   }
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.generateHtmlContent();
-    }, 0);
+    }, );
 
 
   }
   generateHtmlContent(){
+
     this.htmlContent =
     '<h1 style="text-align: center;">Rapport de ' +this.firstName+' '+this.surName+'</h1><p style="padding-left:2vw;"><b><u>Client</u>: '+this.customer+'</b><p style="padding-left:2vw;"><b><u>Nr° de carte ministérielle</u></b> : </p><br><p style="padding-left:2vw;"><b>'+ this.laDate +'</b></p><br>'+`
   <br>
