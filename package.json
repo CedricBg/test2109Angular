@@ -28,6 +28,7 @@
     "ngx-order-pipe": "^2.2.0",
     "ngx-pagination": "^6.0.3",
     "rxjs": "~7.5.0",
+    "sass-loader": "^13.2.2",
     "timezone": "^1.0.23",
     "tslib": "^2.3.0",
     "utc": "^0.1.0",

@@ -5,13 +5,18 @@ import { AgentStatiqueComponent } from './components/agent-statique/agent-statiq
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AgentComponent } from './agent.component';
+import { InfoAgentComponent } from './components/info-agent/info-agent.component';
+
+
 
 
 @NgModule({
   declarations: [
     AgentStatiqueComponent,
     TextEditorComponent,
-    AgentComponent
+    AgentComponent,
+    InfoAgentComponent
+
 
   ],
   imports: [

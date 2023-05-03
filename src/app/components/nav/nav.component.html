@@ -4,10 +4,10 @@
   <h1>{{title}}</h1>
 
   <div class="login" *ngIf="!isConnected">
-    <button (click)="Login()" type="button"><mat-icon>login</mat-icon>Connexion</button>
+    <button (click)="Login()" type="button">Connexion</button>
   </div>
 
-  <div class="button-container login" *ngIf="isConnected">
+  <div class="button-container " *ngIf="isConnected">
     <button (click)=" OpenDialog()" mat-mini-fab color="primary" aria-label="Boutton déconnexion">
       {{name.slice(0,1) | titlecase}}
     </button>

@@ -1,0 +1,21 @@
+
+
+.connected, .logedOut
+{
+  margin-top: 2vh;
+  margin-left: 2vw;
+  display:flex;
+  width: 20vw;
+}
+.logedOut{
+  display:flex;
+}
+.logedOut button{
+  font-weight:bold ;
+  border-radius: 5px;
+  border:none;
+  background-color: black;
+  color: white;
+  height: 45px;
+}
+

@@ -10,6 +10,7 @@ import { NgZone } from '@angular/core';
 
 
 
+
 @Component({
   selector: 'app-text-editor',
   templateUrl: './text-editor.component.html',
@@ -71,7 +72,7 @@ export class TextEditorComponent implements OnInit {
 
   }
   generateHtmlContent(){
-
+    console.log(this.customer)
     this.htmlContent =
     '<h1 style="text-align: center;">Rapport de ' +this.firstName+' '+this.surName+'</h1><p style="padding-left:2vw;"><b><u>Client</u>: '+this.customer+'</b><p style="padding-left:2vw;"><b><u>Nr° de carte ministérielle</u></b> : </p><br><p style="padding-left:2vw;"><b>'+ this.laDate +'</b></p><br>'+`
   <br>

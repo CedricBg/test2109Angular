@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
  isConnected : boolean
  name! : string
- title: string = 'Site de Test securité'
+ title: string = 'Protect group'
   constructor( private _authService : AuthService,public dialog : MatDialog,private _Router : Router )
   {  }
 
@@ -26,15 +26,12 @@ export class NavComponent implements OnInit {
         this.name = sessionStorage.getItem('firstName')
       }
     })
-
   }
 
   Login()
   {
     this._authService.OpenDialog();
   }
-
-
 
   OpenDialog()
   {

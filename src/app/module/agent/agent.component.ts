@@ -14,7 +14,6 @@ export class AgentComponent implements OnInit {
   formAtWork: StartEndTimeWork = new StartEndTimeWork()
   listCustomers: Customers [] = []
   idEmployee: number
-  //pour le Input
   customer: string
   workingCustomer: Working = new Working()
   isWorking!: Boolean
@@ -44,6 +43,7 @@ export class AgentComponent implements OnInit {
     })
   }
 
+
   StartWork()
   {
     const customer = this.listCustomers.find(c=>c.nameCustomer === this.customer)
@@ -54,6 +54,7 @@ export class AgentComponent implements OnInit {
       next: (data: Working)=>{
       this.workingCustomer = data
       this.isWorking = data.isWorking
+      console.log(data)
       }
     })
   }

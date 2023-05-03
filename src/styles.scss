@@ -37,6 +37,9 @@ $test2109-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+*{
+  font-family: 'DM Serif Display', serif;
+}
 html, body {
   margin: 0;
   margin: 0;
@@ -56,7 +59,25 @@ footer{
   align-items:center;
   height : 6vh;
   color:wheat;
-  background-color:#00468C;
+  background-color:black;
 }
 
 
+mat-dialog-container {
+  background-color: wheat !important;
+}
+
+@media screen and (max-width: 340px ) {
+
+  footer:nth-child(even){
+    font-size: 0;
+    color: black;
+  }
+}
+
+@media screen and (max-height: 700px ) {
+
+  footer:nth-child(even){
+    display: none;
+  }
+}

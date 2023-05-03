@@ -62,10 +62,10 @@
           <div class="detailsCard2">
             <p class="email" *ngIf="siteSelected.language != null">Langue de contact: <b>{{siteSelected.language.name}} </b></p>
             <p class="position">Adresse:</p>
-            <p class="email"><i class="far fa-envelope"></i>Rue : {{siteSelected.address.sreetAddress}}</p>
+            <p class="email">Rue : {{siteSelected.address.sreetAddress}}</p>
             <p class="email">Code Postal : {{siteSelected.address.zipCode}}</p>
-            <p >Pays : {{siteSelected.address.state}}</p>
-            <p >Ville : {{siteSelected.address.city}}</p>
+            <p>Pays : {{siteSelected.address.state}}</p>
+            <p>Ville : {{siteSelected.address.city}}</p>
             <p> Nr° de Tva: {{siteSelected.vatNumber}}</p>
           </div>
           <div class="detailsCard2">
@@ -95,7 +95,7 @@
               </p>
               <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
               <p *ngFor="let elt1 of elt.phone">
-                <i class="fas fa-phone"></i>{{elt1.number}}
+                {{elt1.number}}
               </p>
             </div>
             <div *ngIf="elt.nightContact">
