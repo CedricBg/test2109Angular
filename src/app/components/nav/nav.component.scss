@@ -50,9 +50,7 @@
 .button-container button {
   background:wheat ;
 }
-.button-container button:hover{
-  background:black ;
-}
+
 @media screen and (max-width: 1200px ) {
   .nav{
     height: 6vh;
@@ -76,9 +74,11 @@
   }
   .button-container {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     padding-right: 2%;
-    padding-top: 2vh;
+    padding-top: 2px;
+    width: 40px;
+    border: 1px white solid;
   }
 
 }
@@ -98,6 +98,10 @@
       height: 20px;
       width: 100px;
       border: none;
+    }
+
+    .button-container{
+
     }
 }
 @media screen and (max-height: 700px ) {

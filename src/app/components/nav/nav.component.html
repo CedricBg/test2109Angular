@@ -7,12 +7,11 @@
     <button (click)="Login()" type="button">Connexion</button>
   </div>
 
-  <div class="button-container " *ngIf="isConnected">
-    <button (click)=" OpenDialog()" mat-mini-fab color="primary" aria-label="Boutton déconnexion">
-      {{name.slice(0,1) | titlecase}}
+  <div  class="login " *ngIf="isConnected">
+    <button (click)=" OpenDialog()" type="button"  aria-label="Boutton déconnexion">
+      {{name| titlecase}}
     </button>
   </div>
-
 </div>
 
 

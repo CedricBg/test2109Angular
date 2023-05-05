@@ -1,21 +1,35 @@
 
+#contentAgent{
 
-.connected, .logedOut
+  width: 100vw;
+  height: 86vh;
+  border:1px black solid;
+}
+
+#user_interface
 {
-  margin-top: 2vh;
-  margin-left: 2vw;
-  display:flex;
-  width: 20vw;
+  display: flex;
+  flex-wrap: wrap;
+  width:100vw;
+  border: 1px black solid;
 }
-.logedOut{
-  display:flex;
-}
-.logedOut button{
+
+#user_interface div:nth-of-type(1) {flex-grow: 10;}
+#user_interface div:nth-of-type(2) {margin-top:2vh;flex-grow: 1;}
+
+
+
+
+button{
   font-weight:bold ;
-  border-radius: 5px;
+  border-radius: 2px;
   border:none;
   background-color: black;
   color: white;
-  height: 45px;
+  height: 3vh;
+  width: 200px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 

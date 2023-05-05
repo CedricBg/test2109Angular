@@ -1,7 +1,10 @@
 
-<div class="contentAgent">
-  <div class="logedOut" *ngIf="isWorking == false">
-    <div class="">
+<div id="contentAgent">
+  <div id="user_interface"  *ngIf="isWorking == false">
+    <div >
+      <app-info-agent></app-info-agent>
+    </div>
+    <div >
       <mat-form-field appearance="fill">
         <mat-label>Client</mat-label>
         <mat-select [(ngModel)]="customer">
@@ -10,19 +13,17 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button [disabled]="customer == null"  (click)="StartWork()">Prise de service</button>
+      <p><button [disabled]="customer == null"  (click)="StartWork()">Prise de service</button></p>
     </div>
-    <section>
-      <app-info-agent></app-info-agent>
-    </section>
-    <section>
-    <router-outlet></router-outlet>
-  </section>
+    <div>
+      <router-outlet></router-outlet>
+    </div>
+
   </div>
   <div class="connected" *ngIf="isWorking == true">
     <button mat-raised-button color="primary" (click)="EndWork()" >Fin de service</button>
-    <section>
+    <div>
       <app-text-editor [customer]="customer"></app-text-editor>
-    </section>
+    </div>
   </div>
 </div>
