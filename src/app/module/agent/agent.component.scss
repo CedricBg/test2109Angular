@@ -1,8 +1,7 @@
 
 #contentAgent{
-
   width: 100vw;
-  height: 86vh;
+  min-height: 86vh;
   border:1px black solid;
 }
 
@@ -17,9 +16,6 @@
 #user_interface div:nth-of-type(1) {flex-grow: 10;}
 #user_interface div:nth-of-type(2) {margin-top:2vh;flex-grow: 1;}
 
-
-
-
 button{
   font-weight:bold ;
   border-radius: 2px;
@@ -31,5 +27,15 @@ button{
   height: 40px;
   cursor: pointer;
   border-radius: 5px;
+}
+@media screen and (max-height: 700px) {
+  #contentAgent{
+  min-height: 94vh;
+  }
+}
+@media screen and (max-width: 1200px) {
+  #contentAgent{
+  min-height: 94vh;
+  }
 }
 

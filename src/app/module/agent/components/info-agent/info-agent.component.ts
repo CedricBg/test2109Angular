@@ -17,10 +17,11 @@ export class InfoAgentComponent implements OnInit {
     this.idEmployee = Number.parseInt(sessionStorage.getItem("id"))
     this._agentService.GetCustomers(this.idEmployee).subscribe({
       next : (data: Customers[])=>{
-        console.log(data)
         this.customersList = data
       }
     })
   }
+
+
 
 }

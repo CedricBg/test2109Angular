@@ -1,16 +1,13 @@
-<div class="contentTable">
-  <table>
+<div >
+  <table >
     <thead>
       <tr>
         <th>Site(s) attribué</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody *ngFor="let customer of customersList">
       <tr>
-        <td>Alfreds Futterkiste</td>
-      </tr>
-      <tr>
-        <td>Centro comercial Moctezuma</td>
+        <td>{{customer.nameCustomer}}</td>
       </tr>
     </tbody>
   </table>
