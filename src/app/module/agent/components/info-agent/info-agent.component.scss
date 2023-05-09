@@ -10,12 +10,16 @@
   border-radius: .6rem;
   border: 1px black solid;
   display:flex;
-  justify-content: center;
 }
 table{
-  border:1px black solid;
-  width: 20vw;
+  width: 100vw;
 }
 
+@media screen and (max-width: 600px) {
 
+  .contentTable{
+    width: 100%;
+    margin-left: 0;
+  }
+}
 

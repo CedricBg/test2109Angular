@@ -5,6 +5,7 @@
   justify-content: flex-start;
   color:wheat;
   background-color:black;
+
 }
 .nav{
   width:100vw;
@@ -83,7 +84,7 @@
 
 }
 
-  @media screen and (max-width: 480px ) {
+  @media screen and (max-width: 606px ) {
     .nav{
       height: 40px;
 
@@ -100,12 +101,23 @@
       border: none;
     }
 
-    .button-container{
-
-    }
 }
 @media screen and (max-height: 700px ) {
   .nav{
     height: 40px;
   }
+  .login
+  {
+    padding-top: 10px;
+  }
+    .login button{
+      height: 20px;
+      width: 100px;
+      border: none;
+    }
+
+    .nav h1{
+      padding-right: 1vw;
+      padding-top: 1vh;
+    }
 }

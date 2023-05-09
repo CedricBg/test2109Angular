@@ -61,7 +61,6 @@ export class AuthService {
           sessionStorage.setItem('firstName' , this.returnData.firstName)
           sessionStorage.setItem('surMame', this.returnData.surName)
           sessionStorage.setItem('id', this.returnData.id.toString())
-          sessionStorage.setItem('role', this.returnData.role)
           sessionStorage.setItem('dimin', this.returnData.dimin)
           this.emitSubject()
           if(this.returnData.dimin == "SB")

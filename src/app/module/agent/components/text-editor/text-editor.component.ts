@@ -3,10 +3,11 @@ import { Time } from '@angular/common';
 import { Component, Input, OnInit, } from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { notEqual } from 'assert';
-import { Timestamp } from 'rxjs';
+import { Subscription, Timestamp } from 'rxjs';
 import { Pdf } from 'src/app/models/customer/Pdf.models';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { NgZone } from '@angular/core';
+import { Working } from 'src/app/models/Planning/working.models';
 
 
 
@@ -17,7 +18,7 @@ import { NgZone } from '@angular/core';
   styleUrls: ['./text-editor.component.scss']
 })
 export class TextEditorComponent implements OnInit {
-  @Input() customer: string;
+  @Input() dataIsWorking: Working;
   laDate: any = new Date().toLocaleDateString()
   firstName: string = sessionStorage.getItem('firstName').toLowerCase()
   surName : string = sessionStorage.getItem('surMame').toLowerCase()
@@ -25,14 +26,17 @@ export class TextEditorComponent implements OnInit {
   timeStamp: any = Date.now()
   title: string = this.agent+"_"+this.timeStamp
   htmlContent!: string
+  customer: string
 
   pdf: Pdf = {
-    intPdf: 0,
+    idPdf: 0,
     title: '',
-    content: ''
+    content: '',
+    idCustomer: 0,
+    idEmployee: 0
   }
   ngOnInit(): void {
-
+    console.log(this.dataIsWorking)
   }
 
   editorConfig: AngularEditorConfig = {
@@ -62,8 +66,11 @@ export class TextEditorComponent implements OnInit {
   }
 
   constructor(private _employee: EmployeeService) {
+
     this.htmlContent = ''
   }
+
+
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.generateHtmlContent();
@@ -72,9 +79,8 @@ export class TextEditorComponent implements OnInit {
 
   }
   generateHtmlContent(){
-    console.log(this.customer)
     this.htmlContent =
-    '<h1 style="text-align: center;">Rapport de ' +this.firstName+' '+this.surName+'</h1><p style="padding-left:2vw;"><b><u>Client</u>: '+this.customer+'</b><p style="padding-left:2vw;"><b><u>Nr° de carte ministérielle</u></b> : </p><br><p style="padding-left:2vw;"><b>'+ this.laDate +'</b></p><br>'+`
+    '<h1 style="text-align: center;">Rapport de ' +this.firstName+' '+this.surName+'</h1><p style="padding-left:2vw;"><b><u>Client</u>: '+this.dataIsWorking.nameCustomer+'</b><p style="padding-left:2vw;"><b><u>Nr° de carte ministérielle</u></b> : </p><br><p style="padding-left:2vw;"><b>'+ this.laDate +'</b></p><br>'+`
   <br>
 
     <table style="width:100%;">
@@ -244,6 +250,8 @@ export class TextEditorComponent implements OnInit {
 
   SendRapport()
   {
+      this.pdf.idEmployee = Number(sessionStorage.getItem('id'))
+      this.pdf.idCustomer = this.dataIsWorking.customerId
       this.pdf.content = this.htmlContent
       this.pdf.title =  this.title,
       this._employee.SendRapport(this.pdf)

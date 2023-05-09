@@ -1,7 +1,9 @@
 export interface Pdf
 {
-  intPdf: number
+  idPdf: number
   title: string
   content: string
+  idCustomer: number
+  idEmployee: number
 }
 

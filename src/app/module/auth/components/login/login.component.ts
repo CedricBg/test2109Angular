@@ -13,9 +13,7 @@ export class LoginComponent implements OnInit {
   description:string;
   constructor(private _builder : FormBuilder, private _authService : AuthService, public dialogRef: MatDialogRef<LoginComponent>,
     @Inject(MAT_DIALOG_DATA) data)
-    {
-
-    }
+    {}
 
   formLogin : FormGroup
 

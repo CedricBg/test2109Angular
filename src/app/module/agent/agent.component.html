@@ -23,7 +23,7 @@
   <div class="connected" *ngIf="isWorking == true">
     <button mat-raised-button color="primary" (click)="EndWork()" >Fin de service</button>
     <div>
-      <app-text-editor [customer]="customer"></app-text-editor>
+      <app-text-editor [dataIsWorking]="dataIsWorking"></app-text-editor>
     </div>
   </div>
 </div>

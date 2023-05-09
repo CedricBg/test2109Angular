@@ -33,12 +33,12 @@ export class ListCustomerComponent implements OnInit {
   constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this._CustService.getAllCustomers().pipe(first()).subscribe({
+    this.subscriptions.push(this._CustService.getAllCustomers().pipe(first()).subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
         this.getPageData()
       }
-    })
+    }))
 
     //Retour Update Site
     this.subscriptions.push(this._CustService.getUpdateData().subscribe(newData => {
@@ -76,7 +76,6 @@ export class ListCustomerComponent implements OnInit {
   ngOnDestroy(){
     this.subscriptions.forEach(subscription  => {
       subscription.unsubscribe()
-
     })
   }
   ngAfterViewInit() {
@@ -220,7 +219,5 @@ export class ListCustomerComponent implements OnInit {
       }
 
 }
-function ngOnDestroy() {
-  throw new Error('Function not implemented.');
-}
+
 

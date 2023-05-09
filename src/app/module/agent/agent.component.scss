@@ -8,9 +8,7 @@
 #user_interface
 {
   display: flex;
-  flex-wrap: wrap;
   width:100vw;
-  border: 1px black solid;
 }
 
 #user_interface div:nth-of-type(1) {flex-grow: 10;}
@@ -32,10 +30,20 @@ button{
   #contentAgent{
   min-height: 94vh;
   }
+
 }
 @media screen and (max-width: 1200px) {
   #contentAgent{
   min-height: 94vh;
   }
 }
+@media screen and (max-width: 600px) {
 
+  #user_interface{
+    flex-direction:column-reverse;
+    justify-content: center;
+  }
+  #user_interface div:nth-of-type(1) {align-self:center; flex-grow: 1; width:90%; }
+  #user_interface div:nth-of-type(2) {align-self:center; display:flex;justify-content: center; flex-direction:column;flex-grow: 1; width:90%;}
+  #user_interface div:nth-of-type(2) button{ width:100%;}
+}
