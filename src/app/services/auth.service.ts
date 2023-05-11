@@ -59,7 +59,7 @@ export class AuthService {
         {
           sessionStorage.setItem('token' , this.returnData.token)
           sessionStorage.setItem('firstName' , this.returnData.firstName)
-          sessionStorage.setItem('surMame', this.returnData.surName)
+          sessionStorage.setItem('surName', this.returnData.surName)
           sessionStorage.setItem('id', this.returnData.id.toString())
           sessionStorage.setItem('dimin', this.returnData.dimin)
           this.emitSubject()

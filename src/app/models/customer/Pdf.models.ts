@@ -1,9 +1,9 @@
-export interface Pdf
+export class Pdf
 {
   idPdf: number
   title: string
   content: string
-  idCustomer: number
+  customer: string
   idEmployee: number
 }
 

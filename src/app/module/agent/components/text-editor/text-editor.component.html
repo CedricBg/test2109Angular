@@ -2,14 +2,14 @@
 
 
 <section class="content-table">
-  <angular-editor [config]="editorConfig" [(ngModel)]="htmlContent">
+  <angular-editor [config]="editorConfig"  [(ngModel)]="htmlContent">
     <ng-template #customButtons let-executeCommandFn="executeCommandFn">
       <ae-toolbar-set>
         <ae-button iconClass="fa fa-table"  title="Ajouter des lignes"
                    (buttonClick)="executeCommandFn('insertHtml', addRow())">
         </ae-button>
-        <ae-button iconClass="fa fa-send"  title="Ajouter des lignes"
-                   (buttonClick)="executeCommandFn('insertHtml', SendRapport())">
+        <ae-button iconClass="fa fa-save"  title="Suavegarder"
+                   (buttonClick)="executeCommandFn('insertHtml', Save())">
         </ae-button>
       </ae-toolbar-set>
     </ng-template>

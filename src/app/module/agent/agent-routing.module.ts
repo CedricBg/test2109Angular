@@ -1,9 +1,11 @@
 import { AgentStatiqueComponent } from './components/agent-statique/agent-statique.component';
 import { NgModule, Component } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, CanActivate } from '@angular/router';
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
 import { AgentComponent } from './agent.component';
 import { InfoAgentComponent } from './components/info-agent/info-agent.component';
+import { AuthGuard } from 'src/app/auth.guard';
+
 
 const routes: Routes = [
   { path : 'statique' , component: AgentStatiqueComponent},

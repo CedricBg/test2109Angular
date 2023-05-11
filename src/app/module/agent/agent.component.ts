@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { StartEndTimeWork } from 'src/app/models/Planning/StartEndTimeWork.models';
 import { Working } from 'src/app/models/Planning/working.models';
+import { Pdf } from 'src/app/models/customer/Pdf.models';
+import { formCreateRapport } from 'src/app/models/customer/Rapport/FormCreateRapport.models';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { AgentService } from 'src/app/services/agent.service';
+import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-agent',
@@ -18,10 +21,24 @@ export class AgentComponent implements OnInit {
   customer: string
   isWorking!: Boolean
   dataIsWorking: Working = new Working()
+  form: formCreateRapport = new formCreateRapport()
   private subscriptions: Subscription[] = [];
-  constructor(private _agentService: AgentService) {}
+  firstName: string = sessionStorage.getItem('firstName').toLowerCase()
+  surName : string = sessionStorage.getItem('surName').toLowerCase()
+  agent : string = this.firstName+'_'+this.surName
+  timeStamp: any = Date.now();
+  title: string = this.agent+"_"+this.timeStamp
+  pdf: Pdf = {
+    idPdf: 0,
+    title: this.title,
+    content: "",
+    customer: null,
+    idEmployee: 0
+  }
+  constructor(private _agentService: AgentService, private _employee: EmployeeService) {}
 
   ngOnInit(): void {
+
     this.idEmployee = Number.parseInt(sessionStorage.getItem("id"))
     this.formAtWork.EmployeeId =  this.idEmployee
     //On récupere la liste des clients ou l'agent est affecté
@@ -46,9 +63,15 @@ export class AgentComponent implements OnInit {
     }))
   }
 
+
   //On enovi les données pour le début de service l'appel a StartWork va nour regirigé vers la page ou on affiche le rapport
   StartWork()
   {
+    this.form.idEmployee = this.idEmployee
+    this.form.customer = this.pdf.customer
+    this.form.firstName = this.firstName
+    this.form.lastName = this.surName
+    this.form.title = this.title
     const customer = this.listCustomers.find(c=>c.nameCustomer === this.customer)
     this.customer = customer.nameCustomer
     this.formAtWork.EmployeeId = this.idEmployee
@@ -58,6 +81,9 @@ export class AgentComponent implements OnInit {
       this.isWorking = data.isWorking
       this.dataIsWorking = data
       this.dataIsWorking.nameCustomer = this.CurrentCustomer(data.customerId)
+      this.pdf.customer = this.dataIsWorking.nameCustomer
+      this.pdf.idEmployee = this.idEmployee
+      this.Save()
       }
     }))
   }
@@ -75,11 +101,21 @@ export class AgentComponent implements OnInit {
       next : (data: Boolean)=>{
         if(data === true)
         {
+          this.subscriptions.push(this._employee.CheckForRapport(this.idEmployee).subscribe({
+            next : (data: Pdf)=>{
+              this._employee.SendRapport(data)
+          }
+          }))
           this.isWorking = false
           this.customer = null
         }
       }
     }))
+  }
+
+  SendRapport(pdf: Pdf)
+  {
+    this.subscriptions.push(this._employee.SendRapport(pdf))
   }
 
   //on se désabobnne de tout à la fermeture
@@ -88,6 +124,14 @@ export class AgentComponent implements OnInit {
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe()
     })
+  }
+//On crée le rapport quand on prend son service
+  Save()
+  {
+    this.timeStamp = Date.now()
+    this.title= this.agent+"_"+this.timeStamp
+    this.pdf.title = this.title
+    this._employee.SaveRapport(this.pdf)
   }
 }
 

@@ -24,6 +24,7 @@ export class EmployeeService implements OnInit {
   ngOnInit(): void { }
 
   private isUpdatedSubject: Subject<DetailedEmployee> = new Subject<DetailedEmployee>()
+  private isSaveRapportSubject: Subject<Pdf> = new Subject<Pdf>();
   private AllSubject: Subject<Employee[]> = new Subject<Employee[]>()
 
   private JsonHeader()
@@ -34,6 +35,11 @@ export class EmployeeService implements OnInit {
       })
     };
     return httpOptions
+  }
+
+  GetSavedData()
+  {
+    return this.isSaveRapportSubject.asObservable();
   }
 
   getUpdateData()
@@ -53,7 +59,6 @@ export class EmployeeService implements OnInit {
 
   UploadPoto(file: FormData)
   {
-    console.log(file)
     this._httpClient.post<string>(environment.baseAdres+ 'Employee/uploadFile', file).subscribe(
       {
         next : (data: string)=> {
@@ -93,9 +98,22 @@ export class EmployeeService implements OnInit {
       }
     })
   }
+  SaveRapport(pdf: Pdf)
+  {
+    this._httpClient.post<Pdf>(environment.baseAdres+ 'pdf/saveRapport', pdf).subscribe({
+      next: (data: Pdf) =>{
+        this.isSaveRapportSubject.next(data);
+      }
+    })
+  }
 
   SendRapport(pdf: Pdf)
   {
     return this._httpClient.post(environment.baseAdres + 'pdf', pdf).subscribe()
+  }
+
+  CheckForRapport(id: number)
+  {
+    return this._httpClient.get<Pdf>(environment.baseAdres+ 'pdf/checkRapport/'+id)
   }
 }

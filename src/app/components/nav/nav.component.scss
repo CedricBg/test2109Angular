@@ -43,7 +43,7 @@
 
 .button-container {
   display:flex;
-  justify-content: end;
+  justify-content: flex-end;
   padding-right: 2%;
   padding-top: 2vh;
   width: 20vw;
@@ -75,7 +75,7 @@
   }
   .button-container {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     padding-right: 2%;
     padding-top: 2px;
     width: 40px;
