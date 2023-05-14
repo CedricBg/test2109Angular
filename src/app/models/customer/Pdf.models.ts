@@ -3,7 +3,8 @@ export class Pdf
   idPdf: number
   title: string
   content: string
-  customer: string
+  siteId: number
   idEmployee: number
+  dateCreate?: Date
 }
 

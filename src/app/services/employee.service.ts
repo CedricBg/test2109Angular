@@ -109,6 +109,7 @@ export class EmployeeService implements OnInit {
 
   SendRapport(pdf: Pdf)
   {
+
     return this._httpClient.post(environment.baseAdres + 'pdf', pdf).subscribe()
   }
 

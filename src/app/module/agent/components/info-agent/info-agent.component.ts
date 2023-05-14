@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Pdf } from 'src/app/models/customer/Pdf.models';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { AgentService } from 'src/app/services/agent.service';
 import { environment } from 'src/environments/environment';
+import { saveAs } from 'file-saver';
+import { Site } from 'src/app/models/customer/site.models';
 
 @Component({
   selector: 'app-info-agent',
@@ -10,18 +14,40 @@ import { environment } from 'src/environments/environment';
 })
 export class InfoAgentComponent implements OnInit {
 
+  listRapport: Pdf[] = []
   constructor(private _agentService: AgentService) {}
   idEmployee!: number
-  customersList: Customers[] = []
+  siteList: Site[] = []
+  private subscriptions: Subscription[] = [];
+
   ngOnInit(): void {
     this.idEmployee = Number.parseInt(sessionStorage.getItem("id"))
-    this._agentService.GetCustomers(this.idEmployee).subscribe({
-      next : (data: Customers[])=>{
-        this.customersList = data
+    this.subscriptions.push(this._agentService.GetSites(this.idEmployee).subscribe({
+      next : (data: Site[])=>{
+        this.siteList = data
+      }
+    }))
+    this.subscriptions.push(this._agentService.GetRapport(this.idEmployee).subscribe({
+      next: (data: Pdf[]) =>{
+        this.listRapport = data
+      }
+    }))
+  }
+  //on va télécharger un rapport avec son id
+  loadRapport(id: number)
+  {
+    this._agentService.loadRapport(id).subscribe({
+      next: (data: Blob)=>{
+        const filename = 'Rapport.pdf';
+        saveAs(data, filename);
       }
     })
   }
 
-
-
+  ngOnDestroy()
+  {
+    this.subscriptions.forEach(element => {
+      element.unsubscribe
+    })
+  }
 }

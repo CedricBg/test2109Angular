@@ -5,9 +5,23 @@
         <th>Site(s) attribué</th>
       </tr>
     </thead>
-    <tbody *ngFor="let customer of customersList">
+    <tbody *ngFor="let site of siteList">
       <tr>
-        <td>{{customer.nameCustomer}}</td>
+        <td>{{site.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="contentTable" >
+  <table >
+    <thead>
+      <tr>
+        <th>Rapport de site</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let rapport of listRapport">
+      <tr>
+        <td (click)="loadRapport(rapport.idPdf)">{{rapport.title}}</td>
       </tr>
     </tbody>
   </table>

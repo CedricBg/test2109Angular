@@ -4,16 +4,16 @@
     <div >
       <app-info-agent></app-info-agent>
     </div>
-    <div >
+    <div>
       <mat-form-field appearance="fill">
         <mat-label>Client</mat-label>
-        <mat-select [(ngModel)]="customer">
-          <mat-option *ngFor="let cust of listCustomers" autofocus [value]="cust.nameCustomer">
-            {{cust.nameCustomer}}
-          </mat-option>
+        <mat-select [(ngModel)]="site">
+            <mat-option *ngFor="let site of listSite" [value]="site.name">
+              {{site.name}}
+            </mat-option>
         </mat-select>
       </mat-form-field>
-      <p><button [disabled]="customer == null"  (click)="StartWork()">Prise de service</button></p>
+      <p><button [disabled]="site == null"  (click)="StartWork()">Prise de service</button></p>
     </div>
     <div>
       <router-outlet></router-outlet>
@@ -23,7 +23,7 @@
   <div class="connected" *ngIf="isWorking == true">
     <button mat-raised-button color="primary" (click)="EndWork()" >Fin de service</button>
     <div>
-      <app-text-editor [dataIsWorking]="dataIsWorking" [form]="form"></app-text-editor>
+      <app-text-editor></app-text-editor>
     </div>
   </div>
 </div>

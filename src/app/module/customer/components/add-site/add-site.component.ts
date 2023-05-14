@@ -102,11 +102,9 @@ export class AddSiteComponent implements OnInit {
       this._infoService.getLanguages(this.listLanguage, this.formClientSite)
       this.siteCreated = this.formClientSite.value
       this.siteCreated.customerIdCreate = this.customer.customerId
-      console.log(this.formClientSite.value)
       this._custService.CreateSite(this.siteCreated).subscribe({
         next: (data : number) =>{
           this.idSite = data
-          console.log(this.idSite)
           this.AddContactPersonSite()
         }
       })

@@ -1,7 +1,7 @@
 export class StartEndTimeWork{
-  StartId: number
-  ArrivingTime: Date
-  EndTime: Date
-  CustomerId: number
-  EmployeeId: number
+  startId: number
+  arrivingTime: Date
+  endTime: Date
+  siteId: number
+  employeeId: number
 }

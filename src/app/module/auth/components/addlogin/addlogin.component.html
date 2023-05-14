@@ -7,7 +7,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Mot de passe</mat-label>
-      <input formControlName="password" matInput>
+      <input formControlName="password" type="password" matInput>
     </mat-form-field>
     <button mat-raised-button [disabled]="!formLogin.valid" color="primary" (click)="sendform()" >Send</button>
   </form>
