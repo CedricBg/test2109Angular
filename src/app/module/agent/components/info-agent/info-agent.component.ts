@@ -27,11 +27,11 @@ export class InfoAgentComponent implements OnInit {
         this.siteList = data
       }
     }))
-    this.subscriptions.push(this._agentService.GetRapport(this.idEmployee).subscribe({
+    setTimeout(() => {this.subscriptions.push(this._agentService.GetRapport(this.idEmployee).subscribe({
       next: (data: Pdf[]) =>{
         this.listRapport = data
       }
-    }))
+    }))},1000)
   }
   //on va télécharger un rapport avec son id
   loadRapport(id: number)

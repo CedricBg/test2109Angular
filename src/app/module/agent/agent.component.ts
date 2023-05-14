@@ -1,6 +1,6 @@
 import { GenerateHtml } from 'src/app/Utilities/GenerateHtml';
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { StartEndTimeWork } from 'src/app/models/Planning/StartEndTimeWork.models';
 import { Working } from 'src/app/models/Planning/working.models';
 import { Pdf } from 'src/app/models/customer/Pdf.models';
@@ -29,6 +29,7 @@ export class AgentComponent implements OnInit {
   firstName: string = sessionStorage.getItem('firstName').toLowerCase()
   surName : string = sessionStorage.getItem('surName').toLowerCase()
   agent : string = this.firstName+'_'+this.surName
+  private subjectSendRapport: Subscription = new Subscription()
   title: string
   html!: GenerateHtml
   pdf: Pdf = {
@@ -94,15 +95,28 @@ export class AgentComponent implements OnInit {
   //fin de service rapport terminé plus modifiable
   //pour affichage nom du client mis a null
   EndWork(){
-    this.subscriptions.push(this._agentService.EndWork(this.idEmployee).subscribe({
+    const close = confirm("Vouler vous vraiment quitter ? Le rapport sera terminé en cas d'erreur vous devrez commencer un nouveau rapport")
+    if(close === true)
+    {
+    this.subjectSendRapport = this._agentService.EndWork(this.idEmployee).subscribe({
       next : (data: Boolean)=>{
         if(data === true)
         {
           this.isWorking = false
           this.site = null
+          //Observable du save dans destroy de text-editor
+          this.subscriptions.push(this._employee.GetSavedData().subscribe({
+            next: (data: Pdf)=>{
+              this.pdf = data
+            }
+          }))
+          //on met un délai pour s'assuré que les donnèes du destroy de text-editor soit bien dans la db avant la sauvegarde sur pdf
+          //
+          setTimeout(() => {this._employee.SendRapport(this.pdf)},1000)
         }
       }
-    }))
+    })
+  }
   }
 
   //on se désabobnne de tout à la fermeture

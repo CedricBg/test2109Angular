@@ -2,7 +2,7 @@ import { Pdf } from './../../../../models/customer/Pdf.models';
 import { Time } from '@angular/common';
 import { Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, EventEmitter, Output} from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { Subscription, Timestamp, Subject } from 'rxjs';
+import { Subscription, Timestamp, Subject, first } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Working } from 'src/app/models/Planning/working.models';
 import { formCreateRapport } from 'src/app/models/customer/Rapport/FormCreateRapport.models';
@@ -36,22 +36,24 @@ export class TextEditorComponent implements OnInit {
 
   ngOnInit(): void
   {
-
-    {
-      this.subscribtions.push(this._employee.CheckForRapport(this.idEmployee).subscribe({
-        next: (data: Pdf)=> {
+      this.subscribtions.push(this._employee.CheckForRapport(this.idEmployee).pipe(first()).subscribe({
+        next: async (data: Pdf)=> {
           this.pdf = data
-          this.htmlContent = data.content
+          //Récupère le contenu html à affiché
+          this.htmlContent = await data.content
+          //sauvegarde pour avoir les bonnes donnèes sauvegardé si la page est rechargé par l'utilisateur ou c'est déconnecté
+          if(!(data == null)){
+            this.Saves(data)
+          }
         }
       }))
-    }
 
   }
 
-  Saves()
+  Saves(pdf: Pdf)
   {
     this.pdf.content = this.htmlContent
-    this._employee.SaveRapport(this.pdf)
+    this._employee.SaveRapport(pdf)
   }
 
   editorConfig: AngularEditorConfig = {
@@ -89,6 +91,8 @@ export class TextEditorComponent implements OnInit {
     this.subscribtions.forEach(element => {
       element.unsubscribe()
     });
+    this.pdf.content = this.htmlContent
+    this.Saves(this.pdf)
   }
 }
 

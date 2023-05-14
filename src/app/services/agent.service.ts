@@ -21,7 +21,6 @@ export class AgentService {
   private JsonHeader()
   {
       return new HttpHeaders({ 'Content-Type': 'application/json' });
-
   }
 
   IsWorking(id: number)
