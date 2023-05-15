@@ -36,8 +36,11 @@ export class LoginComponent implements OnInit {
 
   Login()
   {
+    if(this.formLogin.valid)
+    {
     this._authService.Login(this.formLogin.value)
     this.CloseDialogBox()
+    }
   }
 
 }

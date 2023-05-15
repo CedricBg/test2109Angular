@@ -47,19 +47,21 @@ html, body {
   background-color: #FBFBFB;
 }
 
-
 .content
 {
-min-height: 94vh;
+min-height: 100vh;
 }
 
 footer{
+  position: absolute; top: 94vh; left:20vw;
   display: flex;
   justify-content: center;
   align-items:center;
   height : 6vh;
   color:wheat;
-  background-color:black;
+  background-color:#326290;
+  border-radius: 5px 5px 0px 0px;
+  width:60vw;
 }
 
 

@@ -36,18 +36,17 @@ export class TextEditorComponent implements OnInit {
 
   ngOnInit(): void
   {
-      this.subscribtions.push(this._employee.CheckForRapport(this.idEmployee).pipe(first()).subscribe({
-        next: async (data: Pdf)=> {
+    setTimeout(() => {this.subscribtions.push(this._employee.CheckForRapport(this.idEmployee).pipe(first()).subscribe({
+        next: (data: Pdf)=> {
           this.pdf = data
           //Récupère le contenu html à affiché
-          this.htmlContent = await data.content
+          this.htmlContent = data.content
           //sauvegarde pour avoir les bonnes donnèes sauvegardé si la page est rechargé par l'utilisateur ou c'est déconnecté
           if(!(data == null)){
             this.Saves(data)
           }
         }
-      }))
-
+      }))},500)
   }
 
   Saves(pdf: Pdf)

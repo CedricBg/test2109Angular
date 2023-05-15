@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Output, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -6,12 +7,25 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
+  connected : boolean = this._AuthSercice.isConnected
 
+  constructor(public _AuthSercice : AuthService){}
 
-  title = 'test2109';
+  ngOnInit(): void {
+    if(this.connected)
+    {
+      this._AuthSercice.redirectTo()
+    }
+  }
 
+  loggedIn()
+  {
+    this.connected = this._AuthSercice.isConnected
+  }
+
+  title = 'Protect group';
 
 
 }

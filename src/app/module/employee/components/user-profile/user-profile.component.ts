@@ -1,5 +1,5 @@
 import { AuthService } from './../../../../services/auth.service';
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit,Inject, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -8,22 +8,22 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  name! : string;
 
   constructor(private _authService : AuthService, public dialogRef: MatDialogRef<UserProfileComponent>,
     @Inject(MAT_DIALOG_DATA) data) { }
-  name! : string
-  ngOnInit(): void {
-    this.name = sessionStorage.getItem('firstName')
-  }
 
+  ngOnInit(): void {
+    this.name = sessionStorage.getItem('firstName');
+  }
 
   CLosedDialogBox()
   {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
   Logout(): void {
-    this._authService.Logout()
-    this.CLosedDialogBox()
+    this._authService.Logout();
+    this.CLosedDialogBox();
   }
 }

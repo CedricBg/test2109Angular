@@ -4,12 +4,11 @@
   display: flex;
   justify-content: flex-start;
   color:wheat;
-  background-color:black;
-
-}
-.nav{
+  background-color:#326290 ;
+  position: absolute;top: 0; left:0;
   width:100vw;
 }
+
 .nav h1{
   margin-right: 40vw;
   padding-right: 10vw;
@@ -31,13 +30,13 @@
   border : none;
   font-family: 'DM Serif Display', serif;
   font-weight: 300;
-  border-radius: 7px;
+  border-radius: 20px;
   letter-spacing : 0.1em;
   width: 10vw;
 }
 
 .login button:hover{
-  background:white;
+  background:rgb(247, 212, 147);
   cursor: pointer;
 }
 

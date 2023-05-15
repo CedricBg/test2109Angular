@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { AppComponent } from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,6 @@ export class AuthService {
     this.connectedSubject.next(this.isConnected)
   }
 
-
   returnData! : User
   AddLogin(form : AddLogin)
   {
@@ -46,7 +46,6 @@ export class AuthService {
     diallogConfig.height = '300';
     diallogConfig.width = '400px';
     const dialogRef = this.dialog.open(LoginComponent,diallogConfig);
-
   }
 
 
@@ -63,17 +62,24 @@ export class AuthService {
           sessionStorage.setItem('id', this.returnData.id.toString())
           sessionStorage.setItem('dimin', this.returnData.dimin)
           this.emitSubject()
-          if(this.returnData.dimin == "SB")
-          {
-            this._router.navigate(["agent"])
-          }
-          else
-          {
-            this._router.navigate([this.returnData.dimin])
-          }
+          //this.AppCompo.loggedIn()
+          this.redirectTo()
         }
       }
     })
+  }
+
+  redirectTo()
+  {
+    const user = sessionStorage.getItem('dimin')
+    if(user == "SB")
+    {
+      this._router.navigate(["agent"])
+    }
+    else
+    {
+      this._router.navigate([user])
+    }
   }
 
   Logout()

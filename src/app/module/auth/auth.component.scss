@@ -1,13 +1,13 @@
 .contentAuth{
   width: 100vw;
-  min-height: 86vh;
+  min-height: 100vh;
   background-image:  url('./../../../assets/pexelsCam1.jpg');
 }
 .transparent_div
 {
   width: 100vw;
-  min-height: 86vh;
-  background: rgba(62, 62, 66, 0.7);
+  min-height: 100vh;
+  background: rgba(62, 62, 66, 0.4);
 }
 @media screen and (min-width: 1930px ) {
   .contentAuth{
