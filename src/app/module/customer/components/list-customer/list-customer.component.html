@@ -79,11 +79,11 @@
                 <p>{{elt.firstName}} {{elt.lastName}}</p>
                 <p *ngIf="elt.email.length >0"  class="email">Email: </p>
                 <p *ngFor="let elt1 of elt.email">
-                  <i class="fas fa-phone"></i>{{elt1.emailAddress}}
+                  {{elt1.emailAddress}}
                 </p>
                 <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
                 <p *ngFor="let elt1 of elt.phone">
-                  <i class="fas fa-phone"></i>{{elt1.number}}
+                  {{elt1.number}}
                 </p>
               </div>
               <div *ngIf="elt.emergencyContact">
@@ -91,7 +91,7 @@
               <p>{{elt.firstName}} {{elt.lastName}}</p>
               <p *ngIf="elt.email.length >0"  class="email">Email: </p>
               <p *ngFor="let elt1 of elt.email">
-                <i class="fas fa-phone"></i>{{elt1.emailAddress}}
+                {{elt1.emailAddress}}
               </p>
               <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
               <p *ngFor="let elt1 of elt.phone">
@@ -103,11 +103,11 @@
               <p>{{elt.firstName}} {{elt.lastName}}</p>
               <p *ngIf="elt.email.length >0"  class="email">Email: </p>
               <p *ngFor="let elt1 of elt.email">
-                <i class="fas fa-phone"></i>{{elt1.emailAddress}}
+                {{elt1.emailAddress}}
               </p>
               <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
               <p *ngFor="let elt1 of elt.phone">
-                <i class="fas fa-phone"></i>{{elt1.number}}
+                {{elt1.number}}
               </p>
             </div>
           </div>

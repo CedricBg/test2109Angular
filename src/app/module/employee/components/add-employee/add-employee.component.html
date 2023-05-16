@@ -7,15 +7,16 @@
       <mat-dialog-content>
       <div>
         <mat-form-field >
-          <mat-label>Prénom : </mat-label><input formControlName="firstName" class="input" matInput>
+          <mat-label>Prénom : </mat-label><input formControlName="firstName"  class="input" matInput>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Nom : </mat-label><input formControlName="surName" class="input" matInput>
+          <mat-label>Nom : </mat-label>
+          <input matInput formControlName="surName" class="input" matInput>
         </mat-form-field>
       </div>
       <div>
         <mat-form-field>
-          <mat-label>Date de naissance : </mat-label><input type="date" formControlName="birthDate" class="input" matInput>
+          <mat-label>Date de naissance : </mat-label><input matInput formControlName="birthDate"  class="input" >
         </mat-form-field>
         <mat-form-field>
           <mat-label>Nr° de registre national : </mat-label><input formControlName="registreNational" class="input" matInput>
