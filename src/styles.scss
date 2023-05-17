@@ -49,20 +49,19 @@ html, body {
 
 .content
 {
-min-height: 100vh;
+min-height: 94vh;
 }
 
 footer{
-  position: absolute; top: 94vh; left:20vw;
   display: flex;
   justify-content: center;
   align-items:center;
   height : 6vh;
   color:wheat;
   background-color:#326290;
-  border-radius: 5px 5px 0px 0px;
-  width:60vw;
+  width:100vw;
 }
+
 
 
 mat-dialog-container {

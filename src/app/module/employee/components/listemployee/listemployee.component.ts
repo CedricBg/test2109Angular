@@ -80,6 +80,11 @@ export class ListemployeeComponent implements OnInit {
   }
   DeleteUSer(id: number)
   {
-    this._serviceEmployee.DeleteUser(id)
+    const deletes = confirm("Supprimer l'utilisateur ?")
+    if(deletes)
+    {
+      this._serviceEmployee.DeleteUser(id)
+    }
+
   }
 }

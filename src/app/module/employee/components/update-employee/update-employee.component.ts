@@ -1,3 +1,4 @@
+import { SendFoto } from './../../../../models/Employee/SendFoto.models';
 import { Language } from './../../../../models/language.models';
 import { InformationsService } from 'src/app/services/informations.service';
 import { Role } from 'src/app/models/Role.models';
@@ -9,7 +10,7 @@ import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Employee } from 'src/app/models/employee.models';
 import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { Observable } from 'rxjs';
+import { Observable, Timestamp } from 'rxjs';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { AddloginComponent } from 'src/app/module/auth/components/addlogin/addlogin.component';
 import * as dayjs from 'dayjs';
@@ -36,7 +37,7 @@ export class UpdateEmployeeComponent implements OnInit {
   listRoles: Role[]
   listLanguages: Language[]
   selectedRole!: string
-
+  infoFoto: SendFoto = new SendFoto()
 
 
   constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _InfoService : InformationsService, public dialog : MatDialog ,private _AddressService : AddressService,
@@ -52,6 +53,7 @@ export class UpdateEmployeeComponent implements OnInit {
     this.GetListCountrys()
     this.GetRoles()
     this.GetOne(this.idEmployee)
+
   }
   CloseDialogBox(): void {
     this.dialogRef.close();
@@ -189,9 +191,10 @@ export class UpdateEmployeeComponent implements OnInit {
   }
   uploadFile(event: any)
   {
-    const day = new Date()
     const formData = new FormData();
-    formData.append('file',event.target.files[0],event.target.files[0].name)
+    const timeStamp =  Date.now()
+    formData.append('idEmployee', this.idEmployee.toString());
+    formData.append('Foto',event.target.files[0],event.target.files[0].name);
     this._serviceEmployee.UploadPoto(formData)
   }
 

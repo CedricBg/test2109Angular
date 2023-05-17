@@ -111,11 +111,11 @@
       <button mat-raised-button color="primary" (click)="CloseDialogBox()" class="sendButton">Envoyer</button>
     </div>
     </form>
-
-      <div>
-        <input type="file" (change)="uploadFile($event)" >
-      </div>
-
+    <div>
+    <form enctype="multipart/form-data">
+        <input type="file" (change)="uploadFile($event)"  >
+    </form>
+  </div>
       <section>
         <button type="button" (click)="AddLogin(SelectedEmployee.id)" mat-raised-button color="primary">Ajouter les accès</button>
       </section>

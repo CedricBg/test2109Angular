@@ -1,3 +1,5 @@
+
+
 .search
 {
   padding-left: 2vw;
@@ -42,6 +44,7 @@ td{
 .cards{
   display: flex;
   padding-left: 2vw;
+  flex-wrap: wrap;
 }
 .AddPerson{
   display: flex;
@@ -59,62 +62,52 @@ td{
   color: #17A2B8;
 }
 
-
-
 .card {
+  display: flex;
+  flex-flow: column wrap;
   margin-left: 2vw;
   width:50vw;
   background-color: #f2f2f2;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   font-family: Arial, sans-serif;
+
 }
 
-.card img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 20px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+.header{
+  width:100%;
+  height:5vh;
+  background-color:#326290;
+  text-align: center;
+  color: wheat;
 }
 
-.details {
+.footer{
+  width:100%;
+  height:5vh;
+  background-color:#326290;
+
+}
+#photo{
+  margin-right: 2vh;
+  margin-left: 1vh;
+  border: 1px black solid;
+  height:120px;
+  width:100px;
+}
+
+.details{
+  flex-grow: 1;
+}
+
+.contenu{
+  padding-top: 2vh;
+  padding-bottom: 2vh;
   display: flex;
-  flex-direction: column;
-  padding-left: 1vw;
-}
-
-.details h2 {
-  font-size: 32px;
-  margin-bottom: 10px;
-}
-
-.details p {
-  font-size: 18px;
-  margin: 5px 0;
-  display: flex;
+  flex-wrap: wrap;
   align-items: center;
 }
 
-.details p i {
-  margin-right: 10px;
-}
 
-.position {
-  color: #555;
-  font-weight: bold;
-}
-
-.email, .phone {
-  color: #999;
-}
-
-.rep
-{
-
-}

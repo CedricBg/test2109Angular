@@ -7,9 +7,9 @@ export class GenerateHtml
       <table style="width:100%;">
         <thead>
           <tr style="display: table-row;">
-            <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 15%; background-color:#00468C;color:#F5DEB3;">Heure de début</th>
-            <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 15%; background-color:#00468C;color:#F5DEB3;">Heure de fin</th>
-            <th style="border-bottom:1px black solid; width:70%;height:30px; background-color: #00468C; color:#F5DEB3;">Message</th>
+            <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 15%; background-color:#326290;color:#F5DEB3;">Heure de début</th>
+            <th style="border-bottom:1px black solid; border-bottom:1px black solid; width: 15%; background-color:#326290;color:#F5DEB3;">Heure de fin</th>
+            <th style="border-bottom:1px black solid; width:70%;height:30px; background-color: #326290; color:#F5DEB3;">Message</th>
           </tr>
         </thead>
         <tbody>

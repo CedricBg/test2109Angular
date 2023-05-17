@@ -11,6 +11,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject, Subject} from 'rxjs';
 import { Employee } from '../models/employee.models';
 import { Role } from '../models/Role.models';
+import { error } from 'console';
+import { SendFoto } from '../models/Employee/SendFoto.models';
 
 
 
@@ -59,10 +61,14 @@ export class EmployeeService implements OnInit {
 
   UploadPoto(file: FormData)
   {
-    this._httpClient.post<string>(environment.baseAdres+ 'Employee/uploadFile', file).subscribe(
+    console.log(file)
+    this._httpClient.post<string>(environment.baseAdres+ 'Employee/UploadFile', file).subscribe(
       {
         next : (data: string)=> {
-          console.log(data)
+          alert(data)
+        },
+        error : (data : string) =>{
+          alert(data)
         }
       }
     )
