@@ -40,7 +40,7 @@
     <div class="card">
       <div class="header"> <h2>{{SelectedEmployee.surName}} {{SelectedEmployee.firstName}}</h2></div>
       <div class="contenu">
-        <div id="photo"></div>
+        <div id="photo"><img [attr.src]="safeImageUrl" alt="Photo"></div>
         <div class="details">
           <p class="email">Rue: {{SelectedEmployee.address.sreetAddress}}</p>
           <p class="email">Code Postal: {{SelectedEmployee.address.zipCode}}</p>

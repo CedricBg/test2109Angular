@@ -48,7 +48,7 @@ export class AgentService {
   }
   loadRapport(id: number)
   {
-    const options = { responseType: 'blob' };
+
     return this._Http.get(environment.baseAdres+ 'pdf/loadRapport/'+id,{responseType:'blob'})
 
   }

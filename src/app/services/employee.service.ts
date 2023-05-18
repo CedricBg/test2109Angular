@@ -13,6 +13,7 @@ import { Employee } from '../models/employee.models';
 import { Role } from '../models/Role.models';
 import { error } from 'console';
 import { SendFoto } from '../models/Employee/SendFoto.models';
+import { env } from 'process';
 
 
 
@@ -38,12 +39,10 @@ export class EmployeeService implements OnInit {
     };
     return httpOptions
   }
-
   GetSavedData()
   {
     return this.isSaveRapportSubject.asObservable();
   }
-
   getUpdateData()
   {
     return this.isUpdatedSubject.asObservable();
@@ -52,13 +51,11 @@ export class EmployeeService implements OnInit {
   {
     return this.AllSubject.asObservable();
   }
-
   insert(employee: DetailedEmployee){
     this._httpClient.post<string>(environment.baseAdres+ 'Employee/insert', employee).subscribe(value =>{
       this.get()
     })
   }
-
   UploadPoto(file: FormData)
   {
     console.log(file)
@@ -73,7 +70,10 @@ export class EmployeeService implements OnInit {
       }
     )
   }
-
+  DownLoadFoto(id: number)
+  {
+    return this._httpClient.get(environment.baseAdres + 'employee/loadFile/'+id,{responseType:'blob'})
+  }
   get()
   {
     return this._httpClient.get<Employee[]>(environment.baseAdres+ 'Employee/all').subscribe({
@@ -82,19 +82,16 @@ export class EmployeeService implements OnInit {
       }
     })
   }
-
   getOne(id: number): Observable<DetailedEmployee>
   {
     return this._httpClient.get<DetailedEmployee>(environment.baseAdres+ 'Employee/GetOne/'+id)
   }
-
   DeleteUser(id: number)
   {
     return this._httpClient.delete(environment.baseAdres+ 'Employee/deactiveuser/'+id).subscribe(value =>{
       this.get()
     })
   }
-
   UpdateUser(employee: DetailedEmployee)
   {
     return this._httpClient.put(environment.baseAdres + 'Employee/update', employee).subscribe({
@@ -112,15 +109,13 @@ export class EmployeeService implements OnInit {
       }
     })
   }
-
   SendRapport(pdf: Pdf)
   {
-
     return this._httpClient.post(environment.baseAdres + 'pdf', pdf).subscribe()
   }
-
   CheckForRapport(id: number)
   {
     return this._httpClient.get<Pdf>(environment.baseAdres+ 'pdf/checkRapport/'+id)
   }
+
 }

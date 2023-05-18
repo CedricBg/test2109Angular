@@ -1,12 +1,13 @@
 import { UpdateEmployeeComponent } from './../update-employee/update-employee.component';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/models/employee.models';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { Subscription } from 'rxjs';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-listemployee',
@@ -21,9 +22,9 @@ export class ListemployeeComponent implements OnInit {
   subscriptionUpdate: Subscription
   subscriptionAll: Subscription
   role: string
+  safeImageUrl: SafeUrl
 
-
-  constructor(private _serviceEmployee : EmployeeService, public dialog : MatDialog) { }
+  constructor(private _serviceEmployee : EmployeeService, public dialog : MatDialog, private _DomSanitizer: DomSanitizer ) { }
 
   ngOnInit(): void {
     this.role = sessionStorage.getItem('dimin')
@@ -47,6 +48,18 @@ export class ListemployeeComponent implements OnInit {
     this._serviceEmployee.getOne(id).subscribe({
         next : ( data : DetailedEmployee)  => {
         this.SelectedEmployee = data
+        this._serviceEmployee.DownLoadFoto(id).subscribe({
+          next : (data : Blob)=>{
+            if(!(data == null))
+            {
+              const imageUrl: string = URL.createObjectURL(data);
+              this.safeImageUrl = this._DomSanitizer.bypassSecurityTrustUrl(imageUrl);
+            }
+            else{
+              this.safeImageUrl =null
+            }
+          }
+        })
       }
     })
   }
