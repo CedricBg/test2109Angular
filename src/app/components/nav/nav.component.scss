@@ -2,7 +2,6 @@
 .nav{
   height: 8vh;
   display: flex;
-  justify-content: flex-start;
   color:wheat;
   background-color:#326290 ;
   position: absolute;top: 0; left:0;
@@ -10,7 +9,7 @@
 }
 
 .nav h1{
-  margin-right: 40vw;
+  margin-right: 45vw;
   padding-right: 10vw;
   padding-top: 2vh;
   padding-left: 10vw;
@@ -40,16 +39,6 @@
   cursor: pointer;
 }
 
-.button-container {
-  display:flex;
-  justify-content: flex-end;
-  padding-right: 2%;
-  padding-top: 2vh;
-  width: 20vw;
-}
-.button-container button {
-  background:wheat ;
-}
 
 @media screen and (max-width: 1200px ) {
   .nav{
@@ -58,7 +47,6 @@
 
   .nav h1{
     letter-spacing : 0.1em;
-    margin-right: 40vw;
     padding-right: 1vw;
     padding-top: 1vh;
     padding-left: 8vw;
@@ -72,32 +60,26 @@
     width: 100px;
     border: none;
   }
-  .button-container {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 2%;
-    padding-top: 2px;
-    width: 40px;
-    border: 1px white solid;
-  }
-
 }
 
-  @media screen and (max-width: 606px ) {
+  @media screen and (max-width: 680px ) {
     .nav{
       height: 40px;
 
     }
     .nav h1{
       visibility: hidden;
-      margin-right: 0vw;
-      padding-right: 0vw;
+      letter-spacing:normal;
+      width: 0;
+      height: 0;
+    }
+    .login{
+      margin-left:0;
     }
     .login button{
       letter-spacing : 0;
       height: 20px;
       width: 100px;
-      border: none;
     }
 
 }

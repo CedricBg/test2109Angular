@@ -56,7 +56,7 @@ export class ListemployeeComponent implements OnInit {
               this.safeImageUrl = this._DomSanitizer.bypassSecurityTrustUrl(imageUrl);
             }
             else{
-              this.safeImageUrl =null
+              this.safeImageUrl = null
             }
           }
         })
@@ -68,11 +68,14 @@ export class ListemployeeComponent implements OnInit {
   {
     if(this.surName == "")
     {
-      this.ngOnInit()
+      this.ngOnInit();
     }
     else{
       this.listEmployee = this.listEmployee.filter(res=>{
-        return res.surName.toLocaleLowerCase().match(this.surName.toLocaleLowerCase())
+        const reponse = res.surName.toLocaleLowerCase().match(this.surName.toLocaleLowerCase());
+        console.log(this.listEmployee);
+        console.log(reponse);
+        return reponse;
       })
     }
   }

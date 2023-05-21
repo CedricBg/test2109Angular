@@ -1,10 +1,6 @@
 <div class="contentTable" >
   <table >
-    <thead>
-      <tr>
-        <th>Site(s) attribué</th>
-      </tr>
-    </thead>
+    <caption>Site(s) attribué</caption>
     <tbody *ngFor="let site of siteList">
       <tr>
         <td>{{site.name}}</td>
@@ -14,14 +10,10 @@
 </div>
 <div class="contentTable" >
   <table >
-    <thead>
-      <tr>
-        <th>Rapport de site</th>
-      </tr>
-    </thead>
+    <caption>Rapport de site</caption>
     <tbody *ngFor="let rapport of listRapport">
       <tr>
-        <td (click)="loadRapport(rapport.idPdf)">{{rapport.title}}</td>
+        <td class="td" (click)="loadRapport(rapport.idPdf)">{{rapport.title}}</td>
       </tr>
     </tbody>
   </table>

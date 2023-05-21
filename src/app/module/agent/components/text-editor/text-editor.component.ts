@@ -1,11 +1,9 @@
+
 import { Pdf } from './../../../../models/customer/Pdf.models';
-import { Time } from '@angular/common';
-import { Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, EventEmitter, Output} from '@angular/core';
+import { Component, OnInit,} from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
-import { Subscription, Timestamp, Subject, first } from 'rxjs';
+import { Subscription, first } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { Working } from 'src/app/models/Planning/working.models';
-import { formCreateRapport } from 'src/app/models/customer/Rapport/FormCreateRapport.models';
 import { GenerateHtml } from 'src/app/Utilities/GenerateHtml';
 
 
@@ -14,15 +12,17 @@ import { GenerateHtml } from 'src/app/Utilities/GenerateHtml';
 @Component({
   selector: 'app-text-editor',
   templateUrl: './text-editor.component.html',
-  styleUrls: ['./text-editor.component.scss']
+  styleUrls: ['./text-editor.component.scss'],
 })
+
 export class TextEditorComponent implements OnInit {
   laDate: any = new Date().toLocaleDateString()
   htmlContent!: string
   subscribtions: Subscription[] = []
-
   idEmployee = Number(sessionStorage.getItem('id'))
   html: GenerateHtml = new GenerateHtml()
+
+
   pdf: Pdf = {
     idPdf: 0,
     title: '',
@@ -49,41 +49,38 @@ export class TextEditorComponent implements OnInit {
       }))},500)
   }
 
+
   Saves(pdf: Pdf)
   {
     this.pdf.content = this.htmlContent
     this._employee.SaveRapport(pdf)
   }
 
-  editorConfig: AngularEditorConfig = {
+
+   editorConfig: AngularEditorConfig =  {
       editable: true,
-      spellcheck: true,
       height: 'auto',
       minHeight: '50vh',
       maxHeight: 'auto',
-      width: '50vw',
+      width: '100%',
       minWidth: '',
-      translate: 'yes',
-      enableToolbar: true,
-      showToolbar: true,
+      showToolbar: false,
       defaultParagraphSeparator: '',
 
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'times-new-roman', name: 'Times New Roman'},
-        {class: 'calibri', name: 'Calibri'},
-        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-      ],
 
     sanitize: false,
     toolbarPosition: 'top',
-    toolbarHiddenButtons: [['link',
-    'unlink',],['insertHorizontalRule','removeFormat','insertImage','fontSize','insertVideo']]
+    toolbarHiddenButtons: [
+      ['link','unlink',],
+      ['fontsList','insertHorizontalRule','removeFormat','insertImage','fontSize','insertVideo','superscript','subscript','striketroughe']]
   }
+
 
   addRow() {
     this.html.AddLines()
   }
+
+
 
   ngOnDestroy()
   {

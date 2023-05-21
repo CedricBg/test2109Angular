@@ -29,7 +29,7 @@ import { CustomerComponent } from './module/customer/customer.component';
 
   ],
   providers: [
-    { provide : HTTP_INTERCEPTORS, useClass : TieInterceptor, multi : true}
+    { provide : HTTP_INTERCEPTORS, useClass : TieInterceptor, multi : true},
   ],
   bootstrap: [AppComponent]
 })

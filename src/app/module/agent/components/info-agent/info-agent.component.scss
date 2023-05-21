@@ -7,12 +7,23 @@
   margin-top :2vh;
   margin-left: 3vw;
   width: 20vw;
-  border-radius: .6rem;
-  border: 1px black solid;
   display:flex;
 }
 table{
-  width: 100vw;
+  width: 100%;
+
+}
+caption{
+  background-color: antiquewhite;
+  height: 20px;
+  margin-bottom: 10px;
+
+}
+.td{
+  cursor: pointer;
+}
+.td:hover{
+  background-color: #ddd;
 }
 
 @media screen and (max-width: 600px) {

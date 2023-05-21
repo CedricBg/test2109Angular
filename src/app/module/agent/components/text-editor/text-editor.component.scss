@@ -1,14 +1,33 @@
-.titre{
-padding-top: 3vh;
-display: flex;
-justify-content: center;
-width: 80vw;
-height: 40px;
-}
-
 .content-table
 {
-  padding-top: 2vh ;
-  padding-left: 40px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding-top: 4px;
 
+}
+
+#toolBar{
+  display: flex;
+  align-items:last baseline;
+  width: 50%;
+
+}
+
+.icons{
+  color: #326290;
+  align-self: start;
+  margin-right: 2px;
+}
+.angular-editor {
+  width: 50%;
+}
+@media screen and (max-width: 824px){
+.content-table
+{
+  align-items:flex-start;
+}
+.angular-editor {
+  width: 100%;
+}
 }

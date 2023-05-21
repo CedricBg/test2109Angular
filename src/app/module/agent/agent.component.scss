@@ -1,8 +1,13 @@
 
 #contentAgent{
-  position: absolute;top:10vh;
+  margin-top: 10vh;
+  margin-bottom: 2vh;
   width: 100vw;
   min-height: 90vh;
+}
+
+.connected{
+  padding-left: 5px;
 }
 
 #user_interface
@@ -16,21 +21,21 @@
 
 button{
   font-weight:bold ;
-  border-radius: 2px;
+  border-radius: 10px;
   border:none;
-  background-color: black;
-  color: white;
+  background-color: #326290;
+  color: wheat;
   height: 3vh;
-  width: 200px;
+  width: 201px;
   height: 40px;
   cursor: pointer;
-  border-radius: 5px;
+
 }
 @media screen and (max-height: 700px) {
   #contentAgent{
   min-height: 94vh;
-  }
 
+  }
 }
 @media screen and (max-width: 1200px) {
   #contentAgent{

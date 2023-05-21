@@ -2,18 +2,10 @@
 
 
 <section class="content-table">
-  <angular-editor [config]="editorConfig"  [(ngModel)]="htmlContent">
-    <ng-template #customButtons let-executeCommandFn="executeCommandFn">
-      <ae-toolbar-set>
-        <ae-button iconClass="fa fa-table"  title="Ajouter des lignes"
-                   (buttonClick)="executeCommandFn('insertHtml', addRow())">
-        </ae-button>
-        <ae-button iconClass="fa fa-save"  title="Suavegarder"
-                   (buttonClick)="executeCommandFn('insertHtml', Saves(pdf))">
-        </ae-button>
-      </ae-toolbar-set>
-    </ng-template>
+  <div id="toolBar"><mat-icon class="icons" matTooltip="Sauvegarder" (click)=Saves(pdf)>save</mat-icon><mat-icon class="icons" matTooltip="Ajouter des lignes" (click)=addRow()>dehaze</mat-icon ></div>
+  <angular-editor class="angular-editor" [config]="editorConfig"  [(ngModel)]="htmlContent">
   </angular-editor>
+  <div id="toolBar"><mat-icon class="icons" matTooltip="Sauvegarder" (click)=Saves(pdf)>save</mat-icon><mat-icon class="icons" matTooltip="Ajouter des lignes" (click)=addRow()>dehaze</mat-icon ></div>
 </section>
 
 

@@ -28,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 registerLocaleData( localeFr , 'fr-BE');
@@ -66,7 +67,8 @@ registerLocaleData( localeFr , 'fr-BE');
     MatSnackBarModule,
     AngularEditorModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatTooltipModule
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],

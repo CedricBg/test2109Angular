@@ -44,7 +44,7 @@ html, body {
   margin: 0;
   margin: 0;
   font-family: 'DM Serif Display', serif;
-  background-color: #FBFBFB;
+  background-color: whitesmoke;
 }
 
 .content
@@ -62,10 +62,8 @@ footer{
   width:100vw;
 }
 
-
-
 mat-dialog-container {
-  background-color: wheat !important;
+  background-color: #326290 !important;
 }
 
 @media screen and (max-width: 340px ) {

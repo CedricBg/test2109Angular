@@ -13,7 +13,7 @@
             </mat-option>
         </mat-select>
       </mat-form-field>
-      <p><button [disabled]="site == null"  (click)="StartWork()">Prise de service</button></p>
+      <p><button id="button" [disabled]="site == null"   (click)="StartWork()">Prise de service</button></p>
     </div>
     <div>
       <router-outlet></router-outlet>
@@ -21,7 +21,7 @@
 
   </div>
   <div class="connected" *ngIf="isWorking == true">
-    <button mat-raised-button color="primary" (click)="EndWork()" >Fin de service</button>
+    <button  id="button" (click)="EndWork()" >Fin de service</button>
     <div>
       <app-text-editor></app-text-editor>
     </div>
