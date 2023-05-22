@@ -13,10 +13,8 @@
     <div id="message" *ngFor="let message of messages" id="contentMessage">{{message}}</div>
 
     <div id="footerMessage">
-      <form>
-       <textarea class="inputMessage"></textarea>
-       <mat-icon>send</mat-icon>
-      </form>
+       <textarea [(ngModel)]="text" #ctrl="ngModel" class="inputMessage"></textarea>
+       <mat-icon (click)="Send()">send</mat-icon>
     </div>
 
  </section>

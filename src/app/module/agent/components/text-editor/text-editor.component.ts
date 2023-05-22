@@ -1,4 +1,4 @@
-
+import { Message } from './../../../../models/Discussion/Message.models';
 import { Pdf } from './../../../../models/customer/Pdf.models';
 import { Component, OnInit,} from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
@@ -6,7 +6,7 @@ import { Subscription, first } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { MessagesService } from 'src/app/services/messages.service';
 import { GenerateHtml } from 'src/app/Utilities/GenerateHtml';
-
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -23,6 +23,8 @@ export class TextEditorComponent implements OnInit {
   idEmployee = Number(sessionStorage.getItem('id'))
   html: GenerateHtml = new GenerateHtml()
   messages: string[] = []
+  Message: Message = new Message()
+  text: string = ""
   pdf: Pdf = {
     idPdf: 0,
     title: '',
@@ -32,17 +34,16 @@ export class TextEditorComponent implements OnInit {
     dateCreate: null
   }
 
-  constructor(private _employee: EmployeeService, private message : MessagesService) { }
+  constructor(private _employee: EmployeeService, private _message : MessagesService) { }
 
   ngOnInit(): void
   {
     setTimeout(() => {this.subscriptions.push(this._employee.CheckForRapport(this.idEmployee).pipe(first()).subscribe({
         next: (data: Pdf)=> {
           this.pdf = data
-          this.subscriptions.push(this.message.MessagesForASite(this.pdf.siteId).subscribe({
+          this.subscriptions.push(this._message.MessagesForASite(this.pdf.siteId).subscribe({
             next : (data : string[]) =>{
               this.messages = data
-              console.log(this.messages)
             }
           }))
 
@@ -54,6 +55,11 @@ export class TextEditorComponent implements OnInit {
           }
         }
       }))},500)
+      this.subscriptions.push(this._message.GetMessage().subscribe({
+        next : (data : string[])=>{
+          this.messages = data
+        }
+      }));
   }
 
 
@@ -89,7 +95,11 @@ export class TextEditorComponent implements OnInit {
 
   Send()
   {
-
+    this.Message.siteId = this.pdf.siteId
+    this.Message.text = this.text
+    console.log(this.text)
+    this._message.SendNewMessage(this.Message)
+    this.text = ""
   }
 
   ngOnDestroy()
