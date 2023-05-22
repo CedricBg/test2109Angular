@@ -8,4 +8,16 @@
   <div id="toolBar"><mat-icon class="icons" matTooltip="Sauvegarder" (click)=Saves(pdf)>save</mat-icon><mat-icon class="icons" matTooltip="Ajouter des lignes" (click)=addRow()>dehaze</mat-icon ></div>
 </section>
 
+<section >
+
+    <div id="message" *ngFor="let message of messages" id="contentMessage">{{message}}</div>
+
+    <div id="footerMessage">
+      <form>
+       <textarea class="inputMessage"></textarea>
+       <mat-icon>send</mat-icon>
+      </form>
+    </div>
+
+ </section>
 

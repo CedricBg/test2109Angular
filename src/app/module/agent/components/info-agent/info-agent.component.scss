@@ -14,7 +14,7 @@ table{
 
 }
 caption{
-  background-color: antiquewhite;
+  background-color: wheat;
   height: 20px;
   margin-bottom: 10px;
 
@@ -26,11 +26,14 @@ caption{
   background-color: #ddd;
 }
 
+
+
 @media screen and (max-width: 600px) {
 
   .contentTable{
     width: 100%;
     margin-left: 0;
   }
+
 }
 

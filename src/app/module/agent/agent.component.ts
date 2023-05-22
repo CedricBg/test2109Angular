@@ -1,14 +1,14 @@
 import { GenerateHtml } from 'src/app/Utilities/GenerateHtml';
 import { Component, OnInit } from '@angular/core';
-import { Subject, Subscription } from 'rxjs';
+import {  Subscription } from 'rxjs';
 import { StartEndTimeWork } from 'src/app/models/Planning/StartEndTimeWork.models';
 import { Working } from 'src/app/models/Planning/working.models';
 import { Pdf } from 'src/app/models/customer/Pdf.models';
-import { formCreateRapport } from 'src/app/models/customer/Rapport/FormCreateRapport.models';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { AgentService } from 'src/app/services/agent.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Site } from 'src/app/models/customer/site.models';
+
 
 @Component({
   selector: 'app-agent',
@@ -32,6 +32,7 @@ export class AgentComponent implements OnInit {
   private subjectSendRapport: Subscription = new Subscription()
   title: string
   html!: GenerateHtml
+
   pdf: Pdf = {
     idPdf: 0,
     title: '',
@@ -54,13 +55,16 @@ export class AgentComponent implements OnInit {
             this.isWorking = data.isWorking
             }
           }))
+
       }
     }))
+
   }
 
   //On envoi les données pour le début de service l'appel a StartWork va nous redirigé vers la page ou on affiche le rapport
   StartWork()
   {
+
     this.html = new GenerateHtml()
     const site = this.listSite.find(c=>c.name === this.site)
     this.site = site.name

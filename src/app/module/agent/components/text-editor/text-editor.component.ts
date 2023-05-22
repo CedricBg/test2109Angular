@@ -4,6 +4,7 @@ import { Component, OnInit,} from '@angular/core';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { Subscription, first } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { MessagesService } from 'src/app/services/messages.service';
 import { GenerateHtml } from 'src/app/Utilities/GenerateHtml';
 
 
@@ -18,11 +19,10 @@ import { GenerateHtml } from 'src/app/Utilities/GenerateHtml';
 export class TextEditorComponent implements OnInit {
   laDate: any = new Date().toLocaleDateString()
   htmlContent!: string
-  subscribtions: Subscription[] = []
+  subscriptions: Subscription[] = []
   idEmployee = Number(sessionStorage.getItem('id'))
   html: GenerateHtml = new GenerateHtml()
-
-
+  messages: string[] = []
   pdf: Pdf = {
     idPdf: 0,
     title: '',
@@ -32,13 +32,20 @@ export class TextEditorComponent implements OnInit {
     dateCreate: null
   }
 
-  constructor(private _employee: EmployeeService,) { }
+  constructor(private _employee: EmployeeService, private message : MessagesService) { }
 
   ngOnInit(): void
   {
-    setTimeout(() => {this.subscribtions.push(this._employee.CheckForRapport(this.idEmployee).pipe(first()).subscribe({
+    setTimeout(() => {this.subscriptions.push(this._employee.CheckForRapport(this.idEmployee).pipe(first()).subscribe({
         next: (data: Pdf)=> {
           this.pdf = data
+          this.subscriptions.push(this.message.MessagesForASite(this.pdf.siteId).subscribe({
+            next : (data : string[]) =>{
+              this.messages = data
+              console.log(this.messages)
+            }
+          }))
+
           //Récupère le contenu html à affiché
           this.htmlContent = data.content
           //sauvegarde pour avoir les bonnes donnèes sauvegardé si la page est rechargé par l'utilisateur ou c'est déconnecté
@@ -80,11 +87,14 @@ export class TextEditorComponent implements OnInit {
     this.html.AddLines()
   }
 
+  Send()
+  {
 
+  }
 
   ngOnDestroy()
   {
-    this.subscribtions.forEach(element => {
+    this.subscriptions.forEach(element => {
       element.unsubscribe()
     });
     this.pdf.content = this.htmlContent

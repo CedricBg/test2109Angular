@@ -4,14 +4,13 @@
   flex-flow: column;
   align-items: center;
   padding-top: 4px;
-
+  letter-spacing : 0.1em;
 }
 
 #toolBar{
   display: flex;
   align-items:last baseline;
   width: 50%;
-
 }
 
 .icons{
@@ -23,6 +22,7 @@
   width: 50%;
 }
 @media screen and (max-width: 824px){
+
 .content-table
 {
   align-items:flex-start;
@@ -30,4 +30,46 @@
 .angular-editor {
   width: 100%;
 }
+
+
+
+#message{
+  margin-left: 0;
+  width:97%;
+}
+
+#contentMessage{
+  padding-left: 2px;
+  width:100%;
+  color: wheat;
+  background-color:#326290;
+}
+
+#footerMessage{
+  width:100%;
+  padding-left: 2px;
+  background-color: wheat;
+  border-radius:  0px 0px 10px 10px;
+}
+form mat-icon{
+  color:#326290;
+}
+form mat-icon:hover
+{
+  cursor: pointer;
+}
+
+.inputMessage{
+  border:none;
+  width: 90%;
+  border-radius:  0px 0px 10px 10px;
+  resize: none;
+  background-color: wheat;
+}
+.inputMessage:focus{
+outline: none;
+}
+
+
+
 }

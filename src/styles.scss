@@ -62,12 +62,15 @@ footer{
   width:100vw;
 }
 
+
 mat-dialog-container {
   background-color: #326290 !important;
 }
 
 @media screen and (max-width: 340px ) {
-
+  *{
+    font-size: x-small;
+  }
   footer:nth-child(even){
     font-size: 0;
     color: black;
@@ -79,4 +82,5 @@ mat-dialog-container {
   footer:nth-child(even){
     display: none;
   }
+
 }

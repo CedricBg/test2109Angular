@@ -10,7 +10,7 @@
 </div>
 <div class="contentTable" >
   <table >
-    <caption>Rapport de site</caption>
+    <caption>Derniers Rapports</caption>
     <tbody *ngFor="let rapport of listRapport">
       <tr>
         <td class="td" (click)="loadRapport(rapport.idPdf)">{{rapport.title}}</td>
@@ -18,3 +18,4 @@
     </tbody>
   </table>
 </div>
+

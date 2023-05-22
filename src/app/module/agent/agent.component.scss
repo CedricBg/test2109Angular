@@ -1,6 +1,6 @@
 
 #contentAgent{
-  margin-top: 10vh;
+  margin-top: 80px;
   margin-bottom: 2vh;
   width: 100vw;
   min-height: 90vh;
@@ -29,8 +29,9 @@ button{
   width: 201px;
   height: 40px;
   cursor: pointer;
-
 }
+
+
 @media screen and (max-height: 700px) {
   #contentAgent{
   min-height: 94vh;
