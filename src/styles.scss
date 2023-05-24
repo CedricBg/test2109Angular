@@ -40,6 +40,7 @@ $test2109-theme: mat.define-light-theme((
 *{
   font-family: 'DM Serif Display', serif;
 }
+
 html, body {
   margin: 0;
   margin: 0;
@@ -49,7 +50,6 @@ html, body {
 
 .content
 {
-height: 94vh;
 display:flex;
 }
 
@@ -62,7 +62,6 @@ footer{
   background-color:#326290;
   width:100vw;
 }
-
 
 mat-dialog-container {
   background-color: whitesmoke !important;
@@ -83,12 +82,9 @@ mat-dialog-container {
   footer:nth-child(even){
     display: none;
   }
-
 }
 @media screen and (max-height: 400px ) {
   *{
     font-size: x-small;
   }
-
-
 }
