@@ -1,3 +1,10 @@
+#content-editor
+{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .content-table
 {
   display: flex;
@@ -5,12 +12,13 @@
   align-items: center;
   padding-top: 4px;
   letter-spacing : 0.1em;
+  width:60%;
 }
 
 #toolBar{
   display: flex;
   align-items:last baseline;
-  width: 50%;
+  width: 95%;
 }
 
 .icons{
@@ -18,20 +26,101 @@
   align-self: start;
   margin-right: 2px;
 }
+
 .angular-editor {
-  width: 50%;
+  width: 95%;
 }
+
+.message-editor{
+  width:300px;
+  max-height: 300px;
+  color:#326290;
+}
+
+#message{
+
+  width:290px;
+  word-break: break-all;
+}
+
+.header-message
+{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:300px;
+  height: 30px;
+  background-color: wheat;
+  border-radius:  10px 10px 0px 0px;
+}
+
+.content-messages{
+  display: flex;
+  justify-content: center;
+  background-color: rgb(250, 233, 202);
+}
+
+.inputMessage{
+  padding-left:3px;
+  border:none;
+  width: 250px;
+  border-radius:  0px 0px 10px 10px;
+  resize: none;
+  background-color: wheat;
+  font-size:small;
+}
+
+.inputMessage:focus{
+outline: none;
+border-radius:  0px 0px 10px 10px;
+resize: none;
+background-color: wheat;
+}
+
+#footerMessage{
+  width:100%;
+  background-color: wheat;
+  border-radius:  0px 0px 10px 10px;
+}
+
+.icon-editor{
+  color:#326290;
+  padding-bottom:4px;
+}
+.icon-editor:hover
+{
+  cursor: pointer;
+  color:#3072af;
+}
+
+///////////////
+
 @media screen and (max-width: 824px){
 
+  #toolBar{
+    display: flex;
+    align-items:last baseline;
+    width:100%;
+  }
 .content-table
 {
+  width:100%;
   align-items:flex-start;
 }
 .angular-editor {
   width: 100%;
 }
 
+.message-editor{
+  width:100%;
+}
 
+.header-message
+{
+  width:100%;
+  background-color: wheat;
+  border-radius:  10px 10px 0px 0px;
+}
 
 #message{
   margin-left: 0;
@@ -51,13 +140,7 @@
   background-color: wheat;
   border-radius:  0px 0px 10px 10px;
 }
-form mat-icon{
-  color:#326290;
-}
-form mat-icon:hover
-{
-  cursor: pointer;
-}
+
 
 .inputMessage{
   border:none;
@@ -66,10 +149,13 @@ form mat-icon:hover
   resize: none;
   background-color: wheat;
 }
-.inputMessage:focus{
-outline: none;
+
+@media screen and (max-width: 340px){
+
+  .icon-editor{
+
+    padding-bottom:0px;
+  }
 }
-
-
 
 }

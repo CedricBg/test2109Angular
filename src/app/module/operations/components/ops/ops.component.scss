@@ -1,5 +1,5 @@
 .menu{
-  position:absolute;top:10vh;
+  position:absolute;top:8vh;
 }
 .menu ul {
   display: flex;
@@ -12,8 +12,8 @@
   margin-left: 4vw;
   padding-left: 1vw;
   padding-right: 1vw;
-  border-left: 1px solid #F5F5F5;;
-  border-right: 1px solid #F5F5F5;;
+  border-left: 1px solid #F5F5F5;
+  border-right: 1px solid #F5F5F5;
 }
 li.icons
 {
@@ -27,4 +27,14 @@ li.icons
 .icons
 {
   padding-left: 1vw;
+}
+@media screen and (max-width: 1400px){
+  .menu ul li {
+    border: none;
+  }
+}
+@media screen and (max-height: 375px){
+  .menu ul li {
+    border: none;
+  }
 }

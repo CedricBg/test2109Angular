@@ -1,5 +1,5 @@
 <div class ="cards">
-  <div  class="employees">
+  <div class="employees">
     <section class="divTable">
       <div class="AddPerson">
         <mat-form-field>
@@ -50,69 +50,91 @@
       </div>
     </section>
   </div>
+
+
   <div class="rep" *ngIf="select == false && siteSelected == null ">
     <section class="cards1">
       <router-outlet></router-outlet>
     </section>
   </div>
+
   <div class="rep" *ngIf="select == true && siteSelected != null ">
+    <h3>Site : {{siteSelected.name}}</h3>
     <div class="cards2">
-      <h3>Site : {{siteSelected.name}}</h3>
-        <div class="contcards2">
-          <div class="detailsCard2">
-            <p class="email" *ngIf="siteSelected.language != null">Langue de contact: <b>{{siteSelected.language.name}} </b></p>
-            <p class="position">Adresse:</p>
-            <p class="email">Rue : {{siteSelected.address.sreetAddress}}</p>
-            <p class="email">Code Postal : {{siteSelected.address.zipCode}}</p>
-            <p>Pays : {{siteSelected.address.state}}</p>
-            <p>Ville : {{siteSelected.address.city}}</p>
-            <p> Nr° de Tva: {{siteSelected.vatNumber}}</p>
-          </div>
-          <div class="detailsCard2">
-          </div>
-          <div class="detailsCard2">
-            <p *ngIf="siteSelected.contactSite.length != 0" class="email">
-            </p>
-            <div class="email" *ngFor="let elt of siteSelected.contactSite; let i = index">
-              <div *ngIf="!elt.emergencyContact && !elt.nightContact">
-                <p>Contact(s): </p>
-                <p>{{elt.firstName}} {{elt.lastName}}</p>
-                <p *ngIf="elt.email.length >0"  class="email">Email: </p>
-                <p *ngFor="let elt1 of elt.email">
-                  {{elt1.emailAddress}}
-                </p>
-                <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
-                <p *ngFor="let elt1 of elt.phone">
-                  {{elt1.number}}
-                </p>
-              </div>
-              <div *ngIf="elt.emergencyContact">
-                <p>Contact en cas d'urgence: </p>
-              <p>{{elt.firstName}} {{elt.lastName}}</p>
-              <p *ngIf="elt.email.length >0"  class="email">Email: </p>
-              <p *ngFor="let elt1 of elt.email">
-                {{elt1.emailAddress}}
-              </p>
-              <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
-              <p *ngFor="let elt1 of elt.phone">
-                {{elt1.number}}
-              </p>
-            </div>
-            <div *ngIf="elt.nightContact">
-              <p>Contact de nuit: </p>
-              <p>{{elt.firstName}} {{elt.lastName}}</p>
-              <p *ngIf="elt.email.length >0"  class="email">Email: </p>
-              <p *ngFor="let elt1 of elt.email">
-                {{elt1.emailAddress}}
-              </p>
-              <p *ngIf="elt.phone.length >0" class="email">Téléphone(s)</p>
-              <p *ngFor="let elt1 of elt.phone">
-                {{elt1.number}}
-              </p>
-            </div>
-          </div>
+      <div class="contcards2">
+        <p  *ngIf="siteSelected.language != null">Langue de contact : {{siteSelected.language.name}} </p>
+        <p>Adresse:</p>
+        <p>Rue : {{siteSelected.address.sreetAddress}}</p>
+        <p>Code Postal : {{siteSelected.address.zipCode}}</p>
+        <p>Pays : {{siteSelected.address.state}}</p>
+        <p>Ville : {{siteSelected.address.city}}</p>
+        <p> Nr° de Tva: {{siteSelected.vatNumber}}</p>
+        <img src="https://www.w3schools.com/howto/img_avatar.png">
+      </div>
+      <div class="detailsCard2">
+        <p *ngIf="siteSelected.contactSite.length != 0" class="email">
+        </p>
+
+        <table >
+          <caption><h3>Responsable du site:</h3> </caption>
+          <thead>
+            <tr >
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>téléphone(s)</th>
+              <th>Email(s)</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let elt of siteSelected.contactSite; let i = index">
+            <tr *ngIf="elt.responsible">
+              <td>{{elt.firstName}}</td>
+              <td>{{elt.lastName}}</td>
+              <td *ngFor="let phone of elt.phone">{{phone.number}}</td>
+              <td *ngFor="let email of elt.email">{{email.emailAddress}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table >
+          <caption><h3>Contact de nuit:</h3></caption>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>téléphone(s)</th>
+              <th>Email(s)</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let elt of siteSelected.contactSite; let i = index">
+            <tr *ngIf="elt.nightContact">
+              <td>{{elt.firstName}}</td>
+              <td>{{elt.lastName}}</td>
+              <td *ngFor="let phone of elt.phone">{{phone.number}}</td>
+              <td *ngFor="let email of elt.email">{{email.emailAddress}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table >
+          <caption><h3>Contact d'urgence:</h3></caption>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>téléphone(s)</th>
+              <th>Email(s)</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let elt of siteSelected.contactSite; let i = index">
+            <tr *ngIf="elt.emergencyContact">
+              <td>{{elt.firstName}}</td>
+              <td>{{elt.lastName}}</td>
+              <td *ngFor="let phone of elt.phone">{{phone.number}}</td>
+              <td *ngFor="let email of elt.email">{{email.emailAddress}}</td>
+            </tr>
+          </tbody>
+        </table>
         </div>
       </div>
-    </div>
   </div>
 </div>

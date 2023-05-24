@@ -1,21 +1,21 @@
-
-
-
+<div id="content-editor">
 <section class="content-table">
   <div id="toolBar"><mat-icon class="icons" matTooltip="Sauvegarder" (click)=Saves(pdf)>save</mat-icon><mat-icon class="icons" matTooltip="Ajouter des lignes" (click)=addRow()>dehaze</mat-icon ></div>
   <angular-editor class="angular-editor" [config]="editorConfig"  [(ngModel)]="htmlContent">
   </angular-editor>
   <div id="toolBar"><mat-icon class="icons" matTooltip="Sauvegarder" (click)=Saves(pdf)>save</mat-icon><mat-icon class="icons" matTooltip="Ajouter des lignes" (click)=addRow()>dehaze</mat-icon ></div>
-</section>
 
-<section >
 
-    <div id="message" *ngFor="let message of messages" id="contentMessage">{{message}}</div>
-
+  </section>
+  <section class="message-editor" >
+    <div class="header-message">{{titlememo}}</div>
+    <div class="content-messages" *ngFor="let message of messages let i = index"><p id="message">{{message}}</p></div>
     <div id="footerMessage">
-       <textarea [(ngModel)]="text" #ctrl="ngModel" class="inputMessage"></textarea>
-       <mat-icon (click)="Send()">send</mat-icon>
+       <textarea [placeholder]="textplaceHolder" [(ngModel)]="text" #ctrl="ngModel" class="inputMessage"></textarea>
+       <mat-icon class="icon-editor" (click)="Send()">send</mat-icon>
     </div>
 
  </section>
+</div>
+
 

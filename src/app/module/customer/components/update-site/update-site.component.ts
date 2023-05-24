@@ -282,7 +282,7 @@ private createContactForm(contact: ContactPerson): FormGroup {
   {
     const diallogConfig =  new MatDialogConfig;
     diallogConfig.data = id;
-    diallogConfig.height = '350px';
+    diallogConfig.height = '400px';
     diallogConfig.width = '600px';
     diallogConfig.disableClose = true;
     const dialogRef = this.dialog.open(AddPersonComponent,diallogConfig);

@@ -17,14 +17,16 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class TextEditorComponent implements OnInit {
-  laDate: any = new Date().toLocaleDateString()
-  htmlContent!: string
-  subscriptions: Subscription[] = []
-  idEmployee = Number(sessionStorage.getItem('id'))
-  html: GenerateHtml = new GenerateHtml()
-  messages: string[] = []
-  Message: Message = new Message()
-  text: string = ""
+  laDate: any = new Date().toLocaleDateString();
+  htmlContent!: string;
+  subscriptions: Subscription[] = [];
+  idEmployee = Number(sessionStorage.getItem('id'));
+  html: GenerateHtml = new GenerateHtml();
+  messages: string[] = [];
+  Message: Message = new Message();
+  text: string = "";
+  titlememo: string = "Mémo de site";
+  textplaceHolder: string = "Entrez un message";
   pdf: Pdf = {
     idPdf: 0,
     title: '',
@@ -62,13 +64,11 @@ export class TextEditorComponent implements OnInit {
       }));
   }
 
-
   Saves(pdf: Pdf)
   {
     this.pdf.content = this.htmlContent
     this._employee.SaveRapport(pdf)
   }
-
 
    editorConfig: AngularEditorConfig =  {
       editable: true,
@@ -95,11 +95,12 @@ export class TextEditorComponent implements OnInit {
 
   Send()
   {
+    if(!(this.text == "")){
     this.Message.siteId = this.pdf.siteId
     this.Message.text = this.text
-    console.log(this.text)
     this._message.SendNewMessage(this.Message)
     this.text = ""
+    }
   }
 
   ngOnDestroy()

@@ -49,7 +49,8 @@ html, body {
 
 .content
 {
-min-height: 94vh;
+height: 94vh;
+display:flex;
 }
 
 footer{
@@ -64,7 +65,7 @@ footer{
 
 
 mat-dialog-container {
-  background-color: #326290 !important;
+  background-color: whitesmoke !important;
 }
 
 @media screen and (max-width: 340px ) {
@@ -77,10 +78,17 @@ mat-dialog-container {
   }
 }
 
-@media screen and (max-height: 700px ) {
+@media screen and (max-height: 800px ) {
 
   footer:nth-child(even){
     display: none;
   }
+
+}
+@media screen and (max-height: 400px ) {
+  *{
+    font-size: x-small;
+  }
+
 
 }
