@@ -1,0 +1,11 @@
+<section class="SelectAgent">
+  <mat-form-field>
+    <mat-label>Sélectionnez un agent</mat-label>
+    <mat-select  [(ngModel)]="name" (ngModelChange)="ngModelChange($event)" >
+      <mat-option  *ngFor="let agent of listAgent"   [value]="agent.firstName">
+        {{agent.firstName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</section>
+<router-outlet></router-outlet>

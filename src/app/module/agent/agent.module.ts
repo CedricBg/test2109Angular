@@ -6,6 +6,8 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AgentComponent } from './agent.component';
 import { InfoAgentComponent } from './components/info-agent/info-agent.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { SiteComponent } from './components/site/site.component';
 
 
 
@@ -15,7 +17,9 @@ import { InfoAgentComponent } from './components/info-agent/info-agent.component
     AgentStatiqueComponent,
     TextEditorComponent,
     AgentComponent,
-    InfoAgentComponent
+    InfoAgentComponent,
+    AdminComponent,
+    SiteComponent
 
 
   ],

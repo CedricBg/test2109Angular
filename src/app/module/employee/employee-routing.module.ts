@@ -1,3 +1,4 @@
+import { AdminComponent } from './components/admin/admin.component';
 import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
 
 import { EmployeeComponent } from './employee.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
     { path : 'AllEmployees' , component : ListemployeeComponent },
     { path : 'UserProfile' , component : UserProfileComponent },
     { path : 'UpdateEmployee', component : UpdateEmployeeComponent},
+    { path : 'Admin', component : AdminComponent},
 
   ]
 },

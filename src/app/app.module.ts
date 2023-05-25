@@ -13,11 +13,14 @@ import { CustomerComponent } from './module/customer/customer.component';
 
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     CustomerComponent,
+
 
 
   ],

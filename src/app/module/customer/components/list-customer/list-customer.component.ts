@@ -1,15 +1,12 @@
 import { UpdateSiteComponent } from './../update-site/update-site.component';
 import { Customers } from 'src/app/models/customer/customers.models';
-import { AddCustomerComponent } from './../add-customer/add-customer.component';
-import { UpdateCustomerComponent } from './../update-customer/update-customer.component';
 import { CustomerService } from './../../../../services/customer.service';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Site } from 'src/app/models/customer/site.models';
-import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
-import { merge, of, forkJoin } from 'rxjs';import { first, startWith, switchMap } from 'rxjs/operators';
+import { Subscription, first } from 'rxjs';
 
 
 @Component({
@@ -216,7 +213,7 @@ export class ListCustomerComponent implements OnInit {
         this._CustService.GetOneCustomer(id)
         this._Router.navigate(['OPS/customer/listcustomer/UpdateCustomer'])
 
-      }
+  }
 
 }
 

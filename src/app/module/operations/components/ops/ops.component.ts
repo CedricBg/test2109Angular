@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-ops',
@@ -7,22 +8,40 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ops.component.scss']
 })
 export class OpsComponent implements OnInit {
-
-  constructor(private _Router : Router) { }
+  connected!: Boolean;
+  constructor(private _Router : Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-  }
-  AllEmp()
-  {
-    this._Router.navigateByUrl('OPS/employee/AllEmployees')
-  }
-  Customers()
-  {
-    this._Router.navigateByUrl('OPS/customer/listcustomer')
-  }
-  Rondes()
-  {
-    this._Router.navigateByUrl('OPS/ronde')
+    this.connected = this.authService.isConnected;
   }
 
+  Agent()
+  {
+    this._Router.navigateByUrl('OPS/agent/admin');
+  }
+
+  AllEmp(chemin: string)
+  {
+    if(!(chemin == ""))
+    {
+    this._Router.navigateByUrl('OPS/employee/'+chemin);
+    }
+    else{
+    this._Router.navigateByUrl('OPS/employee');
+    }
+  }
+  Customers(chemin: string)
+  {
+    this._Router.navigateByUrl('OPS/customer/listcustomer');
+  }
+  Rondes(chemin: string)
+  {
+    if(!(chemin == ""))
+    {
+      this._Router.navigateByUrl('OPS/ronde/'+chemin);
+    }
+    else{
+      this._Router.navigateByUrl('OPS/ronde');
+    }
+  }
 }

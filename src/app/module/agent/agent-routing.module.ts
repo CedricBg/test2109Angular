@@ -5,15 +5,22 @@ import { TextEditorComponent } from './components/text-editor/text-editor.compon
 import { AgentComponent } from './agent.component';
 import { InfoAgentComponent } from './components/info-agent/info-agent.component';
 import { AuthGuard } from 'src/app/auth.guard';
+import { AdminComponent } from './components/admin/admin.component';
+import { SiteComponent } from './components/site/site.component';
+import { EmployeeResolver } from 'src/app/services/employee.service';
+
 
 
 const routes: Routes = [
-  { path : 'statique' , component: AgentStatiqueComponent},
+  { path: 'admin', component: AdminComponent, children : [
+    { path: 'site/:id', component : SiteComponent, resolve: {agent: EmployeeResolver},},
+  ]},
+{ path : 'statique' , component: AgentStatiqueComponent},
   { path : 'editor', component: TextEditorComponent},
   { path: 'InfoAgent', component : InfoAgentComponent},
   { path : '', component: AgentComponent},
   { path : '**', redirectTo : 'employee', pathMatch : 'full'}
-];
+]
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

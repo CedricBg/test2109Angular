@@ -15,10 +15,10 @@ export class DetailedEmployee
     entryService: Date |null
     employeeCardNumber: string | null
     registreNational: string | null
-    address: Address
+    isDeleted: Boolean
     role: Role
     phone: Phone[]
     email: Email[]
-    IsDeleted: Boolean
+    address: Address
     language: Language
 }

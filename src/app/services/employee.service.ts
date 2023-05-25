@@ -3,11 +3,11 @@ import { Language } from './../models/language.models';
 import { Countrys } from 'src/app/models/countrys.models';
 import { FormGroup } from '@angular/forms';
 import { AddEmployeeComponent } from './../module/employee/components/add-employee/add-employee.component';
-import { Router } from '@angular/router';
+import { ActivatedRouteSnapshot, ResolveFn, Router, RouterStateSnapshot } from '@angular/router';
 import { DetailedEmployee } from './../models/DetailedEmployee.models';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';;
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, OnInit, inject } from '@angular/core';
 import { Observable, BehaviorSubject, Subject} from 'rxjs';
 import { Employee } from '../models/employee.models';
 import { Role } from '../models/Role.models';
@@ -77,7 +77,7 @@ export class EmployeeService implements OnInit {
   get()
   {
     return this._httpClient.get<Employee[]>(environment.baseAdres+ 'Employee/all').subscribe({
-      next : async (data : Employee[])=>{
+      next : (data : Employee[])=>{
         this.AllSubject.next(data)
       }
     })
@@ -117,5 +117,14 @@ export class EmployeeService implements OnInit {
   {
     return this._httpClient.get<Pdf>(environment.baseAdres+ 'pdf/checkRapport/'+id)
   }
+  getOneString(id: string): Observable<DetailedEmployee>
+  {
+    const intId = Number(id);
+    return this._httpClient.get<DetailedEmployee>(environment.baseAdres+ 'Employee/GetOne/'+intId)
+  }
 
+}
+export const EmployeeResolver: ResolveFn<any> =
+( route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  return inject(EmployeeService).getOneString(route.paramMap.get('id')!);
 }
