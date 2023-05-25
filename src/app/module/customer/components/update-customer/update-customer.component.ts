@@ -42,6 +42,7 @@ export class UpdateCustomerComponent implements OnInit {
         responsible:      [this.customer.contact == null ? false: this.customer.contact.responsible,[Validators.required, Validators.minLength(5)]],
         emergencyContact: [this.customer.contact == null ? false : this.customer.contact.emergencyContact ,Validators.required],
         nightContact:     [this.customer.contact == null ? false: this.customer.contact.nightContact ,Validators.required],
+        dayContact:       [this.customer.contact == null ? false: this.customer.contact.dayContact ,Validators.required],
         contactId:        [this.customer.contact == null ? 0:this.customer.contact.contactId ],
         email: this._builder.array([]),
         phone: this._builder.array([]),

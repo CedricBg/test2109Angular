@@ -170,6 +170,7 @@ private createContactForm(contact: ContactPerson): FormGroup {
     responsible: [contact.responsible,Validators.required],
     emergencyContact: [contact.emergencyContact,Validators.required],
     nightContact: [contact.nightContact,Validators.required],
+    dayContact: [contact.dayContact,Validators.required],
     contactId: [contact.contactId],
   });
 }
@@ -230,6 +231,7 @@ private createContactForm(contact: ContactPerson): FormGroup {
       responsible: ['',Validators.required],
       emergencyContact: ['',Validators.required],
       nightContact: ['',Validators.required],
+      dayContact: ['',Validators.required],
       contactId: [null],
       email: this._builder.array([]),
       phone: this._builder.array([]),

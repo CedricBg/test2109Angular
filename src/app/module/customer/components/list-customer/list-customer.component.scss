@@ -1,11 +1,10 @@
 
 .cards{
+  margin-top:20px;
   width: 100vw;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  min-height:80vh;
-
 }
 
 .divTable
@@ -35,6 +34,7 @@ td {
   text-align: center;
   padding : 0 10px 0px 20px;
 }
+
 .paginator
 {
   width:99%;
@@ -44,7 +44,6 @@ td {
   justify-content: center;
   padding-right :4px;
   margin-left :1px;
-
 }
 
 .employees{
@@ -86,6 +85,7 @@ td {
   padding-right :4px;
   margin-left :1px;
   color:#00468C;
+
 }
 
 .AddPerson .icons{
@@ -106,6 +106,8 @@ td {
   min-width: 850px;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+
 }
 
 .rep h3{
@@ -134,6 +136,9 @@ td {
   margin-bottom: 10px;
   width:95%;
   justify-content: space-around;
+  max-height: 500px;
+  overflow-y: scroll;
+
 }
 .detailsCard2 table{
   margin-top: 20px;

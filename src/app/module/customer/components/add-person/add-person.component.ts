@@ -33,6 +33,7 @@ constructor(private _builder: FormBuilder,private _customer: CustomerService ,pr
         Responsible: [false],
         EmergencyContact: [false],
         NightContact: [false],
+        DayContact: [false],
         SiteId:[this.idSite],
         Email: this._builder.array([
           this._builder.group({

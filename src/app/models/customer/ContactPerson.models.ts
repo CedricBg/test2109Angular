@@ -11,5 +11,6 @@ export class ContactPerson
   responsible: boolean
   emergencyContact: boolean
   nightContact: boolean
+  dayContact: boolean
   siteId: number | null
 }

@@ -46,11 +46,13 @@ html, body {
   margin: 0;
   font-family: 'DM Serif Display', serif;
   background-color: whitesmoke;
+
 }
 
 .content
 {
-display:flex;
+  display:flex;
+  min-height: 94vh;
 }
 
 footer{
@@ -61,6 +63,7 @@ footer{
   color:wheat;
   background-color:#326290;
   width:100vw;
+  flex-shrink: 0;
 }
 
 mat-dialog-container {

@@ -76,7 +76,7 @@
         </p>
 
         <table >
-          <caption><h3>Responsable du site:</h3> </caption>
+          <caption><h3>Responsable(s) du site:</h3> </caption>
           <thead>
             <tr >
               <th>Nom</th>
@@ -96,7 +96,7 @@
         </table>
 
         <table >
-          <caption><h3>Contact de nuit:</h3></caption>
+          <caption><h3>Contact(s) de nuit:</h3></caption>
           <thead>
             <tr>
               <th>Nom</th>
@@ -116,7 +116,7 @@
         </table>
 
         <table >
-          <caption><h3>Contact d'urgence:</h3></caption>
+          <caption><h3>Contact(s) d'urgence:</h3></caption>
           <thead>
             <tr>
               <th>Nom</th>
@@ -127,6 +127,26 @@
           </thead>
           <tbody *ngFor="let elt of siteSelected.contactSite; let i = index">
             <tr *ngIf="elt.emergencyContact">
+              <td>{{elt.firstName}}</td>
+              <td>{{elt.lastName}}</td>
+              <td *ngFor="let phone of elt.phone">{{phone.number}}</td>
+              <td *ngFor="let email of elt.email">{{email.emailAddress}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table >
+          <caption><h3>Contact(s) de jour:</h3></caption>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>téléphone(s)</th>
+              <th>Email(s)</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let elt of siteSelected.contactSite; let i = index">
+            <tr *ngIf="elt.dayContact ">
               <td>{{elt.firstName}}</td>
               <td>{{elt.lastName}}</td>
               <td *ngFor="let phone of elt.phone">{{phone.number}}</td>

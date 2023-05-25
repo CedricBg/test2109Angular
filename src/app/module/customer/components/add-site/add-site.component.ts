@@ -80,6 +80,7 @@ export class AddSiteComponent implements OnInit {
         Responsible: [false],
         EmergencyContact: [false],
         NightContact: [false],
+        DayContact: [false],
         SiteId:[this.idSite],
         Email: this._builder.array([
           this._builder.group({
