@@ -20,5 +20,9 @@ export class OpsComponent implements OnInit {
   {
     this._Router.navigateByUrl('OPS/customer/listcustomer')
   }
+  Rondes()
+  {
+    this._Router.navigateByUrl('OPS/ronde')
+  }
 
 }
