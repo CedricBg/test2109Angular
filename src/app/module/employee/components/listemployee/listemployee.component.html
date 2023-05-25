@@ -42,27 +42,24 @@
       <div class="contenu">
         <div id="photo"><img [attr.src]="safeImageUrl" alt="Photo"></div>
         <div class="details">
-          <p class="email">Rue: {{SelectedEmployee.address.sreetAddress}}</p>
-          <p class="email">Code Postal: {{SelectedEmployee.address.zipCode}}</p>
-          <p class="email">Ville: {{SelectedEmployee.address.city}}</p>
-          <p class="email">Pays: {{SelectedEmployee.address.state}}</p>
-          <p class="email">Date de naissance: {{SelectedEmployee.birthDate| date:"dd/MM/yy"}}</p>
+          <p>Rue: {{SelectedEmployee.address.sreetAddress}}</p>
+          <p>Code Postal: {{SelectedEmployee.address.zipCode}}</p>
+          <p>Ville: {{SelectedEmployee.address.city}}</p>
+          <p>Pays: {{SelectedEmployee.address.state}}</p>
+          <p>Date de naissance: {{SelectedEmployee.birthDate| date:"dd/MM/yy"}}</p>
 
         </div>
         <div class="details">
           <p class="position">{{SelectedEmployee.role.name}}</p>
-          <p  *ngFor="let emails of SelectedEmployee.email; let i = index" class="email">
+          <p  *ngFor="let emails of SelectedEmployee.email; let i = index">
              {{emails.emailAddress}}</p>
-          <p *ngFor="let phones of SelectedEmployee.phone; let i = index"  class="phone"><i class="fas fa-phone"></i>{{phones.number}}
+          <p *ngFor="let phones of SelectedEmployee.phone; let i = index">Téléphone: {{phones.number}}
           </p>
-          <p class="email">Nr de Badge: {{SelectedEmployee.employeeCardNumber}}</p>
-          <p class="email">Nr° de carte ministériel: {{SelectedEmployee.securityCard}}</p>
+          <p >Nr de Badge: {{SelectedEmployee.employeeCardNumber}}</p>
+          <p >Nr° de carte ministériel: {{SelectedEmployee.securityCard}}</p>
         </div>
       </div>
-
       <div class="footer"></div>
-
-
     </div>
   </div>
 </div>

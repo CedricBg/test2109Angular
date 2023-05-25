@@ -89,8 +89,8 @@
             <tr *ngIf="elt.responsible">
               <td>{{elt.firstName}}</td>
               <td>{{elt.lastName}}</td>
-              <td *ngFor="let phone of elt.phone">{{phone.number}}</td>
-              <td *ngFor="let email of elt.email">{{email.emailAddress}}</td>
+              <td ><p *ngFor="let phone of elt.phone">{{phone.number}}</p></td>
+              <td><p *ngFor="let email of elt.email">{{email.emailAddress}}</p></td>
             </tr>
           </tbody>
         </table>
@@ -109,8 +109,8 @@
             <tr *ngIf="elt.nightContact">
               <td>{{elt.firstName}}</td>
               <td>{{elt.lastName}}</td>
-              <td *ngFor="let phone of elt.phone">{{phone.number}}</td>
-              <td *ngFor="let email of elt.email">{{email.emailAddress}}</td>
+              <td><p *ngFor="let phone of elt.phone">{{phone.number}}</p></td>
+              <td><p *ngFor="let email of elt.email">{{email.emailAddress}}</p></td>
             </tr>
           </tbody>
         </table>
@@ -129,8 +129,8 @@
             <tr *ngIf="elt.emergencyContact">
               <td>{{elt.firstName}}</td>
               <td>{{elt.lastName}}</td>
-              <td *ngFor="let phone of elt.phone">{{phone.number}}</td>
-              <td *ngFor="let email of elt.email">{{email.emailAddress}}</td>
+              <td ><p *ngFor="let phone of elt.phone">{{phone.number}}</p></td>
+              <td><p *ngFor="let email of elt.email">{{email.emailAddress}}</p></td>
             </tr>
           </tbody>
         </table>
@@ -149,8 +149,8 @@
             <tr *ngIf="elt.dayContact ">
               <td>{{elt.firstName}}</td>
               <td>{{elt.lastName}}</td>
-              <td *ngFor="let phone of elt.phone">{{phone.number}}</td>
-              <td *ngFor="let email of elt.email">{{email.emailAddress}}</td>
+              <td ><p *ngFor="let phone of elt.phone">{{phone.number}}</p></td>
+              <td><p *ngFor="let email of elt.email">{{email.emailAddress}}</p></td>
             </tr>
           </tbody>
         </table>

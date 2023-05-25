@@ -73,8 +73,6 @@ export class ListemployeeComponent implements OnInit {
     else{
       this.listEmployee = this.listEmployee.filter(res=>{
         const reponse = res.surName.toLocaleLowerCase().match(this.surName.toLocaleLowerCase());
-        console.log(this.listEmployee);
-        console.log(reponse);
         return reponse;
       })
     }
