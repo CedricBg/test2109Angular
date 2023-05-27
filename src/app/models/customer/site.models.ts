@@ -1,6 +1,7 @@
 import { ContactPerson } from './ContactPerson.models';
 import { Language } from './../language.models';
 import { Address } from './../address.models';
+import { Customers } from './customers.models';
 export class Site
 {
   siteId: number
@@ -12,5 +13,4 @@ export class Site
   language: Language
   address: Address
   customerIdCreate: number
-
 }

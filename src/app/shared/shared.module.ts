@@ -29,6 +29,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
 registerLocaleData( localeFr , 'fr-BE');
@@ -68,7 +69,8 @@ registerLocaleData( localeFr , 'fr-BE');
     AngularEditorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatTooltipModule
+    MatTooltipModule,
+    DragDropModule
 
   ],
   providers : [{ provide: LOCALE_ID , useValue : "fr-BE"}],

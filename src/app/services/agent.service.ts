@@ -8,6 +8,8 @@ import { Working } from '../models/Planning/working.models';
 import { Pdf } from '../models/customer/Pdf.models';
 import { arrayBuffer } from 'stream/consumers';
 import { Site } from '../models/customer/site.models';
+import { DetailedEmployee } from '../models/DetailedEmployee.models';
+import { Employee } from '../models/employee.models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,40 +18,51 @@ export class AgentService {
 
   constructor(private _Http: HttpClient) { }
 
-  isStartWorkSubject: Subject<Boolean> = new Subject<Boolean>()
+  isStartWorkSubject: Subject<Boolean> = new Subject<Boolean>();
 
-  private JsonHeader()
-  {
-      return new HttpHeaders({ 'Content-Type': 'application/json' });
-  }
-
+  //verifie si l'agent est en service, par rapport au rapport et ou il faut le redirigé
   IsWorking(id: number)
   {
-    return this._Http.get<Working>(environment.baseAdres+ "planning/working/"+id)
+    return this._Http.get<Working>(environment.baseAdres+ "planning/working/"+id);
   }
-
+  //Tous les sites attribué a un agent
   GetSites(id: number)
   {
-    return this._Http.get<Site[]>(environment.baseAdres+ "planning/"+id)
+    return this._Http.get<Site[]>(environment.baseAdres+ "planning/"+id);
   }
 
   StartWork(form: StartEndTimeWork)
   {
-    return this._Http.post<Working>(environment.baseAdres+ "planning/startWork", form)
+    return this._Http.post<Working>(environment.baseAdres+ "planning/startWork", form);
   }
 
   EndWork(id: number)
   {
     return this._Http.get<Boolean>(environment.baseAdres+ "planning/endWork/"+id)
   }
+  //Retourn une liste de rapport par id employee
   GetRapport(id: number)
   {
-    return this._Http.get<Pdf[]>(environment.baseAdres+ 'pdf/listRapport/'+id)
+    return this._Http.get<Pdf[]>(environment.baseAdres+ 'pdf/listRapport/'+id);
   }
+  //charge un rapport en Pdf par rapport a sont id
   loadRapport(id: number)
   {
+    return this._Http.get(environment.baseAdres+ 'pdf/loadRapport/'+id,{responseType:'blob'});
+  }
+  //Charge les agents par a rapport a leur role
+  GetGuards()
+  {
+    return this._Http.get<Employee[]>(environment.baseAdres+ 'agent');
+  }
 
-    return this._Http.get(environment.baseAdres+ 'pdf/loadRapport/'+id,{responseType:'blob'})
+  GetOneGuard(id: number)
+  {
+    return this._Http.get<Employee>(environment.baseAdres+ 'agent/GetOne/'+id);
+  }
 
+  GetAssignedCustomers(id: number)
+  {
+    return this._Http.get<Customers[]>(environment.baseAdres+ 'agent/Customers/'+id);
   }
 }

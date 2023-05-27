@@ -39,6 +39,7 @@ export class EmployeeService implements OnInit {
     };
     return httpOptions
   }
+
   GetSavedData()
   {
     return this.isSaveRapportSubject.asObservable();
@@ -51,11 +52,13 @@ export class EmployeeService implements OnInit {
   {
     return this.AllSubject.asObservable();
   }
+  //Ajout d'un employee
   insert(employee: DetailedEmployee){
     this._httpClient.post<string>(environment.baseAdres+ 'Employee/insert', employee).subscribe(value =>{
       this.get()
     })
   }
+  //charge la photo sur l'api
   UploadPoto(file: FormData)
   {
     console.log(file)
@@ -70,10 +73,12 @@ export class EmployeeService implements OnInit {
       }
     )
   }
+  //télécharge la photo pour affichage
   DownLoadFoto(id: number)
   {
     return this._httpClient.get(environment.baseAdres + 'employee/loadFile/'+id,{responseType:'blob'})
   }
+  //liste de tout le employées
   get()
   {
     return this._httpClient.get<Employee[]>(environment.baseAdres+ 'Employee/all').subscribe({
@@ -82,6 +87,7 @@ export class EmployeeService implements OnInit {
       }
     })
   }
+  //Chargement d'un employee par sont Id
   getOne(id: number): Observable<DetailedEmployee>
   {
     return this._httpClient.get<DetailedEmployee>(environment.baseAdres+ 'Employee/GetOne/'+id)
@@ -122,9 +128,4 @@ export class EmployeeService implements OnInit {
     const intId = Number(id);
     return this._httpClient.get<DetailedEmployee>(environment.baseAdres+ 'Employee/GetOne/'+intId)
   }
-
-}
-export const EmployeeResolver: ResolveFn<any> =
-( route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  return inject(EmployeeService).getOneString(route.paramMap.get('id')!);
 }

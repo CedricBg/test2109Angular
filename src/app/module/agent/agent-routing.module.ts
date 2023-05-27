@@ -7,7 +7,9 @@ import { InfoAgentComponent } from './components/info-agent/info-agent.component
 import { AuthGuard } from 'src/app/auth.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { SiteComponent } from './components/site/site.component';
-import { EmployeeResolver } from 'src/app/services/employee.service';
+import { EmployeeResolver } from 'src/app/resolvers/employee-resolver-one.resolver';
+
+
 
 
 

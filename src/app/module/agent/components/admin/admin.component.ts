@@ -1,9 +1,10 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/app/models/employee.models';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { AgentService } from 'src/app/services/agent.service';
 
 
 @Component({
@@ -17,29 +18,28 @@ listAgent: Employee[]= [];
 private subscriptions: Subscription[] = [];
 name: string;
 detail: Employee = new Employee()
-id!: string
-constructor(private _autService : AuthService, private _employeeService : EmployeeService, private _Router: Router, private activatedRoute: ActivatedRoute){
+id!: number
+constructor(private _autService : AuthService, private _AgentService : AgentService, private _Router: Router){
 
   }
 
   ngOnInit(): void {
     this.connected = this._autService.isConnected;
-    this._employeeService.get()
-    this.subscriptions.push(this._employeeService.getAllData().subscribe({
+
+    this.subscriptions.push(this._AgentService.GetGuards().subscribe({
       next : (data : Employee[]) =>{
         this.listAgent = data;
       }
     }))
   }
 //Détection de l'agent sélectionnné
-
   ngModelChange(newValue: string)
   {
-    this.id = this.SelectAgent(newValue)
+    this.id = this.IdAgent(newValue)
     this.Routing(this.id)
   }
-
-  SelectAgent(name: string) : string
+//Converstion du vers l'id
+  IdAgent(name: string) : number
   {
     this.detail = this.listAgent.find((e)=>e.surName === name);
     while(this.detail === undefined)
@@ -47,18 +47,16 @@ constructor(private _autService : AuthService, private _employeeService : Employ
       new Promise(resolve => setTimeout(resolve, 100));
       this.detail = this.listAgent.find(e=>e.firstName === name);
     }
-    return this.detail.id.toString();
+    return this.detail.id;
   }
 
-
-
-  Routing(id: string)
+  //Chargement de l'agent avec le composant site
+  Routing(id: number)
   {
     this._Router.navigateByUrl('OPS/agent/admin/site/'+id);
   }
 
   ngOnDestroy(){
-
     this.subscriptions.forEach(subscription  => {
       subscription.unsubscribe();
     });

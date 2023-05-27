@@ -8,5 +8,6 @@ export class Customers
   contact: ContactPerson
   site: Site[]
   role: Role
-  IsDeleted: Boolean
+  isDeleted: Boolean
+
 }

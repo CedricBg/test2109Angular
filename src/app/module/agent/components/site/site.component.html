@@ -1,31 +1,39 @@
 
-
-
-<section>
-  <div class="card">
-    <div class="header"> <h2>{{agent.agent.surName}} {{agent.agent.firstName}}</h2></div>
-    <div class="contenu">
-      <div id="photo"><img [attr.src]="safeImageUrl" alt="Photo"></div>
-      <div class="details">
-        <p>Rue: {{agent.agent.address.sreetAddress}}</p>
-        <p>Code Postal: {{agent.agent.address.zipCode}}</p>
-        <p>Ville: {{agent.agent.address.city}}</p>
-        <p >Pays: {{agent.agent.address.state}}</p>
-        <p >Date de naissance: {{agent.agent.birthDate| date:"dd/MM/yy"}}</p>
-
+<div class="contenuSite">
+  <section>
+    <div class="card">
+      <div class="header">
       </div>
-      <div class="details">
-        <p class="position">Role: {{agent.agent.role.name}}</p>
-        <span>Email:</span>
-        <p  *ngFor="let emails of agent.agent.email; let i = index">
-           {{emails.emailAddress}}</p>
-        <p *ngFor="let phones of agent.agent.phone; let i = index">Téléphone: {{phones.number}}
-        </p>
-        <p>Nr de Badge: {{agent.agent.employeeCardNumber}}</p>
-        <p>Nr° de carte ministériel: {{agent.agent.securityCard}}</p>
+        <div class="contenu">
+          <div id="photo"><img [attr.src]="safeImageUrl" alt="Photo"></div>
+
+            <div class="details">
+              <p class="position">Agent: {{agent.agent.surName}} {{agent.agent.firstName}}</p>
+              <p class="position">Role: {{agent.agent.role.name}}</p>
+            </div>
+          </div>
+        <div class="footer">
       </div>
     </div>
-    <div class="footer"></div>
+  </section>
+  <div cdkDropListGroup>
+    <div class="contientDragDrop">
+      <div class="listDrag"
+      cdkDropList
+      [cdkDropListData]="listCustomers"
+      (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let elt of listCustomers" cdkDrag>
+          {{elt.nameCustomer}}
+        </div>
+      </div>
+      <div class="listDrag"
+      cdkDropList
+      [cdkDropListData]="listCustomerstoAgent"
+      (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let elt of listCustomerstoAgent" cdkDrag>
+        {{elt.nameCustomer}}
+      </div>
+    </div>
   </div>
-</section>
-
+</div>
+</div>
