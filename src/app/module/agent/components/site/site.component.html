@@ -20,9 +20,9 @@
     <div class="contientDragDrop">
       <div class="listDrag"
       cdkDropList
-      [cdkDropListData]="listCustomers"
+      [cdkDropListData]="modifiedListCustomer"
       (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let elt of listCustomers" cdkDrag>
+        <div *ngFor="let elt of modifiedListCustomer" cdkDrag>
           {{elt.nameCustomer}}
         </div>
       </div>
@@ -35,5 +35,7 @@
       </div>
     </div>
   </div>
+  <button class="button-drag" mat-button (click)="SaveCustomers()">Send</button>
 </div>
+
 </div>

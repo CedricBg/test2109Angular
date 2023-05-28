@@ -6,10 +6,9 @@ import { Subject } from 'rxjs';
 import { Customers } from '../models/customer/customers.models';
 import { Working } from '../models/Planning/working.models';
 import { Pdf } from '../models/customer/Pdf.models';
-import { arrayBuffer } from 'stream/consumers';
 import { Site } from '../models/customer/site.models';
-import { DetailedEmployee } from '../models/DetailedEmployee.models';
 import { Employee } from '../models/employee.models';
+import { AddSites } from '../models/agents/AddSites.models';
 
 @Injectable({
   providedIn: 'root'
@@ -64,5 +63,11 @@ export class AgentService {
   GetAssignedCustomers(id: number)
   {
     return this._Http.get<Customers[]>(environment.baseAdres+ 'agent/Customers/'+id);
+  }
+
+  AddSitesToGuard(sites: AddSites)
+  {
+    console.log(sites)
+    return this._Http.post(environment.baseAdres + 'agent/AddSites',sites);
   }
 }
