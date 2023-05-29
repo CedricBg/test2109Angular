@@ -123,7 +123,6 @@ RemoveList: Site[] = []
       }));
     }
       if(list.length > 0){
-       console.log(true);
        this._SnackBar.openSnackBar('Client(s) bien ajouté');
       }
 
@@ -145,6 +144,10 @@ RemoveList: Site[] = []
    this.delSites.sites = this.RemoveList
    this._agentService.RemoveSitesToGuard(this.delSites).subscribe({
     next : (data: Site[])=>{
+      if(this.listSiteAgent.length > data.length)
+      {
+        this._SnackBar.openSnackBar('Elément bien supprimé');
+      }
       this.listSiteAgent = data
       this.subscription.push(this._agentService.GetAssignedCustomers(this.agent.agent.id).subscribe({
         next : (data : Customers[]) =>{
