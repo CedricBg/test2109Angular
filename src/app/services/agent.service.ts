@@ -67,7 +67,12 @@ export class AgentService {
 
   AddSitesToGuard(sites: AddSites)
   {
-    console.log(sites)
+
     return this._Http.post(environment.baseAdres + 'agent/AddSites',sites);
+  }
+
+  RemoveSitesToGuard(sites: AddSites)
+  {
+    return this._Http.post(environment.baseAdres + 'agent/RemoveSites',sites);
   }
 }

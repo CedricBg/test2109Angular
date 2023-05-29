@@ -32,6 +32,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
+
 registerLocaleData( localeFr , 'fr-BE');
 
 @NgModule({
