@@ -11,7 +11,7 @@ import { InformationsService } from 'src/app/services/informations.service';
 import { Site } from 'src/app/models/customer/site.models';
 import { ContactPerson } from 'src/app/models/customer/ContactPerson.models';
 import { Route, Router } from '@angular/router';
-import { Observable, first } from 'rxjs';
+import { Observable, first, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-customer',
@@ -33,6 +33,7 @@ export class AddCustomerComponent implements OnInit {
   listLanguage: Language[] = []
   listCountrys: Countrys[] = []
   siteCreated: Site
+  subscription: Subscription[] = []
 
   constructor(private _builder: FormBuilder,private _Router : Router, private _custService : CustomerService, private _infoService: InformationsService, private _addressService: AddressService
    ) {}
@@ -40,17 +41,16 @@ export class AddCustomerComponent implements OnInit {
   ngOnInit(): void {
     this.sendCompany()
 
-
-    this._infoService.GetLanguages().subscribe({
+    this.subscription.push(this._infoService.GetLanguages().subscribe({
       next: (data: Language[]) =>{
         this.listLanguage = data
       }
-    })
-    this._addressService.GetAllCountrys().subscribe({
+    }))
+    this.subscription.push(this._addressService.GetAllCountrys().subscribe({
       next: (data: Countrys[]) => {
         this.listCountrys = data
       }
-    })
+    }))
   }
 
   sendCompany()
@@ -108,7 +108,7 @@ export class AddCustomerComponent implements OnInit {
       this.siteCreated.customerIdCreate = this.idClient
       console.log(this.siteCreated)
 
-      this._custService.CreateSite(this.siteCreated).subscribe({
+      this.subscription.push(this._custService.CreateSite(this.siteCreated).subscribe({
         next: (data : number) =>{
           this.idSite = data
           //Appel formulaire
@@ -116,7 +116,7 @@ export class AddCustomerComponent implements OnInit {
           //creation de la nouvelle liste customers pour mise a jour de vue
           this._custService.getAllCustomersOnCreateSite()
         }
-      })
+      }))
     }
   }
 
@@ -219,11 +219,16 @@ export class AddCustomerComponent implements OnInit {
     if(this.formClient.valid)
     {
       this._custService.CreateCompany(this.formClient.value)
-      this._custService.GetIdCustAdd().subscribe({
+      this.subscription.push(this._custService.GetIdCustAdd().subscribe({
         next : (data: number) =>{
           this.idClient = data
         }
-      })
+      }))
     }
+  }
+  ngOnDestroy(){
+    this.subscription.forEach(element => {
+      element.unsubscribe()
+    });
   }
 }

@@ -162,7 +162,6 @@ RemoveList: Site[] = []
   }
 
 
-
   ngOnDestroy(){
     this.subscription.forEach(element => {
       element.unsubscribe();

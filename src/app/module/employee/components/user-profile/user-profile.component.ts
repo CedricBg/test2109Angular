@@ -14,7 +14,7 @@ export class UserProfileComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data) { }
 
   ngOnInit(): void {
-    this.name = sessionStorage.getItem('firstName');
+    this.name = sessionStorage.getItem('surName');
   }
 
   CLosedDialogBox()

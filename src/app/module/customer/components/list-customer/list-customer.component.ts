@@ -128,7 +128,7 @@ export class ListCustomerComponent implements OnInit {
       if(idsite != 0)
       {
         this.select = true
-        this._CustService.GetOne(idsite).subscribe({
+        this.subscriptions.push(this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>
         {
           this.siteSelected =  data
@@ -141,7 +141,7 @@ export class ListCustomerComponent implements OnInit {
             const dialogRef = this.dialog.open(UpdateSiteComponent,diallogConfig);
           }
         }
-      })
+      }))
       }
       else{
         return 0
@@ -177,11 +177,11 @@ export class ListCustomerComponent implements OnInit {
   {
     const site = this.GetSit(id)
     if(site != 0){
-      this._CustService.DeleteSite(site).subscribe({
+      this.subscriptions.push(this._CustService.DeleteSite(site).subscribe({
         next: (data: string)=>{
           console.log(data)
         }
-      })
+      }))
     }
   }
 
@@ -194,7 +194,7 @@ export class ListCustomerComponent implements OnInit {
 
   Delete(id: number)
   {
-    this._CustService.Delete(id).subscribe({
+    this.subscriptions.push(this._CustService.Delete(id).subscribe({
       next : (data: string)=>{
         const body = data
         this._CustService.getAllCustomers().subscribe(data=>{
@@ -203,8 +203,7 @@ export class ListCustomerComponent implements OnInit {
           }
         )
       }
-    })
-
+    }))
   }
   UpdateCustomer(id: number)
   {

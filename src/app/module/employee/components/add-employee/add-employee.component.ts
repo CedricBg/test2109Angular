@@ -1,7 +1,7 @@
 import { Language } from './../../../../models/language.models';
 import { Address } from 'src/app/models/address.models';
 import { InformationsService } from 'src/app/services/informations.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Component, Inject, OnInit,  } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -26,6 +26,7 @@ export class AddEmployeeComponent implements OnInit {
   formEmployee! : FormGroup
   adress! : FormGroup
   listLanguages: Language[] = []
+  subscription: Subscription[] = []
 
   constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _InfoService: InformationsService ,private _AddressService : AddressService, private _InformationService : InformationsService, public dialogRef: MatDialogRef<AddEmployeeComponent>,
     @Inject(MAT_DIALOG_DATA) data)
@@ -93,33 +94,32 @@ export class AddEmployeeComponent implements OnInit {
   }
   GetLanguages()
   {
-    this._InfoService.GetLanguages().subscribe({
+    this.subscription.push(this._InfoService.GetLanguages().subscribe({
       next: (data: Language[]) =>{
         this.listLanguages = data
       }
-    })
+    }))
   }
   GetListCountrys()
   {
-     this._AddressService.GetAllCountrys().subscribe({
+    this.subscription.push(this._AddressService.GetAllCountrys().subscribe({
       next :  (data: Countrys[]) =>{
           this.listCountrys = data
       }
-    })
+    }))
   }
   GetListRoles()
   {
-    this._InformationService.GetRoles().subscribe({
+    this.subscription.push(this._InformationService.GetRoles().subscribe({
       next:  (data : Role[])=> {
           this.listRoles =  data
       }
-    })
+    }))
   }
   get email(): FormArray
   {
      return  this.formEmployee.get("email") as  FormArray
   }
-
 
   newEmail(): FormGroup
   {
@@ -156,5 +156,13 @@ export class AddEmployeeComponent implements OnInit {
   {
     this.phone.removeAt(id)
   }
+
+  ngOnDestroy()
+  {
+    this.subscription.forEach(element => {
+      element.unsubscribe()
+    });
+  }
+
 }
 

@@ -10,7 +10,7 @@ import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Employee } from 'src/app/models/employee.models';
 import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { Observable, Timestamp } from 'rxjs';
+import { Observable, Timestamp, Subscription } from 'rxjs';
 import { DialogConfig } from '@angular/cdk/dialog';
 import { AddloginComponent } from 'src/app/module/auth/components/addlogin/addlogin.component';
 import * as dayjs from 'dayjs';
@@ -38,6 +38,7 @@ export class UpdateEmployeeComponent implements OnInit {
   listLanguages: Language[]
   selectedRole!: string
   infoFoto: SendFoto = new SendFoto()
+  private subscription: Subscription[] = []
 
 
   constructor(private _serviceEmployee : EmployeeService, private _builder : FormBuilder,private _InfoService : InformationsService, public dialog : MatDialog ,private _AddressService : AddressService,
@@ -104,38 +105,38 @@ export class UpdateEmployeeComponent implements OnInit {
 
   GetLanguage()
   {
-    this._InfoService.GetLanguages().subscribe({
+    this.subscription.push(this._InfoService.GetLanguages().subscribe({
       next: (data: Language[]) =>{
         this.listLanguages = data
       }
     })
-  }
+  )}
 
   GetRoles()
   {
-    this._InfoService.GetRoles().subscribe({
+    this.subscription.push(this._InfoService.GetRoles().subscribe({
       next: (data: Role[]) =>{
         this.listRoles = data
       }
-    })
+    }))
   }
 
   GetListCountrys()
   {
-    this._AddressService.GetAllCountrys().subscribe({
+    this.subscription.push(this._AddressService.GetAllCountrys().subscribe({
       next :  (data: Countrys[]) =>{
           this.listCountrys =  data
       }
-    })
+    }))
   }
   GetOne(id: number)
   {
-    this._serviceEmployee.getOne(id).subscribe({
+    this.subscription.push(this._serviceEmployee.getOne(id).subscribe({
         next : ( data : DetailedEmployee)  => {
         this.SelectedEmployee = data
         this.SendInformationForm()
       }
-    })
+    }))
   }
 
 
@@ -205,5 +206,12 @@ export class UpdateEmployeeComponent implements OnInit {
     dialogRef.width = '400px'
     dialogRef.data = id
     const dialog = this.dialog.open(AddloginComponent,dialogRef);
+  }
+
+  ngOnDestroy()
+  {
+    this.subscription.forEach(element => {
+      element.unsubscribe();
+    });
   }
 }

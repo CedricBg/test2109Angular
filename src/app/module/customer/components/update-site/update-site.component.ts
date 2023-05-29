@@ -254,21 +254,21 @@ private createContactForm(contact: ContactPerson): FormGroup {
   }
   GetLanguages()
   {
-    this._infoService.GetLanguages().subscribe({
+    this.subscription.push(this._infoService.GetLanguages().subscribe({
       next : (data: Language[])=>
       {
         this.listLanguage = data
       }
-    })
+    }))
   }
 
   GetListCountrys()
   {
-    this._AddressService.GetAllCountrys().subscribe({
+    this.subscription.push(this._AddressService.GetAllCountrys().subscribe({
       next :  (data: Countrys[]) =>{
           this.listCountrys =  data
       }
-    })
+    }))
   }
 
   CloseDialogBox(): void {

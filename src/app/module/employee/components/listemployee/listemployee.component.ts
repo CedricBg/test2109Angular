@@ -23,18 +23,19 @@ export class ListemployeeComponent implements OnInit {
   subscriptionAll: Subscription
   role: string
   safeImageUrl: SafeUrl
+  subscription: Subscription[] = []
 
   constructor(private _serviceEmployee : EmployeeService, public dialog : MatDialog, private _DomSanitizer: DomSanitizer ) { }
 
   ngOnInit(): void {
     this.role = sessionStorage.getItem('dimin')
     this.GetEmployee()
-    this.subscriptionUpdate = this._serviceEmployee.getUpdateData().subscribe(newData => {
+    this.subscription.push(this._serviceEmployee.getUpdateData().subscribe(newData => {
       this.SelectedEmployee = newData
-    })
-    this.subscriptionAll = this._serviceEmployee.getAllData().subscribe(newData =>{
+    }))
+    this.subscription.push(this._serviceEmployee.getAllData().subscribe(newData =>{
       this.listEmployee = newData
-    })
+    }))
   }
 
   GetEmployee()
@@ -45,10 +46,10 @@ export class ListemployeeComponent implements OnInit {
   GetOne(id: number)
   {
     this.select = true
-    this._serviceEmployee.getOne(id).subscribe({
+    this.subscription.push(this._serviceEmployee.getOne(id).subscribe({
         next : ( data : DetailedEmployee)  => {
         this.SelectedEmployee = data
-        this._serviceEmployee.DownLoadFoto(id).subscribe({
+        this.subscription.push(this._serviceEmployee.DownLoadFoto(id).subscribe({
           next : (data : Blob)=>{
             if(!(data == null))
             {
@@ -59,9 +60,9 @@ export class ListemployeeComponent implements OnInit {
               this.safeImageUrl = null
             }
           }
-        })
+        }))
       }
-    })
+    }))
   }
 
   ngModelChange()
@@ -100,5 +101,11 @@ export class ListemployeeComponent implements OnInit {
       this._serviceEmployee.DeleteUser(id)
     }
 
+  }
+  ngOnDestroy()
+  {
+    this.subscription.forEach(element => {
+      element.unsubscribe();
+    });
   }
 }

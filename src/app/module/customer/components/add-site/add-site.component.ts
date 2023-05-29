@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { distinctUntilChanged, first } from 'rxjs';
+import { distinctUntilChanged, first, Subscription } from 'rxjs';
 import { Countrys } from 'src/app/models/countrys.models';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { Site } from 'src/app/models/customer/site.models';
@@ -26,29 +26,30 @@ export class AddSiteComponent implements OnInit {
   idClient!: number
   idSite!: number
   customer!: Customers
+  subscription: Subscription[] = []
   ngOnInit(): void {
 
-    this._custService.GetaCustomerForUpdateSite().subscribe({
+    this.subscription.push(this._custService.GetaCustomerForUpdateSite().subscribe({
       next :  (data : Customers)=>{
         this.customer = data
       }
-    })
-    this._infoService.GetLanguages().subscribe({
+    }))
+    this.subscription.push(this._infoService.GetLanguages().subscribe({
       next: (data: Language[]) =>{
         this.listLanguage = data
       }
-    })
-    this._addressService.GetAllCountrys().subscribe({
+    }))
+    this.subscription.push(this._addressService.GetAllCountrys().subscribe({
       next: (data: Countrys[]) => {
         this.listCountrys = data
       }
-    })
+    }))
 
-    this._infoService.GetLanguages().subscribe({
+    this.subscription.push(this._infoService.GetLanguages().subscribe({
       next: (data: Language[]) =>{
         this.listLanguage = data
       }
-    })
+    }))
     this.SendSite()
   }
 
@@ -103,12 +104,12 @@ export class AddSiteComponent implements OnInit {
       this._infoService.getLanguages(this.listLanguage, this.formClientSite)
       this.siteCreated = this.formClientSite.value
       this.siteCreated.customerIdCreate = this.customer.customerId
-      this._custService.CreateSite(this.siteCreated).subscribe({
+      this.subscription.push(this._custService.CreateSite(this.siteCreated).subscribe({
         next: (data : number) =>{
           this.idSite = data
           this.AddContactPersonSite()
         }
-      })
+      }))
     }
   }
 
@@ -148,5 +149,11 @@ export class AddSiteComponent implements OnInit {
   DeletePhones(id: number)
   {
     this.Phone.removeAt(id)
+  }
+
+  ngOnDestroy(){
+    this.subscription.forEach(element => {
+      element.unsubscribe()
+    });
   }
 }
