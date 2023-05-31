@@ -8,34 +8,59 @@
           <div id="photo"><img [attr.src]="safeImageUrl" alt="Photo"></div>
 
             <div class="details">
-              <p class="position">Agent: {{agent.agent.surName}} {{agent.agent.firstName}}</p>
-              <p class="position">Role: {{agent.agent.role.name}}</p>
+              <p class="position">Agent: {{data.agent.surName}} {{data.agent.firstName}}</p>
+              <p class="position">Role: {{data.agent.role.name}}</p>
             </div>
           </div>
         <div class="footer">
       </div>
     </div>
   </section>
-  <div cdkDropListGroup>
+
+  <div class="cdks" cdkDropListGroup>
+    <p class="title-drag">Par Client(s)</p>
     <div class="contientDragDrop">
       <div class="listDrag"
       cdkDropList
-      [cdkDropListData]="modifiedListCustomer"
+      [cdkDropListData]="allCustomersNotAssignedToGuardModif"
       (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let elt of modifiedListCustomer" cdkDrag>
-          {{elt.nameCustomer}}
+        <div *ngFor="let elt of allCustomersNotAssignedToGuardModif" cdkDrag>
+          <span>{{elt.nameCustomer}}</span>
         </div>
       </div>
+      <p class="p-drag-center"><mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_right</mat-icon></p>
       <div class="listDrag"
-      cdkDropList
-      [cdkDropListData]="listCustomerstoAgent"
-      (cdkDropListDropped)="drop($event)">
-      <div *ngFor="let elt of listCustomerstoAgent" cdkDrag>
-        {{elt.nameCustomer}}
+        cdkDropList
+        [cdkDropListData]="modifiAssignedCustomer"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let elt of modifiAssignedCustomer" cdkDrag>
+        <span>{{elt.nameCustomer}}</span>
+        </div>
+      </div>
+    </div>
+    <button class="button-drag" mat-button (click)="SaveCustomers()">Envoyer</button>
+  </div>
+
+  <div class="cdks" cdkDropListGroup>
+    <p class="title-drag">Par Site(s)</p>
+    <div class="contientDragDrop">
+      <div class="listDrag"cdkDropList
+      [cdkDropListData]=""
+      (cdkDropListDropped)="dropSite($event)">
+      <div *ngFor="let elt of " cdkDrag>
+        <span></span>
+    </div>
+      </div>
+      <p class="p-drag-center"><mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_right</mat-icon></p>
+      <div class="listDrag" cdkDropList
+      [cdkDropListData]=""
+      (cdkDropListDropped)="dropSite($event)">
+        <div *ngFor="let elt of " cdkDrag>
+          <span></span>
       </div>
     </div>
   </div>
-  <button class="button-drag" mat-button (click)="SaveCustomers()">Send</button>
-</div>
+    <button class="button-drag" mat-button >Envoyer</button>
+  </div>
 
 </div>

@@ -1,13 +1,12 @@
 import { AgentStatiqueComponent } from './components/agent-statique/agent-statique.component';
-import { NgModule, Component } from '@angular/core';
-import { RouterModule, Routes, CanActivate } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes,  } from '@angular/router';
 import { TextEditorComponent } from './components/text-editor/text-editor.component';
 import { AgentComponent } from './agent.component';
 import { InfoAgentComponent } from './components/info-agent/info-agent.component';
-import { AuthGuard } from 'src/app/auth.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { SiteComponent } from './components/site/site.component';
-import { EmployeeResolver } from 'src/app/resolvers/employee-resolver-one.resolver';
+import { EmployeeResolver, listAllCustomerResolver, listassignedCustomerResolver } from 'src/app/resolvers/employee-resolver-one.resolver';
 
 
 
@@ -15,7 +14,10 @@ import { EmployeeResolver } from 'src/app/resolvers/employee-resolver-one.resolv
 
 const routes: Routes = [
   { path: 'admin', component: AdminComponent, children : [
-    { path: 'site/:id', component : SiteComponent, resolve: {agent: EmployeeResolver},},
+    { path: 'site/:id', component : SiteComponent, resolve: {
+      agent: EmployeeResolver,
+      listAssignCustomers : listassignedCustomerResolver,
+      listallCustomers : listAllCustomerResolver},},
   ]},
 { path : 'statique' , component: AgentStatiqueComponent},
   { path : 'editor', component: TextEditorComponent},

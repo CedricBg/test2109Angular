@@ -1,7 +1,7 @@
 
 .contenuSite{
   display:flex;
-
+  flex-wrap: wrap;
 }
 
 .card {
@@ -59,20 +59,35 @@ img {
 //Fin contenu div Agent
 
 //début drag and drop
+.cdks{
+  padding-top:20px;
+}
+
 .contientDragDrop
 {
 display:flex;
 flex-wrap: wrap;
 justify-content: space-around;
-width: 800px;
+word-break: break-all;
+width: 500px;
 min-height: 500px;
 background-color: #f2f2f2;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 margin-left: 50px;
+border-radius: 0 0  5px 5px ;
+}
+
+.p-drag-center{
+  height:500px;
 
 }
+.contientDragDrop mat-icon{
+  color: #326290;
+  padding-top: 250px;
+}
+
 .listDrag{
-width:300px;
+width:200px;
 background-color: white;
 }
 
@@ -94,14 +109,75 @@ background-color: white;
 
 .button-drag{
   margin-top:15px;
-  margin-left:41%;
+  margin-left:35%;
   font-weight:bold ;
   border-radius: 10px;
   border:none;
   background-color: #326290;
   color: wheat;
-  height: 3vh;
   width: 201px;
   height: 40px;
   cursor: pointer;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+.title-drag
+{
+  padding-top: 10px;
+  width:500px;
+  height: 30px;
+  background-color: white;
+  text-align: center;
+  margin-left: 50px;
+  border-radius: 5px 5px 0 0 ;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+@media screen and (max-width: 1400px ) {
+  .contenuSite{
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin-left:0%;
+  }
+  .card{
+    visibility: hidden;
+  }
+  .button-drag{
+    margin-left: 200px;
+    width: 201px;
+    height: 30px;
+    margin-top:15px;
+  }
+}
+
+@media screen and (max-width: 1000px ) {
+  .contenuSite{
+    flex-direction: column-reverse;
+    justify-content: center;
+    margin-left:0%;
+  }
+  .title-drag{
+    height: 20px;
+    padding-top: 0px;
+  }
+  .button-drag{
+    margin-left: 150px;
+  }
+  .card{
+    visibility: hidden;
+  }
+  .contientDragDrop
+  {
+    width: 400px;
+  }
+  .listDrag{
+    width: 150px;
+  }
+  .title-drag
+{
+  width: 400px;
+}
 }

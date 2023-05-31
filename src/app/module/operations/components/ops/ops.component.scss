@@ -38,13 +38,19 @@ li.icons
 }
 
 
-@media screen and (max-width: 1400px){
-  .menu ul li {
-  border: none;
+@media screen and (max-width: 730px){
+  .menu{
+    justify-content: flex-start;
+  }
+  .menu ul {
+    flex-flow: column;
+
+  }
+  .menu ul li{
+    margin-bottom: 2px;
+    height: 30px;
   }
 }
 @media screen and (max-height: 375px){
-  .menu ul li {
-  border: none;
-  }
+
 }

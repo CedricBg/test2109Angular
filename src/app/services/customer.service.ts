@@ -162,7 +162,6 @@ export class CustomerService {
     return this._httpClient.delete(environment.baseAdres+'customer/deleteSite/'+id)
   }
 
-
   DeleteContact(id: number)
   {
     return this._httpClient.delete<Site>(environment.baseAdres+'customer/deleteContact/'+id).subscribe({
