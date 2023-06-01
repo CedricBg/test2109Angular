@@ -45,22 +45,22 @@
     <p class="title-drag">Par Site(s)</p>
     <div class="contientDragDrop">
       <div class="listDrag"cdkDropList
-      [cdkDropListData]=""
+      [cdkDropListData]="listAllsitesAgentmodif"
       (cdkDropListDropped)="dropSite($event)">
-      <div *ngFor="let elt of " cdkDrag>
-        <span></span>
+      <div *ngFor="let elt of listAllsitesAgentmodif" cdkDrag>
+        <span>{{elt.name}}</span>
     </div>
       </div>
       <p class="p-drag-center"><mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_right</mat-icon></p>
       <div class="listDrag" cdkDropList
-      [cdkDropListData]=""
+      [cdkDropListData]="this.listSiteAssignAgent"
       (cdkDropListDropped)="dropSite($event)">
-        <div *ngFor="let elt of " cdkDrag>
-          <span></span>
+        <div *ngFor="let elt of this.listSiteAssignAgent" cdkDrag>
+          <span>{{elt.name}}</span>
       </div>
     </div>
   </div>
-    <button class="button-drag" mat-button >Envoyer</button>
+    <button class="button-drag" mat-button (click)=" SaveSites()">Envoyer</button>
   </div>
 
 </div>

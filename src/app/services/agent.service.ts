@@ -75,4 +75,9 @@ export class AgentService {
   {
     return this._Http.post(environment.baseAdres + 'agent/RemoveSites',sites);
   }
+
+  UpdateSite(sites: AddSites)
+  {
+    return this._Http.post(environment.baseAdres + 'agent/UpdateSite',sites);
+  }
 }
