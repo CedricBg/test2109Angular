@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { EmployeeResolver, listAllCustomerResolver, listassignedCustomerResolver } from 'src/app/resolvers/employee-resolver-one.resolver';
 
-export const routes: Routes = [
+export default [
   { path: 'admin', loadComponent: () => import('./components/admin/admin.component').then(module => module.AdminComponent) , children : [
     { path: 'site/:id', loadComponent : () => import('./components/site/site.component').then(module => module.SiteComponent) , resolve: {
       agent: EmployeeResolver,
@@ -13,4 +13,4 @@ export const routes: Routes = [
   { path: 'InfoAgent', loadComponent : () => import('./components//info-agent/info-agent.component').then(module =>module.InfoAgentComponent)},
   { path : '', loadComponent:() => import('./agent.component').then(module =>module.AgentComponent)},
   { path : '**', redirectTo : './employee', pathMatch : 'full'}
-]
+] as Routes

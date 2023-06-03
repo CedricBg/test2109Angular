@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/nav/nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule} from './shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CustomerComponent } from './module/customer/customer.component';
 
@@ -21,7 +20,6 @@ import { CustomerComponent } from './module/customer/customer.component';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        SharedModule,
         NavComponent,
         CustomerComponent
     ],

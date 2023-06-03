@@ -1,19 +1,11 @@
 import { Pdf } from './../models/customer/Pdf.models';
-import { Language } from './../models/language.models';
-import { Countrys } from 'src/app/models/countrys.models';
-import { FormGroup } from '@angular/forms';
-import { AddEmployeeComponent } from './../module/employee/components/add-employee/add-employee.component';
-import { ActivatedRouteSnapshot, ResolveFn, Router, RouterStateSnapshot } from '@angular/router';
 import { DetailedEmployee } from './../models/DetailedEmployee.models';
 import { environment } from './../../environments/environment';
-import { HttpClient, HttpEvent, HttpHeaders, HttpRequest} from '@angular/common/http';;
-import { Injectable, OnInit, inject } from '@angular/core';
-import { Observable, BehaviorSubject, Subject} from 'rxjs';
+import { HttpClient, HttpHeaders} from '@angular/common/http';;
+import { Injectable, OnInit } from '@angular/core';
+import { Observable, Subject} from 'rxjs';
 import { Employee } from '../models/employee.models';
-import { Role } from '../models/Role.models';
-import { error } from 'console';
-import { SendFoto } from '../models/Employee/SendFoto.models';
-import { env } from 'process';
+
 
 
 
@@ -22,7 +14,7 @@ import { env } from 'process';
 })
 export class EmployeeService implements OnInit {
 
-  constructor(private _httpClient : HttpClient, private _route : Router) { }
+  constructor(private _httpClient : HttpClient) { }
 
   ngOnInit(): void { }
 

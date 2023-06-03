@@ -1,6 +1,6 @@
 
 import { Site } from './../models/customer/site.models';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable,OnInit } from '@angular/core';
@@ -24,7 +24,7 @@ export class CustomerService {
   private isAddCustomerSubject = new Subject<number>()
   private isDeletedContactSubject = new Subject<Site>()
   customer: Customers
-  constructor(private _httpClient : HttpClient, private _route : Router) {  }
+  constructor(private _httpClient : HttpClient) {  }
 
   private JsonHeader()
   {
