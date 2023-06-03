@@ -33,7 +33,7 @@
     "timezone": "^1.0.23",
     "tslib": "^2.3.0",
     "utc": "^0.1.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "^0.11.8"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.2.8",
