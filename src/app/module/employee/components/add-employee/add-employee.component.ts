@@ -9,7 +9,7 @@ import { Countrys } from 'src/app/models/countrys.models';
 import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Role } from 'src/app/models/Role.models';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 
 
 

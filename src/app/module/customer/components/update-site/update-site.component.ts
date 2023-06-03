@@ -9,7 +9,7 @@ import { AddressService } from './../../../../services/address.service';
 import { Countrys } from './../../../../models/countrys.models';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl, AbstractControl, FormGroupName } from '@angular/forms';
 import { ChangeDetectorRef, Component,Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { AddPersonComponent } from '../add-person/add-person.component';
 import { Subject, Subscription, distinctUntilChanged, first, takeUntil } from 'rxjs';

@@ -6,7 +6,7 @@ import { environment } from './../../environments/environment';
 import { AddLogin } from './../models/AddLogin.models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { AppComponent } from '../app.component';

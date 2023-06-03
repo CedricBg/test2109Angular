@@ -2,7 +2,7 @@ import { AddressService } from 'src/app/services/address.service';
 import { CustomerService } from './../../../../services/customer.service';
 import { Component,Inject, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { Countrys } from 'src/app/models/countrys.models';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { Language } from 'src/app/models/language.models';

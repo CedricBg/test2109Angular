@@ -2,10 +2,10 @@ import { UpdateSiteComponent } from './../update-site/update-site.component';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { CustomerService } from './../../../../services/customer.service';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { Site } from 'src/app/models/customer/site.models';
 import { Router } from '@angular/router';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
 import { Subscription, first } from 'rxjs';
 
 

@@ -4,7 +4,7 @@ import { InformationsService } from 'src/app/services/informations.service';
 import { Role } from 'src/app/models/Role.models';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { Countrys } from 'src/app/models/countrys.models';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Employee } from 'src/app/models/employee.models';
