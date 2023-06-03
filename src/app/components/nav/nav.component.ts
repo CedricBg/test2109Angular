@@ -1,10 +1,11 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { UserProfileComponent } from 'src/app/module/employee/components/user-profile/user-profile.component';
+
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgIf, TitleCasePipe } from '@angular/common';
+import { UserProfileComponent } from '../employee/components/user-profile/user-profile.component';
 
 @Component({
     selector: 'app-nav',

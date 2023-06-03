@@ -148,12 +148,15 @@ listSiteAssignAgent: Site[] = []
             const assignCustomer = data;
             this.subscription.push(this._serviceCustomer.getAllCustomers().subscribe({
                 next: ( datas: Customers[]) => {
-                  this.Assignation(assignCustomer,datas);}
+                  this.Assignation(assignCustomer,datas);
+
+                }
+
             }))}}));
         }
       }))
     }
-
+    this._SnackBar.openSnackBar()
     //ici on vide les variables pour éviter les doublons
     this.listSiteAdd = []
     this.listSiteDel = []
@@ -211,7 +214,7 @@ listSiteAssignAgent: Site[] = []
 
     this.delSite.sites = []
     this.addSite.sites = []
-
+    this._SnackBar.openSnackBar()
 
   }
 

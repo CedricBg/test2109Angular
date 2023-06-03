@@ -12,7 +12,7 @@ import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Observable, Timestamp, Subscription } from 'rxjs';
 import { DialogConfig } from '@angular/cdk/dialog';
-import { AddloginComponent } from 'src/app/module/auth/components/addlogin/addlogin.component';
+import { AddloginComponent } from 'src/app/components/auth/components/addlogin/addlogin.component';
 import * as dayjs from 'dayjs';
 import * as timezone from 'dayjs/plugin/timezone';
 import * as utc from 'dayjs/plugin/utc';

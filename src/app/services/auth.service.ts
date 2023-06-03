@@ -1,7 +1,7 @@
 
 import { User } from './../models/user.models';
 import { Login } from './../models/login.models';
-import { LoginComponent } from './../module/auth/components/login/login.component';
+
 import { environment } from './../../environments/environment';
 import { AddLogin } from './../models/AddLogin.models';
 import { HttpClient } from '@angular/common/http';
@@ -9,6 +9,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig, } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { LoginComponent } from '../components/auth/components/login/login.component';
 
 
 @Injectable({

@@ -9,5 +9,6 @@ export default [
       { path: 'customer',   loadChildren: ()=> import('./../customer/customer.routes')},
       { path: 'ronde',   loadChildren: ()=> import('./../ronde/ronde.routes')},
     ]
-}
+  } ,
+  { path : '**', redirectTo : 'employee', pathMatch : 'full'}
 ] as Routes;

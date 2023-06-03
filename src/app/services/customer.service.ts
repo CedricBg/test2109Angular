@@ -121,7 +121,6 @@ export class CustomerService {
 
   UpdateUser(client: Site)
   {
-    console.log(client)
     this._httpClient.put<Site>(environment.baseAdres +'customer/site', client).subscribe({
       next: (data: Site) =>{
         this.isUpdatedSubject.next(data)
