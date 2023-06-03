@@ -8,12 +8,22 @@ import { Customers } from 'src/app/models/customer/customers.models';
 import { AgentService } from 'src/app/services/agent.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Site } from 'src/app/models/customer/site.models';
+import { TextEditorComponent } from './components/text-editor/text-editor.component';
+import { RouterOutlet } from '@angular/router';
+import { MatOptionModule } from '@angular/material/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { InfoAgentComponent } from './components/info-agent/info-agent.component';
+import { NgIf, NgFor } from '@angular/common';
 
 
 @Component({
-  selector: 'app-agent',
-  templateUrl: './agent.component.html',
-  styleUrls: ['./agent.component.scss']
+    selector: 'app-agent',
+    templateUrl: './agent.component.html',
+    styleUrls: ['./agent.component.scss'],
+    standalone: true,
+    imports: [NgIf, InfoAgentComponent, MatFormFieldModule, MatSelectModule, ReactiveFormsModule, FormsModule, NgFor, MatOptionModule, RouterOutlet, TextEditorComponent]
 })
 export class AgentComponent implements OnInit {
 

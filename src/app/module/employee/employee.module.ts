@@ -4,25 +4,22 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { SharedModule } from '../../shared/shared.module';
 import { ListemployeeComponent } from './components/listemployee/listemployee.component';
 import { EmployeeComponent } from './employee.component';
-import { MatLegacyPaginatorIntl as MatPaginatorIntl } from '@angular/material/legacy-paginator';
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { UpdateEmployeeComponent } from './components/update-employee/update-employee.component';
 import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
-  declarations: [
-    AddEmployeeComponent,
-    ListemployeeComponent,
-    EmployeeComponent,
-    UserProfileComponent,
-    UpdateEmployeeComponent,
-    AdminComponent,
-  ],
-  imports: [
-    EmployeeRoutingModule,
-    SharedModule,
-  ],
-
+    imports: [
+        EmployeeRoutingModule,
+        SharedModule,
+        AddEmployeeComponent,
+        ListemployeeComponent,
+        EmployeeComponent,
+        UserProfileComponent,
+        UpdateEmployeeComponent,
+        AdminComponent
+    ]
 })
 
 export class EmployeeModule { }

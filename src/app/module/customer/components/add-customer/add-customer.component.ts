@@ -1,8 +1,8 @@
 import { AddressService } from 'src/app/services/address.service';
 import { CustomerService } from './../../../../services/customer.service';
 import { Component,Inject, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Countrys } from 'src/app/models/countrys.models';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { Language } from 'src/app/models/language.models';
@@ -12,11 +12,22 @@ import { Site } from 'src/app/models/customer/site.models';
 import { ContactPerson } from 'src/app/models/customer/ContactPerson.models';
 import { Route, Router } from '@angular/router';
 import { Observable, first, Subscription } from 'rxjs';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgIf, NgFor } from '@angular/common';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @Component({
-  selector: 'app-add-customer',
-  templateUrl: './add-customer.component.html',
-  styleUrls: ['./add-customer.component.scss']
+    selector: 'app-add-customer',
+    templateUrl: './add-customer.component.html',
+    styleUrls: ['./add-customer.component.scss'],
+    standalone: true,
+    imports: [MatStepperModule, ReactiveFormsModule, NgIf, MatFormFieldModule, MatInputModule, NgFor, MatButtonModule, MatIconModule, MatCheckboxModule, MatSelectModule, MatOptionModule]
 })
 
 

@@ -1,14 +1,19 @@
 import { _DisposeViewRepeaterStrategy } from '@angular/cdk/collections';
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AddRegisterForm } from 'src/app/models/customer/AddRegisterForm.modes';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-addlogin',
-  templateUrl: './addlogin.component.html',
-  styleUrls: ['./addlogin.component.scss']
+    selector: 'app-addlogin',
+    templateUrl: './addlogin.component.html',
+    styleUrls: ['./addlogin.component.scss'],
+    standalone: true,
+    imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule]
 })
 export class AddloginComponent implements OnInit {
 

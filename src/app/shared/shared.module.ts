@@ -10,25 +10,25 @@ import { MatLegacyRadioModule as MatRadioModule }  from '@angular/material/legac
 import  localeFr from "@angular/common/locales/fr-BE";
 import { registerLocaleData } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
-import {  MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
+import {  MatPaginatorModule } from '@angular/material/paginator';
 import { OrderModule } from 'ngx-order-pipe';
 import { NgxPaginationModule} from 'ngx-pagination';
-import { MatLegacyCardModule as MatCardModule} from '@angular/material/legacy-card';
-import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
-import { MatLegacySelectModule as MatSelectModule} from '@angular/material/legacy-select';
+import { MatCardModule} from '@angular/material/card';
+import { PageEvent } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule} from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatLegacyTooltipModule as MatTooltipModule} from '@angular/material/legacy-tooltip';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 

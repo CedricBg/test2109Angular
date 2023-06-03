@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { distinctUntilChanged, first, Subscription } from 'rxjs';
 import { Countrys } from 'src/app/models/countrys.models';
@@ -9,11 +9,22 @@ import { Language } from 'src/app/models/language.models';
 import { AddressService } from 'src/app/services/address.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { InformationsService } from 'src/app/services/informations.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgIf, NgFor } from '@angular/common';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @Component({
-  selector: 'app-add-site',
-  templateUrl: './add-site.component.html',
-  styleUrls: ['./add-site.component.scss']
+    selector: 'app-add-site',
+    templateUrl: './add-site.component.html',
+    styleUrls: ['./add-site.component.scss'],
+    standalone: true,
+    imports: [MatStepperModule, NgIf, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, NgFor, MatOptionModule, MatButtonModule, MatCheckboxModule, MatIconModule]
 })
 export class AddSiteComponent implements OnInit {
 

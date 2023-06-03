@@ -13,20 +13,17 @@ import { AdminCustomerComponent } from './components/admin-customer/admin-custom
 
 
 @NgModule({
-  declarations: [
-    AddCustomerComponent,
-    UpdateCustomerComponent,
-    ListCustomerComponent,
-    UpdateSiteComponent,
-    AddSiteComponent,
-    AddPersonComponent,
-    AdminCustomerComponent,
-
-  ],
-  imports: [
-    CommonModule,
-    CustomerRoutingModule,
-    SharedModule,
-  ]
+    imports: [
+        CommonModule,
+        CustomerRoutingModule,
+        SharedModule,
+        AddCustomerComponent,
+        UpdateCustomerComponent,
+        ListCustomerComponent,
+        UpdateSiteComponent,
+        AddSiteComponent,
+        AddPersonComponent,
+        AdminCustomerComponent
+    ]
 })
 export class CustomerModule { }

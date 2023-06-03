@@ -4,11 +4,14 @@ import { Pdf } from 'src/app/models/customer/Pdf.models';
 import { AgentService } from 'src/app/services/agent.service';
 import { saveAs } from 'file-saver';
 import { Site } from 'src/app/models/customer/site.models';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-info-agent',
-  templateUrl: './info-agent.component.html',
-  styleUrls: ['./info-agent.component.scss']
+    selector: 'app-info-agent',
+    templateUrl: './info-agent.component.html',
+    styleUrls: ['./info-agent.component.scss'],
+    standalone: true,
+    imports: [NgFor]
 })
 export class InfoAgentComponent implements OnInit {
 

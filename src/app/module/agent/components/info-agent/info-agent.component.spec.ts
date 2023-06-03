@@ -8,8 +8,8 @@ describe('InfoAgentComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InfoAgentComponent ]
-    })
+    imports: [InfoAgentComponent]
+})
     .compileComponents();
 
     fixture = TestBed.createComponent(InfoAgentComponent);

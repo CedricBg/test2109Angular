@@ -10,11 +10,16 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { CdkDragDrop,CdkDrag,CdkDropList,CdkDropListGroup,moveItemInArray,transferArrayItem, } from '@angular/cdk/drag-drop';
 import { AddSites } from 'src/app/models/agents/AddSites.models';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-site',
-  templateUrl: './site.component.html',
-  styleUrls: ['./site.component.scss']
+    selector: 'app-site',
+    templateUrl: './site.component.html',
+    styleUrls: ['./site.component.scss'],
+    standalone: true,
+    imports: [CdkDropListGroup, CdkDropList, NgFor, CdkDrag, MatIconModule, MatButtonModule]
 })
 export class SiteComponent implements OnInit{
 subscription: Subscription[] = []

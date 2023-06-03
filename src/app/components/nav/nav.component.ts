@@ -1,14 +1,17 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserProfileComponent } from 'src/app/module/employee/components/user-profile/user-profile.component';
 import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { NgIf, TitleCasePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-nav',
-  templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+    selector: 'app-nav',
+    templateUrl: './nav.component.html',
+    styleUrls: ['./nav.component.scss'],
+    standalone: true,
+    imports: [NgIf, TitleCasePipe]
 })
 export class NavComponent implements OnInit {
  isConnected : boolean

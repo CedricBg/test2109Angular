@@ -4,20 +4,31 @@ import { InformationsService } from 'src/app/services/informations.service';
 import { Observable, Subscription } from 'rxjs';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Component, Inject, OnInit,  } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Countrys } from 'src/app/models/countrys.models';
 import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Role } from 'src/app/models/Role.models';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatOptionModule } from '@angular/material/core';
+import { NgFor, NgIf } from '@angular/common';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 
 
 
 @Component({
-  selector: 'app-add-employee',
-  templateUrl: './add-employee.component.html',
-  styleUrls: ['./add-employee.component.scss']
+    selector: 'app-add-employee',
+    templateUrl: './add-employee.component.html',
+    styleUrls: ['./add-employee.component.scss'],
+    standalone: true,
+    imports: [MatCardModule, MatButtonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatAutocompleteModule, NgFor, MatOptionModule, MatIconModule, NgIf]
 })
 
 export class AddEmployeeComponent implements OnInit {

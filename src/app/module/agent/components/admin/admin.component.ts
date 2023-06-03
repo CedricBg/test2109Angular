@@ -3,14 +3,21 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AgentService } from 'src/app/services/agent.service';
+import { MatOptionModule } from '@angular/material/core';
+import { NgFor } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+    selector: 'app-admin',
+    templateUrl: './admin.component.html',
+    styleUrls: ['./admin.component.scss'],
+    standalone: true,
+    imports: [MatFormFieldModule, MatSelectModule, ReactiveFormsModule, FormsModule, NgFor, MatOptionModule, RouterOutlet]
 })
 export class AdminComponent implements OnInit{
 connected!: Boolean;

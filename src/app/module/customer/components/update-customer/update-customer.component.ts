@@ -1,16 +1,23 @@
-import { NgSwitchDefault } from '@angular/common';
+import { NgSwitchDefault, NgIf, NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Form, FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Form, FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, distinctUntilChanged, first } from 'rxjs';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { CustomerService } from 'src/app/services/customer.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @Component({
-  selector: 'app-update-customer',
-  templateUrl: './update-customer.component.html',
-  styleUrls: ['./update-customer.component.scss']
+    selector: 'app-update-customer',
+    templateUrl: './update-customer.component.html',
+    styleUrls: ['./update-customer.component.scss'],
+    standalone: true,
+    imports: [NgIf, ReactiveFormsModule, MatFormFieldModule, MatInputModule, NgFor, MatIconModule, MatCheckboxModule, MatButtonModule]
 })
 export class UpdateCustomerComponent implements OnInit {
 

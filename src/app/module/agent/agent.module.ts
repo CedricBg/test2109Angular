@@ -13,20 +13,16 @@ import { SiteComponent } from './components/site/site.component';
 
 
 @NgModule({
-  declarations: [
-    AgentStatiqueComponent,
-    TextEditorComponent,
-    AgentComponent,
-    InfoAgentComponent,
-    AdminComponent,
-    SiteComponent
-
-
-  ],
-  imports: [
-    CommonModule,
-    AgentRoutingModule,
-    SharedModule
-  ]
+    imports: [
+        CommonModule,
+        AgentRoutingModule,
+        SharedModule,
+        AgentStatiqueComponent,
+        TextEditorComponent,
+        AgentComponent,
+        InfoAgentComponent,
+        AdminComponent,
+        SiteComponent
+    ]
 })
 export class AgentModule { }

@@ -6,28 +6,23 @@ import { AuthComponent } from './auth.component';
 import { AddloginComponent } from './components/addlogin/addlogin.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { MAT_LEGACY_FORM_FIELD_DEFAULT_OPTIONS as MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/legacy-form-field';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 
 
 
 @NgModule({
-  providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
-
-  ],
-
-  declarations: [
-    AuthComponent,
-    AddloginComponent,
-    RegisterComponent,
-    LoginComponent,
-
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    SharedModule
-  ]
+    providers: [
+        { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } },
+    ],
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        SharedModule,
+        AuthComponent,
+        AddloginComponent,
+        RegisterComponent,
+        LoginComponent
+    ]
 })
 export class AuthModule { }

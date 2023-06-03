@@ -3,16 +3,24 @@ import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/models/employee.models';
-import { LegacyPageEvent as PageEvent } from '@angular/material/legacy-paginator';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { PageEvent } from '@angular/material/paginator';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { Subscription } from 'rxjs';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { NgFor, NgIf, TitleCasePipe, DatePipe } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
-  selector: 'app-listemployee',
-  templateUrl: './listemployee.component.html',
-  styleUrls: ['./listemployee.component.scss']
+    selector: 'app-listemployee',
+    templateUrl: './listemployee.component.html',
+    styleUrls: ['./listemployee.component.scss'],
+    standalone: true,
+    imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, FormsModule, MatButtonModule, MatIconModule, NgFor, NgIf, TitleCasePipe, DatePipe]
 })
 export class ListemployeeComponent implements OnInit {
   surName: any

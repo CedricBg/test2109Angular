@@ -1,11 +1,15 @@
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatIconModule } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-ops',
-  templateUrl: './ops.component.html',
-  styleUrls: ['./ops.component.scss']
+    selector: 'app-ops',
+    templateUrl: './ops.component.html',
+    styleUrls: ['./ops.component.scss'],
+    standalone: true,
+    imports: [NgIf, MatIconModule, RouterOutlet]
 })
 export class OpsComponent implements OnInit {
   connected!: Boolean;
@@ -27,7 +31,7 @@ export class OpsComponent implements OnInit {
     this._Router.navigateByUrl('OPS/employee/'+chemin);
     }
     else{
-    this._Router.navigateByUrl('OPS/employee');
+    this._Router.navigateByUrl('employee');
     }
   }
   Customers(chemin: string)

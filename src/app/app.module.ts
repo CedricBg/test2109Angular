@@ -16,24 +16,18 @@ import { CustomerComponent } from './module/customer/customer.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    CustomerComponent,
-
-
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    SharedModule,
-
-  ],
-  providers: [
-    { provide : HTTP_INTERCEPTORS, useClass : TieInterceptor, multi : true},
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        SharedModule,
+        NavComponent,
+        CustomerComponent
+    ],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: TieInterceptor, multi: true },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

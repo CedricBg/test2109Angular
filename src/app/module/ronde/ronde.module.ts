@@ -7,13 +7,11 @@ import { AdminComponent } from './components/admin/admin.component';
 
 
 @NgModule({
-  declarations: [
-    RondeComponent,
-    AdminComponent
-  ],
-  imports: [
-    CommonModule,
-    RondeRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        RondeRoutingModule,
+        RondeComponent,
+        AdminComponent
+    ]
 })
 export class RondeModule { }

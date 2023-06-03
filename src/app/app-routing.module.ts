@@ -7,15 +7,12 @@ import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
 
-  { path: 'employee' , loadChildren: ()=> import('./module/employee/employee.module').then(m => m.EmployeeModule) },
-  { path: 'auth' ,     loadChildren: ()=> import('./module/auth/auth.module').then(m=>m.AuthModule)},
-  { path: 'customer',   loadChildren: ()=> import('./module/customer/customer.module').then(m=> m.CustomerModule)},
-  { path: 'OPS',   loadChildren: ()=> import('./module/operations/operations.module').then(m=> m.OperationsModule)},
-  { path: 'agent',   loadChildren: ()=> import('./module/agent/agent.module').then(m=> m.AgentModule)},
-  { path: 'ronde',   loadChildren: ()=> import('./module/ronde/ronde.module').then(m=> m.RondeModule)},
+
+  { path: 'auth' ,   loadChildren: ()=> import('./module/auth/auth.routes').then(m=>m.routes)},
+  { path: 'OPS',     loadChildren: ()=> import('./module/operations/operations.routes').then(m=> m.routes)},
+  { path: 'agent',   loadChildren: ()=> import('./module/agent/agent.route').then(m=> m.routes)},
+  { path: 'ronde',   loadChildren: ()=> import('./module/ronde/ronde.routes').then(m=> m.routes)},
   { path: '', redirectTo : 'auth', pathMatch : 'full'},
-
-
 ];
 
 @NgModule({

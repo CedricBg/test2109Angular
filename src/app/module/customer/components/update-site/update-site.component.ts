@@ -7,17 +7,28 @@ import { Language } from './../../../../models/language.models';
 import { InformationsService } from 'src/app/services/informations.service';
 import { AddressService } from './../../../../services/address.service';
 import { Countrys } from './../../../../models/countrys.models';
-import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl, AbstractControl, FormGroupName } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControlName, FormControl, AbstractControl, FormGroupName, ReactiveFormsModule } from '@angular/forms';
 import { ChangeDetectorRef, Component,Inject, OnInit } from '@angular/core';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { AddPersonComponent } from '../add-person/add-person.component';
 import { Subject, Subscription, distinctUntilChanged, first, takeUntil } from 'rxjs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { NgIf, NgFor } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
-  selector: 'app-update-site',
-  templateUrl: './update-site.component.html',
-  styleUrls: ['./update-site.component.scss']
+    selector: 'app-update-site',
+    templateUrl: './update-site.component.html',
+    styleUrls: ['./update-site.component.scss'],
+    standalone: true,
+    imports: [MatCardModule, MatButtonModule, NgIf, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule, NgFor, MatOptionModule, MatIconModule, MatCheckboxModule]
 })
 export class UpdateSiteComponent implements OnInit {
   formClient!: FormGroup

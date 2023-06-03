@@ -2,17 +2,27 @@ import { UpdateSiteComponent } from './../update-site/update-site.component';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { CustomerService } from './../../../../services/customer.service';
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Site } from 'src/app/models/customer/site.models';
-import { Router } from '@angular/router';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { Router, RouterOutlet } from '@angular/router';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { Subscription, first } from 'rxjs';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { NgIf, NgFor, TitleCasePipe } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @Component({
-  selector: 'app-list-customer',
-  templateUrl: './list-customer.component.html',
-  styleUrls: ['./list-customer.component.scss']
+    selector: 'app-list-customer',
+    templateUrl: './list-customer.component.html',
+    styleUrls: ['./list-customer.component.scss'],
+    standalone: true,
+    imports: [MatFormFieldModule, MatIconModule, MatInputModule, ReactiveFormsModule, FormsModule, MatButtonModule, NgIf, NgFor, MatSelectModule, MatOptionModule, MatPaginatorModule, RouterOutlet, TitleCasePipe]
 })
 export class ListCustomerComponent implements OnInit {
   nameCustomer: string = ""

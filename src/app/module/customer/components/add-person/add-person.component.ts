@@ -1,13 +1,22 @@
 import { Component, Inject } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Route, Router } from '@angular/router';
 import { CustomerService } from 'src/app/services/customer.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatStepperModule } from '@angular/material/stepper';
+import { NgIf, NgFor } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'app-add-person',
-  templateUrl: './add-person.component.html',
-  styleUrls: ['./add-person.component.scss']
+    selector: 'app-add-person',
+    templateUrl: './add-person.component.html',
+    styleUrls: ['./add-person.component.scss'],
+    standalone: true,
+    imports: [MatButtonModule, NgIf, ReactiveFormsModule, MatStepperModule, MatFormFieldModule, MatInputModule, MatIconModule, NgFor, MatCheckboxModule]
 })
 export class AddPersonComponent {
 idSite! : number

@@ -1,19 +1,24 @@
 import { Message } from './../../../../models/Discussion/Message.models';
 import { Pdf } from './../../../../models/customer/Pdf.models';
 import { Component, OnInit,} from '@angular/core';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { AngularEditorConfig, AngularEditorModule } from '@kolkov/angular-editor';
 import { Subscription, first } from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { MessagesService } from 'src/app/services/messages.service';
 import { GenerateHtml } from 'src/app/Utilities/GenerateHtml';
-import { FormsModule } from '@angular/forms';
+import { NgFor } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
 @Component({
-  selector: 'app-text-editor',
-  templateUrl: './text-editor.component.html',
-  styleUrls: ['./text-editor.component.scss'],
+    selector: 'app-text-editor',
+    templateUrl: './text-editor.component.html',
+    styleUrls: ['./text-editor.component.scss'],
+    standalone: true,
+    imports: [MatIconModule, MatTooltipModule, AngularEditorModule, ReactiveFormsModule, FormsModule, NgFor]
 })
 
 export class TextEditorComponent implements OnInit {
