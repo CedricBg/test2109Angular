@@ -1,7 +1,6 @@
 
 import { User } from './../models/user.models';
 import { Login } from './../models/login.models';
-
 import { environment } from './../../environments/environment';
 import { AddLogin } from './../models/AddLogin.models';
 import { HttpClient } from '@angular/common/http';
@@ -63,7 +62,6 @@ export class AuthService {
           sessionStorage.setItem('id', this.returnData.id.toString())
           sessionStorage.setItem('dimin', this.returnData.dimin)
           this.emitSubject()
-          //this.AppCompo.loggedIn()
           this.redirectTo()
         }
       }

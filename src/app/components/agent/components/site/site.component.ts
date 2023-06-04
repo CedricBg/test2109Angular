@@ -14,12 +14,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgFor } from '@angular/common';
 
+
+
 @Component({
     selector: 'app-site',
     templateUrl: './site.component.html',
     styleUrls: ['./site.component.scss'],
     standalone: true,
-    imports: [CdkDropListGroup, CdkDropList, NgFor, CdkDrag, MatIconModule, MatButtonModule]
+    imports: [CdkDropListGroup, CdkDropList, NgFor, CdkDrag, MatIconModule, MatButtonModule,  ]
 })
 export class SiteComponent implements OnInit{
 subscription: Subscription[] = []
