@@ -1,18 +1,17 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AuthGuard implements CanActivate {
-  canActivate(){
-    console.log('Activé');
-    if(sessionStorage.getItem('dimin') === 'OPS' )
+import { inject } from '@angular/core';
+import { Router} from '@angular/router';
+
+import { AuthService } from './services/auth.service';
+
+export const OPSGuard = () =>{
+ const authService = inject(AuthService);
+ const router = inject(Router)
+ if(sessionStorage.getItem('dimin') === 'OPS' )
     {
       return true;
     }
+    router.navigate(['/auth']);
     return false
-  }
-
 }
+

@@ -1,1 +1,17 @@
-<p>admin works!</p>
+
+<div>
+  <mat-form-field>
+    <mat-label>Choissisez un client</mat-label>
+    <select (change)="SelectCustomer()"  matNativeControl [(ngModel)]="client" name="customer">
+      <option *ngFor="let clients of this.listCustomers.AllCustomers" value={{clients.nameCustomer}}>{{clients.nameCustomer}}</option>
+    </select >
+  </mat-form-field>
+</div>
+<div *ngIf="client"  >
+<mat-form-field *ngFor="let clientss of this.listCustomers.AllCustomers | filterByName: client">
+  <mat-label>Choissisez un Site</mat-label>
+  <select  (change)="SelectSite()"  matNativeControl name="customer">
+    <option *ngFor="let site of clientss.site"  value={{site.name}}>{{site.name}}</option>
+  </select >
+</mat-form-field>
+</div>

@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
-import { EmployeeResolver, listAllCustomerResolver, listassignedCustomerResolver } from 'src/app/resolvers/employee-resolver-one.resolver';
+import { listAllCustomerResolver, listassignedCustomerResolver } from 'src/app/resolvers/Customer-resolver.resolver';
+import { EmployeeResolver } from 'src/app/resolvers/employee-resolver-one.resolver';
 
 export default [
   { path: 'admin', loadComponent: () => import('./components/admin/admin.component').then(module => module.AdminComponent) , children : [
