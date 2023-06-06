@@ -1,17 +1,34 @@
+<div class="Contenu-admin-ronde">
+  <div *ngIf="siteId">
+    <nav  class="menu">
+    <ul>
+      <li (click)="ModifRfid()" class="icons"><mat-icon class="icons">people</mat-icon><span class="aligned-with-icon">Modification pastilles</span> </li>
+      <li (click)="AddRfid()" class="icons"><mat-icon class="icons">filter_tilt_shift</mat-icon><span class="aligned-with-icon">Ajout pastille(s)</span> </li>
 
-<div>
-  <mat-form-field>
-    <mat-label>Choissisez un client</mat-label>
-    <select (change)="SelectCustomer()"  matNativeControl [(ngModel)]="client" name="customer">
-      <option *ngFor="let clients of this.listCustomers.AllCustomers" value={{clients.nameCustomer}}>{{clients.nameCustomer}}</option>
-    </select >
-  </mat-form-field>
+    </ul>
+  </nav>
+  <div class="card-addRfid">
+    <router-outlet></router-outlet>
+  </div>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>Choissisez un client</mat-label>
+      <select   matNativeControl [(ngModel)]="client" >
+        <option *ngFor="let clients of this.listCustomers.AllCustomers" value={{clients.nameCustomer}}>{{clients.nameCustomer}}</option>
+      </select >
+    </mat-form-field>
+  </div>
+  <div  *ngIf="client" >
+    <div *ngFor="let clientss of this.listCustomers.AllCustomers | filterByName: client">
+      <mat-form-field>
+      <mat-label>Choissisez un Site</mat-label>
+      <select matNativeControl  [(ngModel)]="siteId" >
+        <option  *ngFor="let site of clientss.site"  [value]="site.siteId">{{site.name}}</option>
+      </select>
+      </mat-form-field>
+    </div>
+  </div>
+
 </div>
-<div *ngIf="client"  >
-<mat-form-field *ngFor="let clientss of this.listCustomers.AllCustomers | filterByName: client">
-  <mat-label>Choissisez un Site</mat-label>
-  <select  (change)="SelectSite()"  matNativeControl name="customer">
-    <option *ngFor="let site of clientss.site"  value={{site.name}}>{{site.name}}</option>
-  </select >
-</mat-form-field>
-</div>
+

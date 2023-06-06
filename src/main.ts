@@ -1,3 +1,4 @@
+
 import { MatDialogModule } from '@angular/material/dialog';
 import { enableProdMode, LOCALE_ID, importProvidersFrom } from '@angular/core';
 import { environment } from './environments/environment';
@@ -31,7 +32,6 @@ bootstrapApplication(AppComponent, {
         provideHttpClient(withInterceptorsFromDi()),
         importProvidersFrom(BrowserModule, CommonModule,MatDialogModule,MatSnackBarModule),
         { provide: HTTP_INTERCEPTORS, useClass: TieInterceptor, multi: true },
-        [{ provide: LOCALE_ID, useValue: "fr-BE" }],
         provideAnimations(),
         provideRouter(routes)
 

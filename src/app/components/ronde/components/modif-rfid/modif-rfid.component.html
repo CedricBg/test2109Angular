@@ -1,0 +1,10 @@
+<div class="Contenu_modif-Rfid">
+  <mat-form-field>
+    <mat-label>Sélectionné une pastille dans la liste</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="food">
+      <mat-option *ngFor="let pastille of listRfid" [value]="pastille.patrolId">
+        {{pastille.location}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

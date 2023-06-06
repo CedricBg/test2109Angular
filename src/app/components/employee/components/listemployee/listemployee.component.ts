@@ -1,6 +1,6 @@
 import { UpdateEmployeeComponent } from './../update-employee/update-employee.component';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, LOCALE_ID, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/models/employee.models';
 import { PageEvent } from '@angular/material/paginator';
@@ -20,7 +20,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     templateUrl: './listemployee.component.html',
     styleUrls: ['./listemployee.component.scss'],
     standalone: true,
-    imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, FormsModule, MatButtonModule, MatIconModule, NgFor, NgIf, TitleCasePipe, DatePipe]
+    imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, FormsModule, MatButtonModule, MatIconModule, NgFor, NgIf, TitleCasePipe, DatePipe],
+    providers: [{ provide: LOCALE_ID, useValue: "fr-BE" },
+    ]
 })
 export class ListemployeeComponent implements OnInit {
   surName: any

@@ -5,6 +5,9 @@ import { listAllCustomerResolver } from "src/app/resolvers/Customer-resolver.res
 export default [
   { path : '' , loadComponent : ()=> import('./ronde.component').then(module=>module.RondeComponent) , children :[
     { path : 'admin' ,title:'Administration rondes', loadComponent :()=> import ('./components/admin/admin.component').then(module=>module.AdminComponent),
-   resolve :{ AllCustomers : listAllCustomerResolver} },
+   resolve :{ AllCustomers : listAllCustomerResolver}, children:[
+    { path: 'AddRfid/:id',    title:'Ajouter une pastille',   loadComponent: ()=> import('./components/add-rfid/add-rfid.component').then(module=>module.AddRfidComponent)},
+    { path: 'ModifyRfid/:id', title:'Modification pastilles', loadComponent: ()=> import('./components/modif-rfid/modif-rfid.component').then(module=>module.ModifRfidComponent)},
+   ]},
   ]}
 ] as Routes;

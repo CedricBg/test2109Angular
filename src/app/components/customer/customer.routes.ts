@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes } from "@angular/router";
 
 
-
 export default [
   { path: '', loadComponent:()=>import('./customer.component').then(module =>module.CustomerComponent), children :[
     { path: 'listcustomer',loadComponent:()=>import('./components/list-customer/list-customer.component').then(module=>module.ListCustomerComponent),children:[
