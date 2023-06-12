@@ -1,10 +1,24 @@
-<div class="Contenu_modif-Rfid">
-  <mat-form-field>
+<div class="Contenu_modif_Rfid animate__animated animate__fadeInLeft">
+  <h2>Modification Pastille:</h2>
+  <mat-form-field >
     <mat-label>Sélectionné une pastille dans la liste</mat-label>
-    <mat-select [(ngModel)]="selectedValue" name="food">
-      <mat-option *ngFor="let pastille of listRfid" [value]="pastille.patrolId">
+    <mat-select [(ngModel)]="selectedValue" (ngModelChange)="GetSite()">
+      <mat-option *ngFor="let pastille of listRfid"   value={{pastille.location}}>
         {{pastille.location}}
       </mat-option>
     </mat-select>
   </mat-form-field>
+
+<div *ngIf="selectedValue">
+
+<form [formGroup]="Rfidform">
+  <mat-form-field appearance="fill">
+    <mat-label>Nr puce Rfid: </mat-label><input  type="text" formControlName="RfidNr" class="input" matInput>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Emplacement sur le site: </mat-label><input  type="text" formControlName="Location" class="input" matInput>
+  </mat-form-field>
+  <button matButton type="button" mat-raised-button color="primary" (click)="send()">Modifier</button>
+</form>
+</div>
 </div>

@@ -1,9 +1,9 @@
 <div class ="cards">
-  <div class="employees">
+  <div class="employees animate__animated animate__fadeIn">
     <section class="divTable">
       <div class="AddPerson">
-        <mat-form-field>
-          <mat-label class="matLabel">Recherche<mat-icon class="icons2">search</mat-icon></mat-label>
+        <mat-form-field class="select_list_customer">
+          <mat-label class="matLabel ">Recherche<mat-icon class="icons2">search</mat-icon></mat-label>
           <input  type="text" name="nameCustomer" [(ngModel)]="nameCustomer" (ngModelChange)="ngModelChange()"  placeholder="Nom du client" matInput >
         </mat-form-field>
           <button mat-button type="button" (click)="FormAddUser()"><mat-icon class="icons">person_add</mat-icon> Ajouter un client</button>
@@ -25,7 +25,7 @@
               <button class="buttonIcons" (click)="UpdateCustomer(client.customerId)" type="button"><mat-icon  class="icons2">edit_square</mat-icon></button>
             </td>
             <td>
-              <div *ngIf="client.site != null">
+              <div class="select_list_customer" *ngIf="client.site != null">
                 <mat-form-field >
                   <mat-label>--Sélectionnez un site--</mat-label>
                   <mat-select [(value)]="selectedSiteName">
@@ -52,13 +52,13 @@
   </div>
 
 
-  <div class="rep" *ngIf="select == false && siteSelected == null ">
+  <div class="rep animate__animated animate__fadeIn" *ngIf="select == false && siteSelected == null ">
     <section class="cards1">
       <router-outlet></router-outlet>
     </section>
   </div>
 
-  <div class="rep" *ngIf="select == true && siteSelected != null ">
+  <div class="rep animate__animated animate__fadeIn" *ngIf="select == true && siteSelected != null ">
     <h3>Site : {{siteSelected.name}}</h3>
     <div class="cards2">
       <div class="contcards2">
@@ -74,7 +74,7 @@
       <div class="detailsCard2">
         <p *ngIf="siteSelected.contactSite.length != 0" class="email">
         </p>
-
+ 
         <table >
           <caption><h3>Responsable(s) du site:</h3> </caption>
           <thead>

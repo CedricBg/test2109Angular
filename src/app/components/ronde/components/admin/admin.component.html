@@ -1,13 +1,13 @@
-<div class="Contenu-admin-ronde">
+<div class="Contenu-admin-ronde animate__animated animate__fadeInTopRight">
   <div *ngIf="siteId">
     <nav  class="menu">
-    <ul>
+    <ul class="animate__animated animate__fadeInUp">
       <li (click)="ModifRfid()" class="icons"><mat-icon class="icons">people</mat-icon><span class="aligned-with-icon">Modification pastilles</span> </li>
       <li (click)="AddRfid()" class="icons"><mat-icon class="icons">filter_tilt_shift</mat-icon><span class="aligned-with-icon">Ajout pastille(s)</span> </li>
 
     </ul>
   </nav>
-  <div class="card-addRfid">
+  <div class="card-addRfid ">
     <router-outlet></router-outlet>
   </div>
   </div>
@@ -20,7 +20,7 @@
     </mat-form-field>
   </div>
   <div  *ngIf="client" >
-    <div *ngFor="let clientss of this.listCustomers.AllCustomers | filterByName: client">
+    <div class="animate__animated animate__fadeInTopRight" *ngFor="let clientss of this.listCustomers.AllCustomers | filterByName: client">
       <mat-form-field>
       <mat-label>Choissisez un Site</mat-label>
       <select matNativeControl  [(ngModel)]="siteId" >

@@ -17,9 +17,15 @@ export class RondeService {
     return this._http.post<boolean>(environment.baseAdres+'rondes/addRfid',rfid);
   }
 
-   GetRfidPatrols(id:number)
-   {
+  GetRfidPatrols(id:number)
+  {
     return this._http.get(environment.baseAdres+ 'rondes/GetRfid/'+id);
-   }
+  }
+
+  UpdateRfid(rfid: RfidPatrol)
+  {
+    return this._http.put<RfidPatrol[]>(environment.baseAdres+ 'rondes/updateRfid', rfid)
+  }
+
 }
 
