@@ -1,4 +1,4 @@
-import { ResolveFn } from '@angular/router';
+
 import { NgFor, NgIf } from '@angular/common';
 import { Subscription, Observable } from 'rxjs';
 import { Component, OnInit, inject } from '@angular/core';
@@ -11,13 +11,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-modif-rfid',
   templateUrl: './modif-rfid.component.html',
   styleUrls: ['./modif-rfid.component.scss'],
   standalone: true,
-  imports: [MatSelectModule,NgFor, NgIf,FormsModule, MatFormFieldModule,MatInputModule, ReactiveFormsModule, MatButtonModule],
+  imports: [MatSelectModule,NgFor, NgIf,FormsModule, MatFormFieldModule,MatInputModule, ReactiveFormsModule, MatButtonModule,MatIconModule],
 })
 
 export class ModifRfidComponent implements OnInit {
@@ -30,9 +31,7 @@ rfids!: Observable<RfidPatrol>;
 rfid: RfidPatrol
 constructor(private _rondeService : RondeService,private _SnackBar: SnackBarService, private _activatedRoute : ActivatedRoute, private _builder: FormBuilder ){}
 
-
   ngOnInit(): void {
-
     this.subscription.push(
       this._activatedRoute.params.subscribe(params =>{
         this.siteId = params['id']
@@ -43,7 +42,6 @@ constructor(private _rondeService : RondeService,private _SnackBar: SnackBarServ
         }))
       })
     );
-
   }
   send()
   {
@@ -52,6 +50,7 @@ constructor(private _rondeService : RondeService,private _SnackBar: SnackBarServ
       this._rondeService.UpdateRfid(this.Rfidform.value).subscribe({
         next : (data: RfidPatrol[]) => {
           if(data.length > 0){
+            this.listRfid = data
             this._SnackBar.openSnackBar({text2: 'La pastille à bien été modifié'})
           }
           else{
@@ -67,6 +66,7 @@ constructor(private _rondeService : RondeService,private _SnackBar: SnackBarServ
   GetSite()
   {
     this.rfid = this.listRfid.find(elt=>elt.location === this.selectedValue);
+    console.log(this.rfid)
     this.form()
   }
 
@@ -78,6 +78,28 @@ constructor(private _rondeService : RondeService,private _SnackBar: SnackBarServ
         idSite: [this.rfid.idSite],
         patrolId: [this.rfid.patrolId]
       });
+  }
+
+  DeleteRfid()
+  {
+    const ok = confirm('Supprimer la pastille ?')
+    if(ok){
+      console.log(this.rfid)
+      this._rondeService.DeleteRfid(this.rfid).subscribe({
+        next : (data: RfidPatrol[]) =>{
+          if(data.length > 0)
+          {
+            this.listRfid = data
+            console.log(this.listRfid)
+            this.selectedValue = null
+            this._SnackBar.openSnackBar({text2: 'La pastille à bien été supprimée'})
+          }
+          else{
+            this._SnackBar.openSnackBar({text2: 'Nous n\'avons pas pu supprimer la pastille'})
+          }
+        }
+      })
+    }
 
   }
 

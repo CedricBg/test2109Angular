@@ -45,6 +45,10 @@ constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBu
   {
     this._router.navigateByUrl('OPS/ronde/admin/ModifyRfid/'+this.siteId)
   }
+  AddRonde()
+  {
+    this._router.navigateByUrl('OPS/ronde/admin/AddRonde/'+this.siteId)
+  }
 
   ngOnDestroy(){
     this.subscription.forEach(element => {

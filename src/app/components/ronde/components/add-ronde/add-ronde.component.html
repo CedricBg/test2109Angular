@@ -1,0 +1,8 @@
+
+<div *ngIf='nameRonde != ""'>
+  <mat-form-field>
+    <mat-select>
+      <mat-option *ngFor="let rfid of listRfid" [value]="rfid.location">{{rfid.location}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

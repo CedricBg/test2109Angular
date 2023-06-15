@@ -1,9 +1,8 @@
 import { UpdateEmployeeComponent } from './../update-employee/update-employee.component';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
-import { Component, LOCALE_ID, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, LOCALE_ID, OnInit } from '@angular/core';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/models/employee.models';
-import { PageEvent } from '@angular/material/paginator';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 import { Subscription } from 'rxjs';

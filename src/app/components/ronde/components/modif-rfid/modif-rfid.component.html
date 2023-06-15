@@ -9,16 +9,21 @@
     </mat-select>
   </mat-form-field>
 
-<div *ngIf="selectedValue">
+  <div class="animate__animated animate__fadeIn" *ngIf="selectedValue">
 
-<form [formGroup]="Rfidform">
-  <mat-form-field appearance="fill">
-    <mat-label>Nr puce Rfid: </mat-label><input  type="text" formControlName="RfidNr" class="input" matInput>
-  </mat-form-field>
-  <mat-form-field appearance="fill">
-    <mat-label>Emplacement sur le site: </mat-label><input  type="text" formControlName="Location" class="input" matInput>
-  </mat-form-field>
-  <button matButton type="button" mat-raised-button color="primary" (click)="send()">Modifier</button>
-</form>
-</div>
+    <form   [formGroup]="Rfidform">
+      <button  (click)="DeleteRfid()">
+        <mat-icon type="button" >delete</mat-icon>
+      </button>
+      <mat-form-field appearance="fill">
+        <mat-label>Emplacement sur le site: </mat-label><input  type="text" formControlName="Location" class="input" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Nr puce Rfid: </mat-label><input  type="text" formControlName="RfidNr" class="input" matInput>
+      </mat-form-field>
+
+      <button matButton type="button" mat-raised-button color="primary" (click)="send()">Modifier</button>
+
+    </form>
+  </div>
 </div>

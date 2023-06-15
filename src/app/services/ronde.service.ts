@@ -13,19 +13,22 @@ export class RondeService {
   //on enregistre les pastilles pour les rondes (contient l'id site, le nom de l'emplacement de la pastille et le nr de la pastille)
   AddRfid(rfid: RfidPatrol[])
   {
-    console.log(rfid)
     return this._http.post<boolean>(environment.baseAdres+'rondes/addRfid',rfid);
   }
-
-  GetRfidPatrols(id:number)
+  //on récupère les pastilles par id du site
+  GetRfidPatrols(id: number)
   {
     return this._http.get(environment.baseAdres+ 'rondes/GetRfid/'+id);
   }
-
+  //Mise a jour d'une pastille par rapport a l'id de la pastille et du site
   UpdateRfid(rfid: RfidPatrol)
   {
     return this._http.put<RfidPatrol[]>(environment.baseAdres+ 'rondes/updateRfid', rfid)
   }
-
+  //Suppresion dédinitive d'une pastille
+  DeleteRfid(rfid: RfidPatrol)
+  {
+    return this._http.put<RfidPatrol[]>(environment.baseAdres+'rondes/deleteRfid',rfid)
+  }
 }
 

@@ -1,4 +1,4 @@
-<div>
+<div class="animate__animated animate__fadeInLeft">
   <h2>Ajout Pastille:</h2>
   <form  [formGroup]="formRfid">
     <span mat-icon-button (click)="AddRfid()">
@@ -7,11 +7,12 @@
     <div formGroupName="rfidPatrol">
       <div *ngFor="let emailAddres of rfidPatrol.controls; let i = index" [formGroupName]="i">
         <mat-form-field appearance="fill">
-          <mat-label>Nr puce Rfid: </mat-label><input  type="text" formControlName="RfidNr" class="input" matInput>
-        </mat-form-field>
-        <mat-form-field appearance="fill">
           <mat-label>Emplacement sur le site: </mat-label><input  type="text" formControlName="Location" class="input" matInput>
         </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Nr puce Rfid: </mat-label><input  type="text" formControlName="RfidNr" class="input" matInput>
+        </mat-form-field>
+
         <span *ngIf="i >= 1">
           <button (click)="DeleteRfid(i)">
             <mat-icon type="button" >delete</mat-icon>

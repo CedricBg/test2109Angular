@@ -1,11 +1,11 @@
 .Contenu-admin-ronde
 {
   display: flex;
-  flex-flow: column wrap;
+  flex-direction: row;
   margin-top:20px;
   margin-left:10px;
 }
-.Contenu-admin-ronde div{
+.Contenu-admin-ronde div div{
   display: flex;
   flex-flow: row wrap;
 }
@@ -53,5 +53,9 @@ li.icons
 }
 .card-addRfid
 {
+  margin-left: 5vw;
+
+}
+.Contenant_menu{
   margin-left: 5vw;
 }

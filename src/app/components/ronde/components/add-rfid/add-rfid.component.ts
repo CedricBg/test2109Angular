@@ -27,10 +27,8 @@ export class AddRfidComponent implements OnInit{
 
   ngOnInit(): void {
     this.subscription.push(this._activetdedRoute.params.subscribe(params =>
-
       this.siteId = params['id']));
-
-    this.AddRfidForm()
+      this.AddRfidForm()
   }
 
   DeleteRfid(id: number)
