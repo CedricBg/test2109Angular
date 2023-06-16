@@ -1,8 +1,6 @@
-
-<div *ngIf='nameRonde != ""'>
+<div class="Contenu_Add_ronde animate__animated animate__fadeInLeft"></div>
   <mat-form-field>
-    <mat-select>
-      <mat-option *ngFor="let rfid of listRfid" [value]="rfid.location">{{rfid.location}}</mat-option>
-    </mat-select>
+    <mat-label>Entrez un nom de ronde</mat-label>
+    <input matInput type="text" [(ngModel)]="nameRonde">
   </mat-form-field>
-</div>
+  <button  mat-flat-button color="primary" (click)="CheckRondeExist()" type="button">Ajouter</button>

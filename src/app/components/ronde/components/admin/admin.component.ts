@@ -11,9 +11,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 
 
-
-
-
 @Component({
     selector: 'app-admin',
     templateUrl: './admin.component.html',
@@ -26,7 +23,7 @@ subscription : Subscription[] = [];
 listCustomers : any;
 client!: string;
 siteId: number;
-
+siteSected: Boolean = false;
 
 constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBuilder, private _router : Router){}
   ngOnInit(): void {
@@ -35,6 +32,13 @@ constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBu
         this.listCustomers = data
       }
     }));
+  }
+
+  SelectSite()
+  {
+    this.siteSected =  false;
+    this.siteSected =  true;
+    console.log('este')
   }
 
   AddRfid()

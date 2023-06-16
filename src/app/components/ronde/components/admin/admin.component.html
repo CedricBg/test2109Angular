@@ -1,12 +1,13 @@
 <div class="Contenu-admin-ronde animate__animated animate__fadeInLeft">
 
   <div class="card-addRfid ">
-    <div  *ngIf="siteId">
+    <div  *ngIf="siteId && siteSected">
       <nav  class="menu">
       <ul class="animate__animated animate__fadeInUp">
-        <li (click)="ModifRfid()" class="icons"><mat-icon class="icons">people</mat-icon><span class="aligned-with-icon">Modification pastilles</span> </li>
-        <li (click)="AddRfid()" class="icons"><mat-icon class="icons">filter_tilt_shift</mat-icon><span class="aligned-with-icon">Ajout pastille(s)</span> </li>
+        <li (click)="ModifRfid()" class="icons"><mat-icon class="icons">sensors</mat-icon><span class="aligned-with-icon">Modification pastilles</span> </li>
+        <li (click)="AddRfid()" class="icons"><mat-icon class="icons">sensors</mat-icon><span class="aligned-with-icon">Ajout pastille(s)</span> </li>
         <li (click)="AddRonde()" class="icons"><mat-icon class="icons">filter_tilt_shift</mat-icon><span class="aligned-with-icon">Ajout ronde</span> </li>
+        <li (click)="AddRonde()" class="icons"><mat-icon class="icons">filter_tilt_shift</mat-icon><span class="aligned-with-icon">Modification ronde</span> </li>
       </ul>
     </nav>
     </div>
@@ -23,8 +24,8 @@
       <div class="animate__animated animate__fadeIn" *ngFor="let clientss of this.listCustomers.AllCustomers | filterByName: client">
         <mat-form-field>
         <mat-label>Choissisez un Site</mat-label>
-        <select matNativeControl  [(ngModel)]="siteId" >
-          <option  *ngFor="let site of clientss.site"  [value]="site.siteId">{{site.name}}</option>
+        <select matNativeControl  (click)="SelectSite()" [(ngModel)]="siteId" >
+          <option  *ngFor="let site of clientss.site" (mouseenter)="SelectSite()"   [value]="site.siteId">{{site.name}}</option>
         </select>
         </mat-form-field>
       </div>

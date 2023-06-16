@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 import { listAllCustomerResolver } from "src/app/resolvers/Customer-resolver.resolver";
-import { ListRfidResolver } from "src/app/resolvers/ronde-resolver.resolver";
+
 
 
 export default [
@@ -9,8 +9,7 @@ export default [
     resolve :{ AllCustomers : listAllCustomerResolver}, children:[
       { path: 'AddRfid/:id',    title:'Ajouter une pastille',   loadComponent: ()=> import('./components/add-rfid/add-rfid.component').then(module=>module.AddRfidComponent)},
       { path: 'ModifyRfid/:id', title:'Modification pastilles', loadComponent: ()=> import('./components/modif-rfid/modif-rfid.component').then(module=>module.ModifRfidComponent)},
-      { path: 'AddRonde/:id' , title:'Ajouter une ronde',loadComponent: ()=> import('./components/add-ronde/add-ronde.component').then(module =>module.AddRondeComponent),
-      resolve :{'AllRfid': ListRfidResolver}},
+      { path: 'AddRonde/:id' , title:'Ajouter une ronde',loadComponent: ()=> import('./components/add-ronde/add-ronde.component').then(module =>module.AddRondeComponent)},
     ]},
   ]}
 ] as Routes;

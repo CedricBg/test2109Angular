@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RfidPatrol } from '../models/rondes/RfidPatrol.models';
 import { environment } from 'src/environments/environment';
+import { Rounds } from '../models/rondes/rounds.models';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,11 @@ export class RondeService {
   {
     return this._http.put<RfidPatrol[]>(environment.baseAdres+'rondes/deleteRfid',rfid)
   }
+  //check ronde existe si elle n'existe pas on la crée et on récupère une liste avec un élément de création pour le test
+  CheckRondeExist(round: Rounds)
+  {
+    return this._http.put<boolean>(environment.baseAdres+'rondes/CheckRound',round)
+  }
+
 }
 
