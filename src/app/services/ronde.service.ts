@@ -24,18 +24,23 @@ export class RondeService {
   //Mise a jour d'une pastille par rapport a l'id de la pastille et du site
   UpdateRfid(rfid: RfidPatrol)
   {
-    return this._http.put<RfidPatrol[]>(environment.baseAdres+ 'rondes/updateRfid', rfid)
+    return this._http.put<RfidPatrol[]>(environment.baseAdres+ 'rondes/updateRfid', rfid);
   }
   //Suppresion dédinitive d'une pastille
   DeleteRfid(rfid: RfidPatrol)
   {
-    return this._http.put<RfidPatrol[]>(environment.baseAdres+'rondes/deleteRfid',rfid)
+    return this._http.put<RfidPatrol[]>(environment.baseAdres+'rondes/deleteRfid',rfid);
   }
   //check ronde existe si elle n'existe pas on la crée et on récupère une liste avec un élément de création pour le test
   CheckRondeExist(round: Rounds)
   {
-    return this._http.put<boolean>(environment.baseAdres+'rondes/CheckRound',round)
+    return this._http.put<boolean>(environment.baseAdres+'rondes/CheckRound',round);
   }
 
+  //récupère une liste de rondes sur base de l'id du site
+  GetRounds(id: number)
+  {
+    return this._http.get<Rounds[]>(environment.baseAdres+'rondes/GetRounds/'+id);
+  }
 }
 

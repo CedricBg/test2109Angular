@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { NgFor, NgIf } from '@angular/common';
@@ -23,10 +23,10 @@ subscription : Subscription[] = [];
 listCustomers : any;
 client!: string;
 siteId: number;
-siteSected: Boolean = false;
 
 constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBuilder, private _router : Router){}
   ngOnInit(): void {
+
     this.subscription.push(this._activetdedRoute.data.subscribe({
       next : (data : Customers[]) => {
         this.listCustomers = data
@@ -34,24 +34,28 @@ constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBu
     }));
   }
 
-  SelectSite()
+  ChangeSite()
   {
-    this.siteSected =  false;
-    this.siteSected =  true;
-    console.log('este')
+    this._router.navigateByUrl('OPS/ronde/admin')
   }
 
-  AddRfid()
+   AddRfid()
   {
     this._router.navigateByUrl('OPS/ronde/admin/AddRfid/'+this.siteId)
+
   }
   ModifRfid()
   {
     this._router.navigateByUrl('OPS/ronde/admin/ModifyRfid/'+this.siteId)
+
   }
   AddRonde()
   {
     this._router.navigateByUrl('OPS/ronde/admin/AddRonde/'+this.siteId)
+  }
+  ModifRonde()
+  {
+    this._router.navigateByUrl('OPS/ronde/admin/ModifRonde/'+this.siteId);
   }
 
   ngOnDestroy(){

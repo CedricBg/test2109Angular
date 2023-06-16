@@ -1,6 +1,6 @@
 import { RfidPatrol } from 'src/app/models/rondes/RfidPatrol.models';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
@@ -25,21 +25,20 @@ nameRonde!: string;
 rounds: Rounds = new Rounds();
 idsite!: number;
 SiteSected: Boolean = false;
-constructor(private _activatedRoute : ActivatedRoute, private _RondeService : RondeService, private _snack: SnackBarService){}
+constructor(private _activatedRoute : ActivatedRoute, private _RondeService : RondeService, private _snack: SnackBarService, private _router :Router){}
 
   ngOnInit(): void {
-    this._activatedRoute.paramMap.subscribe(elt => {
+    this.subscription.push(this._activatedRoute.paramMap.subscribe(elt => {
       this.idsite =  Number(elt.get('id'));
       this.nameRonde = "";
       this.rounds.name = this.nameRonde;
       this.rounds.siteId = this.idsite;
-    })
+    }))
   }
 
   CheckRondeExist()
   {
     console.log(this.nameRonde)
-    console.log(this.rounds.name)
     if( this.nameRonde.length <= 1){
       this._snack.openSnackBar({text1: "Erreur", text2:'Le nom de la ronde est trop court'});
     }
@@ -47,18 +46,21 @@ constructor(private _activatedRoute : ActivatedRoute, private _RondeService : Ro
     this.rounds.name = this.nameRonde;
     this.rounds.siteId =  this.idsite;
     console.log(this.idsite)
-    this._RondeService.CheckRondeExist(this.rounds).subscribe({
+    this.subscription.push(this._RondeService.CheckRondeExist(this.rounds).subscribe({
       next: (data: boolean)=>{
         console.log(data)
         if(data === false)
         {
           this._snack.openSnackBar({text1: "Erreur", text2:'Nous n\'avons pas pu créer la ronde'});
+          this._router.navigateByUrl('OPS/ronde/admin');
         }
         else{
           this._snack.openSnackBar({text1: "Réussi", text2:'La ronde '+ this.nameRonde+' créé avec succés'});
+          this._router.navigateByUrl('OPS/ronde/admin/ModifRonde/'+this.idsite);
         }
       }
-    })
+    }))
+
   }
   }
 
