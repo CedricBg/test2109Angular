@@ -1,1 +1,7 @@
-<p>modif-ronde works!</p>
+<mat-form-field>
+  <mat-label>Sélectionnez une ronde</mat-label>
+  <mat-select [(ngModel)]="roundId">
+    <mat-option *ngFor="let elt of listRounds" value="{{elt.roundsId}}">{{elt.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+<button type="button" (click)="Getround()">Envoyer</button>

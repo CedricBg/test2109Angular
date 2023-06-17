@@ -16,6 +16,5 @@ connected!: Boolean
   ngOnInit(): void {
     this.connected = this.authService.isConnected
   }
-
 }
 

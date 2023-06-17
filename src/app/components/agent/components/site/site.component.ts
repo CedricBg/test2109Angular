@@ -24,85 +24,73 @@ import { NgFor } from '@angular/common';
     imports: [CdkDropListGroup, CdkDropList, NgFor, CdkDrag, MatIconModule, MatButtonModule,  ]
 })
 export class SiteComponent implements OnInit{
-subscription: Subscription[] = []
+subscription: Subscription[] = [];
 data: any;
-nom: string = ""
-safeImageUrl: SafeUrl
+nom: string = "";
+safeImageUrl: SafeUrl;
 
 //Par customer
 //Données venant de la db
-listAssignedCustomer: Customers[] = []
+listAssignedCustomer: Customers[] = [];
 //liste sur lasquelle on va travailler on pourrras comparé les changements entre les 2 listes
-modifiAssignedCustomer: Customers[] = []
+modifiAssignedCustomer: Customers[] = [];
 //Données venant de la db
-allCustomersNotAssignedToGuard: Customers [] = []
+allCustomersNotAssignedToGuard: Customers [] = [];
 //liste sur lasquelle on va travailler on pourrras comparé les changements entre les 2 listes
-allCustomersNotAssignedToGuardModif : Customers [] = []
+allCustomersNotAssignedToGuardModif : Customers [] = [];
 //on va transformé nos clients en liste de sites
-listSiteAdd: Site[] = []
-listSiteDel: Site[] = []
+listSiteAdd: Site[] = [];
+listSiteDel: Site[] = [];
 //On renvoi a la db une liste de site avec l'id de l'emplyee
-addSite: AddSites = new AddSites()
-delSite: AddSites = new AddSites()
+addSite: AddSites = new AddSites();
+delSite: AddSites = new AddSites();
 
 //Par sites
-listAllsites: Site[] = []
-listAllsitesAgentmodif: Site[] = []
-listAllSiteAgent: Site[] = []
-
-listSiteAssignAgent: Site[] = []
-
-
+listAllsites: Site[] = [];
+listAllsitesAgentmodif: Site[] = [];
+listAllSiteAgent: Site[] = [];
+listSiteAssignAgent: Site[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,private _SnackBar : SnackBarService, private _serviceEmployee: EmployeeService, private _serviceCustomer: CustomerService, private _agentService : AgentService, private _DomSanitizer: DomSanitizer){}
   ngOnInit(): void {
-
-
-    this.addSite.sites = []
-    this.delSite.sites = []
-    this.listAllsitesAgentmodif = []
-
+    this.addSite.sites = [];
+    this.delSite.sites = [];
+    this.listAllsitesAgentmodif = [];
     this.subscription.push(this.activatedRoute.data.subscribe({
       next : (data: any)=>{
           //donnees envoyé avec un resolver
-          this.data = data
-
+          this.data = data;
           this.Assignation(this.data.listAssignCustomers, this.data.listallCustomers)
           this.subscription.push(this._agentService.GetSites(data.agent.id).subscribe({
             next : (data : Site[] ) =>{
-              this.listAllSiteAgent = data
-              this.listAllsites = []
+              this.listAllSiteAgent = data;
+              this.listAllsites = [];
               this.data.listallCustomers.forEach(element => {
                 this.listAllsites = this.listAllsites.concat(element.site)
               });
               this.AssignationSite();
             }
           }));
-
         }
-
     }))
-
   }
 
   Assignation(listAssignCustomers: Customers[], listallCustomers: Customers[])
   {
-
     //this.listAssignedCustomer et this.data.listallCustomers sont identique au départ, une va servir pour les changements
     //et l'autre à la comparaison avec les données fixes
     this.listAssignedCustomer = listallCustomers.filter(object => listAssignCustomers.some(elt => elt.customerId === object.customerId));
     this.modifiAssignedCustomer  = listallCustomers.filter(object => this.listAssignedCustomer.some(elt => elt.customerId === object.customerId));
     this.allCustomersNotAssignedToGuard = listallCustomers.filter(object => !this.listAssignedCustomer.some(elt =>elt.customerId === object.customerId));
     this.allCustomersNotAssignedToGuardModif = listallCustomers.filter(object => !this.listAssignedCustomer.some(elt =>elt.customerId === object.customerId));
-
   }
 
   SaveCustomers()
   {
     //ici on filtre pour avoir tout les clients que l'on a enlevé de la liste
-    const DellistCustomer = this.listAssignedCustomer.filter(object => !this.modifiAssignedCustomer.some(elt=>elt.customerId === object.customerId))
+    const DellistCustomer = this.listAssignedCustomer.filter(object => !this.modifiAssignedCustomer.some(elt=>elt.customerId === object.customerId));
     //ici on filtre pour avoir tout les clients ajouté  a la liste
-    const AddlistCustomer = this.allCustomersNotAssignedToGuard.filter(object => !this.allCustomersNotAssignedToGuardModif.some(elt=>elt.customerId === object.customerId))
+    const AddlistCustomer = this.allCustomersNotAssignedToGuard.filter(object => !this.allCustomersNotAssignedToGuardModif.some(elt=>elt.customerId === object.customerId));
     //ici on transforme en liste de delSite pour envoi suppression de site
     if(DellistCustomer.length > 0)
     {
@@ -110,24 +98,24 @@ listSiteAssignAgent: Site[] = []
         this.listSiteDel = this.listSiteDel.concat(element.site);
       });
 
-      const liste = this.listAllSiteAgent.filter(object => this.listSiteDel.some(elt =>elt.siteId === object.siteId))
+      const liste = this.listAllSiteAgent.filter(object => this.listSiteDel.some(elt =>elt.siteId === object.siteId));
 
       this.delSite.sites = liste
-      this.delSite.idEmployee = this.data.agent.id
+      this.delSite.idEmployee = this.data.agent.id;
       //on éfface les données sélectionné et on met à jour liste de site
-      this._agentService.RemoveSitesToGuard(this.delSite).subscribe({
+      this.subscription.push(this._agentService.RemoveSitesToGuard(this.delSite).subscribe({
         next: (dat : Site[]) => {
-          this.listAllSiteAgent = dat
-          this.AssignationSite()
+          this.listAllSiteAgent = dat;
+          this.AssignationSite();
           this.subscription.push(this._agentService.GetAssignedCustomers(this.data.agent.id).subscribe({
             next : (data: Customers[]) => {
-              const assignCustomer = data
+              const assignCustomer = data;
               this.subscription.push(this._serviceCustomer.getAllCustomers().subscribe({
                   next: ( datas: Customers[]) => {
                     this.Assignation(assignCustomer,datas)}
               }))}}));
         }
-      })
+      }))
     }
     if(AddlistCustomer.length > 0)
     {
@@ -141,7 +129,7 @@ listSiteAssignAgent: Site[] = []
       this.subscription.push(this._agentService.AddSitesToGuard(this.addSite).subscribe({
         next: (data : Site []) => {
           this.listAllSiteAgent = data;
-          this.AssignationSite()
+          this.AssignationSite();
           //ici les changements on été portés dans la db
           //Maintenant on récupère les donnèes mise à jour
 
@@ -160,10 +148,10 @@ listSiteAssignAgent: Site[] = []
     }
     this._SnackBar.openSnackBar()
     //ici on vide les variables pour éviter les doublons
-    this.listSiteAdd = []
-    this.listSiteDel = []
-    this.addSite.sites = []
-    this.delSite.sites = []
+    this.listSiteAdd = [];
+    this.listSiteDel = [];
+    this.addSite.sites = [];
+    this.delSite.sites = [];
 
   }
 
@@ -174,7 +162,7 @@ listSiteAssignAgent: Site[] = []
     this.listAllsitesAgentmodif = this.listAllsites.filter(object => !this.listSiteAssignAgent.some(elt =>elt.siteId === object.siteId))
     this.subscription.push(this._agentService.GetAssignedCustomers(this.data.agent.id).subscribe({
       next : (data: Customers[]) => {
-        const assignCustomer = data
+        const assignCustomer = data;
         this.subscription.push(this._serviceCustomer.getAllCustomers().subscribe({
             next: ( datas: Customers[]) => {
               this.Assignation(assignCustomer,datas)}
@@ -188,11 +176,11 @@ listSiteAssignAgent: Site[] = []
 
     if(differenceplus.length > 0)
     {
-      this.addSite.sites = differenceplus
-      this.addSite.idEmployee = this.data.agent.id
+      this.addSite.sites = differenceplus;
+      this.addSite.idEmployee = this.data.agent.id;
       this.subscription.push(this._agentService.AddSitesToGuard(this.addSite).subscribe({
         next: (data : Site[]) =>  {
-          this.listAllSiteAgent = data
+          this.listAllSiteAgent = data;
         this.AssignationSite()
         }
       }));
@@ -200,26 +188,19 @@ listSiteAssignAgent: Site[] = []
 
     if(differencemoins.length > 0)
     {
-      this.delSite.sites = differencemoins
-      this.delSite.idEmployee = this.data.agent.id
-
-
+      this.delSite.sites = differencemoins;
+      this.delSite.idEmployee = this.data.agent.id;
       this.subscription.push(this._agentService.RemoveSitesToGuard(this.delSite).subscribe({
       next: (data : Site[]) => {
-        this.listAllSiteAgent = data
-        this.AssignationSite()
+        this.listAllSiteAgent = data;
+        this.AssignationSite();
       }
     }));
   }
-
-
-
-    this.delSite.sites = []
-    this.addSite.sites = []
-    this._SnackBar.openSnackBar()
-
+    this.delSite.sites = [];
+    this.addSite.sites = [];
+    this._SnackBar.openSnackBar();
   }
-
 
   drop(event: CdkDragDrop<any[]>)
   {
@@ -250,6 +231,8 @@ listSiteAssignAgent: Site[] = []
   }
 
   ngOnDestroy(){
-
+    this.subscription.forEach(element => {
+      element.unsubscribe();
+    });
   }
 }
