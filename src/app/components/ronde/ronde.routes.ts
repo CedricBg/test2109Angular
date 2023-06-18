@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 import { listAllCustomerResolver } from "src/app/resolvers/Customer-resolver.resolver";
-import { ListRoundsResolver } from "src/app/resolvers/ronde-resolver.resolver";
+import { ListRfidResolver, ListRoundsResolver } from "src/app/resolvers/ronde-resolver.resolver";
 
 
 
@@ -12,8 +12,7 @@ export default [
       { path: 'ModifyRfid/:id', title:'Modification pastilles', loadComponent: ()=> import('./components/modif-rfid/modif-rfid.component').then(module=>module.ModifRfidComponent)},
       { path: 'AddRonde/:id' , title:'Ajouter une ronde',loadComponent: ()=> import('./components/add-ronde/add-ronde.component').then(module =>module.AddRondeComponent)},
       { path: 'ModifRonde/:id' , title: 'Modification des rondes', loadComponent: ()=> import('./components/modif-ronde/modif-ronde.component').then(module =>module.ModifRondeComponent),
-    resolve: {ListRoundsResolver}
-    },
+      resolve: {ListRoundsResolver}},
     ]},
   ]}
 ] as Routes;

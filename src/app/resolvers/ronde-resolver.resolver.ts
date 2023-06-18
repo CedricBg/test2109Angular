@@ -11,6 +11,7 @@ export const ListRfidResolver: ResolveFn<any> =
 }
 
 
+
 export const ListRoundsResolver: ResolveFn<any> =
 ( route: ActivatedRouteSnapshot, state: RouterStateSnapshot) =>{
   const id = +route.paramMap.get('id');

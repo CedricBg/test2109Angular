@@ -1,0 +1,46 @@
+*{
+  box-sizing: border-box;
+}
+.content-all{
+  display:flex;
+}
+.content-all div:first-child{
+  display: flex;
+  flex-flow: column wrap;
+  margin-right: 1vw;
+}
+
+.content-box{
+  padding-top:1vh;
+  width:45vw;
+  display:flex;
+  flex-flow: row wrap;
+}
+
+.content-box h1{
+width:45vw;
+text-align: center;
+
+}
+.example-list{
+  margin-left:1vw;
+  width:20vw;
+  background-color: white;
+}
+.title-box{
+  width:100%;
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.box{
+  display: flex;
+  align-items: center;
+  width:20vw;
+  background-color: beige;
+  border: 1px black solid;
+}
+
+.box mat-icon{
+
+}

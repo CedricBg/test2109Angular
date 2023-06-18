@@ -28,6 +28,7 @@
           <span>{{elt.nameCustomer}}</span>
         </div>
       </div>
+
       <p class="p-drag-center"><mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_right</mat-icon></p>
       <div class="listDrag"
         cdkDropList
@@ -55,12 +56,11 @@
       <div class="listDrag" cdkDropList
       [cdkDropListData]="this.listSiteAssignAgent"
       (cdkDropListDropped)="dropSite($event)">
-        <div *ngFor="let elt of this.listSiteAssignAgent" cdkDrag>
+        <div *ngFor="let elt of listSiteAssignAgent" cdkDrag>
           <span>{{elt.name}}</span>
       </div>
     </div>
   </div>
     <button class="button-drag" mat-button (click)=" SaveSites()">Envoyer</button>
   </div>
-
 </div>

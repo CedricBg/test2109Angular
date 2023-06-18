@@ -1,7 +1,33 @@
-<mat-form-field>
-  <mat-label>Sélectionnez une ronde</mat-label>
-  <mat-select [(ngModel)]="roundId">
-    <mat-option *ngFor="let elt of listRounds" value="{{elt.roundsId}}">{{elt.name}}</mat-option>
-  </mat-select>
-</mat-form-field>
-<button type="button" (click)="Getround()">Envoyer</button>
+<div class="content-all">
+  <div>
+    <mat-form-field>
+      <mat-label>Sélectionnez une ronde</mat-label>
+      <mat-select [(ngModel)]="roundId" (ngModelChange)="Getround()">
+        <mat-option *ngFor="let elt of listRounds" value="{{elt.roundsId}}">{{elt.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="content-box" *ngIf="round.name != ''" cdkDropListGroup>
+    <h1>Ronde {{round.name}}</h1>
+    <div class="title-box">
+      <p>Pastilles disponible</p>
+      <p>Pastille(s) ronde</p>
+    </div>
+      <div class="example-list"
+        cdkDropList
+        [cdkDropListData]="listFiltered"
+
+        cdkDropListSortingDisabled
+        (cdkDropListDropped)="drop($event)">
+        <div class="box" *ngFor="let item of listFiltered" cdkDrag> {{item.location}}<mat-icon>menu</mat-icon></div>
+      </div>
+
+      <div class="example-list"
+        cdkDropList
+        [cdkDropListData]="listRfidRound"
+        (cdkDropListDropped)="drop($event)">
+        <div class="box" *ngFor="let item of listRfidRound" cdkDrag> {{item.location}}<mat-icon>menu</mat-icon></div>
+      </div>
+  </div>
+</div>

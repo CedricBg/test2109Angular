@@ -3,5 +3,6 @@ export interface RfidPatrol
   patrolId: number
   rfidNr: string
   location: string
-  idSite :number
+  idSite: number
+  position: number
 }
