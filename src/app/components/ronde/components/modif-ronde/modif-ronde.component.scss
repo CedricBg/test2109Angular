@@ -1,14 +1,4 @@
-*{
-  box-sizing: border-box;
-}
-.content-all{
-  display:flex;
-}
-.content-all div:first-child{
-  display: flex;
-  flex-flow: column wrap;
-  margin-right: 1vw;
-}
+
 
 .content-box{
   padding-top:1vh;

@@ -2,7 +2,7 @@
   <h2>Ajout Pastille:</h2>
   <form  [formGroup]="formRfid">
     <span mat-icon-button (click)="AddRfid()">
-      <mat-icon >add</mat-icon> Ajoutez une adresse mail
+      <mat-icon >add</mat-icon> Ajoutez une pastille
     </span>
     <div formGroupName="rfidPatrol">
       <div *ngFor="let emailAddres of rfidPatrol.controls; let i = index" [formGroupName]="i">
