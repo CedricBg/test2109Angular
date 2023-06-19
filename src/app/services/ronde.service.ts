@@ -1,3 +1,4 @@
+import { PutRfidRounds } from './../models/rondes/putRfidRounds.models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RfidPatrol } from '../models/rondes/RfidPatrol.models';
@@ -46,6 +47,10 @@ export class RondeService {
   GetRoundRfid(round: Rounds)
   {
     return this._http.post<RfidPatrol[]>(environment.baseAdres+'rondes/GetRfidRounds',round);
+  }
+  PutRfidRounds(rfids: PutRfidRounds)
+  {
+    return this._http.put<RfidPatrol[]>(environment.baseAdres+'rondes/PutRfidRounds',rfids)
   }
 }
 

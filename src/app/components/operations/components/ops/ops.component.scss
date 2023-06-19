@@ -41,7 +41,7 @@ li.icons
 @media screen and (max-width: 730px){
   .menu{
     justify-content: flex-start;
-    margin-bottom:200px;
+
   }
   .menu ul {
     flex-flow: column;
@@ -52,6 +52,4 @@ li.icons
     height: 30px;
   }
 }
-@media screen and (max-height: 375px){
 
-}

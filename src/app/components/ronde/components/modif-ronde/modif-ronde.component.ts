@@ -1,3 +1,4 @@
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
@@ -18,6 +19,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { RfidPatrol } from 'src/app/models/rondes/RfidPatrol.models';
 import { MatIconModule } from '@angular/material/icon';
+import { PutRfidRounds } from 'src/app/models/rondes/putRfidRounds.models';
 
 @Component({
   selector: 'app-modif-ronde',
@@ -34,10 +36,11 @@ siteId!: number;
 listRfidRound: RfidPatrol[] =[];
 listRfidSite: RfidPatrol[]= [];
 listFiltered: RfidPatrol[]=[];
+putRfid: PutRfidRounds = new PutRfidRounds();
 
 round: Rounds = new Rounds();
 roundId: number = 0;
-constructor(private _rondeService: RondeService, private _ActivatedRoute: ActivatedRoute){}
+constructor(private _rondeService: RondeService, private _ActivatedRoute: ActivatedRoute, private _snack: SnackBarService){}
   ngOnInit(): void {
   this.round.name = '';
    this.subscription.push(
@@ -101,6 +104,27 @@ constructor(private _rondeService: RondeService, private _ActivatedRoute: Activa
       );
     }
   }
+
+  ModifyRound()
+  {
+
+    this.putRfid.idRound = this.roundId;
+    this.putRfid.listRfid = this.listRfidRound
+    this.subscription.push(
+      this._rondeService.PutRfidRounds(this.putRfid).subscribe({
+        next: (data: RfidPatrol[]) =>{
+          this.listRfidRound = data;
+          if(data.length > 0){
+            this._snack.openSnackBar({text1:'Réussi', text2:'La ronde à bien été modifié'});
+          }
+          else{
+            this._snack.openSnackBar({text1:'Erreur', text2:'Nous n\'avons rien modifié'});
+          }
+        }
+      })
+    );
+  }
+
 
   ngOnDestroy(){
     this.subscription.forEach(element => {

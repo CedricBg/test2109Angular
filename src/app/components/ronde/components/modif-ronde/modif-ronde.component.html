@@ -20,14 +20,16 @@
 
         cdkDropListSortingDisabled
         (cdkDropListDropped)="drop($event)">
-        <div class="box" *ngFor="let item of listFiltered" cdkDrag> {{item.location}}<mat-icon>menu</mat-icon></div>
+        <div class="box" *ngFor="let item of listFiltered" cdkDrag><span>{{item.location}}</span><mat-icon>menu</mat-icon></div>
       </div>
 
       <div class="example-list"
         cdkDropList
         [cdkDropListData]="listRfidRound"
         (cdkDropListDropped)="drop($event)">
-        <div class="box" *ngFor="let item of listRfidRound" cdkDrag> {{item.location}}<mat-icon>menu</mat-icon></div>
+        <div class="box" *ngFor="let item of listRfidRound" cdkDrag><span>{{item.location}}</span><mat-icon>menu</mat-icon></div>
       </div>
+      <div class="title-box"><button type="button"(click)="ModifyRound()" >Envoyer</button></div>
+
   </div>
 </div>

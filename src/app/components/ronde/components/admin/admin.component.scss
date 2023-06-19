@@ -59,3 +59,10 @@ li.icons
 .Contenant_menu{
   margin-left: 5vw;
 }
+@media screen and (max-width: 730px){
+
+  .menu ul li{
+
+    height: 30px;
+  }
+}
