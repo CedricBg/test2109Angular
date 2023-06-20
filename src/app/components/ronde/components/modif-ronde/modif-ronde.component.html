@@ -9,7 +9,7 @@
   </div>
 
   <div class="content-box" *ngIf="round.name != ''" cdkDropListGroup>
-    <h1>Ronde {{round.name}}</h1>
+    <h1>Ronde {{round.name}} <button type="button" (click)="ChangeName()"><mat-icon>menu</mat-icon></button> </h1>
     <div class="title-box">
       <p>Pastilles disponible</p>
       <p>Pastille(s) ronde</p>

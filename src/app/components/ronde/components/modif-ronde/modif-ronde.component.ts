@@ -39,10 +39,11 @@ listRfidRound: RfidPatrol[] =[];
 listRfidSite: RfidPatrol[]= [];
 listFiltered: RfidPatrol[]=[];
 putRfid: PutRfidRounds = new PutRfidRounds();
-rifdPosition!: RfidPatrol
-
+rifdPosition!: RfidPatrol;
 round: Rounds = new Rounds();
 roundId: number = 0;
+
+
 constructor(private _rondeService: RondeService, private _ActivatedRoute: ActivatedRoute, private _snack: SnackBarService){}
   ngOnInit(): void {
   this.round.name = '';
@@ -83,7 +84,6 @@ constructor(private _rondeService: RondeService, private _ActivatedRoute: Activa
         this.GetFilteredlist()
       }
     })
-
   }
 
   SelectRound()
@@ -112,7 +112,6 @@ constructor(private _rondeService: RondeService, private _ActivatedRoute: Activa
     }
   }
 
-
   ModifyRound()
   {
     console.log(this.listRfidRound)
@@ -132,7 +131,31 @@ constructor(private _rondeService: RondeService, private _ActivatedRoute: Activa
       })
     );
   }
-
+  ChangeName(){
+    const name = prompt("Entrez un nom");
+    if(name != '')
+    {
+      this.round.name = name;
+      this.subscription.push(
+        this._rondeService.ChangeName(this.round).subscribe({
+          next: (data: Rounds[]) =>{
+            console.log(data)
+              console.log(this.listRounds)
+              if (JSON.stringify(data) === JSON.stringify(this.listRounds))
+            {
+              this._snack.openSnackBar({text2: 'Aucun changements'})
+            }
+            else
+            {
+              this.listRounds = data;
+              console.log(this.listRounds);
+              this._snack.openSnackBar({text2: 'Nom bien changé'})
+            }
+          }
+        })
+      );
+    }
+  }
 
   ngOnDestroy(){
     this.subscription.forEach(element => {

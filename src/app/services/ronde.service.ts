@@ -50,7 +50,11 @@ export class RondeService {
   }
   PutRfidRounds(rfids: PutRfidRounds)
   {
-    return this._http.put<RfidPatrol[]>(environment.baseAdres+'rondes/PutRfidRounds',rfids)
+    return this._http.put<RfidPatrol[]>(environment.baseAdres+'rondes/PutRfidRounds',rfids);
+  }
+  ChangeName(round: Rounds)
+  {
+    return this._http.put<Rounds[]>(environment.baseAdres+'rondes/ChangeName',round);
   }
 }
 
