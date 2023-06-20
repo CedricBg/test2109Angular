@@ -1,3 +1,6 @@
+import { RfidPatrol } from 'src/app/models/rondes/RfidPatrol.models';
+import { MatIconModule } from '@angular/material/icon';
+import { PutRfidRounds } from 'src/app/models/rondes/putRfidRounds.models';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -16,15 +19,14 @@ import {
   CdkDropListGroup,
   moveItemInArray,
   transferArrayItem,
+
 } from '@angular/cdk/drag-drop';
-import { RfidPatrol } from 'src/app/models/rondes/RfidPatrol.models';
-import { MatIconModule } from '@angular/material/icon';
-import { PutRfidRounds } from 'src/app/models/rondes/putRfidRounds.models';
+
 
 @Component({
   selector: 'app-modif-ronde',
   standalone: true,
-  imports: [CommonModule,MatButtonModule,ReactiveFormsModule,MatSelectModule,NgFor,NgIf,MatFormFieldModule,FormsModule,CdkDropListGroup, CdkDropList, CdkDrag,MatIconModule],
+  imports: [CommonModule,MatButtonModule,ReactiveFormsModule,MatSelectModule,NgFor,NgIf,MatFormFieldModule,FormsModule,CdkDropList, CdkDropListGroup, CdkDropList, CdkDrag ,MatIconModule],
   templateUrl: './modif-ronde.component.html',
   styleUrls: ['./modif-ronde.component.scss']
 })
@@ -37,6 +39,7 @@ listRfidRound: RfidPatrol[] =[];
 listRfidSite: RfidPatrol[]= [];
 listFiltered: RfidPatrol[]=[];
 putRfid: PutRfidRounds = new PutRfidRounds();
+rifdPosition!: RfidPatrol
 
 round: Rounds = new Rounds();
 roundId: number = 0;
@@ -68,10 +71,7 @@ constructor(private _rondeService: RondeService, private _ActivatedRoute: Activa
 
   GetFilteredlist()
   {
-    console.log(this.listRfidSite)
-    console.log(this.listRfidRound)
     this.listFiltered = this.listRfidSite.filter(e => !this.listRfidRound.some(r=> r.patrolId === e.patrolId));
-    console.log(this.listFiltered)
   }
 
   Getround()
@@ -92,7 +92,8 @@ constructor(private _rondeService: RondeService, private _ActivatedRoute: Activa
     return round;
   }
 
-  drop(event: CdkDragDrop<any[]>) {
+  drop(event: CdkDragDrop<RfidPatrol[]>) {
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -103,11 +104,18 @@ constructor(private _rondeService: RondeService, private _ActivatedRoute: Activa
         event.currentIndex,
       );
     }
+    if(event.container.data.length){
+      for(var i = 0; i < event.container.data.length; i++)
+      {
+        this.listRfidRound[i].position = i;
+      }
+    }
   }
+
 
   ModifyRound()
   {
-
+    console.log(this.listRfidRound)
     this.putRfid.idRound = this.roundId;
     this.putRfid.listRfid = this.listRfidRound
     this.subscription.push(
