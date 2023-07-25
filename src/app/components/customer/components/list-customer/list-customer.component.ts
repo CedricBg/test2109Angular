@@ -50,11 +50,11 @@ export class ListCustomerComponent implements OnInit {
     //Retour Update Site
     this.subscriptions.push(this._CustService.getUpdateData().subscribe(newData => {
       this.siteSelected = newData
-      this._CustService.getAllCustomers().subscribe(data=>{
+      this.subscriptions.push(this._CustService.getAllCustomers().subscribe(data=>{
         this.listCustomers = data
         this.getPageData()
         }
-      )
+      ))
     }))
 
     //Abonnement à la nouvelle liste de customers sur la add csutomer apres création d'un customer
@@ -80,14 +80,10 @@ export class ListCustomerComponent implements OnInit {
     }))
   }
 
-  ngOnDestroy(){
-    this.subscriptions.forEach(subscription  => {
-      subscription.unsubscribe()
-    })
-  }
   ngAfterViewInit() {
-    this.paginator.page.subscribe(() => this.getPageData());
+    this.subscriptions.push(this.paginator.page.subscribe(() => this.getPageData()));
   }
+
   //gestion du pager
    getPageData() {
     this.length =  this.listCustomers.length
@@ -108,7 +104,6 @@ export class ListCustomerComponent implements OnInit {
     {
       return 0
     }
-
   }
 
   GetOne(id: number)
@@ -120,11 +115,11 @@ export class ListCustomerComponent implements OnInit {
       {
       //pour la gestion de la vue et savoir quoi afficher à mettre a null pour chaque nouveau composant a afficher
       this.select = true
-      this._CustService.GetOne(idsite).subscribe({
+      this.subscriptions.push(this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
           this.siteSelected =  data
         }
-      })
+      }))
     }
     }
   }
@@ -185,13 +180,16 @@ export class ListCustomerComponent implements OnInit {
 
   DeleteSite(id: number)
   {
-    const site = this.GetSit(id)
-    if(site != 0){
-      this.subscriptions.push(this._CustService.DeleteSite(site).subscribe({
-        next: (data: string)=>{
-          console.log(data)
-        }
-      }))
+    const deletes = confirm("Supprimer le site ?")
+      if(deletes){
+      const site = this.GetSit(id)
+      if(site != 0){
+        this.subscriptions.push(this._CustService.DeleteSite(site).subscribe({
+          next: (data: string)=>{
+            console.log(data)
+          }
+        }))
+      }
     }
   }
 
@@ -204,17 +202,21 @@ export class ListCustomerComponent implements OnInit {
 
   Delete(id: number)
   {
-    this.subscriptions.push(this._CustService.Delete(id).subscribe({
-      next : (data: string)=>{
-        const body = data
-        this._CustService.getAllCustomers().subscribe(data=>{
-          this.listCustomers = data
-          this.getPageData()
-          }
-        )
-      }
-    }))
+    const deletes = confirm("Supprimer le client ?")
+    if(deletes){
+      this.subscriptions.push(this._CustService.Delete(id).subscribe({
+        next : (data: string)=>{
+          const body = data
+          this.subscriptions.push(this._CustService.getAllCustomers().subscribe(data=>{
+            this.listCustomers = data
+            this.getPageData()
+            }
+          ))
+        }
+      }))
+    }
   }
+
   UpdateCustomer(id: number)
   {
     this.select = false
@@ -224,6 +226,11 @@ export class ListCustomerComponent implements OnInit {
 
   }
 
+  ngOnDestroy(){
+    this.subscriptions.forEach(subscription  => {
+      subscription.unsubscribe()
+    })
+  }
 }
 
 

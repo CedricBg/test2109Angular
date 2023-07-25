@@ -1,7 +1,7 @@
 <mat-horizontal-stepper class="custom-stepper"  #stepper>
   <mat-step [stepControl]="formClientSite" >
     <form *ngIf="idClient != 0" [formGroup]="formClientSite">
-      <ng-template matStepLabel><span *ngIf="idClient != 0 && idSite != 0">Ajouter un site a </span></ng-template>
+      <ng-template matStepLabel><span *ngIf="idClient != 0 && idSite != 0">Ajouter un site à <span *ngIf="customer != undefined">{{customer.nameCustomer}}</span> </span></ng-template>
       <span class="inputClient">
       <mat-form-field appearance="fill">
         <mat-label>Nom du site</mat-label>
@@ -77,7 +77,7 @@
         </mat-form-field>
       </span>
       <span class="inputClient">
-        <mat-checkbox  formControlName="Responsible">Responsble du site</mat-checkbox>
+        <mat-checkbox  formControlName="Responsible">Responsable du site</mat-checkbox>
         <mat-checkbox  formControlName="EmergencyContact">Contact en cas d'urgence</mat-checkbox>
         <mat-checkbox  formControlName="NightContact">Contact de nuit</mat-checkbox>
         <mat-checkbox  formControlName="DayContact">Contact de nuit</mat-checkbox>

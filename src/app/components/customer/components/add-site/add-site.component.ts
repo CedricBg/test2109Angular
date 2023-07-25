@@ -107,6 +107,7 @@ export class AddSiteComponent implements OnInit {
       })
     })
   }
+
   CreateSite()
   {
     if(this.formClientSite.valid)
@@ -129,7 +130,6 @@ export class AddSiteComponent implements OnInit {
       this._custService.AddContactCreateSite(this.formContactPerson.get('ContactPerson').value)
       this._Router.navigateByUrl('OPS/customer/listcustomer')
   }
-
 
   AddEmail() {
     const email = this._builder.group({

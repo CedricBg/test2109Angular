@@ -1,6 +1,5 @@
 <nav *ngIf="connected === true" class="menu animate__animated animate__slideInDown">
   <ul>
-    <li (click)="Rondes('')" class="icons"><mat-icon class="icons">filter_tilt_shift</mat-icon><span class="aligned-with-icon">Gestion rondes</span> </li>
     <li (click)="Agent()" class="icons"><mat-icon class="icons">people</mat-icon><span class="aligned-with-icon">Gestion Agents</span> </li>
     <li (click)="Rondes('admin')" class="icons "><mat-icon class="icons">filter_tilt_shift</mat-icon><span class="aligned-with-icon">Administration rondes</span> </li>
     <li (click)="AllEmp('AllEmployees')" class="icons "><mat-icon class="icons">people</mat-icon><span class="aligned-with-icon">Administration employées</span> </li>
@@ -11,4 +10,3 @@
 
 <router-outlet></router-outlet>
 
- 

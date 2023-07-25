@@ -40,7 +40,7 @@
               <button class="buttonIcons" (click)="AddSite(client.customerId)" type="button"><mat-icon  class="icons1">add</mat-icon></button>
               <button  class="buttonIcons" (click)="GetOne(client.customerId)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
               <button class="buttonIcons" (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit_square</mat-icon></button>
-              <button class="buttonIcons" (click)="DeleteSite(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
+              <button  class="buttonIcons" (click)="DeleteSite(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
             </td>
           </tr>
         </tbody>
@@ -74,7 +74,7 @@
       <div class="detailsCard2">
         <p *ngIf="siteSelected.contactSite.length != 0" class="email">
         </p>
- 
+
         <table >
           <caption><h3>Responsable(s) du site:</h3> </caption>
           <thead>

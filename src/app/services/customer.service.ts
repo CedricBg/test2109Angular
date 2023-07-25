@@ -169,10 +169,12 @@ export class CustomerService {
       }
     })
   }
+
   GetDeleteContact()
   {
     return this.isDeletedContactSubject.asObservable()
   }
+
   //Ici on récupère une liste de Customers quand ajoute une persone de contact a la création d'un site
   AddContactCreateSite(contact: ContactPerson)
   {
