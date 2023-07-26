@@ -1,7 +1,7 @@
 .contentAuth{
   width: 100vw;
   min-height: 94vh;
-  background-image:  url('./../../../assets/pexelsCam1.jpg');
+
 }
 .transparent_div
 {
@@ -10,21 +10,8 @@
   background-image:  url('./../../../assets/fond1.jpg');
   opacity: 0.2;
   background-size: cover;
-
-  //background: rgba(62, 62, 66, 0.4);
 }
 
-
-footer{
-  margin-top: 0px;
-}
-
-@media screen and (min-width: 1930px ) {
-  .contentAuth{
-  background-image:  url('./../../../assets/pexels-copie3.jpg');
-
-  }
-}
 
 @media screen and (max-width: 1200px ) {
   .contentAuth, .transparent_div{

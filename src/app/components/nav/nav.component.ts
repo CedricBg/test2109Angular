@@ -2,10 +2,10 @@ import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import { NgIf, TitleCasePipe } from '@angular/common';
 import { UserProfileComponent } from '../employee/components/user-profile/user-profile.component';
+import { LoginComponent } from '../auth/components/login/login.component';
 
 @Component({
     selector: 'app-nav',
@@ -34,7 +34,14 @@ export class NavComponent implements OnInit {
 
   Login()
   {
-    this._authService.OpenDialog();
+
+    const diallogConfig = new MatDialogConfig;
+    diallogConfig.disableClose = false;
+    diallogConfig.position = {right:'10px', top:'10px'};
+    diallogConfig.autoFocus = true;
+    diallogConfig.height = '250px';
+    diallogConfig.width = '300px';
+    const dialogRef = this.dialog.open(LoginComponent,diallogConfig);
   }
 
   OpenDialog()

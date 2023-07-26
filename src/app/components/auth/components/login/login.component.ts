@@ -5,6 +5,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+
+
 
 
 @Component({
@@ -12,14 +15,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     standalone: true,
-    imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule]
+    imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule,MatIconModule]
 })
 export class LoginComponent implements OnInit {
   description:string;
 
 
-  constructor(private _builder : FormBuilder, private _authService : AuthService, public dialogRef: MatDialogRef<LoginComponent>,
-    @Inject(MAT_DIALOG_DATA) data)
+  constructor(private _builder : FormBuilder, private _authService : AuthService, public dialogRef: MatDialogRef<LoginComponent>)
     {}
 
   formLogin : FormGroup

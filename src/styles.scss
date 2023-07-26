@@ -73,8 +73,10 @@ html, body {
 
 
 /* TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version.*/
-mat-dialog-container {
-  background-color: whitesmoke !important;
+
+mat-dialog-container *{
+  background-color: transparent !important;
+  border-radius: 5px !important;
 }
 
 @media screen and (max-width: 340px ) {

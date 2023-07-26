@@ -1,7 +1,5 @@
 
-
-import { HttpClientModule } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -9,13 +7,9 @@ import { RouterOutlet } from '@angular/router';
     templateUrl: './auth.component.html',
     styleUrls: ['./auth.component.scss'],
     standalone: true,
-    imports: [RouterOutlet,HttpClientModule]
+    imports: [RouterOutlet,]
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent  {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

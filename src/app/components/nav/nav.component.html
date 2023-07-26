@@ -2,12 +2,10 @@
 <div class="nav">
   <h1>{{title}}</h1>
 
-  <div class="login" *ngIf="!isConnected">
-    <button (click)="Login()" type="button">Connexion</button>
-  </div>
+  <div class="login" >
+    <button *ngIf="!isConnected" (click)="Login()" type="button">Connexion</button>
 
-  <div  class="login " *ngIf="isConnected">
-    <button (click)=" OpenDialog()" type="button"  aria-label="Boutton déconnexion">
+    <button *ngIf="isConnected" (click)=" OpenDialog()" type="button"  aria-label="Boutton déconnexion">
       {{name| titlecase}}
     </button>
   </div>

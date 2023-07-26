@@ -37,17 +37,6 @@ export class AuthService {
     this._httpClient.post<string>(environment.baseAdres+ 'Auth/AddLogin', form).subscribe()
   }
 
-  OpenDialog()
-  {
-    const diallogConfig = new MatDialogConfig;
-    diallogConfig.disableClose = false;
-    diallogConfig.position = {right:'10px', top:'10px'};
-    diallogConfig.autoFocus = true;
-    diallogConfig.height = '300';
-    diallogConfig.width = '400px';
-    const dialogRef = this.dialog.open(LoginComponent,diallogConfig);
-  }
-
 
   Login(userin : Login)
   {
