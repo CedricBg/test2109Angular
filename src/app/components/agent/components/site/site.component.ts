@@ -2,7 +2,6 @@ import { AgentService } from 'src/app/services/agent.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription,} from 'rxjs';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Site } from 'src/app/models/customer/site.models';
 import { Customers } from 'src/app/models/customer/customers.models';
@@ -13,6 +12,7 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgFor } from '@angular/common';
+
 
 
 
@@ -27,7 +27,7 @@ export class SiteComponent implements OnInit{
 subscription: Subscription[] = [];
 data: any;
 nom: string = "";
-safeImageUrl: SafeUrl;
+
 
 //Par customer
 //Données venant de la db
@@ -51,7 +51,7 @@ listAllsitesAgentmodif: Site[] = [];
 listAllSiteAgent: Site[] = [];
 listSiteAssignAgent: Site[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute,private _SnackBar : SnackBarService, private _serviceEmployee: EmployeeService, private _serviceCustomer: CustomerService, private _agentService : AgentService, private _DomSanitizer: DomSanitizer){}
+  constructor(private activatedRoute: ActivatedRoute,private _SnackBar : SnackBarService, private _serviceEmployee: EmployeeService, private _serviceCustomer: CustomerService, private _agentService : AgentService){}
   ngOnInit(): void {
     this.addSite.sites = [];
     this.delSite.sites = [];
@@ -60,6 +60,7 @@ listSiteAssignAgent: Site[] = [];
       next : (data: any)=>{
           //donnees envoyé avec un resolver
           this.data = data;
+
           this.Assignation(this.data.listAssignCustomers, this.data.listallCustomers)
           this.subscription.push(this._agentService.GetSites(data.agent.id).subscribe({
             next : (data : Site[] ) =>{
@@ -73,6 +74,7 @@ listSiteAssignAgent: Site[] = [];
           }));
         }
     }))
+
   }
 
   Assignation(listAssignCustomers: Customers[], listallCustomers: Customers[])

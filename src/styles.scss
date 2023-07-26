@@ -83,17 +83,6 @@ mat-dialog-container *{
   *{
     font-size: x-small;
   }
-  footer:nth-child(even){
-    font-size: 0;
-    color: black;
-  }
-}
-
-@media screen and (max-height: 800px ) {
-
-  footer:nth-child(even){
-    display: none;
-  }
 }
 @media screen and (max-height: 400px ) {
   *{
