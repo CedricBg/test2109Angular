@@ -37,7 +37,7 @@ export class NavComponent implements OnInit {
 
     const diallogConfig = new MatDialogConfig;
     diallogConfig.disableClose = false;
-    diallogConfig.position = {right:'10px', top:'10px'};
+    diallogConfig.position = {right:'2vw', top:'55px'};
     diallogConfig.autoFocus = true;
     diallogConfig.height = '250px';
     diallogConfig.width = '300px';
@@ -48,10 +48,10 @@ export class NavComponent implements OnInit {
   {
     const diallogConfig = new MatDialogConfig;
     diallogConfig.disableClose = false;
-    diallogConfig.position = {right:'10px', top:'10px'};
+    diallogConfig.position = {right:'2vw', top:'55px'};
     diallogConfig.autoFocus = true;
-    diallogConfig.height = '200px';
-    diallogConfig.width = '400px';
+    diallogConfig.height = '100px';
+    diallogConfig.width = '200px';
     const dialogRef = this.dialog.open(UserProfileComponent,diallogConfig);
   }
 }
