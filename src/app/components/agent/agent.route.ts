@@ -3,7 +3,7 @@ import { listAllCustomerResolver, listassignedCustomerResolver } from 'src/app/r
 import { EmployeeResolver } from 'src/app/resolvers/employee-resolver-one.resolver';
 
 export default [
-  { path: 'admin', loadComponent: () => import('./components/admin/admin.component').then(module => module.AdminComponent) , children : [
+  { path: 'admin',title : 'Gestion agents', loadComponent: () => import('./components/admin/admin.component').then(module => module.AdminComponent) , children : [
     { path: 'site/:id', loadComponent : () => import('./components/site/site.component').then(module => module.SiteComponent) , resolve: {
       agent: EmployeeResolver,
       listAssignCustomers : listassignedCustomerResolver,

@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'auth' ,  title:'Connexion', loadChildren: ()=> import('./app/components/auth/auth.routes')},
   { path: 'OPS',  title: 'Opérations' ,  loadChildren: ()=> import('./app/components/operations/operations.routes')},
   { path: 'agent', title: sessionStorage.getItem('firstName'), loadChildren: ()=> import('./app/components/agent/agent.route')},
-  { path: 'ronde',   loadChildren: ()=> import('./app/components/ronde/ronde.routes')},
+  { path: 'ronde', title: 'Gestion des rondes',   loadChildren: ()=> import('./app/components/ronde/ronde.routes')},
   { path: '', redirectTo : 'auth', pathMatch : 'full'},
 ];
 

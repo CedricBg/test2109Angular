@@ -1,17 +1,40 @@
+*{box-sizing: border-box;}
 .cards{
   margin-top:20px;
   width: 100vw;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  border: 1px black solid;
 }
 
-.divTable
-{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+.employees{
+  border : 1px blue solid;
+  border-radius: 5px;
+  padding: 10px;
+  width:90%;
 }
+
+.AddPerson{
+  display: flex;
+  flex-flow: row nowrap;
+  background-color:white;
+  color:#00468C;
+  border : 1px green solid;
+  width: 100%;
+}
+
+.AddPerson .icons{
+  color:#00468C;
+}
+
+.AddPerson .icons:hover{
+  color: #f5f5ea;
+}
+
 
 table{
+  width: 100%;
   border-collapse: collapse;
 }
 
@@ -30,16 +53,8 @@ td {
   background-color: white;
   height: 40px;
   text-align: center;
-  padding : 0 10px 0px 20px;
 
-}
 
-.select_list_customer{
-  padding-top: 10%;
-}
-
-.search_list_customer{
-  padding-top: 4%;
 }
 
 .paginator
@@ -53,11 +68,6 @@ td {
   margin-left :1px;
 }
 
-.employees{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 10px;
-}
 
 .icons button{
   color: #17A2B8;
@@ -82,98 +92,3 @@ td {
   border: none;
 }
 
-.AddPerson{
-  width: 99%;
-  display: flex;
-  justify-content:space-evenly;
-  background-color:white;
-  border-radius: 5px 5px 0 0;
-  align-items: center;
-  color:#00468C;
-  padding-right :4px;
-  margin-left :1px;
-}
-
-.AddPerson .icons{
-  color:#00468C;
-}
-
-.AddPerson .icons:hover{
-  color: #f5f5ea;
-}
-
-/////
-
-.rep{
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 850px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.rep h3{
-  border-radius: 5px 5px 0px 0px;
-  box-shadow: 1px 1px 1px 1px #f5f5ea;
-  width: 97%;
-  text-align: center;
-  background-color: rgb(253, 253, 253);
-}
-
-.rep h3:last-child{
-  border-radius: 5px 5px 0px 0px;
-  box-shadow: 1px 1px 1px 1px #f5f5ea;
-  width: 100%;
-  text-align: center;
-  background-color: rgb(253, 253, 253);
-}
-
-.cards2 {
-  display: flex;
-  flex-wrap: wrap;
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px 1px #f5f5ea;
-  background-color: rgb(253, 253, 253);
-  padding:10px;
-  margin-bottom: 10px;
-  width:95%;
-  justify-content: space-around;
-
-  overflow-y: scroll;
-}
-.detailsCard2 table{
-  margin-top: 20px;
-}
-
-img{
-  width:170px;
-  height: 200px;
-}
-
-
-@media screen and (max-width: 1400px){
-  .rep{
-    margin-top: 5px;
-    box-shadow: none;
-  }
-}
-@media screen and (max-width: 730px){
-
-  .cards{
-    margin-top:100px;
-  }
-}
-@media screen and (max-height: 550px){
-
-  .cards{
-    margin-top:50px;
-  }
-}
-@media screen and (max-height: 290px){
-
-  .cards{
-    margin-top:80px;
-  }
-}

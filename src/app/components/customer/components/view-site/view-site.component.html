@@ -1,0 +1,100 @@
+<div class="rep animate__animated animate__fadeIn" *ngIf="siteSelected != null ">
+  <button (click)="CloseWindow()">Quitter</button>
+  <h3>Site : {{siteSelected.name}}</h3>
+  <div class="cards2">
+    <div class="contcards2">
+      <p  *ngIf="siteSelected.language != null">Langue de contact : {{siteSelected.language.name}} </p>
+      <p>Adresse:</p>
+      <p>Rue : {{siteSelected.address.sreetAddress}}</p>
+      <p>Code Postal : {{siteSelected.address.zipCode}}</p>
+      <p>Pays : {{siteSelected.address.state}}</p>
+      <p>Ville : {{siteSelected.address.city}}</p>
+      <p> Nr° de Tva: {{siteSelected.vatNumber}}</p>
+      <img src="https://www.w3schools.com/howto/img_avatar.png">
+    </div>
+    <div class="detailsCard2">
+      <p *ngIf="siteSelected.contactSite.length != 0" class="email">
+      </p>
+
+      <table >
+        <caption><h3>Responsable(s) du site:</h3> </caption>
+        <thead>
+          <tr >
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>téléphone(s)</th>
+            <th>Email(s)</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let elt of siteSelected.contactSite; let i = index">
+          <tr *ngIf="elt.responsible">
+            <td>{{elt.firstName}}</td>
+            <td>{{elt.lastName}}</td>
+            <td ><p *ngFor="let phone of elt.phone">{{phone.number}}</p></td>
+            <td><p *ngFor="let email of elt.email">{{email.emailAddress}}</p></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table >
+        <caption><h3>Contact(s) de nuit:</h3></caption>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>téléphone(s)</th>
+            <th>Email(s)</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let elt of siteSelected.contactSite; let i = index">
+          <tr *ngIf="elt.nightContact">
+            <td>{{elt.firstName}}</td>
+            <td>{{elt.lastName}}</td>
+            <td><p *ngFor="let phone of elt.phone">{{phone.number}}</p></td>
+            <td><p *ngFor="let email of elt.email">{{email.emailAddress}}</p></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table >
+        <caption><h3>Contact(s) d'urgence:</h3></caption>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>téléphone(s)</th>
+            <th>Email(s)</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let elt of siteSelected.contactSite; let i = index">
+          <tr *ngIf="elt.emergencyContact">
+            <td>{{elt.firstName}}</td>
+            <td>{{elt.lastName}}</td>
+            <td ><p *ngFor="let phone of elt.phone">{{phone.number}}</p></td>
+            <td><p *ngFor="let email of elt.email">{{email.emailAddress}}</p></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table >
+        <caption><h3>Contact(s) de jour:</h3></caption>
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>téléphone(s)</th>
+            <th>Email(s)</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let elt of siteSelected.contactSite; let i = index">
+          <tr *ngIf="elt.dayContact ">
+            <td>{{elt.firstName}}</td>
+            <td>{{elt.lastName}}</td>
+            <td ><p *ngFor="let phone of elt.phone">{{phone.number}}</p></td>
+            <td><p *ngFor="let email of elt.email">{{email.emailAddress}}</p></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+</div>

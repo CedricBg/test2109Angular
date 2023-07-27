@@ -15,6 +15,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ViewSiteComponent } from '../view-site/view-site.component';
+import { AddSiteComponent } from '../add-site/add-site.component';
+import { UpdateCustomerComponent } from '../update-customer/update-customer.component';
 
 
 @Component({
@@ -118,11 +121,21 @@ export class ListCustomerComponent implements OnInit {
       this.subscriptions.push(this._CustService.GetOne(idsite).subscribe({
         next: (data: Site)=>{
           this.siteSelected =  data
+          if(this.siteSelected)
+          {
+            const diallogConfig =  new MatDialogConfig;
+            diallogConfig.data =  this.siteSelected
+            diallogConfig.disableClose = true;
+            diallogConfig.restoreFocus = true;
+            const dialogRef = this.dialog.open(ViewSiteComponent,diallogConfig);
+          }
         }
       }))
     }
     }
   }
+
+
 
   UpdateOne(id: number)
   {
@@ -143,6 +156,7 @@ export class ListCustomerComponent implements OnInit {
             diallogConfig.data =  this.siteSelected
             diallogConfig.disableClose = true;
             diallogConfig.restoreFocus = true;
+            diallogConfig.width = '1700px';
             const dialogRef = this.dialog.open(UpdateSiteComponent,diallogConfig);
           }
         }
@@ -175,7 +189,13 @@ export class ListCustomerComponent implements OnInit {
     this.siteSelected = null
     //pour l'observable vers addSitepour lui passer le client pour le nouveau site
     this._CustService.GetOneforsiteCustomer(id)
-    this._Router.navigate(['OPS/customer/listcustomer/addSite'])
+
+    const diallogConfig =  new MatDialogConfig;
+            diallogConfig.data =  this.siteSelected
+            diallogConfig.disableClose = true;
+            diallogConfig.restoreFocus = true;
+            diallogConfig.width = '1700px';
+            const dialogRef = this.dialog.open(AddSiteComponent,diallogConfig);
   }
 
   DeleteSite(id: number)
@@ -222,8 +242,12 @@ export class ListCustomerComponent implements OnInit {
     this.select = false
     this.siteSelected = null
         this._CustService.GetOneCustomer(id)
-        this._Router.navigate(['OPS/customer/listcustomer/UpdateCustomer'])
-
+        const diallogConfig =  new MatDialogConfig;
+        diallogConfig.data =  this.siteSelected
+        diallogConfig.disableClose = true;
+        diallogConfig.restoreFocus = true;
+        diallogConfig.width = '1700px';
+        const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
   }
 
   ngOnDestroy(){

@@ -1,0 +1,101 @@
+
+.rep{
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 850px;
+  border-radius: 5px;
+  background-color: white !important;
+}
+
+.rep h3{
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 1px 1px 1px 1px #f5f5ea;
+  width: 97%;
+  text-align: center;
+  background-color: rgb(253, 253, 253);
+}
+
+.rep h3:last-child{
+  border-radius: 5px 5px 0px 0px;
+  box-shadow: 1px 1px 1px 1px #f5f5ea;
+  width: 100%;
+  text-align: center;
+  background-color: rgb(253, 253, 253);
+}
+
+.cards2 {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px #f5f5ea;
+  background-color: rgb(253, 253, 253);
+  padding:10px;
+  margin-bottom: 10px;
+  width:95%;
+  justify-content: space-around;
+
+  overflow-y: scroll;
+}
+.detailsCard2 table{
+  margin-top: 20px;
+}
+
+img{
+  width:170px;
+  height: 200px;
+}
+.divTable
+{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+table{
+  border-collapse: collapse;
+}
+
+th{
+  background-color: #F5F5F5;
+  height: 40px;
+  text-align: center;
+  padding : 0 10px 0px 20px;
+}
+
+tr{
+  border-bottom: 1px solid #ccc;
+}
+
+td {
+  background-color: white;
+  height: 40px;
+  text-align: center;
+  padding : 0 10px 0px 20px;
+
+}
+
+
+@media screen and (max-width: 1400px){
+  .rep{
+    margin-top: 5px;
+    box-shadow: none;
+  }
+}
+@media screen and (max-width: 730px){
+
+  .cards{
+    margin-top:100px;
+  }
+}
+@media screen and (max-height: 550px){
+
+  .cards{
+    margin-top:50px;
+  }
+}
+@media screen and (max-height: 290px){
+
+  .cards{
+    margin-top:80px;
+  }
+}
