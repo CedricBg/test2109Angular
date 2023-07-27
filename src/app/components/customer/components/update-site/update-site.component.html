@@ -1,4 +1,4 @@
-<div  >
+<div class="container"  >
   <mat-card appearance="outlined" class="Detailed-card">
       <div class="close">
         <button class="iconsCenter" mat-raised-button  color="warning" (click)="CloseDialogBox()" class="sendButton">Fermer</button>
@@ -12,7 +12,7 @@
               <mat-label>Tva: </mat-label><input  formControlName="vatNumber"  matInput>
             </mat-form-field>
 
-            <div formGroupName="language">
+            <span formGroupName="language">
               <mat-form-field >
                 <mat-label>Langue de contact: </mat-label>
                 <mat-select  formControlName="name" >
@@ -21,7 +21,7 @@
                   </mat-option>
                 </mat-select >
               </mat-form-field>
-            </div>
+            </span>
 
             <div formGroupName="address" >
             <mat-form-field>
@@ -45,8 +45,8 @@
               <div formArrayName="contactSite">
                 <div class="card-contacts" *ngFor="let contact of contactSite.controls; let i = index">
                   <div>
-                  <button mat-icon-button type="button" >
-                    <mat-icon (click)="DeleteContact(contact.get('contactId').value)" type="button" class="icons">close</mat-icon>
+                  <button (click)="DeleteContact(contact.get('contactId').value)" mat-icon-button type="button" >
+                    <mat-icon type="button" class="icons">close</mat-icon>
                   </button>
                 </div>
                   <mat-form-field [formGroupName]="i">

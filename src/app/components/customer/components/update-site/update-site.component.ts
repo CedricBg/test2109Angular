@@ -288,7 +288,12 @@ private createContactForm(contact: ContactPerson): FormGroup {
 
   DeleteContact(id: number)
   {
-    return this._customerService.DeleteContact(id)
+    const response = confirm('Supprimer le contact ?')
+    if(response){
+      this._customerService.DeleteContact(id);
+    }
+
+
   }
 
   AddPerson(id: number)
