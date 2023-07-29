@@ -1,0 +1,16 @@
+.contenu_ronde{
+  position:absolute;top:150px;
+}
+
+@media screen and (max-width: 770px){
+  .contenu_ronde{
+    position:absolute;top:100px;
+
+  }
+}
+@media screen and (max-height: 440px){
+  .contenu_ronde{
+    position:absolute;top:100px;
+
+  }
+}

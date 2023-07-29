@@ -1,7 +1,14 @@
-
+*{
+  box-sizing: border-box;
+}
+.container{
+  display: flex;
+  flex-flow: row-reverse wrap;
+}
 .menu{
   display: flex;
   justify-content: center;
+  width:90%;
 }
 .menu ul {
   display: flex;
@@ -19,6 +26,7 @@
   background: rgb(170,176,221);
   background: linear-gradient(0deg, rgba(170,176,221,1) 3%, rgba(50,98,144,1) 10%);
   cursor: pointer;
+
 }
 
 .menu ul li:hover {
@@ -34,22 +42,118 @@ li.icons
 .icons
 {
   padding-left: 2px;
-  padding-right: 5px;
+  margin-right: 5px;
+}
+.menuPhone{
+  visibility: hidden;
 }
 
+::ng-deep .menus{
+  box-sizing: border-box !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  width:190px !important;
+  position:absolute;
+  top:-50px;
+  right:10px;
+}
 
-@media screen and (max-width: 730px){
+::ng-deep .buttons{
+  width:190px !important;
+  background-color: rgba(50,98,144,1) !important;
+  border-bottom: 3px solid #AAB0DD !important ;
+  border-radius:  3px !important;
+  margin-bottom: 10px !important;
+  height: 10px !important;
+}
+.buttons .mat-icon, .buttons  span{
+  height: 10px !important;
+  font-size: 10px !important;
+  padding :0 !important;
+  margin: 0 !important;
+  color: white;
+}
+@media screen and (max-width: 771px){
   .menu{
-    justify-content: flex-start;
-
+    visibility: hidden;
+    width:0%;
+    font-size: 0;
+    padding: 0;
+    margin: 0;
   }
-  .menu ul {
-    flex-flow: column;
-
+  .menu ul{
+    visibility: hidden;
+    width:0%;
+    padding: 0;
+    margin: 0;
   }
   .menu ul li{
-    margin-bottom: 2px;
-    height: 30px;
+    visibility: hidden;
+    width:0%;
+    padding: 0;
+    margin: 0;
+  }
+  .menu ul li span{
+    visibility: hidden;
+    width:0%;
+    font-size: 0px;
+    padding: 0;
+    margin: 0;
+  }
+  .icons
+{
+  padding-left: 0px;
+  padding-right: 0px;
+  font-size: 0px;
+}
+  .containMenu{
+    visibility:visible;
+  }
+
+}
+@media screen and (max-height: 440px){
+  .menu{
+    visibility: hidden;
+    width:0%;
+    font-size: 0;
+    padding: 0;
+    margin: 0;
+  }
+  .menu ul{
+    visibility: hidden;
+    width:0%;
+    padding: 0;
+    margin: 0;
+  }
+  .menu ul li{
+    visibility: hidden;
+    width:0%;
+    padding: 0;
+    margin: 0;
+  }
+  .menu ul li span{
+    visibility: hidden;
+    width:0%;
+    font-size: 0px;
+    padding: 0;
+    margin: 0;
+  }
+  .icons
+{
+  padding-left: 0px;
+  padding-right: 0px;
+  font-size: 0px;
+}
+  .containMenu{
+    visibility:visible;
   }
 }
 
+@media screen and (max-height: 345px){
+  .containMenu{
+    top:25px;
+    top:0;
+  }
+
+}

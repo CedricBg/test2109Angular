@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { distinctUntilChanged, first, Subscription } from 'rxjs';
+import {  Subscription } from 'rxjs';
 import { Countrys } from 'src/app/models/countrys.models';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { Site } from 'src/app/models/customer/site.models';
@@ -18,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgIf, NgFor } from '@angular/common';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogRef } from '@angular/material/dialog';
+import { AddCustomerComponent } from '../add-customer/add-customer.component';
 
 @Component({
     selector: 'app-add-site',
@@ -28,7 +30,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 })
 export class AddSiteComponent implements OnInit {
 
-  constructor(private _infoService: InformationsService, private _builder : FormBuilder,private _Router: Router, private _custService: CustomerService,private _addressService: AddressService) { }
+  constructor(private dialogRef: MatDialogRef<AddCustomerComponent>, private _infoService: InformationsService, private _builder : FormBuilder,private _Router: Router, private _custService: CustomerService,private _addressService: AddressService) { }
   formClientSite: FormGroup
   formContactPerson: FormGroup
   listCountrys: Countrys[] = []
@@ -63,8 +65,6 @@ export class AddSiteComponent implements OnInit {
     }))
     this.SendSite()
   }
-
-
   SendSite()
   {
     this.formClientSite = this._builder.group({
@@ -82,7 +82,6 @@ export class AddSiteComponent implements OnInit {
       }),
     })
   }
-
   AddContactPersonSite()
   {
     this.formContactPerson = this._builder.group({
@@ -107,7 +106,6 @@ export class AddSiteComponent implements OnInit {
       })
     })
   }
-
   CreateSite()
   {
     if(this.formClientSite.valid)
@@ -124,27 +122,23 @@ export class AddSiteComponent implements OnInit {
       }))
     }
   }
-
   AjoutcontactSite()
   {
       this._custService.AddContactCreateSite(this.formContactPerson.get('ContactPerson').value)
-      this._Router.navigateByUrl('OPS/customer/listcustomer')
+      this.CloseWindow();
   }
-
   AddEmail() {
     const email = this._builder.group({
       emailAddress: ['', Validators.required]
     });
     this.Email.push(email);
   }
-
   AddPhone() {
     const phone = this._builder.group({
       number: ['', Validators.required]
     });
     this.Phone.push(phone);
   }
-
   get Email(): FormArray
   {
     return this.formContactPerson.get('ContactPerson.Email') as FormArray;
@@ -161,7 +155,9 @@ export class AddSiteComponent implements OnInit {
   {
     this.Phone.removeAt(id)
   }
-
+  CloseWindow(){
+    this.dialogRef.close();
+  }
   ngOnDestroy(){
     this.subscription.forEach(element => {
       element.unsubscribe()

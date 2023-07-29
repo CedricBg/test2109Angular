@@ -4,13 +4,14 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
     selector: 'app-ops',
     templateUrl: './ops.component.html',
     styleUrls: ['./ops.component.scss'],
     standalone: true,
-    imports: [NgIf, MatIconModule, RouterOutlet , MatButtonModule]
+    imports: [NgIf, MatIconModule, RouterOutlet , MatButtonModule, MatMenuModule]
 })
 export class OpsComponent implements OnInit {
   connected!: Boolean;

@@ -1,6 +1,7 @@
 
 
-<div>
+<div class="container">
+  <button (click)="CloseWindow()">Fermer</button>
   <mat-horizontal-stepper class="custom-stepper" [linear]="isLinear" #stepper>
     <mat-step [stepControl]="formClient" >
       <form [formGroup]="formClient">

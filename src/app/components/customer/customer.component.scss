@@ -1,4 +1,16 @@
 .customer{
-  position:absolute;top:16vh;
+  position:absolute;top:150px;
 }
 
+@media screen and (max-width: 770px){
+  .customer{
+    position:absolute;top:100px;
+
+  }
+}
+@media screen and (max-height: 440px){
+  .customer{
+    position:absolute;top:100px;
+
+  }
+}

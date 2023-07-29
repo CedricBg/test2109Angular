@@ -1,49 +1,47 @@
-<div class ="cards">
+<div class="cards">
     <section class="employees animate__animated animate__fadeIn">
 
       <div class="AddPerson">
-        <mat-form-field class="select_list_customer">
+        <h1>Gestion Client</h1>
+        <mat-form-field >
           <mat-label class="matLabel ">Recherche<mat-icon class="icons2">search</mat-icon></mat-label>
           <input  type="text" name="nameCustomer" [(ngModel)]="nameCustomer" (ngModelChange)="ngModelChange()"  placeholder="Nom du client" matInput >
         </mat-form-field>
-          <button mat-button type="button" (click)="FormAddUser()"><mat-icon class="icons">person_add</mat-icon> Ajouter un client</button>
+        <button mat-button type="button" (click)="FormAddUser()"><mat-icon class="icons">person_add</mat-icon> Ajouter un client</button>
       </div>
 
       <table *ngIf="pagedData != null">
-        <caption>Gestion Client</caption>
         <thead>
           <tr>
-            <th>Nom</th>
-            <th>client</th>
-            <th>Site a modifier</th>
-            <th>Actions par site</th>
+            <th>Client</th>
+            <th>Modifiez un client</th>
+            <th>Supprimer un client</th>
+            <th>Sélectionnez un site</th>
+            <th>Ajouter un site</th>
+            <th>Consulter un site</th>
+            <th>Modifier un site</th>
+            <th>Supprimer un site</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let client of pagedData">
             <td><a><u>{{client.nameCustomer| titlecase }}</u></a></td>
-            <td>
-              <button class="buttonIcons"  (click)="Delete(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
-              <button class="buttonIcons" (click)="UpdateCustomer(client.customerId)" type="button"><mat-icon  class="icons2">edit_square</mat-icon></button>
-            </td>
+            <td><button class="buttonIcons" (click)="UpdateCustomer(client.customerId)" type="button"><mat-icon  class="icons2">edit_square</mat-icon></button></td>
+            <td><button class="buttonIcons"  (click)="Delete(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button></td>
             <td>
               <div class="select_list_customer" *ngIf="client.site != null">
-                <mat-form-field >
-                  <mat-label>--Sélectionnez un site--</mat-label>
-                  <mat-select [(value)]="selectedSiteName">
-                    <mat-option *ngFor="let elt of client.site"  [value]="elt.name" >
+                  <select [(ngModel)]="selectedSiteName">
+                    <option [ngValue]="null" disabled selected>Sélectionnez un site</option>
+                    <option *ngFor="let elt of client.site"  [ngValue]="elt.name">
                       {{elt.name}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+                    </option>
+                  </select>
               </div>
             </td>
-            <td>
-              <button class="buttonIcons" (click)="AddSite(client.customerId)" type="button"><mat-icon  class="icons1">add</mat-icon></button>
-              <button  class="buttonIcons" (click)="GetOne(client.customerId)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button>
-              <button class="buttonIcons" (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit_square</mat-icon></button>
-              <button  class="buttonIcons" (click)="DeleteSite(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button>
-            </td>
+            <td><button class="buttonIcons" (click)="AddSite(client.customerId)" type="button"><mat-icon  class="icons1">add</mat-icon></button></td>
+            <td><button class="buttonIcons" (click)="GetOne(client.customerId)" type="button"><mat-icon  class="icons1">visibility</mat-icon></button></td>
+            <td><button class="buttonIcons" (click)="UpdateOne(client.customerId)" type="button"><mat-icon  class="icons2">edit_square</mat-icon></button></td>
+            <td><button class="buttonIcons" (click)="DeleteSite(client.customerId)" type="button"><mat-icon class="icons3">delete</mat-icon></button></td>
           </tr>
         </tbody>
       </table>

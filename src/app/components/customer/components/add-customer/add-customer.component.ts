@@ -1,17 +1,17 @@
 import { AddressService } from 'src/app/services/address.service';
 import { CustomerService } from './../../../../services/customer.service';
-import { Component,Inject, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Countrys } from 'src/app/models/countrys.models';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { Language } from 'src/app/models/language.models';
-import { Role } from 'src/app/models/Role.models';
+
 import { InformationsService } from 'src/app/services/informations.service';
 import { Site } from 'src/app/models/customer/site.models';
 import { ContactPerson } from 'src/app/models/customer/ContactPerson.models';
-import { Route, Router } from '@angular/router';
-import { Observable, first, Subscription } from 'rxjs';
+import {  Router } from '@angular/router';
+import {  Subscription } from 'rxjs';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -46,7 +46,7 @@ export class AddCustomerComponent implements OnInit {
   siteCreated: Site
   subscription: Subscription[] = []
 
-  constructor(private _builder: FormBuilder,private _Router : Router, private _custService : CustomerService, private _infoService: InformationsService, private _addressService: AddressService
+  constructor(private dialogRef: MatDialogRef<AddCustomerComponent>,private _builder: FormBuilder,private _Router : Router, private _custService : CustomerService, private _infoService: InformationsService, private _addressService: AddressService
    ) {}
 
   ngOnInit(): void {
@@ -64,6 +64,10 @@ export class AddCustomerComponent implements OnInit {
     }))
   }
 
+  CloseWindow()
+  {
+    this.dialogRef.close();
+  }
   sendCompany()
   {
     this.formClient = this._builder.group({
@@ -90,7 +94,6 @@ export class AddCustomerComponent implements OnInit {
     this.isLinear = true;
     this.SendSite()
   }
-
   SendSite()
   {
     this.formClientSite = this._builder.group({
@@ -130,7 +133,6 @@ export class AddCustomerComponent implements OnInit {
       }))
     }
   }
-
   AddContactPersonSite()
   {
     this.formContactPerson = this._builder.group({
@@ -154,13 +156,11 @@ export class AddCustomerComponent implements OnInit {
       })
     })
   }
-
   AjoutcontactSite()
   {
       this._custService.AddContactCreateSite(this.formContactPerson.get('ContactPerson').value)
       this._Router.navigateByUrl('OPS/customer/listcustomer')
   }
-
   get email(): FormArray
   {
     return this.formClient.get('contact.email') as FormArray;
@@ -169,7 +169,6 @@ export class AddCustomerComponent implements OnInit {
   {
     return this.formClient.get('contact.phone') as FormArray;
   }
-
   get Email(): FormArray
   {
     return this.formContactPerson.get('ContactPerson.Email') as FormArray;
@@ -178,35 +177,30 @@ export class AddCustomerComponent implements OnInit {
   {
     return this.formContactPerson.get('ContactPerson.Phone') as FormArray;
   }
-
   AddEmail() {
     const email = this._builder.group({
       emailAddress: ['', [Validators.required,Validators.email]],
     });
     this.Email.push(email);
   }
-
   AddPhone() {
     const phone = this._builder.group({
       number: ['', [Validators.required,Validators.minLength(10)]]
     });
     this.Phone.push(phone);
   }
-
   AddEmails() {
     const email = this._builder.group({
       emailAddress: ['', [Validators.required,Validators.email]],
     });
     this.email.push(email);
   }
-
   AddPhones() {
     const phone = this._builder.group({
       number: ['', [Validators.required,Validators.minLength(10)]]
     });
     this.phone.push(phone);
   }
-
   DeleteEmails(id: number)
   {
     this.Email.removeAt(id)
@@ -215,7 +209,6 @@ export class AddCustomerComponent implements OnInit {
   {
     this.Phone.removeAt(id)
   }
-
   DeleteEmail(id: number)
   {
     this.email.removeAt(id)
@@ -224,7 +217,6 @@ export class AddCustomerComponent implements OnInit {
   {
     this.phone.removeAt(id)
   }
-
   CreateCompany()
   {
     if(this.formClient.valid)

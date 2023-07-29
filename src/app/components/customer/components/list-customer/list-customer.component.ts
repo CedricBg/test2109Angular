@@ -18,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ViewSiteComponent } from '../view-site/view-site.component';
 import { AddSiteComponent } from '../add-site/add-site.component';
 import { UpdateCustomerComponent } from '../update-customer/update-customer.component';
+import { AddCustomerComponent } from '../add-customer/add-customer.component';
+import { DialogRef } from '@angular/cdk/dialog';
 
 
 @Component({
@@ -40,7 +42,7 @@ export class ListCustomerComponent implements OnInit {
   length: number
   customer: Customers
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef) { }
+  constructor( private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.subscriptions.push(this._CustService.getAllCustomers().pipe(first()).subscribe({
@@ -135,8 +137,6 @@ export class ListCustomerComponent implements OnInit {
     }
   }
 
-
-
   UpdateOne(id: number)
   {
     //selectedSiteName est mis a jour par sélection dans le html
@@ -215,9 +215,12 @@ export class ListCustomerComponent implements OnInit {
 
   FormAddUser()
   {
-    this.select = false
-    this.siteSelected = null
-    this._Router.navigateByUrl('OPS/customer/listcustomer/addCustomer')
+    const diallogConfig =  new MatDialogConfig;
+    diallogConfig.data =  this.siteSelected
+    diallogConfig.disableClose = true;
+    diallogConfig.restoreFocus = true;
+    diallogConfig.width = '1700px';
+    const dialogRef = this.dialog.open(AddCustomerComponent,diallogConfig);
   }
 
   Delete(id: number)
@@ -239,15 +242,14 @@ export class ListCustomerComponent implements OnInit {
 
   UpdateCustomer(id: number)
   {
-    this.select = false
-    this.siteSelected = null
-        this._CustService.GetOneCustomer(id)
-        const diallogConfig =  new MatDialogConfig;
-        diallogConfig.data =  this.siteSelected
-        diallogConfig.disableClose = true;
-        diallogConfig.restoreFocus = true;
-        diallogConfig.width = '1700px';
-        const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
+
+    this._CustService.GetOneCustomer(id)
+    const diallogConfig =  new MatDialogConfig;
+    diallogConfig.data =  this.siteSelected
+    diallogConfig.disableClose = true;
+    diallogConfig.restoreFocus = true;
+    diallogConfig.width = '1700px';
+    const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
   }
 
   ngOnDestroy(){

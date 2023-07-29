@@ -1,7 +1,16 @@
 .employee{
-  position:absolute;top:14vh;
+  position:absolute;top:150px;
 }
-.button-container{
-  border: 1px black solid;
-  width:10%;
+
+@media screen and (max-width: 770px){
+  .employee{
+    position:absolute;top:100px;
+
+  }
+}
+@media screen and (max-height: 440px){
+  .employee{
+    position:absolute;top:100px;
+
+  }
 }

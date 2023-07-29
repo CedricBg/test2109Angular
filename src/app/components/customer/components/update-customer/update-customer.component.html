@@ -1,5 +1,5 @@
 <div class="container" *ngIf="customer != null ">
-
+  <button (click)="CloseWindow()">Fermer</button>
     <form [formGroup]="formCustomer" (ngSubmit)="Send(customer.customerId)">
       <mat-form-field class="input">
         <mat-label>Nom:</mat-label><input formControlName="nameCustomer" matInput>
@@ -44,7 +44,7 @@
 
     </section>
     <div class="checkbox">
-      <mat-checkbox class="checkbox" formControlName="responsible">Responsble du site</mat-checkbox>
+      <mat-checkbox class="checkbox" formControlName="responsible">Responsable du site</mat-checkbox>
       <mat-checkbox class="checkbox" formControlName="emergencyContact">Contact en cas d'urgence</mat-checkbox>
       <mat-checkbox class="checkboxtClient" formControlName="nightContact">Contact de nuit</mat-checkbox>
       <mat-checkbox class="checkboxtClient" formControlName="dayContact">Contact de jour</mat-checkbox>

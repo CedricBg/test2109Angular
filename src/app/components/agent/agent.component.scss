@@ -1,9 +1,6 @@
 
 #contentAgent{
-  margin-top: 80px;
-  margin-bottom: 2vh;
-  width: 100vw;
-  min-height: 90vh;
+  position:absolute;top:150px;
 }
 
 .connected{
@@ -51,4 +48,16 @@ button{
   #user_interface div:nth-of-type(1) {align-self:center; flex-grow: 1; width:90%; }
   #user_interface div:nth-of-type(2) {align-self:center; display:flex;justify-content: center; flex-direction:column;flex-grow: 1; width:90%;}
   #user_interface div:nth-of-type(2) button{ width:100%;}
+}
+@media screen and (max-width: 770px){
+  #contentAgent{
+    position:absolute;top:100px;
+
+  }
+}
+@media screen and (max-height: 440px){
+  #contentAgent{
+    position:absolute;top:100px;
+
+  }
 }
