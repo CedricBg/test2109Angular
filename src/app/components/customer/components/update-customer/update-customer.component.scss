@@ -1,28 +1,71 @@
 
 .container{
   background-color:whitesmoke !important;
-
   margin:5px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-end;
+
 }
-.mail{
+.container button{
+  width: 150px;
+}
+.name{
+  width:60%;
+  margin-top:10px;
+  margin-left:10px;
+}
+form{
+  display: flex;
+  flex-flow: column wrap;
+  width:100%;
+}
+
+form div {
+  display: flex;
+  flex-flow: column nowrap;
+}
+section{
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+
+}
+section div p mat-form-field{
+  width: 100%;
+}
+section div p mat-form-field input {
+  width: 380px;
+}
+section div p mat-form-field span{
+
+  align-content: flex-end;
+
+}
+
+.contact{
+  margin: 0px 50px 5px 50px;
+}
+.checkbox
+{
+  margin-top: 20px;
+  box-shadow: 1px 0px 1px 1px #41698F;
+  padding-right:20px;
+
+}
+.input
+{
 display: flex;
+flex-flow: column-reverse nowrap;
+padding:10px;
+box-shadow: 1px 0px 1px 1px #41698F;
+}
+
+.mail {
+ padding-bottom: 10px;
 }
 .container
 {
   padding: 2%;
 }
 
-.checkbox
-{
-  margin-top:2vh;
-  margin-right: 2vw;
-}
-.input
-{
-  margin-right: 2vw ;
-}
-.button
-{
-  margin-top :4vh;
-  width:100%;
-}

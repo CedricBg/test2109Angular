@@ -139,3 +139,9 @@ width: 100%;
     font-size: 15px;
   }
 }
+mat-dialog-container *{
+  background-color: transparent !important;
+  border-radius: 5px !important;
+}
+
+
