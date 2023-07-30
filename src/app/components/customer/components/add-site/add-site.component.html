@@ -1,6 +1,6 @@
 <div class="container">
-  <button (click)="CloseWindow()">Fermer</button>
-  <mat-horizontal-stepper class="custom-stepper"  #stepper>
+  <button mat-stroked-button (click)="CloseWindow()">Fermer</button>
+  <mat-horizontal-stepper class="custom-stepper" #stepper>
     <mat-step [stepControl]="formClientSite" >
       <form *ngIf="idClient != 0" [formGroup]="formClientSite">
         <ng-template matStepLabel><span *ngIf="idClient != 0 && idSite != 0">Ajouter un site à <span *ngIf="customer != undefined">{{customer.nameCustomer}}</span> </span></ng-template>
@@ -58,11 +58,10 @@
       </div>
       </form>
       <div>
-        <button *ngIf="idClient == 0" mat-button matStepperPrevious>Retour</button>
-        <button *ngIf="idClient != 0" (click)="CreateSite()" mat-button matStepperNext>Suivant</button>
+        <button *ngIf="idClient != 0"  type="button" (click)="CreateSite()" mat-stroked-button matStepperNext>Suivant</button>
       </div>
     </mat-step>
-    <mat-step  [stepControl]="formContactPerson">
+    <mat-step *ngIf="formClientSite.valid" [stepControl]="formContactPerson">
       <form *ngIf="idSite" [formGroup]="formContactPerson">
         <div formGroupName="ContactPerson">
         <ng-template matStepLabel><span *ngIf="idClient != 0 && idSite != 0">Ajout d'un contact:</span></ng-template>

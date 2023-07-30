@@ -2,6 +2,26 @@
 {
   background: whitesmoke !important;
   margin:5px;
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  border-radius: 5px;
+}
+.container button{
+  margin:5px;
+  width:150px;
+}
+mat-horizontal-stepper {
+  width:100%;
+}
+
+.mat-step1{
+  display: flex;
+  flex-flow: column nowrap;
+ width:100%;
+}
+.mat-step1 h3{
+ margin-left: 35px;
 }
 .erreur
 {
@@ -9,17 +29,21 @@
 }
 .inputClient
 {
+
   margin-left: 1vw;
 }
 .custom-stepper {
-  background-color: #f2f2f2;
+  background-color: whitesmoke;
 }
 .MailPhone{
 display: flex;
 }
 
-.checkbox
-{
-  padding-top: 3vh;
-}
+.mat-step1{
+  display: flex;
 
+}
+.checkbox{
+display: flex;
+flex-flow: column nowrap;
+}

@@ -1,18 +1,26 @@
-
+*{
+  box-sizing: border-box;
+}
 .rep{
-  padding: 5px;
+  margin: 5px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   min-width: 850px;
   border-radius: 5px;
-  background-color: white !important;
+  background-color: whitesmoke !important;
+}
+
+.rep button{
+  margin:5px
 }
 
 .rep h3{
+  margin-top:5px;
+  margin-right:1% ;
   border-radius: 5px 5px 0px 0px;
   box-shadow: 1px 1px 1px 1px #f5f5ea;
-  width: 97%;
+  width: 98%;
   text-align: center;
   background-color: rgb(253, 253, 253);
 }
@@ -32,12 +40,13 @@
   box-shadow: 1px 1px 1px 1px #f5f5ea;
   background-color: rgb(253, 253, 253);
   padding:10px;
+  margin-right:1% ;
   margin-bottom: 10px;
-  width:95%;
+  width:98%;
   justify-content: space-around;
-
   overflow-y: scroll;
 }
+
 .detailsCard2 table{
   margin-top: 20px;
 }

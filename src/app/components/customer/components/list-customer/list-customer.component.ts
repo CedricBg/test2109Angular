@@ -129,6 +129,7 @@ export class ListCustomerComponent implements OnInit {
             diallogConfig.data =  this.siteSelected
             diallogConfig.disableClose = true;
             diallogConfig.restoreFocus = true;
+            diallogConfig.position = { top:'50px'};
             const dialogRef = this.dialog.open(ViewSiteComponent,diallogConfig);
           }
         }
@@ -156,7 +157,8 @@ export class ListCustomerComponent implements OnInit {
             diallogConfig.data =  this.siteSelected
             diallogConfig.disableClose = true;
             diallogConfig.restoreFocus = true;
-            diallogConfig.width = '1700px';
+            diallogConfig.width = '1200px';
+            diallogConfig.position = { top:'50px'};
             const dialogRef = this.dialog.open(UpdateSiteComponent,diallogConfig);
           }
         }

@@ -1,27 +1,44 @@
+*{
+  box-sizing: border-box;
+}
+
 .container{
   margin:5px;
-  background-color: rgba(255, 255, 255, 1) !important;
+  background-color: whitesmoke !important;
   color : black !important;
   display: flex;
   flex-flow: column nowrap;
 }
+
 .close{
   display:flex;
   justify-content:flex-end;
-  margin-bottom : 15px;
+  margin : 5px 5px 15px 0px;
 }
 .send{
   display:flex;
   margin-bottom : 15px;
+  width:200px;
+  margin: 10px;
 }
-.send button{
-  width:100%;
-  color : black;
+
+.valid{
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  align-items: flex-end;
+  margin: 10px;
 }
+
 .input{
 margin-left: 1vw;
 margin-top: 1vh;
 }
+
+.checkbox{
+  display: flex;
+  flex-flow: row wrap;
+}
+
 .Detailed-card {
   background-color: #f2f2f2;
   border-radius: 5px;
@@ -30,19 +47,25 @@ margin-top: 1vh;
 }
 
 .card-contacts {
+  width: 45%;
   background-color: #f2f2f2;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   font-family: Arial, sans-serif;
-  margin-bottom: 1vw;
-  margin: 2px;
+  margin: 10px;
   padding: 5px;
 }
-.groupehoneEmail
-{
+.dial{
   display: flex;
+  flex-flow: row wrap;
+  width:100%;
 }
-.groupehoneEmail .contPhone
-{
-  margin-left: 1vw;
+.group{
+display: flex;
+align-items: center;
+justify-content: space-around;
+}
+.Add{
+  margin-bottom: 10px;
+  font-size: 10px;
 }

@@ -110,6 +110,7 @@ export class AddSiteComponent implements OnInit {
   {
     if(this.formClientSite.valid)
     {
+      console.log(this.idSite)
       this._infoService.getSectedCountry(this.listCountrys, this.formClientSite)
       this._infoService.getLanguages(this.listLanguage, this.formClientSite)
       this.siteCreated = this.formClientSite.value
@@ -117,6 +118,7 @@ export class AddSiteComponent implements OnInit {
       this.subscription.push(this._custService.CreateSite(this.siteCreated).subscribe({
         next: (data : number) =>{
           this.idSite = data
+          console.log(this.idSite)
           this.AddContactPersonSite()
         }
       }))

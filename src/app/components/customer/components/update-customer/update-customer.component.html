@@ -18,48 +18,38 @@
             </div>
             <section >
               <div formArrayName="email">
-                <span class="mail" mat-icon-button (click)="AddEmail()">
-                  <mat-icon >add</mat-icon> Ajoutez une adresse mail:
-                </span>
+
                 <p *ngFor="let adress of email.controls; let i = index">
-
                   <mat-form-field  [formGroupName]="i" >
-
                     <mat-label >Email: </mat-label><input formControlName="emailAddress" matInput>
                     <span *ngIf="i >=1" mat-icon-button (click)="DeleteEmails(i)">
                       <mat-icon class="icons">delete</mat-icon>
                     </span>
+
                   </mat-form-field>
 
                 </p>
-
+                <span class="mail" mat-icon-button (click)="AddEmail()">
+                  <mat-icon >add</mat-icon> Ajoutez une adresse mail:
+                </span>
               </div>
               <div formArrayName="phone">
                 <p *ngFor="let number of phone.controls; let i = index">
-                  <span mat-icon-button (click)="AddPhone()">
-                    <mat-icon >add</mat-icon>Ajoutez une adresse téléphone
-                  </span>
+
                   <mat-form-field  [formGroupName]="i" >
                     <mat-label >Téléphone: </mat-label><input formControlName="number" matInput>
                     <span *ngIf="i >=1" mat-icon-button (click)="DeletePhones(i)">
                       <mat-icon class="icons">delete</mat-icon>
                     </span>
                   </mat-form-field>
-
                 </p>
-
-
+                <span mat-icon-button (click)="AddPhone()">
+                  <mat-icon >add</mat-icon>Ajoutez une adresse téléphone
+                </span>
               </div>
             </section>
           </div>
-          <div  class="checkbox">
-            <div>
-              <mat-checkbox color="primary" class="checkboxClient"formControlName="responsible">Responsable du site</mat-checkbox>
-              <mat-checkbox color="primary" class="checkboxClient" formControlName="emergencyContact">Contact en cas d'urgence</mat-checkbox>
-              <mat-checkbox color="primary" class="checkboxClient" formControlName="nightContact">Contact de nuit</mat-checkbox>
-              <mat-checkbox color="primary" class="checkboxClient" formControlName="dayContact">Contact de jour</mat-checkbox>
-            </div>
-          </div>
+
         </div>
     </form>
     <button mat-raised-button  (click)="Send(customer.customerId)" class="button" mat-button>Modifier</button>

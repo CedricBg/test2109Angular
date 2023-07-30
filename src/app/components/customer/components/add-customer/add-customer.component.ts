@@ -78,6 +78,7 @@ export class AddCustomerComponent implements OnInit {
         Responsible: [false],
         EmergencyContact: [false],
         NightContact: [false],
+        dayContact: [false],
         SiteId:[this.idSite],
         email: this._builder.array([
           this._builder.group({
@@ -142,6 +143,7 @@ export class AddCustomerComponent implements OnInit {
         Responsible: [false],
         EmergencyContact: [false],
         NightContact: [false],
+        dayContact:[false],
         SiteId:[this.idSite],
         Email: this._builder.array([
           this._builder.group({
@@ -219,6 +221,7 @@ export class AddCustomerComponent implements OnInit {
   }
   CreateCompany()
   {
+
     if(this.formClient.valid)
     {
       this._custService.CreateCompany(this.formClient.value)

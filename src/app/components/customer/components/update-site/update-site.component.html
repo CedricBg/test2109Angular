@@ -1,34 +1,35 @@
 <div class="container"  >
   <mat-card appearance="outlined" class="Detailed-card">
-      <div class="close">
-        <button class="iconsCenter" mat-raised-button  color="warning" (click)="CloseDialogBox()" class="sendButton">Fermer</button>
-      </div>
-      <form [formGroup]="formClient" (ngSubmit)="Send()" *ngIf="formClient">
-        <mat-dialog-content>
+    <div class="close">
+      <button class="iconsCenter" mat-raised-button  (click)="CloseDialogBox()" class="sendButton">Fermer</button>
+    </div>
+    <form  [formGroup]="formClient" (ngSubmit)="Send()" *ngIf="formClient">
+      <mat-dialog-content >
+
         <mat-form-field>
           <mat-label>Nom du site: </mat-label><input formControlName="name"  matInput>
         </mat-form-field>
-            <mat-form-field class="input">
-              <mat-label>Tva: </mat-label><input  formControlName="vatNumber"  matInput>
-            </mat-form-field>
-
-            <span formGroupName="language">
-              <mat-form-field >
-                <mat-label>Langue de contact: </mat-label>
-                <mat-select  formControlName="name" >
-                  <mat-option *ngFor="let elt of listLanguage" [value]="elt.name" >
-                      {{elt.name}}
-                  </mat-option>
-                </mat-select >
-              </mat-form-field>
-            </span>
-
-            <div formGroupName="address" >
+        <mat-form-field class="input">
+            <mat-label>Tva: </mat-label><input  formControlName="vatNumber"  matInput>
+        </mat-form-field>
+        <span formGroupName="language">
+          <mat-form-field >
+            <mat-label>Langue de contact:
+            </mat-label>
+            <mat-select  formControlName="name" >
+              <mat-option *ngFor="let elt of listLanguage" [value]="elt.name" >
+                {{elt.name}}
+              </mat-option>
+            </mat-select >
+          </mat-form-field>
+        </span>
+        <div formGroupName="address" >
             <mat-form-field>
-              <mat-label>Pays: </mat-label>
+              <mat-label>Pays:
+              </mat-label>
               <mat-select formControlName="state">
                 <mat-option *ngFor="let elt of listCountrys" [value]="elt.country" >
-                      {{elt.country}}
+                  {{elt.country}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -41,68 +42,74 @@
             <mat-form-field class="input">
               <mat-label>Ville: </mat-label><input formControlName="city" matInput>
             </mat-form-field>
-            </div>
-              <div formArrayName="contactSite">
-                <div class="card-contacts" *ngFor="let contact of contactSite.controls; let i = index">
-                  <div>
-                  <button (click)="DeleteContact(contact.get('contactId').value)" mat-icon-button type="button" >
+        </div>
+        <div class="send">
+          <button mat-raised-button  (click)="AddPerson(selectedClient.siteId)"  type="button">Ajouter un contact</button>
+        </div>
+        <div class="dial" formArrayName="contactSite">
+          <div class="card-contacts" *ngFor="let contact of contactSite.controls; let i = index">
+            <div>
+              <button (click)="DeleteContact(contact.get('contactId').value)" mat-icon-button type="button" >
                     <mat-icon type="button" class="icons">close</mat-icon>
-                  </button>
-                </div>
-                  <mat-form-field [formGroupName]="i">
-                    <mat-label >Prénom: </mat-label><input matInput formControlName="firstName">
-                  </mat-form-field >
-                  <mat-form-field class="input" [formGroupName]="i">
-                    <mat-label >Nom: </mat-label><input matInput formControlName="lastName">
-                  </mat-form-field >
-                  <span class="input" [formGroupName]="i"><mat-checkbox  formControlName="nightContact">de nuit</mat-checkbox></span>
-                  <span class="input" [formGroupName]="i"><mat-checkbox  formControlName="emergencyContact">d'urgence</mat-checkbox></span>
-                  <span class="input" [formGroupName]="i"><mat-checkbox  formControlName="responsible">Responsable</mat-checkbox></span>
-                  <span class="input" [formGroupName]="i"><mat-checkbox  formControlName="dayContact">jour</mat-checkbox></span>
-                  <div class="groupehoneEmail" formGroupName="{{i}}">
-
-                    <div class="contPhone" formArrayName="email">
-                      <span mat-icon-button (click)="AddEmail(i)">
-                        <mat-icon >add</mat-icon> Ajoutez un email
-                      </span>
-                      <div *ngFor="let email of getEmailControls(contact); let j = index">
-                        <mat-form-field [formGroupName]="j">
-                          <mat-label>Email:</mat-label>
-                          <input matInput formControlName="emailAddress">
-                        </mat-form-field>
-                        <span *ngIf="j >= 1">
-                          <button mat-icon-button type="button" (click)="Delete(i,j,'email')">
-                            <mat-icon type="button" class="icons">delete</mat-icon>
-                          </button>
-                        </span>
-                    </div>
-                   </div>
-                   <div  formArrayName="phone">
-                    <span mat-icon-button (click)="AddPhone(i)">
-                      <mat-icon >add</mat-icon> Ajoutez nr° de téléphone
-                    </span>
-                    <div *ngFor="let phone of getPhoneControls(contact); let j = index">
-                      <mat-form-field [formGroupName]="j">
-                        <mat-label>Téléphone:</mat-label>
-                        <input matInput formControlName="number">
-                      </mat-form-field>
-                      <span *ngIf="j >= 1">
-                        <button mat-icon-button type="button" (click)="Delete(i,j,'phone')">
-                          <mat-icon type="button" class="icons">delete</mat-icon>
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </mat-dialog-content>
-            <div class="send">
-              <button mat-raised-button color="primary" type="submit">Envoyer</button>
+              </button>
             </div>
-      </form>
-      <div class="send">
-        <button mat-raised-button (click)="AddPerson(selectedClient.siteId)" color="primary" type="button">Ajouter un contact</button>
+            <div class="group">
+            <mat-form-field  [formGroupName]="i">
+              <mat-label >Prénom: </mat-label><input matInput formControlName="firstName">
+            </mat-form-field >
+            <mat-form-field  [formGroupName]="i">
+                  <mat-label >Nom: </mat-label><input matInput formControlName="lastName">
+            </mat-form-field >
+            </div>
+            <div class="group" formGroupName="{{i}}">
+              <div  formArrayName="email">
+                <span class="Add" mat-icon-button (click)="AddEmail(i)">
+                  <mat-icon >add</mat-icon>Ajoutez un email
+                </span>
+                <div *ngFor="let email of getEmailControls(contact); let j = index">
+                <mat-form-field [formGroupName]="j">
+                  <mat-label>Email:
+                </mat-label>
+                  <input matInput formControlName="emailAddress">
+                </mat-form-field>
+                <span *ngIf="j >= 1">
+                <button mat-icon-button type="button" (click)="Delete(i,j,'email')">
+                  <mat-icon type="button" class="icons">delete</mat-icon>
+                </button>
+              </span>
+            </div>
+          </div>
+          <div  formArrayName="phone">
+          <span class="Add" mat-icon-button (click)="AddPhone(i)">
+            <mat-icon >add</mat-icon>Ajoutez nr° de téléphone
+          </span>
+          <div *ngFor="let phone of getPhoneControls(contact); let j = index">
+            <mat-form-field [formGroupName]="j">
+              <mat-label>Téléphone:
+              </mat-label>
+              <input matInput formControlName="number">
+            </mat-form-field>
+            <span *ngIf="j >= 1">
+            <button mat-icon-button type="button" (click)="Delete(i,j,'phone')">
+              <mat-icon type="button" class="icons">delete</mat-icon>
+            </button>
+          </span>
+        </div>
       </div>
+    </div>
+    <div class="checkbox">
+      <span class="input" [formGroupName]="i"><mat-checkbox formControlName="nightContact">de nuit</mat-checkbox></span>
+      <span class="input" [formGroupName]="i"><mat-checkbox formControlName="emergencyContact">d'urgence</mat-checkbox></span>
+      <span class="input" [formGroupName]="i"><mat-checkbox formControlName="responsible">Responsable</mat-checkbox></span>
+      <span class="input" [formGroupName]="i"><mat-checkbox formControlName="dayContact">jour</mat-checkbox></span>
+    </div>
+  </div>
+</div>
+      </mat-dialog-content>
+      <div class="valid">
+        <button mat-raised-button color="primary" type="submit">Envoyer</button>
+      </div>
+    </form>
+
   </mat-card>
 </div>
