@@ -250,7 +250,7 @@ export class ListCustomerComponent implements OnInit {
     diallogConfig.data =  this.siteSelected
     diallogConfig.disableClose = true;
     diallogConfig.restoreFocus = true;
-    diallogConfig.width = '600px';
+
     const dialogRef = this.dialog.open(UpdateCustomerComponent,diallogConfig);
   }
 

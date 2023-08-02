@@ -1,56 +1,49 @@
 <div class="container" *ngIf="customer != null ">
-  <button mat-stroked-button  (click)="CloseWindow()">Annuler</button>
-    <form [formGroup]="formCustomer" >
-        <div>
-          <mat-form-field class="name">
-            <mat-label>Nom du client:</mat-label><input formControlName="nameCustomer" matInput>
-          </mat-form-field>
+  <button mat-stroked-button  (click)="CloseWindow()" class="button">Annuler</button>
+
+  <form [formGroup]="formCustomer" >
+    <mat-form-field >
+      <mat-label>Nom du client:</mat-label><input formControlName="nameCustomer" matInput>
+    </mat-form-field>
+    <div  formGroupName="contact">
+      <div>
+        <mat-form-field >
+          <mat-label>Nom:</mat-label><input formControlName="lastName" matInput>
+        </mat-form-field>
+        <mat-form-field >
+          <mat-label>Prénom:</mat-label><input formControlName="firstName" matInput>
+        </mat-form-field>
+      </div>
+      <div>
+        <div formArrayName="email">
+          <p *ngFor="let adress of email.controls; let i = index">
+            <mat-form-field  [formGroupName]="i" >
+              <mat-label >Email: </mat-label><input formControlName="emailAddress" matInput>
+              <span *ngIf="i >=1" mat-icon-button (click)="DeleteEmails(i)">
+                <mat-icon class="icons">delete</mat-icon>
+              </span>
+            </mat-form-field>
+          </p>
+          <span class="mail" mat-icon-button (click)="AddEmail()">
+            <mat-icon >add</mat-icon> Ajoutez une adresse mail:
+          </span>
         </div>
-        <div class="contact" formGroupName="contact">
-          <div class="input">
-            <div>
-              <mat-form-field >
-                <mat-label>Nom:</mat-label><input formControlName="lastName" matInput>
-              </mat-form-field>
-              <mat-form-field >
-                <mat-label>Prénom:</mat-label><input formControlName="firstName" matInput>
-              </mat-form-field>
-            </div>
-            <section >
-              <div formArrayName="email">
-
-                <p *ngFor="let adress of email.controls; let i = index">
-                  <mat-form-field  [formGroupName]="i" >
-                    <mat-label >Email: </mat-label><input formControlName="emailAddress" matInput>
-                    <span *ngIf="i >=1" mat-icon-button (click)="DeleteEmails(i)">
-                      <mat-icon class="icons">delete</mat-icon>
-                    </span>
-
-                  </mat-form-field>
-
-                </p>
-                <span class="mail" mat-icon-button (click)="AddEmail()">
-                  <mat-icon >add</mat-icon> Ajoutez une adresse mail:
-                </span>
-              </div>
-              <div formArrayName="phone">
-                <p *ngFor="let number of phone.controls; let i = index">
-
-                  <mat-form-field  [formGroupName]="i" >
-                    <mat-label >Téléphone: </mat-label><input formControlName="number" matInput>
-                    <span *ngIf="i >=1" mat-icon-button (click)="DeletePhones(i)">
-                      <mat-icon class="icons">delete</mat-icon>
-                    </span>
-                  </mat-form-field>
-                </p>
-                <span mat-icon-button (click)="AddPhone()">
-                  <mat-icon >add</mat-icon>Ajoutez une adresse téléphone
-                </span>
-              </div>
-            </section>
-          </div>
-
+        <div formArrayName="phone">
+          <p *ngFor="let number of phone.controls; let i = index">
+            <mat-form-field  [formGroupName]="i" >
+              <mat-label >Téléphone: </mat-label><input formControlName="number" matInput>
+              <span *ngIf="i >=1" mat-icon-button (click)="DeletePhones(i)">
+                <mat-icon class="icons">delete</mat-icon>
+              </span>
+            </mat-form-field>
+          </p>
+          <span mat-icon-button (click)="AddPhone()">
+            <mat-icon >add</mat-icon>Ajoutez une adresse téléphone
+          </span>
         </div>
-    </form>
-    <button mat-raised-button  (click)="Send(customer.customerId)" class="button" mat-button>Modifier</button>
+      </div>
+    </div>
+  </form>
+
+  <button mat-raised-button color="primary" (click)="Send(customer.customerId)" class="button" mat-button>Envoyer</button>
 </div>

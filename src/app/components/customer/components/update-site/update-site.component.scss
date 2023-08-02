@@ -6,14 +6,19 @@
   margin:5px;
   background-color: whitesmoke !important;
   color : black !important;
-  display: flex;
-  flex-flow: column nowrap;
-}
 
-.close{
-  display:flex;
-  justify-content:flex-end;
-  margin : 5px 5px 15px 0px;
+}
+.close
+{
+  margin:5px;
+  display: flex;
+  justify-content: flex-end;
+}
+.information{
+
+  display: flex;
+  flex-flow:  row;
+
 }
 .send{
   display:flex;
@@ -69,3 +74,4 @@ justify-content: space-around;
   margin-bottom: 10px;
   font-size: 10px;
 }
+

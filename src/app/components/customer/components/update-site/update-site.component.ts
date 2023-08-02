@@ -12,7 +12,7 @@ import { ChangeDetectorRef, Component,Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { AddPersonComponent } from '../add-person/add-person.component';
-import { Subject, Subscription, distinctUntilChanged, first, takeUntil } from 'rxjs';
+import { Subscription, distinctUntilChanged, first, takeUntil } from 'rxjs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
@@ -300,8 +300,7 @@ private createContactForm(contact: ContactPerson): FormGroup {
   {
     const diallogConfig =  new MatDialogConfig;
     diallogConfig.data = id;
-    diallogConfig.height = '400px';
-    diallogConfig.width = '600px';
+
     diallogConfig.disableClose = true;
     const dialogRef = this.dialog.open(AddPersonComponent,diallogConfig);
   }

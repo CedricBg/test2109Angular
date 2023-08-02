@@ -1,24 +1,16 @@
-.MailPhone{
-  display: flex;
-  }
-  .inputClient
-  {
-    margin-left: 1vw;
-  }
-  .checkbox
-  {
-    padding-right: 3vh;
-  }
+*{
+  box-sizing: border-box;
+}
 
   .Add-person
   {
     display:flex;
     flex-direction: column;
     flex-wrap: wrap;
-    width:100%;
-    height: 100%;
-    background-color: white;
+    align-items: flex-end;
+    background-color: whitesmoke;
     border-radius: 5px;
+    margin: 5px;
   }
   .Add-person button{
     width: 100px;
@@ -27,9 +19,39 @@
     margin-bottom:10px;
   }
 
-  .Add-person form button
+  .Add-person button
   {
-    margin-top: 10px;
-    width:90%;
+    margin: 10px;
+    width:200px;
   }
 
+  mat-form-field input{
+    width:86%;
+  }
+  mat-form-field mat-icon{
+  cursor: pointer;
+  }
+  .MailPhone{
+  display: flex;
+
+  }
+
+  .inputClient
+  {
+    margin-left: 1vw;
+  }
+
+  .inputClient span {
+    cursor: pointer;
+  }
+
+  .ContainCheckbox
+  {
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .checkbox
+  {
+    padding-right: 3vh;
+  }

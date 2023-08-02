@@ -3,15 +3,14 @@ import { Language } from './../../../../models/language.models';
 import { InformationsService } from 'src/app/services/informations.service';
 import { Role } from 'src/app/models/Role.models';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogModule } from '@angular/material/dialog';
 import { Countrys } from 'src/app/models/countrys.models';
 import { DetailedEmployee } from 'src/app/models/DetailedEmployee.models';
 import { Employee } from 'src/app/models/employee.models';
 import { AddressService } from 'src/app/services/address.service';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { Observable, Timestamp, Subscription } from 'rxjs';
-import { DialogConfig } from '@angular/cdk/dialog';
+import { Subscription } from 'rxjs';
 import { AddloginComponent } from 'src/app/components/auth/components/addlogin/addlogin.component';
 import * as dayjs from 'dayjs';
 import * as timezone from 'dayjs/plugin/timezone';
@@ -35,8 +34,9 @@ import { NgIf, NgFor } from '@angular/common';
     templateUrl: './update-employee.component.html',
     styleUrls: ['./update-employee.component.scss'],
     standalone: true,
-    imports: [NgIf, MatCardModule, MatButtonModule, ReactiveFormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatIconModule, FormsModule]
-})
+    imports: [NgIf, MatCardModule, MatButtonModule, ReactiveFormsModule,MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatSelectModule, NgFor, MatOptionModule, MatIconModule, FormsModule]
+
+  })
 export class UpdateEmployeeComponent implements OnInit {
   firstName: any
   listEmployee: Employee[]

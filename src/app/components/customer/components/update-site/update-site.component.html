@@ -1,30 +1,28 @@
 <div class="container"  >
   <mat-card appearance="outlined" class="Detailed-card">
     <div class="close">
-      <button class="iconsCenter" mat-raised-button  (click)="CloseDialogBox()" class="sendButton">Fermer</button>
+      <button class="iconsCenter" mat-raised-button  (click)="CloseDialogBox()" class="sendButton">Annuler</button>
     </div>
     <form  [formGroup]="formClient" (ngSubmit)="Send()" *ngIf="formClient">
       <mat-dialog-content >
-
-        <mat-form-field>
-          <mat-label>Nom du site: </mat-label><input formControlName="name"  matInput>
-        </mat-form-field>
-        <mat-form-field class="input">
+        <div class="information">
+          <mat-form-field class="input">
+            <mat-label>Nom du site: </mat-label><input formControlName="name"  matInput>
+          </mat-form-field>
+          <mat-form-field class="input">
             <mat-label>Tva: </mat-label><input  formControlName="vatNumber"  matInput>
-        </mat-form-field>
-        <span formGroupName="language">
-          <mat-form-field >
-            <mat-label>Langue de contact:
-            </mat-label>
+          </mat-form-field>
+          <mat-form-field class="input" formGroupName="language">
+            <mat-label>Langue de contact:</mat-label>
             <mat-select  formControlName="name" >
               <mat-option *ngFor="let elt of listLanguage" [value]="elt.name" >
                 {{elt.name}}
               </mat-option>
             </mat-select >
           </mat-form-field>
-        </span>
+        </div>
         <div formGroupName="address" >
-            <mat-form-field>
+            <mat-form-field class="input">
               <mat-label>Pays:
               </mat-label>
               <mat-select formControlName="state">
@@ -43,6 +41,7 @@
               <mat-label>Ville: </mat-label><input formControlName="city" matInput>
             </mat-form-field>
         </div>
+
         <div class="send">
           <button mat-raised-button  (click)="AddPerson(selectedClient.siteId)"  type="button">Ajouter un contact</button>
         </div>
@@ -104,12 +103,11 @@
       <span class="input" [formGroupName]="i"><mat-checkbox formControlName="dayContact">jour</mat-checkbox></span>
     </div>
   </div>
-</div>
+        </div>
       </mat-dialog-content>
       <div class="valid">
         <button mat-raised-button color="primary" type="submit">Envoyer</button>
       </div>
     </form>
-
   </mat-card>
 </div>
