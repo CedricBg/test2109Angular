@@ -34,6 +34,7 @@ export class AuthService {
   returnData! : User
   AddLogin(form : AddLogin)
   {
+
     this._httpClient.post<string>(environment.baseAdres+ 'Auth/AddLogin', form).subscribe()
   }
 

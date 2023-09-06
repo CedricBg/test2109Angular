@@ -43,12 +43,12 @@ export class AddloginComponent implements OnInit {
 
   sendform()
   {
-
     if(this.formLogin.valid)
     {
       const form: AddRegisterForm = this.formLogin.value
       form.id = this.idEmployee
       this._auth.AddLogin(form)
+      this.dialogRef.close();
     }
   }
 }

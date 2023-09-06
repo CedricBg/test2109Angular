@@ -10,9 +10,9 @@
 <div class = "cards">
 <div class="employees">
     <div class="AddPerson">
-      <button mat-button type="button" (click)="OpenformAddUser()"><mat-icon  class="icons">person_add</mat-icon></button>
+      <button mat-button type="button" (click)="OpenformAddUser()"><mat-icon  class="icons">person_add</mat-icon> Ajouter un employée</button>
     </div>
-    <hr>
+
       <table>
           <thead>
             <tr>
@@ -23,8 +23,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let employee of listEmployee" >
-              <td>{{employee.firstName | titlecase }} {{employee.surName | titlecase}}</td>
-              <td>{{employee.role.name}}</td>
+              <td *ngIf="employee.id > 1">{{employee.firstName | titlecase }} {{employee.surName | titlecase}}</td>
+              <td *ngIf="employee.id > 1">{{employee.role.name}}</td>
               <td *ngIf="role == 'ADM' || employee.id > 1">
                 <button mat-button   type="button" (click)="GetOne(employee.id)"><mat-icon class="icons1">visibility</mat-icon></button>
                 <button  mat-button  type="button" (click)="OpenformUpdate(employee.id)"><mat-icon class="icons2">edit</mat-icon></button>

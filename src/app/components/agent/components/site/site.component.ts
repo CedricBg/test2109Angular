@@ -173,9 +173,13 @@ listSiteAssignAgent: Site[] = [];
 
   SaveSites()
   {
+    console.log(this.listAllSiteAgent)
+    console.log(this.listSiteAssignAgent)
+
     const differencemoins = this.listAllSiteAgent.filter(object => !this.listSiteAssignAgent.some(elt=>elt.siteId === object.siteId ))
     const differenceplus = this.listSiteAssignAgent.filter(object => !this.listAllSiteAgent.some(elt=>elt.siteId === object.siteId ))
-
+    console.log(differencemoins)
+    console.log(differenceplus)
     if(differenceplus.length > 0)
     {
       this.addSite.sites = differenceplus;

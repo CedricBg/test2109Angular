@@ -1,4 +1,10 @@
-
+.details{
+  padding:10px;
+}
+.iconsCenter{
+  margin:10px;
+  align-self: flex-end;
+}
  mat-form-field{
   margin-right: 5px;
  }
@@ -7,4 +13,12 @@
  {
   margin-top: 2vh;
  }
-
+ .bouttons
+ {
+  display: flex;
+  flex-flow: row nowrap;
+  padding:10px;
+  justify-content:space-around;
+  justify-content:space-between;
+  align-items: center;
+ }

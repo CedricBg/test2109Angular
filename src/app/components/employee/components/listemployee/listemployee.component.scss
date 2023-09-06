@@ -13,6 +13,7 @@
 }
 table{
   width: 100%;
+  border-collapse: collapse;
 }
 
 th
@@ -20,13 +21,17 @@ th
   text-align: left;
   padding-left: 2vw;
   padding-bottom: 1vh;
+
 }
 td{
   padding-left: 1vw;
 }
+tr{
 
+  border-bottom: 1px solid #ccc;
+}
 .employees{
-  background-color: #f2f2f2;
+  background-color: whitesmoke;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 10px;
@@ -45,6 +50,7 @@ td{
   display: flex;
   padding-left: 2vw;
   flex-wrap: wrap;
+
 }
 .AddPerson{
   display: flex;
@@ -67,7 +73,7 @@ td{
   flex-flow: column wrap;
   margin-left: 2vw;
   width:50vw;
-  background-color: #f2f2f2;
+  background-color: whitesmoke;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   padding: 20px;
@@ -82,13 +88,14 @@ td{
   background-color:#326290;
   text-align: center;
   color: wheat;
+  border-radius: 5px 5px 0px 0px;
 }
 
 .footer{
   width:100%;
   height:40px;
   background-color:#326290;
-
+  border-radius: 0px 0px 5px 5px;
 }
 #photo{
   margin-right: 2vh;

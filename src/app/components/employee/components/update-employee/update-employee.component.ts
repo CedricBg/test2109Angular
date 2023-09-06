@@ -67,9 +67,7 @@ export class UpdateEmployeeComponent implements OnInit {
     this.GetOne(this.idEmployee)
 
   }
-  CloseDialogBox(): void {
-    this.dialogRef.close();
-  }
+
    SendInformationForm()
   {
     const utcDate = dayjs.utc(this.SelectedEmployee.birthDate);
@@ -194,31 +192,37 @@ export class UpdateEmployeeComponent implements OnInit {
   }
   updateUser()
   {
-    this._InfoService.getSelectedRole(this.listRoles, this.formEmployee)
-    this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee)
-    this._InfoService.getLanguages(this.listLanguages, this.formEmployee)
-    this.formEmployee.value['id'] = this.SelectedEmployee.id
+    this._InfoService.getSelectedRole(this.listRoles, this.formEmployee);
+    this._InfoService.getSectedCountry(this.listCountrys, this.formEmployee);
+    this._InfoService.getLanguages(this.listLanguages, this.formEmployee);
+    this.formEmployee.value['id'] = this.SelectedEmployee.id;
+    this.CloseDialogBox();
+    return this._serviceEmployee.UpdateUser(this.formEmployee.value);
 
-    return this._serviceEmployee.UpdateUser(this.formEmployee.value)
   }
   uploadFile(event: any)
   {
-    const formData = new FormData();
-    const timeStamp =  Date.now()
-    formData.append('idEmployee', this.idEmployee.toString());
-    formData.append('Foto',event.target.files[0],event.target.files[0].name);
-    this._serviceEmployee.UploadPoto(formData)
+    const ok = confirm('Souhaitez vous changer la photo ?');
+    if(ok)
+    {
+      const formData = new FormData();
+      const timeStamp =  Date.now()
+      formData.append('idEmployee', this.idEmployee.toString());
+      formData.append('Foto',event.target.files[0],event.target.files[0].name);
+      this._serviceEmployee.UploadPoto(formData);
+    }
   }
 
   AddLogin(id: number)
   {
     let dialogRef = new MatDialogConfig;
-    dialogRef.height = '200px'
-    dialogRef.width = '400px'
     dialogRef.data = id
     const dialog = this.dialog.open(AddloginComponent,dialogRef);
   }
 
+  CloseDialogBox(): void {
+    this.dialogRef.close();
+  }
   ngOnDestroy()
   {
     this.subscription.forEach(element => {

@@ -2,11 +2,11 @@
 
 <div class="details" *ngIf="SelectedEmployee != null">
   <mat-card appearance="outlined" class="Detailed-card">
-    <div>
-      <button class="iconsCenter" mat-raised-button (click)="CloseDialogBox()" color="warning" class="sendButton">Fermer</button>
+    <div class="iconsCenter">
+      <button class="iconsCenter" mat-raised-button (click)="CloseDialogBox()" color="warning" class="sendButton">Annuler</button>
     </div>
 
-    <form [formGroup]="formEmployee" (ngSubmit)="updateUser()" >
+    <form [formGroup]="formEmployee"  >
       <mat-dialog-content>
       <div>
         <mat-form-field >
@@ -106,20 +106,24 @@
       <mat-label>Nr de carte ministériel: </mat-label><input formControlName="securityCard" class="input" matInput>
     </mat-form-field>
   </div>
-</mat-dialog-content>
-    <div>
-      <button mat-raised-button color="primary" (click)="CloseDialogBox()" class="sendButton">Envoyer</button>
+    </mat-dialog-content>
+
+    </form>
+      <div class="bouttons">
+        <div>
+          <form enctype="multipart/form-data">
+            <input type="file" (change)="uploadFile($event)"  >
+          </form>
+        </div>
+        <div>
+          <button type="button" (click)="AddLogin(SelectedEmployee.id)" mat-raised-button color="primary">Ajouter les accès</button>
+        </div>
+        <div >
+          <button mat-raised-button color="primary" (click)="updateUser()" >Modifiez</button>
+        </div>
     </div>
-    </form>
-    <div>
-    <form enctype="multipart/form-data">
-        <input type="file" (change)="uploadFile($event)"  >
-    </form>
-  </div>
-      <section>
-        <button type="button" (click)="AddLogin(SelectedEmployee.id)" mat-raised-button color="primary">Ajouter les accès</button>
-      </section>
-</mat-card>
+
+  </mat-card>
 
 </div>
 

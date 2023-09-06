@@ -62,6 +62,7 @@ export class AgentComponent implements OnInit {
         //on verifie que l'agent est en service ou pas
         this.subscriptions.push(this._agentService.IsWorking(this.idEmployee).subscribe({
             next : (data: Working)=>{
+              console.log(data)
             this.isWorking = data.isWorking
             }
           }))

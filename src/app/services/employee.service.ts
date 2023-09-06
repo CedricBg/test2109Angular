@@ -53,7 +53,6 @@ export class EmployeeService implements OnInit {
   //charge la photo sur l'api
   UploadPoto(file: FormData)
   {
-    console.log(file)
     this._httpClient.post<string>(environment.baseAdres+ 'Employee/UploadFile', file).subscribe(
       {
         next : (data: string)=> {
