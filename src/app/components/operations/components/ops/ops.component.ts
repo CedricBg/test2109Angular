@@ -6,6 +6,7 @@ import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 
+
 @Component({
     selector: 'app-ops',
     templateUrl: './ops.component.html',
@@ -15,10 +16,12 @@ import { MatMenuModule } from '@angular/material/menu';
 })
 export class OpsComponent implements OnInit {
   connected!: Boolean;
+
   constructor(private _Router : Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.connected = this.authService.isConnected;
+
   }
 
   Agent()

@@ -4,46 +4,46 @@
 .container{
   display: flex;
   flex-flow: row-reverse wrap;
+  justify-content: center;
 }
 .menu{
   display: flex;
   justify-content: center;
-  width:90%;
-}
-.menu ul {
-  display: flex;
-  font-family:'Segoe UI';
-  list-style: none;
-}
-.menu ul li {
   height: 50px;
-  margin-left: 10px;
+  margin-top: 20px;
+  width:80%;
+}
+
+.menu div {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px 2px  whitesmoke;
+  border-radius: 25px;
+
+}
+.menu div span {
+
+  display: flex;
+  padding-top: 13px;
+  height: 50px;
   padding-left: 10px;
   padding-right: 10px;
-  border-radius: 3px;
-  color:white;
-  box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.5);
-  background: rgb(170,176,221);
-  background: linear-gradient(0deg, rgba(170,176,221,1) 3%, rgba(50,98,144,1) 10%);
-  cursor: pointer;
+  color: black;
+}
+.menu div span mat-icon{
+  margin-right:5px;
+}
+
+.menu div span:hover {
+  color:darkred;
+  border-radius: 5px;
 
 }
 
-.menu ul li:hover {
-color: wheat;
-}
 
-li.icons
-{
-  display: flex;
-  align-items: center;
-}
-
-.icons
-{
-  padding-left: 2px;
-  margin-right: 5px;
-}
 .menuPhone{
   visibility: hidden;
 }

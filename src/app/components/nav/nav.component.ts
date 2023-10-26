@@ -1,7 +1,7 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-
+import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { NgIf, TitleCasePipe } from '@angular/common';
 import { UserProfileComponent } from '../employee/components/user-profile/user-profile.component';
@@ -12,12 +12,13 @@ import { LoginComponent } from '../auth/components/login/login.component';
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.scss'],
     standalone: true,
-    imports: [NgIf, TitleCasePipe]
+    imports: [NgIf, TitleCasePipe,MatProgressSpinnerModule]
 })
 export class NavComponent implements OnInit {
- isConnected : boolean
- name! : string
- title: string = 'Protect group'
+load:boolean = false;
+ isConnected : boolean;
+ name! : string;
+ title: string = 'Protect group';
   constructor( private _authService : AuthService,public dialog : MatDialog,private _Router : Router )
   {  }
 
@@ -34,7 +35,6 @@ export class NavComponent implements OnInit {
 
   Login()
   {
-
     const diallogConfig = new MatDialogConfig;
     diallogConfig.disableClose = false;
     diallogConfig.position = {right:'2vw', top:'55px'};
@@ -42,6 +42,8 @@ export class NavComponent implements OnInit {
     diallogConfig.height = '250px';
     diallogConfig.width = '300px';
     const dialogRef = this.dialog.open(LoginComponent,diallogConfig);
+
+
   }
 
   OpenDialog()
@@ -54,4 +56,5 @@ export class NavComponent implements OnInit {
     diallogConfig.width = '200px';
     const dialogRef = this.dialog.open(UserProfileComponent,diallogConfig);
   }
+
 }

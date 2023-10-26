@@ -1,8 +1,9 @@
 
 <div class="nav">
   <h1>{{title}}</h1>
-
+  <mat-spinner *ngIf="load"></mat-spinner>
   <div class="login" >
+
     <button *ngIf="!isConnected" (click)="Login()" type="button">Connexion</button>
 
     <button *ngIf="isConnected" (click)=" OpenDialog()" type="button"  aria-label="Boutton déconnexion">
