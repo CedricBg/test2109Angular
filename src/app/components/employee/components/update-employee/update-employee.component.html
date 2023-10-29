@@ -9,16 +9,16 @@
     <form [formGroup]="formEmployee"  >
       <mat-dialog-content>
       <div>
-        <mat-form-field >
+        <mat-form-field appearance="outline">
           <mat-label>Prénom : </mat-label><input formControlName="firstName" class="input" matInput>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Nom : </mat-label><input formControlName="surName" class="input" matInput>
         </mat-form-field>
       </div>
 
     <div>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Date de naissance: </mat-label><input type="date" formControlName="birthDate" class="input" matInput>
       </mat-form-field>
 
@@ -26,17 +26,17 @@
     </div>
 
     <div formGroupName="address" >
-      <mat-form-field>
+      <mat-form-field appearance="outline">
 
         <mat-label appearance="outline">Rue: </mat-label><input formControlName="sreetAddress" class="input" matInput>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Ville: </mat-label><input formControlName="city" class="input" matInput>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Code Postal : </mat-label><input formControlName="zipCode" class="input" matInput>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Pays: </mat-label>
         <mat-select formControlName="state">
           <mat-option *ngFor="let elt of listCountrys" [value]="elt.country" >
@@ -46,7 +46,7 @@
       </mat-form-field>
     </div>
     <div formGroupName="language">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Langue(s):</mat-label>
         <mat-select formControlName="name">
           <mat-option *ngFor="let language of listLanguages" [value]="language.name">
@@ -56,7 +56,7 @@
       </mat-form-field>
     </div>
     <div formGroupName="role" >
-      <mat-form-field>
+      <mat-form-field appearance="outline">
       <mat-label>Role: </mat-label>
       <mat-select formControlName="name">
         <mat-option *ngFor="let elt of listRoles"  [value]="elt.name" >
@@ -68,7 +68,7 @@
 
     <div formArrayName="email">
       <div *ngFor="let emailss of email.controls; let i = index" >
-        <mat-form-field [formGroupName]="i">
+        <mat-form-field appearance="outline" [formGroupName]="i">
           <mat-label >Email: </mat-label><input formControlName="emailAddress"  class="input" matInput>
         </mat-form-field>
         <span *ngIf="i >=1">
@@ -84,8 +84,8 @@
 
     <div formArrayName="phone">
       <div *ngFor="let phone of phone.controls; let i = index" >
-      <mat-form-field [formGroupName]="i">
-        <mat-label>Phone: </mat-label><input formControlName="number"  class="input" matInput>
+      <mat-form-field appearance="outline" [formGroupName]="i">
+        <mat-label appearance="outline" >Phone: </mat-label><input formControlName="number"  class="input" matInput>
       </mat-form-field>
       <span *ngIf="i >=1">
       <span mat-icon-button (click)="DeletePhones(i)">
@@ -98,12 +98,12 @@
     </span>
   </div>
   <div>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Nr de Badge personnel: </mat-label><input formControlName="employeeCardNumber" class="input" matInput>
     </mat-form-field>
   </div>
   <div>
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Nr de carte ministériel: </mat-label><input formControlName="securityCard" class="input" matInput>
     </mat-form-field>
   </div>

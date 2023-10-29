@@ -6,26 +6,26 @@
     <form [formGroup]="formEmployee" (ngSubmit)="SubmitForm()">
       <mat-dialog-content>
       <div>
-        <mat-form-field >
+        <mat-form-field appearance="outline" >
           <mat-label>Prénom : </mat-label><input formControlName="firstName"  class="input" matInput>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Nom : </mat-label>
           <input matInput formControlName="surName" class="input" matInput>
         </mat-form-field>
       </div>
       <div>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Date de naissance : </mat-label><input matInput type="date" formControlName="birthDate"  class="input" >
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Nr° de registre national : </mat-label><input formControlName="registreNational" class="input" matInput>
         </mat-form-field>
         <mat-checkbox  formControlName="vehicle">Véhicule
         </mat-checkbox>
       </div>
       <div formGroupName="language">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Langue(s): </mat-label><input matInput [matAutocomplete]="nation" formControlName="name" class="input">
           <mat-autocomplete #nation="matAutocomplete">
             <mat-option *ngFor="let language of listLanguages" [value]="language.name">
@@ -35,16 +35,16 @@
         </mat-form-field>
       </div>
       <div formGroupName="address">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Rue : </mat-label><input formControlName="sreetAddress" class="input" matInput>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Ville : </mat-label><input formControlName="city" class="input" matInput>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Code Postal : </mat-label><input formControlName="zipCode" class="input" matInput>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Pays : </mat-label><input matInput [matAutocomplete]="autoNationality" formControlName="state" class="input">
           <mat-autocomplete #autoNationality="matAutocomplete" >
             <mat-option *ngFor="let elt of listCountrys" [value]="elt.country" >
@@ -54,7 +54,7 @@
         </mat-form-field>
       </div>
       <div formGroupName="role" >
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Role :
           </mat-label><input matInput [matAutocomplete]="auto" formControlName="name" class="input">
           <mat-autocomplete #auto="matAutocomplete" >
@@ -69,7 +69,7 @@
           <mat-icon >add</mat-icon> Ajoutez une adresse mail
         </span>
         <div *ngFor="let emailAddress of email.controls; let i = index" [formGroupName]="i"  >
-          <mat-form-field >
+          <mat-form-field appearance="outline">
             <mat-label>Email : </mat-label><input type="email" formControlName="emailAddress"  class="input"  matInput>
           </mat-form-field>
           <span *ngIf="i >= 1">
@@ -81,11 +81,11 @@
       </div>
 
       <div formArrayName="phone" >
-        <button mat-icon-button type="button" (click)="AddPhone()">
+        <span mat-icon-button (click)="AddPhone()">
           <mat-icon >add</mat-icon> Ajoutez un numéro de téléphone
-        </button>
+        </span>
         <div *ngFor="let number of phone.controls; let i = index" [formGroupName]="i"  >
-          <mat-form-field>
+          <mat-form-field appearance="outline">
             <mat-label>Phone : </mat-label><input type="text" formControlName="number" class="input" matInput>
           </mat-form-field>
           <span *ngIf="i >= 1">

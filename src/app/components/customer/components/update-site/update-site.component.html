@@ -6,13 +6,13 @@
     <form  [formGroup]="formClient" (ngSubmit)="Send()" *ngIf="formClient">
       <mat-dialog-content >
         <div class="information">
-          <mat-form-field class="input">
+          <mat-form-field  appearance="outline" class="input">
             <mat-label>Nom du site: </mat-label><input formControlName="name"  matInput>
           </mat-form-field>
-          <mat-form-field class="input">
+          <mat-form-field appearance="outline" class="input">
             <mat-label>Tva: </mat-label><input  formControlName="vatNumber"  matInput>
-          </mat-form-field>
-          <mat-form-field class="input" formGroupName="language">
+          </mat-form-field >
+          <mat-form-field appearance="outline" class="input" formGroupName="language">
             <mat-label>Langue de contact:</mat-label>
             <mat-select  formControlName="name" >
               <mat-option *ngFor="let elt of listLanguage" [value]="elt.name" >
@@ -22,7 +22,7 @@
           </mat-form-field>
         </div>
         <div formGroupName="address" >
-            <mat-form-field class="input">
+            <mat-form-field appearance="outline" class="input">
               <mat-label>Pays:
               </mat-label>
               <mat-select formControlName="state">
@@ -31,13 +31,13 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="input">
+            <mat-form-field appearance="outline" class="input">
               <mat-label>Rue + nr°: </mat-label><input formControlName="sreetAddress" matInput>
             </mat-form-field>
-            <mat-form-field class="input">
+            <mat-form-field appearance="outline" class="input">
               <mat-label>Code Postal: </mat-label><input formControlName="zipCode" matInput>
             </mat-form-field>
-            <mat-form-field class="input">
+            <mat-form-field appearance="outline" class="input">
               <mat-label>Ville: </mat-label><input formControlName="city" matInput>
             </mat-form-field>
         </div>
