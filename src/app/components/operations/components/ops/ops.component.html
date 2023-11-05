@@ -1,5 +1,6 @@
 
 <div class="container animate__animated animate__flipInX" *ngIf="connected === true" >
+
   <div class="menuPhone">
     <button class="containMenu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu list">
       <mat-icon>list</mat-icon>
@@ -24,14 +25,16 @@
     <div>
       <div class="begin" (click)="Agent()" >            <mat-icon class="icons">people</mat-icon>Gestion Agents</div>
 
-      <div  (click)="Rondes('admin')" >           <mat-icon class="icons">filter_tilt_shift</mat-icon><span class="middle">Administration rondes</span></div>
+      <div  (click)="Rondes('admin')" >                 <mat-icon class="icons">filter_tilt_shift</mat-icon><span class="middle">Administration rondes</span></div>
 
       <div (click)="AllEmp('AllEmployees')" >           <mat-icon class="icons">people</mat-icon><span class="middle">Administration employées</span></div>
 
-      <div class="begin" (click)="Customers('Admin')" > <mat-icon class="icons begin">people</mat-icon>Administration Clients</div>
+      <div class="begin" (click)="Customers('Admin')" > <mat-icon class="icons">people</mat-icon>Administration Clients</div>
     </div>
   </nav>
 </div>
 
+<div class="routerOutlet">
 <router-outlet></router-outlet>
+</div>
 
