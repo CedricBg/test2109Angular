@@ -18,7 +18,7 @@ export class NavComponent implements OnInit {
 load:boolean = false;
  isConnected : boolean;
  name! : string;
- title: string = 'Protect group';
+ title: string = 'Shield Connect';
   constructor( private _authService : AuthService,public dialog : MatDialog,private _Router : Router )
   {  }
 

@@ -1,23 +1,18 @@
 <app-nav></app-nav>
 <div *ngIf="!_AuthService.isConnected" Class="message">
   <div class="accueil">
-    <h1>Bienvenue sur la page de connexion</h1>
-    <h2>Site de démonstration</h2>
+    <h1>Welcome to the login page</h1>
+    <h2>Demo site</h2>
     <div class="text_accueil">
-      Bienvenue sur le site en cours de création !
-      Je suis ravis de vous accueillir dans cet espace en devenir,
-      où je travail actuellement à peaufiner la mise en page pour vous offrir une expérience agréable.
-
-      Veuillez m'excuser pour l'apparence actuelle,
-      car je suis en plein processus de conception et d'ajustement pour que tout soit parfait.
-
-      Merci de votre compréhension
+      <div class="picture1"></div>
+      <div class="picture2"></div>
+      <div class="picture3"></div>
     </div>
   </div>
 
   <div class="table_accueil">
     <table>
-      <caption><h3>Id de connexion pour les tests</h3></caption>
+      <caption><h3>Connection ID for tests</h3></caption>
       <tr>
         <th></th>
         <th>
@@ -28,12 +23,12 @@
         </th>
       </tr>
       <tr>
-        <td>Accès gestion agents:  </td>
+        <td>Agent management access:  </td>
         <td>ced</td>
         <td>123</td>
       </tr>
       <tr>
-        <td>Accès console agent:  </td>
+        <td>Agent console access:  </td>
         <td>cedric</td>
         <td>aaaaaaaa</td>
       </tr>

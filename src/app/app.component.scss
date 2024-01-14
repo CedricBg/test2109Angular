@@ -20,11 +20,39 @@ width: 100%;
 }
 .text_accueil
 {
-
-  margin: 50px 0 0 30%;
-  width:40%;
-  word-spacing: 2px;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 50px 0 0 10%;
+  width:80%;
 }
+.picture1{
+  width: 400px;
+  height:400px;
+  background-image: url('./../assets/screens.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+.picture2{
+  width: 400px;
+  height:400px;
+  background-image: url('./../assets/connexion.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+.picture3{
+  width: 400px;
+  height:400px;
+  background-image: url('./../assets/nasaearth.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+
 .table_accueil{
   display: flex;
   justify-content: center;

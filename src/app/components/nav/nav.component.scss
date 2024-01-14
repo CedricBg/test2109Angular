@@ -5,46 +5,47 @@
 
 
 .nav{
-  height: 50px;
+  height: 70px;
   display: flex;
-  color:wheat;
-  background-color:black ;
+  color:black;
   width:100vw;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  border-bottom: 1px rgb(201, 201, 201) solid;
   display: flex;
   justify-content: flex-end;
 }
 
 .nav h1{
-  font-family: 'DM Serif Display', serif;
+  font-family: "Bai Jamjuree", sans-serif;
   letter-spacing : 0.2em;
-  padding-top:7px;
-  height: 100%;
+  padding-top:1%;
   width:100%;
   padding-left: 100px;
+  font-weight: bold;
 }
 .login
 {
-  padding-top: 13px;
+  padding-top: 1%;
   margin-right: 10px;
 }
 
 .login button{
-  height: 25px;
-  background-color:wheat ;
-  color : black;
+  height: 35px;
+  background-color:#3451E1 ;
+  color : white;
   border : none;
-  font-family: 'DM Serif Display', serif;
-  font-weight: 300;
-  border-radius: 20px;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: bold;
+  border-radius: 15px;
   letter-spacing : 0.1em;
-  width: 180px;
+  width: 170px;
 }
 
 .login button:hover{
-  background:rgb(247, 212, 147);
+  background:white;
+  color:#3451E1 ;
   box-shadow: 0px 5px 10px 0 black 50%;
   cursor: pointer;
+  border: 1px solid #3451E1 ;
 }
 
 
