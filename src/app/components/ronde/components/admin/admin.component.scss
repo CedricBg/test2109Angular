@@ -11,59 +11,25 @@
 
 }
 
-.menu{
-  display: flex;
-  margin-bottom: 10px;
-}
-.menu ul {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-flow: column wrap;
-  font-family:'Segoe UI';
-  list-style: none;
-  align-items: center;
-}
-.menu ul li {
-  align-content: center;
-  height: 50px;
-  margin-top: 10px;
-  border-radius: 3px;
-  width:200px;
-  color:white;
-  box-shadow: 0px 4px 8px 2px rgba(0, 0, 0, 0.5);
-  background: rgb(170,176,221);
-  background: linear-gradient(0deg, rgba(170,176,221,1) 3%, rgba(50,98,144,1) 10%);
-  cursor: pointer;
-}
 
-.menu ul li:hover {
-color: wheat;
-}
-
-li.icons
-{
-  display: flex;
-  align-items: center;
-}
-
-.icons
-{
-  padding-left: 2px;
-  padding-right: 5px;
-}
 .card-addRfid
 {
+  display: flex;
+  width: 80%;
   margin-left: 5vw;
-
+  align-items: center;
 }
+
 .Contenant_menu{
   margin-left: 5vw;
 }
-@media screen and (max-width: 730px){
 
-  .menu ul li{
+.content_mat_form{
+  padding-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
 
-    height: 30px;
-  }
 }
+

@@ -1,8 +1,7 @@
 <div class="Contenu-admin-ronde animate__animated animate__fadeInLeft">
   <div class="card-addRfid ">
 
-    <div>
-      <div>
+      <div class="content_mat_form">
         <mat-form-field>
           <mat-label>Choisissez un client</mat-label>
           <select   matNativeControl [(ngModel)]="client" >
@@ -10,9 +9,9 @@
           </select >
         </mat-form-field>
       </div>
+      <mat-icon *ngIf="client" fontIcon="arrow_forward"></mat-icon>
+      <div class="content_mat_form" *ngIf="client" >
 
-      <div  *ngIf="client" >
-        <mat-icon  fontIcon="arrow_forward"></mat-icon>
         <div class="animate__animated animate__fadeIn" *ngFor="let clientss of this.listCustomers.AllCustomers | filterByName: client">
           <mat-form-field>
           <mat-label>Choisissez un Site</mat-label>
@@ -22,11 +21,9 @@
           </mat-form-field>
         </div>
       </div>
-    </div>
-  </div>
-  <div  *ngIf="siteId">
-    <nav  class="menu">
-      <mat-icon  fontIcon="arrow_forward"></mat-icon>
+      <mat-icon *ngIf="siteId" fontIcon="arrow_forward"></mat-icon>
+  <div class="content_mat_form"  *ngIf="siteId">
+
       <mat-form-field>
         <mat-label>Action</mat-label>
         <select matNativeControl (click)="SelectAction()" [(ngModel)]="action">
@@ -36,13 +33,11 @@
           <option value="ModifRonde">Modification ronde</option>
         </select>
       </mat-form-field>
-
-    </nav>
   </div>
-
+</div>
 </div>
 
-<div class="card-addRfid ">
+<div >
   <router-outlet></router-outlet>
 </div>
 
