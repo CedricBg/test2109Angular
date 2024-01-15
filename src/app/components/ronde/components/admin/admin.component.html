@@ -1,39 +1,48 @@
 <div class="Contenu-admin-ronde animate__animated animate__fadeInLeft">
-
   <div class="card-addRfid ">
-    <div  *ngIf="siteId">
-      <nav  class="menu">
-      <ul class="animate__animated animate__fadeInUp">
-        <li (click)="ModifRfid()" class="icons"><mat-icon class="icons">sensors</mat-icon><span class="aligned-with-icon">Modification pastilles</span> </li>
-        <li (click)="AddRfid()" class="icons"><mat-icon class="icons">sensors</mat-icon><span class="aligned-with-icon">Ajout pastille(s)</span> </li>
-        <li (click)="AddRonde()" class="icons"><mat-icon class="icons">filter_tilt_shift</mat-icon><span class="aligned-with-icon">Ajout ronde</span> </li>
-        <li (click)="ModifRonde()" class="icons"><mat-icon class="icons">filter_tilt_shift</mat-icon><span class="aligned-with-icon">Modification ronde</span> </li>
-      </ul>
-    </nav>
-    </div>
 
     <div>
-      <mat-form-field>
-        <mat-label>Choissisez un client</mat-label>
-        <select   matNativeControl [(ngModel)]="client" >
-          <option *ngFor="let clients of this.listCustomers.AllCustomers" value={{clients.nameCustomer}}>{{clients.nameCustomer}}</option>
-        </select >
-      </mat-form-field>
-    </div>
-    <div  *ngIf="client" >
-      <div class="animate__animated animate__fadeIn" *ngFor="let clientss of this.listCustomers.AllCustomers | filterByName: client">
+      <div>
         <mat-form-field>
-        <mat-label>Choissisez un Site</mat-label>
-        <select matNativeControl [(ngModel)]="siteId">
-          <option  *ngFor="let site of clientss.site" (click)="ChangeSite()" [value]="site.siteId">{{site.name}}</option>
-        </select>
+          <mat-label>Choisissez un client</mat-label>
+          <select   matNativeControl [(ngModel)]="client" >
+            <option *ngFor="let clients of this.listCustomers.AllCustomers" value={{clients.nameCustomer}}>{{clients.nameCustomer}}</option>
+          </select >
         </mat-form-field>
+      </div>
+
+      <div  *ngIf="client" >
+        <mat-icon  fontIcon="arrow_forward"></mat-icon>
+        <div class="animate__animated animate__fadeIn" *ngFor="let clientss of this.listCustomers.AllCustomers | filterByName: client">
+          <mat-form-field>
+          <mat-label>Choisissez un Site</mat-label>
+          <select matNativeControl [(ngModel)]="siteId">
+            <option  *ngFor="let site of clientss.site" (click)="ChangeSite()" [value]="site.siteId">{{site.name}}</option>
+          </select>
+          </mat-form-field>
+        </div>
       </div>
     </div>
   </div>
-  <div class="card-addRfid ">
-    <router-outlet></router-outlet>
+  <div  *ngIf="siteId">
+    <nav  class="menu">
+      <mat-icon  fontIcon="arrow_forward"></mat-icon>
+      <mat-form-field>
+        <mat-label>Action</mat-label>
+        <select matNativeControl (click)="SelectAction()" [(ngModel)]="action">
+          <option value="ModifRfid">Modification pastilles</option>
+          <option value="AddRfid">Ajout pastille(s)</option>
+          <option value="AddRonde">Ajout ronde</option>
+          <option value="ModifRonde">Modification ronde</option>
+        </select>
+      </mat-form-field>
+
+    </nav>
   </div>
+
 </div>
 
+<div class="card-addRfid ">
+  <router-outlet></router-outlet>
+</div>
 

@@ -16,17 +16,18 @@ import { MatIconModule } from '@angular/material/icon';
     templateUrl: './admin.component.html',
     styleUrls: ['./admin.component.scss'],
     standalone: true,
-    imports: [NgFor, NgIf, RouterOutlet, MatSelectModule, MatInputModule, FormsModule, filterByName,ReactiveFormsModule,MatIconModule  ]
+    imports: [NgFor, NgIf, RouterOutlet, MatSelectModule, MatInputModule, FormsModule, filterByName,ReactiveFormsModule,MatIconModule ]
 })
 export class AdminComponent implements OnInit {
 subscription : Subscription[] = [];
 listCustomers : any;
+listActions : string[] = ['ChangeSite', 'AddRfid', 'ModifRfid', 'AddRonde', 'ModifRonde'];
 client!: string;
+action!: string;
 siteId: number;
 
 constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBuilder, private _router : Router){}
   ngOnInit(): void {
-
     this.subscription.push(this._activetdedRoute.data.subscribe({
       next : (data : Customers[]) => {
         this.listCustomers = data
@@ -36,22 +37,41 @@ constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBu
 
   ChangeSite()
   {
-    this._router.navigateByUrl('OPS/ronde/admin')
+    this._router.navigateByUrl('OPS/ronde/admin');
+  }
+
+  SelectAction()
+  {
+    switch(this.action){
+      case 'ChangeSite':
+        this.ChangeSite();
+        break;
+      case 'AddRfid':
+        this.AddRfid();
+        break;
+      case 'ModifRfid':
+        this.ModifRfid();
+        break;
+      case 'AddRonde':
+        this.AddRonde();
+        break;
+      case 'ModifRonde':
+        this.ModifRonde();
+        break;
+    }
   }
 
    AddRfid()
   {
-    this._router.navigateByUrl('OPS/ronde/admin/AddRfid/'+this.siteId)
-
+    this._router.navigateByUrl('OPS/ronde/admin/AddRfid/'+this.siteId);
   }
   ModifRfid()
   {
-    this._router.navigateByUrl('OPS/ronde/admin/ModifyRfid/'+this.siteId)
-
+    this._router.navigateByUrl('OPS/ronde/admin/ModifyRfid/'+this.siteId);
   }
   AddRonde()
   {
-    this._router.navigateByUrl('OPS/ronde/admin/AddRonde/'+this.siteId)
+    this._router.navigateByUrl('OPS/ronde/admin/AddRonde/'+this.siteId);
   }
   ModifRonde()
   {
