@@ -20,8 +20,12 @@
   align-items: center;
 }
 
-.Contenant_menu{
-  margin-left: 5vw;
+.router-outlet{
+  background-color: whitesmoke;
+  margin-left: 6vw;
+  border-radius: 5px;
+  width: 65%;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 
 .content_mat_form{
@@ -30,6 +34,5 @@
   margin-right: 10px;
   display: flex;
   align-items: center;
-
 }
 

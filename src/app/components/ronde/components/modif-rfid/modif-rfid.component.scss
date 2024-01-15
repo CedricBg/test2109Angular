@@ -1,11 +1,23 @@
 .Contenu_modif_Rfid{
-
   display: grid;
+  width: 80%;
+  margin-left: 10%;
+  padding: 2%;
+
+}
+mat-form-field{
+  width: 45%;
+  margin-right: 1%;
 }
 
-mat-form-field{
-padding-left: 5px;
+.contain_buttons{
+  display: flex;
+  justify-content: space-between;
 }
+.contain_buttons button:nth-child(1){
+  background-color: yellowgreen;
+}
+
 button{
-  width:100%;
+  width:48%;
 }

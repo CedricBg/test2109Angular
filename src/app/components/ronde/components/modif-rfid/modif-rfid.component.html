@@ -1,7 +1,7 @@
 <div class="Contenu_modif_Rfid animate__animated animate__fadeInLeft">
   <h2>Modification Pastille:</h2>
   <mat-form-field >
-    <mat-label>Sélectionné une pastille dans la liste</mat-label>
+    <mat-label>Veuillez Sélectionner une pastille dans la liste</mat-label>
     <mat-select [(ngModel)]="selectedValue" (ngModelChange)="GetSite()">
       <mat-option *ngFor="let pastille of listRfid"   value={{pastille.location}}>
         {{pastille.location}}
@@ -10,20 +10,20 @@
   </mat-form-field>
 
   <div class="animate__animated animate__fadeIn" *ngIf="selectedValue">
-
     <form   [formGroup]="Rfidform">
-      <button  (click)="DeleteRfid()">
-        <mat-icon type="button" >delete</mat-icon>
-      </button>
+
       <mat-form-field appearance="fill">
         <mat-label>Emplacement sur le site: </mat-label><input  type="text" formControlName="Location" class="input" matInput>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Nr puce Rfid: </mat-label><input  type="text" formControlName="RfidNr" class="input" matInput>
       </mat-form-field>
-
-      <button matButton type="button" mat-raised-button color="primary" (click)="send()">Modifier</button>
-
+      <div class="contain_buttons">
+        <button   type="button" mat-raised-button   (click)="send()">
+          <mat-icon fontIcon="edit"></mat-icon>Valider les modifications</button>
+        <button matButton type="button" mat-raised-button color="warn"  (click)="DeleteRfid()">
+          <mat-icon fontIcon="delete_forever"></mat-icon>Supprimer la pastille</button>
+      </div>
     </form>
   </div>
 </div>
