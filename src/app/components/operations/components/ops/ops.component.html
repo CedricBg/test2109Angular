@@ -1,11 +1,11 @@
 
 <div class="container animate__animated animate__flipInX" *ngIf="connected === true" >
 
-  <div class="menuPhone">
-    <button class="containMenu" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu list">
-      <mat-icon fontIcon="list"></mat-icon>
+  <div class="menu">
+    <button class="ButtonTaches" mat-raised-button  [matMenuTriggerFor]="menu" aria-label="Menu list">
+      <mat-icon fontIcon="list"></mat-icon>Sélectionnez une tâches
     </button>
-    <mat-menu class="menus"  #menu="matMenu">
+    <mat-menu  #menu="matMenu">
       <button (click)="Rondes('admin')" mat-menu-item (click)="Agent()" class="buttons" >
         <mat-icon fontIcon="people"></mat-icon><span>Gestion Agents</span>
       </button>
@@ -16,22 +16,12 @@
         <mat-icon class="icons" fontIcon="people"></mat-icon><span >Administration employées</span>
       </button>
       <button (click)="Customers('Admin')" mat-menu-item class="buttons">
-        <mat-icon class="icons" fontIcon="people"></mat-icon><span >Administration Clients</span>
+        <mat-icon class="icons" fontIcon="recent_actors"></mat-icon><span >Administration Clients</span>
       </button>
     </mat-menu>
   </div>
 
-  <nav class="menu animate__animated animate__slideInDown">
-    <div>
-      <div class="begin" (click)="Agent()" >            <mat-icon class="icons" fontIcon="people" ></mat-icon>Gestion Agents</div>
 
-      <div  (click)="Rondes('admin')" >                 <mat-icon class="icons" fontIcon="filter_tilt_shift"></mat-icon><span class="middle">Administration rondes</span></div>
-
-      <div (click)="AllEmp('AllEmployees')" >           <mat-icon class="icons" fontIcon="people"></mat-icon><span class="middle">Administration employées</span></div>
-
-      <div class="begin" (click)="Customers('Admin')" > <mat-icon class="icons" fontIcon="people"></mat-icon>Administration Clients</div>
-    </div>
-  </nav>
 </div>
 
 <div class="routerOutlet">
