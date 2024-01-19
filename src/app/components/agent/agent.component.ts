@@ -1,6 +1,6 @@
 import { GenerateHtml } from 'src/app/Utilities/GenerateHtml';
 import { Component, OnInit } from '@angular/core';
-import {  Subscription } from 'rxjs';
+import {  Subscription, switchMap, tap } from 'rxjs';
 import { StartEndTimeWork } from 'src/app/models/Planning/StartEndTimeWork.models';
 import { Working } from 'src/app/models/Planning/working.models';
 import { Pdf } from 'src/app/models/customer/Pdf.models';
@@ -56,20 +56,22 @@ export class AgentComponent implements OnInit {
 
     this.idEmployee = Number.parseInt(sessionStorage.getItem("id"))
     //On récupere la liste des clients ou l'agent est affecté
-    this.subscriptions.push(this._agentService.GetSites( this.idEmployee).subscribe({
-      next : (data: Site[]) =>{
-        this.listSite = data
-        //on verifie que l'agent est en service ou pas
-        this.subscriptions.push(this._agentService.IsWorking(this.idEmployee).subscribe({
-            next : (data: Working)=>{
-              console.log(data)
-            this.isWorking = data.isWorking
-            }
-          }))
-
-      }
-    }))
-
+    if (!isNaN(this.idEmployee)) {
+      this.subscriptions.push(this._agentService.GetSites(this.idEmployee).pipe(
+        tap((data: Site[]) => {
+          this.listSite = data;
+        }),
+        switchMap(() => this._agentService.IsWorking(this.idEmployee))
+      ).subscribe({
+        next: (data: Working) => {
+          this.isWorking = data.isWorking;
+        }
+      })
+      )
+    }
+    else{
+      alert("Vous n'êtes pas connecté")
+    }
   }
 
   //On envoi les données pour le début de service l'appel a StartWork va nous redirigé vers la page ou on affiche le rapport

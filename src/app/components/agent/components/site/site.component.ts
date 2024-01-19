@@ -1,7 +1,7 @@
 import { AgentService } from 'src/app/services/agent.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { Subscription,} from 'rxjs';
+import { Subscription, switchMap,} from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
 import { Site } from 'src/app/models/customer/site.models';
 import { Customers } from 'src/app/models/customer/customers.models';
@@ -56,31 +56,39 @@ listSiteAssignAgent: Site[] = [];
     this.addSite.sites = [];
     this.delSite.sites = [];
     this.listAllsitesAgentmodif = [];
-    this.subscription.push(this.activatedRoute.data.subscribe({
-      next : (data: any)=>{
-          //donnees envoyé avec un resolver
-          this.data = data;
 
-          this.Assignation(this.data.listAssignCustomers, this.data.listallCustomers)
-          this.subscription.push(this._agentService.GetSites(data.agent.id).subscribe({
-            next : (data : Site[] ) =>{
-              this.listAllSiteAgent = data;
-              this.listAllsites = [];
-              this.data.listallCustomers.forEach(element => {
-                this.listAllsites = this.listAllsites.concat(element.site)
-              });
-              this.AssignationSite();
-            }
-          }));
-        }
-    }))
 
-  }
+     this.subscription.push(this.activatedRoute.data.pipe(
+      switchMap((data: any) => {
+        this.data = data;
+        this.nom = this.data.agent.name;
+        return this._agentService.GetSites(data.agent.id);
+      }),
+      switchMap((data: Site[]) => {
+        this.listAllSiteAgent = data;
+        return this._serviceCustomer.getAllCustomers();
+      }),
+     ).subscribe({
+      next: (data: Customers[]) => {
+        const assignCustomer = data;
+        this.Assignation(assignCustomer,data);
+        this.listAllsites = [];
+        this.data.listallCustomers.forEach(element => {
+          this.listAllsites = this.listAllsites.concat(element.site)
+        });
+        this.AssignationSite();
+      }
+     }))
+    }
+
+
+
 
   Assignation(listAssignCustomers: Customers[], listallCustomers: Customers[])
   {
     //this.listAssignedCustomer et this.data.listallCustomers sont identique au départ, une va servir pour les changements
     //et l'autre à la comparaison avec les données fixes
+
     this.listAssignedCustomer = listallCustomers.filter(object => listAssignCustomers.some(elt => elt.customerId === object.customerId));
     this.modifiAssignedCustomer  = listallCustomers.filter(object => this.listAssignedCustomer.some(elt => elt.customerId === object.customerId));
     this.allCustomersNotAssignedToGuard = listallCustomers.filter(object => !this.listAssignedCustomer.some(elt =>elt.customerId === object.customerId));
@@ -173,13 +181,8 @@ listSiteAssignAgent: Site[] = [];
 
   SaveSites()
   {
-    console.log(this.listAllSiteAgent)
-    console.log(this.listSiteAssignAgent)
-
     const differencemoins = this.listAllSiteAgent.filter(object => !this.listSiteAssignAgent.some(elt=>elt.siteId === object.siteId ))
     const differenceplus = this.listSiteAssignAgent.filter(object => !this.listAllSiteAgent.some(elt=>elt.siteId === object.siteId ))
-    console.log(differencemoins)
-    console.log(differenceplus)
     if(differenceplus.length > 0)
     {
       this.addSite.sites = differenceplus;
