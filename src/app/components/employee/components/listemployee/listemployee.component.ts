@@ -5,7 +5,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 import { Employee } from 'src/app/models/employee.models';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NgFor, NgIf, TitleCasePipe, DatePipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -55,21 +55,21 @@ export class ListemployeeComponent implements OnInit {
   GetOne(id: number)
   {
     this.select = true
-    this.subscription.push(this._serviceEmployee.getOne(id).subscribe({
-        next : ( data : DetailedEmployee)  => {
+
+    this.subscription.push(this._serviceEmployee.getOne(id).pipe(
+      switchMap((data: any) => {
         this.SelectedEmployee = data
-        this.subscription.push(this._serviceEmployee.DownLoadFoto(id).subscribe({
-          next : (data : Blob)=>{
-            if(!(data == null))
-            {
-              const imageUrl: string = URL.createObjectURL(data);
-              this.safeImageUrl = this._DomSanitizer.bypassSecurityTrustUrl(imageUrl);
-            }
-            else{
-              this.safeImageUrl = null
-            }
-          }
-        }))
+        return this._serviceEmployee.DownLoadFoto(id);
+      }),
+    ).subscribe({
+      next: (data: Blob) => {
+        if (!(data == null)) {
+          const imageUrl: string = URL.createObjectURL(data);
+          this.safeImageUrl = this._DomSanitizer.bypassSecurityTrustUrl(imageUrl);
+        }
+        else {
+          this.safeImageUrl = null
+        }
       }
     }))
   }

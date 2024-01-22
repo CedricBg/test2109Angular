@@ -3,80 +3,135 @@
 }
 
 .message{
-  position:absolute;top:50;left:20;
+  position:absolute;
+  top:10vh;
+  left:0;
   color : rgb(76, 62, 107);
   width: 100vw;
   height: 80vh;
   display: flex;
   flex-flow: column nowrap;
+
 }
-.accueil{
-width: 100%;
+
+.table_accueil{
+  display: flex;
+  position: absolute;
+  top: 50vh;
+  width: 100vw;
+  z-index: 10;
+  background-color: white;
+  height: 40vh;
+  justify-content: center;
+  align-items: center;
 }
-.accueil h1 ,h2 {
-  width: 100%;
-  text-align: center;
-  padding-top: 20px;
+
+.card_accueil{
+  display: flex;
+  justify-content: center;
+  border: 1px solid rgb(237, 241, 255);
+  border-radius: 5px;
+  width: 96vw;
+  height: 35vh;
 }
-.text_accueil
+
+.content_circles{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.text_footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35vw;
+  padding-right: 10vw;
+}
+
+.image_circle
 {
   display: flex;
-  justify-content: space-evenly;
-  margin: 50px 0 0 10%;
-  width:80%;
+  padding-bottom: 1vh;
+  justify-content:space-between;
+  width: 20vw;
+  border-bottom: 1px solid rgb(198, 197, 201);
 }
+.image_circle2
+{
+  margin-top: 1vh;
+  display: flex;
+  justify-content:space-between;
+  width: 20vw;
+}
+
 .picture1{
-  width: 400px;
-  height:400px;
-  background-image: url('./../assets/screens.jpg');
+  width: 100px;
+  height:100px;
+  background-image: url('./../assets/chien.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   border-radius: 50%;
+  border-radius: 50%;
 }
+
 .picture2{
-  width: 400px;
-  height:400px;
+  width: 100px;
+  height:100px;
   background-image: url('./../assets/connexion.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   border-radius: 50%;
 }
+
 .picture3{
-  width: 400px;
-  height:400px;
-  background-image: url('./../assets/nasaearth.jpg');
+  width: 100px;
+  height:100px;
+  background-image: url('./../assets/cam.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+.picture4{
+  width: 100px;
+  height:100px;
+  background-image: url('./../assets/connexion.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+.picture5{
+  width: 100px;
+  height:100px;
+  background-image: url('./../assets/connexion.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+}
+.picture6{
+  width: 100px;
+  height:100px;
+  background-image: url('./../assets/connexion.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   border-radius: 50%;
 }
 
-.table_accueil{
-  display: flex;
-  justify-content: center;
-  margin: 20px 0 0 0 ;
-  width: 100vw;
-  padding-top: 100px;
 
-}
-.table_accueil table{
-  width: 500px;
-}
-.table_accueil table td {
-  text-align: center;
-  padding-top: 10px;
-}
 @media screen and (max-width:14000px) {
-.table_accueil table{
+.accueil table{
     height: 0;
   }
 }
 @media screen and (max-width:670px) {
   .table_accueil table{
     width:350px;
-
   }
 }
 @media screen and (max-width:600px) {
@@ -84,8 +139,8 @@ width: 100%;
     visibility: hidden;
     display: none;
   }
-
 }
+
 @media screen and (max-height:630px) {
   .table_accueil{
     padding-top: 0;
@@ -95,6 +150,7 @@ width: 100%;
     padding-top:5px;
   }
 }
+
 @media screen and (max-height:530px) {
 
   .message {
@@ -102,7 +158,6 @@ width: 100%;
   }
 
 }
-
 
 @media screen and (max-height:400px) {
   .text_accueil{

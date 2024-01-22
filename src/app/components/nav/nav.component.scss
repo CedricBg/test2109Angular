@@ -9,9 +9,12 @@
   display: flex;
   color:black;
   width:100vw;
-  border-bottom: 1px rgb(201, 201, 201) solid;
   display: flex;
   justify-content: flex-end;
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .nav h1{
@@ -19,36 +22,50 @@
   letter-spacing : 0.2em;
   padding-top:1%;
   width:100%;
-  padding-left: 100px;
+  padding-left: 4vw;
   font-weight: bold;
 }
+
+hr{
+  color: whitesmoke ;
+  position: absolute;
+  top: 7vh;
+  left: 4vw;
+  width: 93vw;
+  z-index: 5;
+}
+
 .login
 {
   padding-top: 1%;
-  margin-right: 10px;
+  margin-right: 3vw;
 }
 
 .login button{
+  padding: 0;
+  margin: 0;
+  justify-content: flex-end  ;
+  border-radius: none ;
+  display: flex;
+  align-items: center;
   height: 35px;
-  background-color:#3451E1 ;
-  color : white;
+  background: transparent;
+  color : black;
   border : none;
   font-family: "Bai Jamjuree", sans-serif;
-  font-weight: bold;
-  border-radius: 15px;
   letter-spacing : 0.1em;
   width: 170px;
 }
 
 .login button:hover{
-  background:white;
-  color:#3451E1 ;
-  box-shadow: 0px 5px 10px 0 black 50%;
-  cursor: pointer;
-  border: 1px solid #3451E1 ;
+ color: blueviolet;
 }
 
-
+.login button mat-icon{
+  font-size: 18px;
+  padding-top: 3px;
+  padding-left: 5px;
+}
 
 @media screen and (max-width: 550px ) {
   .nav h1{

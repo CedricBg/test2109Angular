@@ -1,38 +1,23 @@
 <app-nav></app-nav>
 <div *ngIf="!_AuthService.isConnected" Class="message">
-  <div class="accueil">
-    <h1>Welcome to the login page</h1>
-    <h2>Demo site</h2>
-    <div class="text_accueil">
-      <div class="picture1"></div>
-      <div class="picture2"></div>
-      <div class="picture3"></div>
-    </div>
-  </div>
 
   <div class="table_accueil">
-    <table>
-      <caption><h3>Connection ID for tests</h3></caption>
-      <tr>
-        <th></th>
-        <th>
-          Login agent
-        </th>
-        <th>
-          Mot de passe
-        </th>
-      </tr>
-      <tr>
-        <td>Agent management access:  </td>
-        <td>ced</td>
-        <td>123</td>
-      </tr>
-      <tr>
-        <td>Agent console access:  </td>
-        <td>cedric</td>
-        <td>aaaaaaaa</td>
-      </tr>
-    </table>
+    <div class="card_accueil">
+      <div class="text_footer">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem harum laboriosam tempora quasi recusandae soluta sed placeat nesciunt, aspernatur nostrum perspiciatis quia excepturi sint, vero quos vel, repellendus nulla cupiditate?</div>
+      <div class="content_circles">
+        <div class="image_circle">
+          <div class="picture1"></div>
+          <div class="picture2"></div>
+          <div class="picture3"></div>
+        </div>
+
+        <div class="image_circle2">
+          <div class="picture4"></div>
+          <div class="picture5"></div>
+          <div class="picture6"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <router-outlet></router-outlet>

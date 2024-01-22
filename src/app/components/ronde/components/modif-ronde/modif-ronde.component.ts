@@ -105,9 +105,13 @@ constructor(private _rondeService: RondeService, private _ActivatedRoute: Activa
       );
     }
     if(event.container.data.length){
+      console.log(this.listRfidRound)
       for(var i = 0; i < event.container.data.length; i++)
       {
-        this.listRfidRound[i].position = i;
+        if(this.listRfidRound[i] != null)
+        {
+          this.listRfidRound[i].position = i;
+        }
       }
     }
   }

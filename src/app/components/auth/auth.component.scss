@@ -1,14 +1,43 @@
 .contentAuth{
+  position: absolute ;
+  top: 0;
+  left: 0;
+  background-image: url("../../../assets/portable.jpg.jpg");
+  background-position: center;
   width: 100vw;
-  min-height: 95vh;
-
+  height: 65vh;
+  background-size: cover;
+  -o-filter: blur(5px);
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  opacity: 0.5;
 }
-.transparent_div
-{
-  width: 100vw;
-  min-height: 95vh;
+
+.accueil{
+  color:black;
+  display: flex;
+  position: absolute;
+  left: 38vw;
+  top: 15vh;
+  flex-direction: column ;
+  justify-content: center;
+  align-items: center;
 }
 
+.accueil h1 ,h2 {
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.accueil table{
+  width: 500px;
+}
+
+.accueil table td {
+  text-align: center;
+  padding-top: 10px;
+}
 
 @media screen and (max-width: 1200px ) {
   .contentAuth, .transparent_div{

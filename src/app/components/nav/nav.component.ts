@@ -6,13 +6,15 @@ import { Router } from '@angular/router';
 import { NgIf, TitleCasePipe } from '@angular/common';
 import { UserProfileComponent } from '../employee/components/user-profile/user-profile.component';
 import { LoginComponent } from '../auth/components/login/login.component';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-nav',
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.scss'],
     standalone: true,
-    imports: [NgIf, TitleCasePipe,MatProgressSpinnerModule]
+    imports: [NgIf, TitleCasePipe,MatProgressSpinnerModule,MatIconModule,CommonModule]
 })
 export class NavComponent implements OnInit {
 load:boolean = false;
