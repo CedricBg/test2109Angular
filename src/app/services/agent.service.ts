@@ -60,14 +60,13 @@ export class AgentService {
     return this._Http.get<Employee>(environment.baseAdres+ 'agent/GetOne/'+id);
   }
 
-  GetAssignedCustomers(id: number)
+ /*  GetAssignedCustomers(id: number)
   {
     return this._Http.get<Customers[]>(environment.baseAdres+ 'agent/Customers/'+id);
-  }
+  } */
 
   AddSitesToGuard(sites: AddSites)
   {
-
     return this._Http.post(environment.baseAdres + 'agent/AddSites',sites);
   }
 

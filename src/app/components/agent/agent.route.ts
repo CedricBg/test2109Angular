@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
-import { listAllCustomerResolver, listassignedCustomerResolver } from 'src/app/resolvers/Customer-resolver.resolver';
+import { listAllCustomerResolver } from 'src/app/resolvers/Customer-resolver.resolver';
 import { EmployeeResolver } from 'src/app/resolvers/employee-resolver-one.resolver';
 
 export default [
   { path: 'admin',title : 'Gestion agents', loadComponent: () => import('./components/admin/admin.component').then(module => module.AdminComponent) , children : [
     { path: 'site/:id', loadComponent : () => import('./components/site/site.component').then(module => module.SiteComponent) , resolve: {
       agent: EmployeeResolver,
-      listAssignCustomers : listassignedCustomerResolver,
       listallCustomers : listAllCustomerResolver},},
   ]},
   { path : 'statique' , loadComponent: () => import('./components/agent-statique/agent-statique.component').then(module => module.AgentStatiqueComponent)},

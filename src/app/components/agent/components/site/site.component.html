@@ -17,7 +17,7 @@
     </div>
   </section>
 
-  <div class="cdks" cdkDropListGroup>
+  <!-- <div class="cdks" cdkDropListGroup>
     <p class="title-drag">Par Client(s)</p>
     <div class="contientDragDrop">
       <div class="listDrag"
@@ -40,9 +40,9 @@
       </div>
     </div>
     <button class="button-drag" mat-button (click)="SaveCustomers()">Envoyer</button>
-  </div>
+  </div> -->
 
-  <div class="cdks" cdkDropListGroup>
+ <div class="cdks" cdkDropListGroup>
     <p class="title-drag">Par Site(s)</p>
     <div class="contientDragDrop">
       <div class="listDrag"cdkDropList
@@ -52,7 +52,7 @@
         <span>{{elt.name}}</span>
     </div>
       </div>
-      <p class="p-drag-center"><mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_right</mat-icon></p>
+      <p class="p-drag-center"><mat-icon fontIcon="keyboard_arrow_left"></mat-icon><mat-icon fontIcon="keyboard_arrow_right"></mat-icon></p>
       <div class="listDrag" cdkDropList
       [cdkDropListData]="this.listSiteAssignAgent"
       (cdkDropListDropped)="dropSite($event)">
@@ -61,6 +61,7 @@
       </div>
     </div>
   </div>
-    <button class="button-drag" mat-button (click)=" SaveSites()">Envoyer</button>
+    <button class="button-drag" mat-button>Envoyer</button>
   </div>
 </div>
+
