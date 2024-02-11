@@ -1,9 +1,9 @@
+import { Site } from './../../../../models/customer/site.models';
 import { AgentService } from 'src/app/services/agent.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Subscription, switchMap, tap,} from 'rxjs';
 import { EmployeeService } from 'src/app/services/employee.service';
-import { Site } from 'src/app/models/customer/site.models';
 import { Customers } from 'src/app/models/customer/customers.models';
 import { CustomerService } from 'src/app/services/customer.service';
 import { CdkDragDrop,CdkDrag,CdkDropList,CdkDropListGroup,moveItemInArray,transferArrayItem, } from '@angular/cdk/drag-drop';
@@ -77,14 +77,20 @@ listSiteAssignAgent: Site[] = [];
 
   findListNotAssingeToGuard()
   {
-    let allSites = [];
+    let allSites : Site[] = [];
     this.listAllCustomers.forEach(client => {
       allSites = allSites.concat(...client.site);
     });
 
     this.listAllsites = allSites;
-    this.listAllsitesAgentmodif = allSites.filter(site => !this.listSiteAssignAgent);
+    this.listAllsitesAgentmodif = allSites.filter(object => !this.listSiteAssignAgent.some(elt => elt.siteId === object.siteId));
+  }
 
+  SaveSites(){
+    this.findListNotAssingeToGuard()
+    this.addSite.idEmployee = this.data.agent.id;
+    this.addSite.sites = this.listSiteAssignAgent;
+    console.log(this.addSite);
   }
 
   drop(event: CdkDragDrop<any[]>)
