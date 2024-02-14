@@ -3,12 +3,13 @@ import { StartEndTimeWork } from '../models/Planning/StartEndTimeWork.models';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Subject } from 'rxjs';
-import { Customers } from '../models/customer/customers.models';
+
 import { Working } from '../models/Planning/working.models';
 import { Pdf } from '../models/customer/Pdf.models';
 import { Site } from '../models/customer/site.models';
 import { Employee } from '../models/employee.models';
 import { AddSites } from '../models/agents/AddSites.models';
+
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +40,13 @@ export class AgentService {
   {
     return this._Http.get<Boolean>(environment.baseAdres+ "planning/endWork/"+id)
   }
+
   //Retourn une liste de rapport par id employee
   GetRapport(id: number)
   {
     return this._Http.get<Pdf[]>(environment.baseAdres+ 'pdf/listRapport/'+id);
   }
+
   //charge un rapport en Pdf par rapport a sont id
   loadRapport(id: number)
   {
@@ -60,23 +63,10 @@ export class AgentService {
     return this._Http.get<Employee>(environment.baseAdres+ 'agent/GetOne/'+id);
   }
 
- /*  GetAssignedCustomers(id: number)
-  {
-    return this._Http.get<Customers[]>(environment.baseAdres+ 'agent/Customers/'+id);
-  } */
+
 
   AddSitesToGuard(sites: AddSites)
   {
     return this._Http.post(environment.baseAdres + 'agent/AddSites',sites);
-  }
-
-  RemoveSitesToGuard(sites: AddSites)
-  {
-    return this._Http.post(environment.baseAdres + 'agent/RemoveSites',sites);
-  }
-
-  UpdateSite(sites: AddSites)
-  {
-    return this._Http.post(environment.baseAdres + 'agent/UpdateSite',sites);
   }
 }

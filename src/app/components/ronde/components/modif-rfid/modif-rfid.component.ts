@@ -51,10 +51,10 @@ constructor(private _rondeService : RondeService,private _SnackBar: SnackBarServ
         next : (data: RfidPatrol[]) => {
           if(data.length > 0){
             this.listRfid = data
-            this._SnackBar.openSnackBar({text2: 'La pastille à bien été modifié'})
+            this._SnackBar.openSnackBar({text1: "Ok",text2: 'La pastille à bien été modifié'})
           }
           else{
-            this._SnackBar.openSnackBar({text2: 'Nous n\'avons pas pu modifier la pastille'})
+            this._SnackBar.openSnackBar({text1: "échec",text2: 'Nous n\'avons pas pu modifier la pastille'})
           }
 
         }

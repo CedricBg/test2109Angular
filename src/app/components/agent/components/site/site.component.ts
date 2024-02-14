@@ -68,14 +68,26 @@ listSiteAssignAgent: Site[] = [];
       }),
       tap((data: Site[]) => {
         this.listSiteAssignAgent = data;
-        this.findListNotAssingeToGuard()
+        this.findListSiteNotAssingeToGuard()
       }),
       ).subscribe()
       )
     }
 
+  findListCustomersAssingeToGuard(){
+    this.listAssignedCustomer = this.listAllCustomers.filter(object => this.data.agent.id === object.idEmployee);
+  }
 
-  findListNotAssingeToGuard()
+  findListCustomersNotAssingeToGuard(){
+    this.listAllCustomers.forEach(client => {
+
+
+    }
+    );
+
+  }
+
+  findListSiteNotAssingeToGuard()
   {
     let allSites : Site[] = [];
     this.listAllCustomers.forEach(client => {
@@ -84,14 +96,37 @@ listSiteAssignAgent: Site[] = [];
 
     this.listAllsites = allSites;
     this.listAllsitesAgentmodif = allSites.filter(object => !this.listSiteAssignAgent.some(elt => elt.siteId === object.siteId));
+
   }
 
-  SaveSites(){
-    this.findListNotAssingeToGuard()
+  saveSites(){
+    this.findListSiteNotAssingeToGuard()
     this.addSite.idEmployee = this.data.agent.id;
     this.addSite.sites = this.listSiteAssignAgent;
-    console.log(this.addSite);
+    this.subscription.push(this._agentService.AddSitesToGuard(this.addSite).subscribe({
+      next : (data : Site[]) => {
+        console.log(data);
+        console.log(this.listSiteAssignAgent);
+        if(this.arraysAreEqual(data, this.listSiteAssignAgent))
+        {
+          this.listSiteAssignAgent = data;
+          this._SnackBar.openSnackBar({text1: "Ok",text2:  "Les sites ont été ajouté avec succès"});
+        }
+        else{
+          this._SnackBar.openSnackBar({text1: "Erreur",text2:  "Les sites n'ont pas été ajouté avec succès"});
+        }
+      }
+    }))
   }
+
+  arraysAreEqual(a: Site[], b: Site[]) {
+    return Array.isArray(a) &&
+      Array.isArray(b) &&
+      a.length === b.length &&
+      a.every((val, index) => val.siteId === b[index].siteId);
+  }
+
+
 
   drop(event: CdkDragDrop<any[]>)
   {
