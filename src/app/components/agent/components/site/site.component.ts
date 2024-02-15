@@ -1,3 +1,4 @@
+
 import { Site } from './../../../../models/customer/site.models';
 import { AgentService } from 'src/app/services/agent.service';
 import { ActivatedRoute } from '@angular/router';
@@ -33,29 +34,21 @@ nom: string = "";
 //Données venant de la db
 listAssignedCustomer: Customers[] = [];
 listAllCustomers: Customers[] = [];
-//liste sur lasquelle on va travailler on pourrras comparé les changements entre les 2 listes
-modifiAssignedCustomer: Customers[] = [];
-//Données venant de la db
-allCustomersNotAssignedToGuard: Customers [] = [];
-//liste sur lasquelle on va travailler on pourrras comparé les changements entre les 2 listes
-allCustomersNotAssignedToGuardModif : Customers [] = [];
+
+CustomersNotAssignedToGuard : Customers [] = [];
 //on va transformé nos clients en liste de sites
 listSiteAdd: Site[] = [];
-listSiteDel: Site[] = [];
 //On renvoi a la db une liste de site avec l'id de l'emplyee
 addSite: AddSites = new AddSites();
-delSite: AddSites = new AddSites();
 
 //Par sites
 listAllsites: Site[] = [];
 listAllsitesAgentmodif: Site[] = [];
-listAllSiteAgent: Site[] = [];
 listSiteAssignAgent: Site[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,private _SnackBar : SnackBarService, private _serviceEmployee: EmployeeService, private _serviceCustomer: CustomerService, private _agentService : AgentService){}
   ngOnInit(): void {
     this.addSite.sites = [];
-    this.delSite.sites = [];
     this.listAllsitesAgentmodif = [];
 
      this.subscription.push(
@@ -69,21 +62,19 @@ listSiteAssignAgent: Site[] = [];
       tap((data: Site[]) => {
         this.listSiteAssignAgent = data;
         this.findListSiteNotAssingeToGuard()
+        this.findListCustomersAssingeToGuard()
       }),
       ).subscribe()
       )
     }
 
-  findListCustomersAssingeToGuard(){
-    this.listAssignedCustomer = this.listAllCustomers.filter(object => this.data.agent.id === object.idEmployee);
+  findListCustomersNotAssingeToGuard(listAssignCustomer : Customers[]){
+    this.CustomersNotAssignedToGuard = this.listAllCustomers.filter(customer => customer.site.some(site => !listAssignCustomer.some(customerAssign => customerAssign.customerId === customer.customerId)));
   }
 
-  findListCustomersNotAssingeToGuard(){
-    this.listAllCustomers.forEach(client => {
-
-
-    }
-    );
+  findListCustomersAssingeToGuard(){
+    this.listAssignedCustomer = this.listAllCustomers.filter(customer => customer.site.some(site => this.listSiteAssignAgent.some(siteAgent => site.siteId === siteAgent.siteId)));
+    this.findListCustomersNotAssingeToGuard(this.listAssignedCustomer)
 
   }
 
@@ -96,24 +87,33 @@ listSiteAssignAgent: Site[] = [];
 
     this.listAllsites = allSites;
     this.listAllsitesAgentmodif = allSites.filter(object => !this.listSiteAssignAgent.some(elt => elt.siteId === object.siteId));
-
   }
 
-  saveSites(){
+  saveByCustomer(){
+  this.listSiteAssignAgent = [];
+  this.listAssignedCustomer.forEach(customer => {
+  this.listSiteAssignAgent = this.listSiteAssignAgent.concat(...customer.site);
+    });
     this.findListSiteNotAssingeToGuard()
+    this.saveSites();
+  }
+
+
+
+  //sauvegarde sur base des sites attribué on renvoi les sites attribué a la db
+  saveSites(){
+    this.findListCustomersAssingeToGuard()
     this.addSite.idEmployee = this.data.agent.id;
     this.addSite.sites = this.listSiteAssignAgent;
     this.subscription.push(this._agentService.AddSitesToGuard(this.addSite).subscribe({
       next : (data : Site[]) => {
-        console.log(data);
-        console.log(this.listSiteAssignAgent);
         if(this.arraysAreEqual(data, this.listSiteAssignAgent))
         {
           this.listSiteAssignAgent = data;
-          this._SnackBar.openSnackBar({text1: "Ok",text2:  "Les sites ont été ajouté avec succès"});
+          this._SnackBar.openSnackBar({text1: "Ok",text2:  "Les changements ont été enregistré avec succès"});
         }
         else{
-          this._SnackBar.openSnackBar({text1: "Erreur",text2:  "Les sites n'ont pas été ajouté avec succès"});
+          this._SnackBar.openSnackBar({text1: "Erreur",text2:  "Les changements n'ont pas été ajouté avec succès"});
         }
       }
     }))
@@ -125,7 +125,6 @@ listSiteAssignAgent: Site[] = [];
       a.length === b.length &&
       a.every((val, index) => val.siteId === b[index].siteId);
   }
-
 
 
   drop(event: CdkDragDrop<any[]>)

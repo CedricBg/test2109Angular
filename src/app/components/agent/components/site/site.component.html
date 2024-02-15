@@ -17,14 +17,14 @@
     </div>
   </section>
 
-  <!-- <div class="cdks" cdkDropListGroup>
+  <div class="cdks" cdkDropListGroup>
     <p class="title-drag">Par Client(s)</p>
     <div class="contientDragDrop">
       <div class="listDrag"
       cdkDropList
-      [cdkDropListData]="allCustomersNotAssignedToGuardModif"
+      [cdkDropListData]="CustomersNotAssignedToGuard"
       (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let elt of allCustomersNotAssignedToGuardModif" cdkDrag>
+        <div *ngFor="let elt of CustomersNotAssignedToGuard" cdkDrag>
           <span>{{elt.nameCustomer}}</span>
         </div>
       </div>
@@ -32,15 +32,15 @@
       <p class="p-drag-center"><mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_right</mat-icon></p>
       <div class="listDrag"
         cdkDropList
-        [cdkDropListData]="modifiAssignedCustomer"
+        [cdkDropListData]="listAssignedCustomer"
         (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let elt of modifiAssignedCustomer" cdkDrag>
+        <div *ngFor="let elt of listAssignedCustomer" cdkDrag>
         <span>{{elt.nameCustomer}}</span>
         </div>
       </div>
     </div>
-    <button class="button-drag" mat-button >Envoyer</button>
-  </div> -->
+    <button class="button-drag" mat-button (click)="saveByCustomer()" >Envoyer</button>
+  </div>
 
  <div class="cdks" cdkDropListGroup>
     <p class="title-drag">Par Site(s)</p>
