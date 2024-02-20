@@ -20,6 +20,7 @@ import { AddSiteComponent } from '../add-site/add-site.component';
 import { UpdateCustomerComponent } from '../update-customer/update-customer.component';
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { DialogRef } from '@angular/cdk/dialog';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 
 @Component({
@@ -42,7 +43,7 @@ export class ListCustomerComponent implements OnInit {
   length: number
   customer: Customers
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor( private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef) { }
+  constructor( private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef, private _snackaBarServcie: SnackBarService) { }
 
   ngOnInit(): void {
     this.subscriptions.push(this._CustService.getAllCustomers().pipe(first()).subscribe({
@@ -57,6 +58,7 @@ export class ListCustomerComponent implements OnInit {
       this.siteSelected = newData
       this.subscriptions.push(this._CustService.getAllCustomers().subscribe(data=>{
         this.listCustomers = data
+        this._snackaBarServcie.openSnackBar({text1: "Erreur",text2:  "Les changements n'ont pas été ajouté avec succès"});
         this.getPageData()
         }
       ))
@@ -73,6 +75,7 @@ export class ListCustomerComponent implements OnInit {
     //Retour update Customer
     this.subscriptions.push(this._CustService.GetUpdateCustomer().subscribe(newData =>{
       this.listCustomers = newData
+      //this._snackaBarServcie.openSnackBar({text1: "Erreur",text2:  "Les changements n'ont pas été ajouté avec succès"});
       this.getPageData()
     }))
 
@@ -140,7 +143,6 @@ export class ListCustomerComponent implements OnInit {
 
   UpdateOne(id: number)
   {
-    //selectedSiteName est mis a jour par sélection dans le html
     if(this.selectedSiteName != undefined)
     {
       const idsite: number =  this.GetSit(id)

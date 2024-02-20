@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DialogRef } from '@angular/cdk/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class UpdateCustomerComponent implements OnInit {
   formCustomer : FormGroup
   customer!: Customers
   private subscriptions: Subscription[]=[];
-  constructor(private dialogRef: DialogRef<UpdateCustomerComponent>,private _builder: FormBuilder,private _custService: CustomerService, private _router  : Router
+  constructor(private dialogRef: DialogRef<UpdateCustomerComponent>, private _snackBar : SnackBarService ,private _builder: FormBuilder,private _custService: CustomerService, private _router  : Router
 ){}
 
 ngOnInit(): void {
@@ -38,6 +39,7 @@ ngOnInit(): void {
     }
   }));
 }
+
   formulaire()
   {
     this.formCustomer = this._builder.group({
@@ -88,13 +90,18 @@ ngOnInit(): void {
       this.phone.push(this.newPhone())
     }
   }
+
   Send(id: number)
   {
     this.formCustomer.get('customerId').patchValue(id)
     if(this.formCustomer.valid === true)
     {
       this._custService.UpdateCustomer(this.formCustomer.value);
+      this._snackBar.openSnackBar({text2 :"Customer updated successfully"});
       this.CloseWindow()
+    }
+    else{
+      this._snackBar.openSnackBar({text2 :"formulaire not valid"});
     }
   }
   get email(): FormArray

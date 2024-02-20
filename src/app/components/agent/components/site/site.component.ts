@@ -13,6 +13,8 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NgFor } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 
 
@@ -22,13 +24,13 @@ import { NgFor } from '@angular/common';
     templateUrl: './site.component.html',
     styleUrls: ['./site.component.scss'],
     standalone: true,
-    imports: [CdkDropListGroup, CdkDropList, NgFor, CdkDrag, MatIconModule, MatButtonModule, MatIconModule  ]
+    imports: [CdkDropListGroup, CdkDropList, NgFor, CdkDrag, MatIconModule, MatButtonModule, MatIconModule , MatCardModule ]
 })
 export class SiteComponent implements OnInit{
 subscription: Subscription[] = [];
 data: any;
 nom: string = "";
-
+safeImageUrl: SafeUrl
 
 //Par customer
 //Données venant de la db
@@ -46,7 +48,7 @@ listAllsites: Site[] = [];
 listAllsitesAgentmodif: Site[] = [];
 listSiteAssignAgent: Site[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute,private _SnackBar : SnackBarService, private _serviceEmployee: EmployeeService, private _serviceCustomer: CustomerService, private _agentService : AgentService){}
+  constructor(private activatedRoute: ActivatedRoute,private _SnackBar : SnackBarService, private _DomSanitizer: DomSanitizer, private _serviceEmployee: EmployeeService, private _serviceCustomer: CustomerService, private _agentService : AgentService){}
   ngOnInit(): void {
     this.addSite.sites = [];
     this.listAllsitesAgentmodif = [];
@@ -54,6 +56,7 @@ listSiteAssignAgent: Site[] = [];
      this.subscription.push(
       this.activatedRoute.data.pipe(
         switchMap ((data: any) => {
+          console.log(data);
           this.data = data;
           this.nom = this.data.agent.name;
           this.listAllCustomers = this.data.listallCustomers;
@@ -63,6 +66,9 @@ listSiteAssignAgent: Site[] = [];
         this.listSiteAssignAgent = data;
         this.findListSiteNotAssingeToGuard()
         this.findListCustomersAssingeToGuard()
+        this._serviceEmployee.DownLoadFoto(this.data.agent.id).subscribe((data: any) => {
+          this.safeImageUrl = this._DomSanitizer.bypassSecurityTrustUrl(URL.createObjectURL(data));
+        })
       }),
       ).subscribe()
       )
@@ -125,7 +131,6 @@ listSiteAssignAgent: Site[] = [];
       a.length === b.length &&
       a.every((val, index) => val.siteId === b[index].siteId);
   }
-
 
   drop(event: CdkDragDrop<any[]>)
   {

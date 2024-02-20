@@ -1,21 +1,15 @@
 
 <div class="contenuSite">
-  <section>
-    <div class="card">
-      <div class="header">
-      </div>
-        <div class="contenu">
-          <div id="photo"><img  alt="Photo"></div>
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar ><img id="photo" [attr.src]="safeImageUrl" alt="Photo"></div>
+      <mat-card-title>{{data.agent.surName}} {{data.agent.firstName}}</mat-card-title>
+      <mat-card-subtitle>Rôle: {{data.agent.role.name}}</mat-card-subtitle>
 
-            <div class="details">
-              <p class="position">Agent: {{data.agent.surName}} {{data.agent.firstName}}</p>
-              <p class="position">Rôle: {{data.agent.role.name}}</p>
-            </div>
-          </div>
-        <div class="footer">
-      </div>
-    </div>
-  </section>
+    </mat-card-header>
+
+    <mat-card-content></mat-card-content>
+  </mat-card>
 
   <div class="cdks" cdkDropListGroup>
     <p class="title-drag">Par Client(s)</p>
@@ -25,7 +19,7 @@
       [cdkDropListData]="CustomersNotAssignedToGuard"
       (cdkDropListDropped)="drop($event)">
         <div *ngFor="let elt of CustomersNotAssignedToGuard" cdkDrag>
-          <span>{{elt.nameCustomer}}</span>
+          <span class="element">{{elt.nameCustomer}}</span>
         </div>
       </div>
 
@@ -35,7 +29,7 @@
         [cdkDropListData]="listAssignedCustomer"
         (cdkDropListDropped)="drop($event)">
         <div *ngFor="let elt of listAssignedCustomer" cdkDrag>
-        <span>{{elt.nameCustomer}}</span>
+        <span class="element">{{elt.nameCustomer}}</span>
         </div>
       </div>
     </div>
@@ -49,7 +43,7 @@
       [cdkDropListData]="listAllsitesAgentmodif"
       (cdkDropListDropped)="dropSite($event)">
       <div *ngFor="let elt of listAllsitesAgentmodif" cdkDrag>
-        <span>{{elt.name}}</span>
+        <span class="element">{{elt.name}}</span>
     </div>
       </div>
       <p class="p-drag-center"><mat-icon fontIcon="keyboard_arrow_left"></mat-icon><mat-icon fontIcon="keyboard_arrow_right"></mat-icon></p>
@@ -57,7 +51,7 @@
       [cdkDropListData]="this.listSiteAssignAgent"
       (cdkDropListDropped)="dropSite($event)">
         <div *ngFor="let elt of listSiteAssignAgent" cdkDrag>
-          <span>{{elt.name}}</span>
+          <span class="element">{{elt.name}}</span>
       </div>
     </div>
   </div>
