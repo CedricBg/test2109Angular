@@ -1,31 +1,41 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule, ProgressSpinnerMode} from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { NgIf, TitleCasePipe } from '@angular/common';
 import { UserProfileComponent } from '../employee/components/user-profile/user-profile.component';
 import { LoginComponent } from '../auth/components/login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { SpinnerService } from 'src/app/services/spinner.service';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
     selector: 'app-nav',
     templateUrl: './nav.component.html',
     styleUrls: ['./nav.component.scss'],
     standalone: true,
-    imports: [NgIf, TitleCasePipe,MatProgressSpinnerModule,MatIconModule,CommonModule]
+    imports: [NgIf, TitleCasePipe,MatProgressSpinnerModule,MatIconModule,CommonModule, MatProgressSpinnerModule]
 })
 export class NavComponent implements OnInit {
-load:boolean = false;
- isConnected : boolean;
- name! : string;
- title: string = 'Shield Connect';
-  constructor( private _authService : AuthService,public dialog : MatDialog,private _Router : Router )
+  color: ThemePalette = 'primary';
+  mode: ProgressSpinnerMode = 'indeterminate';
+  value = 100;
+  load:boolean = false;
+
+  isConnected : boolean;
+
+  name! : string;
+  title: string = 'Shield Connect';
+  constructor( private _authService : AuthService,  public _spinnerService: SpinnerService, public dialog : MatDialog,private _Router : Router )
   {  }
 
   ngOnInit(): void
   {
+
+    this._spinnerService.spinner.subscribe((data : boolean) => this.load = data)
+
     this._authService.connectedSubject.subscribe
     ({
       next : (data : boolean) => {

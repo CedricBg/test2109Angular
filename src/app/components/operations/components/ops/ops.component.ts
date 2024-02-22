@@ -5,7 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { ThemePalette } from '@angular/material/core';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
     selector: 'app-ops',
@@ -17,10 +18,11 @@ import { MatMenuModule } from '@angular/material/menu';
 export class OpsComponent implements OnInit {
   connected!: Boolean;
 
-  constructor(private _Router : Router, private authService: AuthService) { }
+  constructor(private _Router : Router, public _spinnerService: SpinnerService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.connected = this.authService.isConnected;
+    this._spinnerService.spinner.next(false);
 
   }
 

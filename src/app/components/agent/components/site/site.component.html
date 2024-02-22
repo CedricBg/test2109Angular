@@ -4,58 +4,60 @@
     <mat-card-header>
       <div mat-card-avatar ><img id="photo" [attr.src]="safeImageUrl" alt="Photo"></div>
       <mat-card-title>{{data.agent.surName}} {{data.agent.firstName}}</mat-card-title>
-      <mat-card-subtitle>Rôle: {{data.agent.role.name}}</mat-card-subtitle>
-
+      <mat-card-subtitle>{{data.agent.role.name}}</mat-card-subtitle>
     </mat-card-header>
 
-    <mat-card-content></mat-card-content>
   </mat-card>
 
-  <div class="cdks" cdkDropListGroup>
-    <p class="title-drag">Par Client(s)</p>
-    <div class="contientDragDrop">
-      <div class="listDrag"
-      cdkDropList
-      [cdkDropListData]="CustomersNotAssignedToGuard"
-      (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let elt of CustomersNotAssignedToGuard" cdkDrag>
-          <span class="element">{{elt.nameCustomer}}</span>
-        </div>
-      </div>
-
-      <p class="p-drag-center"><mat-icon>keyboard_arrow_left</mat-icon><mat-icon>keyboard_arrow_right</mat-icon></p>
-      <div class="listDrag"
+  <div class="ConentDragendDrops">
+    <span class="title_DragandDrop">Attribué un site ou un client à un agent</span>
+    <div class="cdks" cdkDropListGroup>
+      <p class="title-drag">Par Client(s)</p>
+      <div class="contientDragDrop">
+        <div class="listDrag"
         cdkDropList
-        [cdkDropListData]="listAssignedCustomer"
+        [cdkDropListData]="CustomersNotAssignedToGuard"
         (cdkDropListDropped)="drop($event)">
-        <div *ngFor="let elt of listAssignedCustomer" cdkDrag>
-        <span class="element">{{elt.nameCustomer}}</span>
+          <div *ngFor="let elt of CustomersNotAssignedToGuard" cdkDrag>
+
+            <span class="element"><mat-icon aria-hidden="false" class="iconAdd"  aria-label="Store" fontIcon="add_business"></mat-icon>{{elt.nameCustomer}}</span>
+          </div>
+        </div>
+
+
+        <div class="listDrag"
+          cdkDropList
+          [cdkDropListData]="listAssignedCustomer"
+          (cdkDropListDropped)="drop($event)">
+          <div *ngFor="let elt of listAssignedCustomer" cdkDrag>
+          <span class="element"><mat-icon aria-hidden="false" class="iconDelete"  aria-label="Example home icon" fontIcon="store"></mat-icon>{{elt.nameCustomer}}</span>
+          </div>
         </div>
       </div>
+      <button class="button-drag" mat-button (click)="saveByCustomer()" >Envoyer</button>
     </div>
-    <button class="button-drag" mat-button (click)="saveByCustomer()" >Envoyer</button>
-  </div>
 
- <div class="cdks" cdkDropListGroup>
-    <p class="title-drag">Par Site(s)</p>
-    <div class="contientDragDrop">
-      <div class="listDrag"cdkDropList
-      [cdkDropListData]="listAllsitesAgentmodif"
-      (cdkDropListDropped)="dropSite($event)">
-      <div *ngFor="let elt of listAllsitesAgentmodif" cdkDrag>
-        <span class="element">{{elt.name}}</span>
-    </div>
-      </div>
-      <p class="p-drag-center"><mat-icon fontIcon="keyboard_arrow_left"></mat-icon><mat-icon fontIcon="keyboard_arrow_right"></mat-icon></p>
-      <div class="listDrag" cdkDropList
-      [cdkDropListData]="this.listSiteAssignAgent"
-      (cdkDropListDropped)="dropSite($event)">
-        <div *ngFor="let elt of listSiteAssignAgent" cdkDrag>
+  <div class="cdks" cdkDropListGroup>
+      <p class="title-drag">Par Site(s)</p>
+      <div class="contientDragDrop">
+        <div class="listDrag"cdkDropList
+        [cdkDropListData]="listAllsitesAgentmodif"
+        (cdkDropListDropped)="dropSite($event)">
+        <div *ngFor="let elt of listAllsitesAgentmodif" cdkDrag>
           <span class="element">{{elt.name}}</span>
       </div>
+        </div>
+
+        <div class="listDrag" cdkDropList
+        [cdkDropListData]="this.listSiteAssignAgent"
+        (cdkDropListDropped)="dropSite($event)">
+          <div *ngFor="let elt of listSiteAssignAgent" cdkDrag>
+            <span class="element">{{elt.name}}</span>
+        </div>
+      </div>
     </div>
-  </div>
-    <button class="button-drag" mat-button (click)="saveSites()">Envoyer</button>
+      <button class="button-drag" mat-button (click)="saveSites()">Envoyer</button>
+    </div>
   </div>
 </div>
 

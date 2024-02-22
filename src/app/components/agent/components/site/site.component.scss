@@ -8,12 +8,8 @@
   width:250px;
   height: 10vh;
 }
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
-#photo{
 
+#photo{
   height:50px;
   width:50px;
   border-radius: 180px;
@@ -26,11 +22,21 @@
   flex-wrap: wrap;
   align-items: center;
 }
-//Fin contenu div Agent
 
-//début drag and drop
-.cdks{
-  padding-top:20px;
+.ConentDragendDrops
+{
+  display: flex;
+  flex-flow: wrap;
+  position:absolute  ;
+  top: 10vh ;
+  left: 20vw;
+  justify-content: center;
+}
+.ConentDragendDrops .title_DragandDrop{
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .contientDragDrop
@@ -51,20 +57,19 @@ border-radius: 0 0  5px 5px ;
   height:500px;
 
 }
-.contientDragDrop mat-icon{
-  color: #326290;
-  padding-top: 250px;
-}
+
 
 .listDrag{
-width:10vw;
+display: flex ;
+flex-flow: column wrap;
+width:200px;
 border-radius: 5px;
 margin-top: 2%;
 margin-bottom: 2%;
-border: 1px solid #41fadb ;
 background-color: white;
 padding: 1%;
 }
+
 
 .cdk-drag-preview {
   box-sizing: border-box;
@@ -82,13 +87,27 @@ padding: 1%;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 .element{
+  display: flex;
   display: inline-block;
-  margin-top: 3%;
-  margin-bottom: 3%;
-  text-align: center ;
-  border: 1px solid #AAD1D0;
+  border: 1px solid #bbf0ee;
   width: 100%;
+  border-radius: 1px;
+  background-color: #cff0ef;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  justify-content: center;
+
 }
+.iconDelete{
+height: 20px;
+color: green;
+}
+.iconAdd{
+  height: 20px;
+  color: red;
+  margin-right: 3px;
+  }
+
 .element:hover{
 cursor:move;
 }
@@ -123,11 +142,7 @@ cursor:move;
 }
 
 @media screen and (max-width: 1400px ) {
-  .contenuSite{
-    flex-direction: column-reverse;
-    justify-content: center;
-    margin-left:0%;
-  }
+
   .card{
     visibility: hidden;
   }
@@ -137,14 +152,17 @@ cursor:move;
     height: 30px;
     margin-top:15px;
   }
+  .ConentDragendDrops
+  {
+  display: flex;
+  position:absolute;
+  top: 32vh;
+  left: 2vw;
+  }
 }
 
 @media screen and (max-width: 1000px ) {
-  .contenuSite{
-    flex-direction: column-reverse;
-    justify-content: center;
-    margin-left:0%;
-  }
+
   .title-drag{
     height: 20px;
     padding-top: 0px;
