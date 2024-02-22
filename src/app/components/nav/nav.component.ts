@@ -19,9 +19,6 @@ import { ThemePalette } from '@angular/material/core';
     imports: [NgIf, TitleCasePipe,MatProgressSpinnerModule,MatIconModule,CommonModule, MatProgressSpinnerModule]
 })
 export class NavComponent implements OnInit {
-  color: ThemePalette = 'primary';
-  mode: ProgressSpinnerMode = 'indeterminate';
-  value = 100;
   load:boolean = false;
 
   isConnected : boolean;

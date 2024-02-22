@@ -5,15 +5,16 @@
 
 .spinner{
   position: absolute;
-  top: 10vh;
+  top: 1vh;
   left: 49vw;
 
 }
 
+
 .nav{
   height: 70px;
   display: flex;
-  color:black;
+  color: black;
   width:100vw;
   display: flex;
   justify-content: flex-end;
@@ -21,6 +22,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  background-color: transparent;
 }
 
 .nav h1{

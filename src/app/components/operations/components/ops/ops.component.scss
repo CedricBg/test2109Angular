@@ -14,12 +14,20 @@
 }
 
 .ButtonTaches{
+  color: white;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 2px 3px 1px black;
   display: flex;
   font-weight: bold;
   width: 250px;
   align-items: center;
   justify-content: space-around;
-
+  background-color: rgb(133, 250, 240);
+}
+.ButtonTaches:hover{
+  box-shadow: 2px 2px 3px 1px rgb(133, 250, 240);
+  cursor: pointer;
 }
 .routerOutlet{
   min-height:85%;

@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { InfoAgentComponent } from './components/info-agent/info-agent.component';
 import { NgIf, NgFor } from '@angular/common';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 @Component({
@@ -50,7 +51,7 @@ export class AgentComponent implements OnInit {
     siteId: 0,
     idEmployee: 0,
   }
-  constructor(private _agentService: AgentService, private _employee: EmployeeService) {}
+  constructor(private _agentService: AgentService, private _employee: EmployeeService, public spinnerService : SpinnerService) {}
 
   ngOnInit(): void {
 
@@ -72,6 +73,7 @@ export class AgentComponent implements OnInit {
     else{
       alert("Vous n'êtes pas connecté")
     }
+    this.spinnerService.spinner.next(false);
   }
 
   //On envoi les données pour le début de service l'appel a StartWork va nous redirigé vers la page ou on affiche le rapport
