@@ -31,7 +31,6 @@ export class OpsComponent implements OnInit {
   {
     this._Router.navigateByUrl('OPS/agent/admin');
     this._spinnerService.spinner.next(true);
-
   }
 
   AllEmp(chemin: string)
@@ -43,7 +42,9 @@ export class OpsComponent implements OnInit {
     else{
     this._Router.navigateByUrl('employee');
     }
+    this._spinnerService.spinner.next(true);
   }
+
   Customers(chemin: string)
   {
     this._Router.navigateByUrl('OPS/customer/listcustomer');
@@ -52,6 +53,7 @@ export class OpsComponent implements OnInit {
 
   Rondes(chemin: string)
   {
+    this._spinnerService.spinner.next(true);
     if(!(chemin == ""))
     {
       this._Router.navigateByUrl('OPS/ronde/'+chemin);
@@ -59,7 +61,7 @@ export class OpsComponent implements OnInit {
     else{
       this._Router.navigateByUrl('OPS/ronde');
     }
-    this._spinnerService.spinner.next(true);
+
   }
   ngOnDestroy(){
     this.subscriptions.forEach(subscription  => {

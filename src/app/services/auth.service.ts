@@ -47,7 +47,7 @@ export class AuthService {
   Login(userin : Login)
   {
     return this._httpClient.post<User>(environment.baseAdres+ 'Auth/login', userin).subscribe({
-      next : (data : User)=> {
+      next : (data : any)=> {
         this.returnData = data
           if(this.isValideUser(this.returnData))
           {
@@ -60,7 +60,6 @@ export class AuthService {
             this.redirectTo()
           }
           else{
-
             this._spinnerServce.spinner.next(false);
           }
       }
