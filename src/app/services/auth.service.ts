@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig, } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { SpinnerService } from './spinner.service';
 
 
 
@@ -16,7 +17,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
 
-  constructor(private _httpClient : HttpClient, private _router : Router, public dialog : MatDialog) { }
+  constructor(private _httpClient : HttpClient, private _router : Router, public dialog : MatDialog, private _spinnerServce : SpinnerService) { }
 
   private _isConnected : boolean
   get isConnected() : boolean
@@ -38,22 +39,30 @@ export class AuthService {
     this._httpClient.post<string>(environment.baseAdres+ 'Auth/AddLogin', form).subscribe()
   }
 
+  private isValideUser(user : any): user is User
+  {
+    return 'token' in user && 'firstName' in user && 'surName' in user && 'id' in user && 'dimin' in user && 'role' in user
+  }
 
   Login(userin : Login)
   {
     return this._httpClient.post<User>(environment.baseAdres+ 'Auth/login', userin).subscribe({
       next : (data : User)=> {
         this.returnData = data
-        if(this.returnData != null)
-        {
-          sessionStorage.setItem('token' , this.returnData.token)
-          sessionStorage.setItem('firstName' , this.returnData.firstName)
-          sessionStorage.setItem('surName', this.returnData.surName)
-          sessionStorage.setItem('id', this.returnData.id.toString())
-          sessionStorage.setItem('dimin', this.returnData.dimin)
-          this.emitSubject()
-          this.redirectTo()
-        }
+          if(this.isValideUser(this.returnData))
+          {
+            sessionStorage.setItem('token' , this.returnData.token)
+            sessionStorage.setItem('firstName' , this.returnData.firstName)
+            sessionStorage.setItem('surName', this.returnData.surName)
+            sessionStorage.setItem('id', this.returnData.id.toString())
+            sessionStorage.setItem('dimin', this.returnData.dimin)
+            this.emitSubject()
+            this.redirectTo()
+          }
+          else{
+
+            this._spinnerServce.spinner.next(false);
+          }
       }
     })
   }

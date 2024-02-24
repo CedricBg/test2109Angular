@@ -39,7 +39,13 @@ constructor(private _autService : AuthService, private _AgentService : AgentServ
         this.listAgent = data;
       }
     }))
-    this._spinnerService.spinner.next(false);
+    this.subscriptions.push(this._spinnerService.spinner.subscribe({
+      next: (data : boolean) => {
+        if(data == true){
+          this._spinnerService.spinner.next(false);
+        }
+      }
+    }))
   }
 //Détection de l'agent sélectionnné
   ngModelChange(newValue: string)

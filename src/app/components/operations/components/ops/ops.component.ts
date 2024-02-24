@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { ThemePalette } from '@angular/material/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-ops',
@@ -17,19 +18,20 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class OpsComponent implements OnInit {
   connected!: Boolean;
+  private subscriptions: Subscription[] = [];
 
   constructor(private _Router : Router, public _spinnerService: SpinnerService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.connected = this.authService.isConnected;
     this._spinnerService.spinner.next(false);
-
   }
 
   Agent()
   {
     this._Router.navigateByUrl('OPS/agent/admin');
     this._spinnerService.spinner.next(true);
+
   }
 
   AllEmp(chemin: string)
@@ -58,5 +60,10 @@ export class OpsComponent implements OnInit {
       this._Router.navigateByUrl('OPS/ronde');
     }
     this._spinnerService.spinner.next(true);
+  }
+  ngOnDestroy(){
+    this.subscriptions.forEach(subscription  => {
+      subscription.unsubscribe();
+    });
   }
 }

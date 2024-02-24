@@ -56,7 +56,6 @@ listSiteAssignAgent: Site[] = [];
      this.subscription.push(
       this.activatedRoute.data.pipe(
         switchMap ((data: any) => {
-          console.log(data);
           this.data = data;
           this.nom = this.data.agent.name;
           this.listAllCustomers = this.data.listallCustomers;
