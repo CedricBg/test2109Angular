@@ -10,6 +10,7 @@ import { NgFor } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ private subscriptions: Subscription[] = [];
 name: string;
 detail: Employee = new Employee()
 id!: number
-constructor(private _autService : AuthService, private _AgentService : AgentService, private _Router: Router){
+constructor(private _autService : AuthService, private _AgentService : AgentService, private _Router: Router,private _spinnerService : SpinnerService){
 
   }
 
@@ -38,6 +39,7 @@ constructor(private _autService : AuthService, private _AgentService : AgentServ
         this.listAgent = data;
       }
     }))
+    this._spinnerService.spinner.next(false);
   }
 //Détection de l'agent sélectionnné
   ngModelChange(newValue: string)

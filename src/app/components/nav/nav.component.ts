@@ -32,7 +32,6 @@ export class NavComponent implements OnInit {
   {
 
     this._spinnerService.spinner.subscribe((data : boolean) => this.load = data)
-
     this._authService.connectedSubject.subscribe
     ({
       next : (data : boolean) => {

@@ -1,5 +1,11 @@
 
 .Contenu_Add_ronde{
 display: flex;
-flex-flow: row wrap;
+flex-flow: column wrap;
+margin-left: 50px;
+width:250px;
+border: 1px solid #000;
+}
+.Contenu_Add_ronde button:hover{
+cursor: pointer;
 }

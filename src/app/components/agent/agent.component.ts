@@ -51,7 +51,7 @@ export class AgentComponent implements OnInit {
     siteId: 0,
     idEmployee: 0,
   }
-  constructor(private _agentService: AgentService, private _employee: EmployeeService, public spinnerService : SpinnerService) {}
+  constructor(private _agentService: AgentService, private _employee: EmployeeService, private _spinnerService : SpinnerService) {}
 
   ngOnInit(): void {
 
@@ -73,7 +73,7 @@ export class AgentComponent implements OnInit {
     else{
       alert("Vous n'êtes pas connecté")
     }
-    this.spinnerService.spinner.next(false);
+    this._spinnerService.spinner.next(false);
   }
 
   //On envoi les données pour le début de service l'appel a StartWork va nous redirigé vers la page ou on affiche le rapport

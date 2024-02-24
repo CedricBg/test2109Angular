@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import {  FormBuilder, FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { filterByName } from "../../../customer/filter-by-name.pipe";
 import { MatIconModule } from '@angular/material/icon';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 
@@ -26,13 +27,14 @@ client!: string;
 action!: string;
 siteId: number;
 
-constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBuilder, private _router : Router){}
+constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBuilder, private _router : Router, private _spinnerService : SpinnerService){}
   ngOnInit(): void {
     this.subscription.push(this._activetdedRoute.data.subscribe({
       next : (data : Customers[]) => {
         this.listCustomers = data
       }
     }));
+    this._spinnerService.spinner.next(false);
   }
 
   ChangeSite()

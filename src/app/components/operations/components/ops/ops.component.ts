@@ -29,6 +29,7 @@ export class OpsComponent implements OnInit {
   Agent()
   {
     this._Router.navigateByUrl('OPS/agent/admin');
+    this._spinnerService.spinner.next(true);
   }
 
   AllEmp(chemin: string)
@@ -44,7 +45,9 @@ export class OpsComponent implements OnInit {
   Customers(chemin: string)
   {
     this._Router.navigateByUrl('OPS/customer/listcustomer');
+    this._spinnerService.spinner.next(true);
   }
+
   Rondes(chemin: string)
   {
     if(!(chemin == ""))
@@ -54,5 +57,6 @@ export class OpsComponent implements OnInit {
     else{
       this._Router.navigateByUrl('OPS/ronde');
     }
+    this._spinnerService.spinner.next(true);
   }
 }

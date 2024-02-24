@@ -13,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @Component({
     selector: 'app-listemployee',
@@ -34,7 +35,7 @@ export class ListemployeeComponent implements OnInit {
   safeImageUrl: SafeUrl
   subscription: Subscription[] = []
 
-  constructor(private _serviceEmployee : EmployeeService, public dialog : MatDialog, private _DomSanitizer: DomSanitizer ) { }
+  constructor(private _serviceEmployee : EmployeeService, public dialog : MatDialog, private _DomSanitizer: DomSanitizer,private _spinnerService : SpinnerService ) { }
 
   ngOnInit(): void {
     this.role = sessionStorage.getItem('dimin')
@@ -45,6 +46,7 @@ export class ListemployeeComponent implements OnInit {
     this.subscription.push(this._serviceEmployee.getAllData().subscribe(newData =>{
       this.listEmployee = newData
     }))
+    this._spinnerService.spinner.next(false);
   }
 
   GetEmployee()

@@ -21,6 +21,7 @@ import { UpdateCustomerComponent } from '../update-customer/update-customer.comp
 import { AddCustomerComponent } from '../add-customer/add-customer.component';
 import { DialogRef } from '@angular/cdk/dialog';
 import { SnackBarService } from 'src/app/services/snack-bar.service';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 @Component({
@@ -43,7 +44,7 @@ export class ListCustomerComponent implements OnInit {
   length: number
   customer: Customers
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor( private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef, private _snackaBarServcie: SnackBarService) { }
+  constructor(private _spinnerService : SpinnerService, private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef, private _snackaBarServcie: SnackBarService) { }
 
   ngOnInit(): void {
     this.subscriptions.push(this._CustService.getAllCustomers().pipe(first()).subscribe({
@@ -86,6 +87,7 @@ export class ListCustomerComponent implements OnInit {
         this.getPageData()
       }
     }))
+    this._spinnerService.spinner.next(false);
   }
 
   ngAfterViewInit() {

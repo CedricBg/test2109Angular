@@ -2,11 +2,15 @@
 .contenuSite{
   display:flex;
   flex-wrap: wrap;
+
 }
 
 .card{
   width:250px;
-  height: 10vh;
+  height: 80px;
+  background-color: #B2CCE1;
+  text-align: center ;
+  color: whitesmoke   ;
 }
 
 #photo{
@@ -23,6 +27,8 @@
   align-items: center;
 }
 
+
+
 .ConentDragendDrops
 {
   display: flex;
@@ -32,20 +38,24 @@
   left: 20vw;
   justify-content: center;
 }
+
 .ConentDragendDrops .title_DragandDrop{
-  width: 100%;
+  display: inline-block;
+
+  width: 1000px;
+  height: 20px;
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .contientDragDrop
 {
 display:flex;
 flex-wrap: wrap;
-justify-content: space-around;
 word-break: break-all;
-width: 500px;
+width: 600px;
 min-height: 500px;
 background-color: #f2f2f2;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -62,12 +72,12 @@ border-radius: 0 0  5px 5px ;
 .listDrag{
 display: flex ;
 flex-flow: column wrap;
-width:200px;
-border-radius: 5px;
+width:230px;
 margin-top: 2%;
 margin-bottom: 2%;
-background-color: white;
-padding: 1%;
+background-color: transparent;
+padding-left: 30px;
+padding-right: 30px;
 }
 
 
@@ -91,13 +101,18 @@ padding: 1%;
   display: inline-block;
   border: 1px solid #bbf0ee;
   width: 100%;
-  border-radius: 1px;
-  background-color: #cff0ef;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  border-radius: 5px;
+  background-color: #E4EDF8;
+  padding-top: 5px;
+  padding-bottom: 5px;
   justify-content: center;
-
+  margin-bottom: 2px;
 }
+
+.element:hover{
+  cursor:move;
+  }
+
 .iconDelete{
 height: 20px;
 color: green;
@@ -108,31 +123,29 @@ color: green;
   margin-right: 3px;
   }
 
-.element:hover{
-cursor:move;
-}
+
 
 .button-drag{
   margin-top:15px;
-  margin-left:35%;
+  margin-left:38%;
   font-weight:bold ;
   border-radius: 10px;
   border:none;
-  background-color: #AAD1D0;
-  color: white;
+  background-color: #B2CCE1;
   width: 201px;
   height: 40px;
   cursor: pointer;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
               0 8px 10px 1px rgba(0, 0, 0, 0.14),
               0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  color: whitesmoke  !important;
 }
 .title-drag
 {
   padding-top: 10px;
-  width:500px;
+  width:600px;
   height: 30px;
-  background-color: white;
+  background-color:  #f2f2f2;
   text-align: center;
   margin-left: 50px;
   border-radius: 5px 5px 0 0 ;
