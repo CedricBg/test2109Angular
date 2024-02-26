@@ -20,7 +20,6 @@ import { ThemePalette } from '@angular/material/core';
 })
 export class NavComponent implements OnInit {
   load:boolean = false;
-
   isConnected : boolean;
 
   name! : string;
@@ -30,8 +29,8 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void
   {
-
     this._spinnerService.spinner.subscribe((data : boolean) => this.load = data)
+    console.log(this.load)
     this._authService.connectedSubject.subscribe
     ({
       next : (data : boolean) => {

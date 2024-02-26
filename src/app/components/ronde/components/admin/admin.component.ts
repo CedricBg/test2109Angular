@@ -34,7 +34,8 @@ constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBu
         this.listCustomers = data
       }
     }));
-    this._spinnerService.spinner.next(false);
+    this._spinnerService.setActive(false);
+
   }
 
   ChangeSite()

@@ -33,19 +33,13 @@ constructor(private _autService : AuthService, private _AgentService : AgentServ
 
   ngOnInit(): void {
     this.connected = this._autService.isConnected;
-
+    this._spinnerService.setActive(false);
     this.subscriptions.push(this._AgentService.GetGuards().subscribe({
       next : (data : Employee[]) =>{
         this.listAgent = data;
       }
     }))
-    this.subscriptions.push(this._spinnerService.spinner.subscribe({
-      next: (data : boolean) => {
-        if(data == true){
-          this._spinnerService.spinner.next(false);
-        }
-      }
-    }))
+
   }
 //Détection de l'agent sélectionnné
   ngModelChange(newValue: string)

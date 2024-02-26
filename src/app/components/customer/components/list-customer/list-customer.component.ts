@@ -87,7 +87,7 @@ export class ListCustomerComponent implements OnInit {
         this.getPageData()
       }
     }))
-    this._spinnerService.spinner.next(false);
+    this._spinnerService.setActive(false);
   }
 
   ngAfterViewInit() {

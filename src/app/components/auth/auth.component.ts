@@ -11,8 +11,6 @@ import { RouterOutlet } from '@angular/router';
     imports: [RouterOutlet]
 })
 export class AuthComponent  {
-  load: boolean = false;
-
 
 
 }

@@ -62,6 +62,9 @@ export class AuthService {
           else{
             this._spinnerServce.spinner.next(false);
           }
+      },
+      error : (error) => {
+        this._spinnerServce.spinner.next(false);
       }
     })
   }

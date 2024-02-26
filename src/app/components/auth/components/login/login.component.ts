@@ -49,9 +49,10 @@ export class LoginComponent implements OnInit {
   {
     if(this.formLogin.valid)
     {
-    this._spinnerService.spinner.next(true);
+
     this._authService.Login(this.formLogin.value)
     this.CloseDialogBox()
+    this._spinnerService.setActive(true);
     }
   }
 

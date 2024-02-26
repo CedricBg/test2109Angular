@@ -46,7 +46,7 @@ export class ListemployeeComponent implements OnInit {
     this.subscription.push(this._serviceEmployee.getAllData().subscribe(newData =>{
       this.listEmployee = newData
     }))
-    this._spinnerService.spinner.next(false);
+    this._spinnerService.setActive(false);
   }
 
   GetEmployee()

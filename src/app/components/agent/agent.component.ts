@@ -73,7 +73,7 @@ export class AgentComponent implements OnInit {
     else{
       alert("Vous n'êtes pas connecté")
     }
-    this._spinnerService.spinner.next(false);
+    this._spinnerService.setActive(false);
   }
 
   //On envoi les données pour le début de service l'appel a StartWork va nous redirigé vers la page ou on affiche le rapport
