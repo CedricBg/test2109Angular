@@ -1,6 +1,6 @@
 
 import { Site } from './../models/customer/site.models';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable,OnInit } from '@angular/core';
@@ -23,6 +23,7 @@ export class CustomerService {
   private isUpdatesiteSubject = new Subject<Customers>()
   private isAddCustomerSubject = new Subject<number>()
   private isDeletedContactSubject = new Subject<Site>()
+  private subscription : Subscription[] = []
   customer: Customers
   constructor(private _httpClient : HttpClient) {  }
 
@@ -78,11 +79,11 @@ export class CustomerService {
 
   GetOneforsiteCustomer(id: number)
   {
-    return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
+    this.subscription.push(this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
       next:  (data: Customers) =>{
         this.isUpdatesiteSubject.next(data)
       }
-    })
+    }))
   }
 
   getAllCustomers()
@@ -92,11 +93,11 @@ export class CustomerService {
 
   getAllCustomersOnCreateSite()
   {
-    return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/').subscribe({
+    this.subscription.push(this._httpClient.get<Customers[]>(environment.baseAdres +'customer/').subscribe({
       next: (data: Customers[])=>{
         this.isCreatesiteSubject.next(data)
       }
-    })
+    }))
   }
 
   GetOne(id: number): Observable<Site>
@@ -111,34 +112,33 @@ export class CustomerService {
 
   GetOneCustomer(id: number)
   {
-    return this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
+    this.subscription.push(this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({
       next: (data: Customers) =>{
         this.customerSubject.next(data)
       }
-    })
+    }))
   }
-
 
   UpdateUser(client: Site)
   {
-    this._httpClient.put<Site>(environment.baseAdres +'customer/site', client).subscribe({
+    this.subscription.push(this._httpClient.put<Site>(environment.baseAdres +'customer/site', client).subscribe({
       next: (data: Site) =>{
         this.isUpdatedSubject.next(data)
       }
-    })
+    }))
   }
 
   UpdateCustomer(customer: Customers)
   {
-    this._httpClient.put<Customers[]>(environment.baseAdres +'customer/', JSON.stringify(customer), this.JsonHeader()).subscribe({
+    this.subscription.push(this._httpClient.put<Customers[]>(environment.baseAdres +'customer/', JSON.stringify(customer), this.JsonHeader()).subscribe({
       next : (data: Customers[]) =>{
         this.isUpdateCustSubject.next(data)
       }
-    })
+    }))
   }
 
   CreateCompany(customer: Customers){
-    return this._httpClient.post<number>(environment.baseAdres +'customer/addCustomer/', customer, this.JsonHeader()).subscribe({
+    this.subscription.push(this._httpClient.post<number>(environment.baseAdres +'customer/addCustomer/', customer, this.JsonHeader()).subscribe({
       next: (data: number)=>{
         this.isAddCustomerSubject.next(data)
         this.getAllCustomers().subscribe({
@@ -148,7 +148,7 @@ export class CustomerService {
           }
         })
       }
-    })
+    }))
   }
 
   CreateSite(site: Site)
@@ -163,11 +163,11 @@ export class CustomerService {
 
   DeleteContact(id: number)
   {
-    return this._httpClient.delete<Site>(environment.baseAdres+'customer/deleteContact/'+id).subscribe({
+    this.subscription.push(this._httpClient.delete<Site>(environment.baseAdres+'customer/deleteContact/'+id).subscribe({
       next: (data: Site)=>{
         this.isDeletedContactSubject.next(data);
       }
-    })
+    }))
   }
 
   GetDeleteContact()
@@ -178,20 +178,26 @@ export class CustomerService {
   //Ici on récupère une liste de Customers quand ajoute une persone de contact a la création d'un site
   AddContactCreateSite(contact: ContactPerson)
   {
-    return this._httpClient.post<Customers[]>(environment.baseAdres + 'customer/addContact/',contact).subscribe({
+    this.subscription.push(this._httpClient.post<Customers[]>(environment.baseAdres + 'customer/addContact/',contact).subscribe({
       next :(data: Customers[])=>{
         this.isAddCustSubject.next(data);
       }
-    })
+    }))
   }
   //Ici on récupère un site quand on ajoute une person de contact via la mise a jour d'un site
   AddContactSite(contact: ContactPerson)
   {
-    return this._httpClient.post<Site>(environment.baseAdres + 'customer/addContactsite/',contact).subscribe({
+    this.subscription.push(this._httpClient.post<Site>(environment.baseAdres + 'customer/addContactsite/',contact).subscribe({
       next :(data: Site)=>{
         this.isUpdatedSubject.next(data)
       }
-    })
+    }))
+  }
+
+  unsubscribe(){
+    this.subscription.forEach(sub => {
+      sub.unsubscribe()
+    });
   }
 
 

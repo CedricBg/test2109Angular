@@ -44,12 +44,13 @@ export class ListCustomerComponent implements OnInit {
   length: number
   customer: Customers
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(private _spinnerService : SpinnerService, private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef, private _snackaBarServcie: SnackBarService) { }
+  constructor(private _spinnerService : SpinnerService, private _CustService: CustomerService, public dialog : MatDialog,private _Router: Router,private cdRef: ChangeDetectorRef, private _snackaBarService: SnackBarService) { }
 
   ngOnInit(): void {
     this.subscriptions.push(this._CustService.getAllCustomers().pipe(first()).subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
+        console.log(this.listCustomers)
         this.getPageData()
       }
     }))
@@ -57,9 +58,11 @@ export class ListCustomerComponent implements OnInit {
     //Retour Update Site
     this.subscriptions.push(this._CustService.getUpdateData().subscribe(newData => {
       this.siteSelected = newData
+      console.log(this.siteSelected)
       this.subscriptions.push(this._CustService.getAllCustomers().subscribe(data=>{
         this.listCustomers = data
-        this._snackaBarServcie.openSnackBar({text1: "Erreur",text2:  "Les changements n'ont pas été ajouté avec succès"});
+        console.log(this.listCustomers)
+        this._snackaBarService.openSnackBar({text1: "Erreur",text2:  "Les changements n'ont pas été ajouté avec succès"});
         this.getPageData()
         }
       ))
@@ -84,15 +87,17 @@ export class ListCustomerComponent implements OnInit {
     this.subscriptions.push(this._CustService.GetCustomersList().subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
+        console.log(this.listCustomers)
         this.getPageData()
+
       }
     }))
-
+    this._spinnerService.setActive(false);
   }
 
   ngAfterViewInit() {
     this.subscriptions.push(this.paginator.page.subscribe(() => this.getPageData()));
-    this._spinnerService.setActive(false);
+
   }
 
   //gestion du pager
@@ -260,10 +265,9 @@ export class ListCustomerComponent implements OnInit {
   }
 
   ngOnDestroy(){
+    this._CustService.unsubscribe()
     this.subscriptions.forEach(subscription  => {
       subscription.unsubscribe()
     })
   }
 }
-
-
