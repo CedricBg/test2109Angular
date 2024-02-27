@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { ThemePalette } from '@angular/material/core';
 import { SpinnerService } from 'src/app/services/spinner.service';
 import { Subscription } from 'rxjs';
 

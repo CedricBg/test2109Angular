@@ -54,14 +54,21 @@ $test2109-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+@font-face {
+  font-family: 'BaiJamJuree';
+  src: url('./assets/BaiJamJuree.woff2') format('woff2');
+}
+
+
+
 *{
-  font-family: "Bai Jamjuree";
+  font-family: "BaiJamJuree", sans-serif;
 }
 
 html, body {
   margin: 0;
   margin: 0;
-  font-family: "Bai Jamjuree";
+  font-family: "BaiJamJuree";
   background-color: #E4EDF8;
 
 }
