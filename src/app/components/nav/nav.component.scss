@@ -23,21 +23,23 @@
   top: 0;
   left: 0;
   background-color: transparent;
+  font-family: "BaiJamJuree";
 }
 
 .nav h1{
-  font-family: "Bai Jamjuree", sans-serif;
   letter-spacing : 0.2em;
   padding-top:1%;
   width:100%;
   padding-left: 4vw;
   font-weight: bold;
+  font-family: "BaiJamJuree";
+
 }
 
 hr{
   color: whitesmoke ;
   position: absolute;
-  top: 7vh;
+  top: 60px;
   left: 4vw;
   width: 93vw;
   z-index: 5;
@@ -60,7 +62,7 @@ hr{
   background: transparent;
   color : black;
   border : none;
-  font-family: "Bai Jamjuree", sans-serif;
+
   letter-spacing : 0.1em;
   width: 170px;
 }

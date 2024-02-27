@@ -30,7 +30,7 @@ export class OpsComponent implements OnInit {
 
   Agent()
   {
-    if(this._Router.url != '/OPS/agent/admin'){
+    if(this._Router.url != '/OPS/agent/admin' && !(this._Router.url.startsWith('/OPS/agent/admin'))){
     this._spinnerService.setActive(true);
     }
 
@@ -39,7 +39,7 @@ export class OpsComponent implements OnInit {
 
   Rondes(chemin: string)
   {
-    if(this._Router.url != 'OPS/ronde/'+chemin && this._Router.url != ('OPS/ronde')){
+    if(this._Router.url != '/OPS/ronde/'+chemin && this._Router.url != ('/OPS/ronde') && !(this._Router.url.startsWith('/OPS/ronde'))){
       this._spinnerService.setActive(true);
     }
     if(!(chemin == ""))
