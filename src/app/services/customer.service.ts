@@ -1,6 +1,6 @@
 
 import { Site } from './../models/customer/site.models';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, tap } from 'rxjs';
 import { environment } from './../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable,OnInit } from '@angular/core';
@@ -23,6 +23,7 @@ export class CustomerService {
   private isUpdatesiteSubject = new Subject<Customers>()
   private isAddCustomerSubject = new Subject<number>()
   private isDeletedContactSubject = new Subject<Site>()
+  private listCutomerSubject = new Subject<Customers[]>()
   private subscription : Subscription[] = []
   customer: Customers
   constructor(private _httpClient : HttpClient) {  }
@@ -72,10 +73,7 @@ export class CustomerService {
     return this.customerSubject.asObservable();
   }
 
-  GetCustomersList()
-  {
-    return this.isCreatesiteSubject.asObservable()
-  }
+
 
   GetOneforsiteCustomer(id: number)
   {
@@ -86,14 +84,25 @@ export class CustomerService {
     }))
   }
 
-  getAllCustomers()
+  getAllCustomersSubject()
   {
-    return this._httpClient.get<Customers[]>(environment.baseAdres +'customer/')
+    return this.listCutomerSubject.asObservable()
+  }
+  getAllCustomers() {
+    return this.subscription.push(this._httpClient.get<Customers[]>(environment.baseAdres +'customer/').subscribe({
+    next : (data: Customers[]) => {
+        this.listCutomerSubject.next(data)
+      }
+    }))
   }
 
+  GetCustomersList()
+  {
+    return this.isCreatesiteSubject.asObservable()
+  }
   getAllCustomersOnCreateSite()
   {
-    this.subscription.push(this._httpClient.get<Customers[]>(environment.baseAdres +'customer/').subscribe({
+   return  this.subscription.push(this._httpClient.get<Customers[]>(environment.baseAdres +'customer/').subscribe({
       next: (data: Customers[])=>{
         this.isCreatesiteSubject.next(data)
       }
@@ -141,7 +150,8 @@ export class CustomerService {
     this.subscription.push(this._httpClient.post<number>(environment.baseAdres +'customer/addCustomer/', customer, this.JsonHeader()).subscribe({
       next: (data: number)=>{
         this.isAddCustomerSubject.next(data)
-        this.getAllCustomers().subscribe({
+        this.getAllCustomers()
+        this.getAllCustomersSubject().subscribe({
           next : (data: Customers[])=>
           {
             this.isAddCustSubject.next(data)
