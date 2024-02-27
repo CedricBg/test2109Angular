@@ -13,7 +13,6 @@ export class SpinnerService {
 
 
   setActive(isActive: boolean) {
-    console.log('setActive', isActive);
     this.isActive = isActive;
     this.spinner.next(this.isActive);
   }

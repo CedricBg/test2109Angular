@@ -23,14 +23,15 @@ export class OpsComponent implements OnInit {
   constructor(private _Router : Router, public _spinnerService: SpinnerService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.connected = this.authService.isConnected;
+    this.subscriptions.push(this.authService.connectedSubject.subscribe((connected: boolean) => {
+      this.connected = connected;
+    }));
     this._spinnerService.setActive(false);
   }
 
   Agent()
   {
     if(this._Router.url != '/OPS/agent/admin'){
-    console.log('Agent');
     this._spinnerService.setActive(true);
     }
 
@@ -72,7 +73,6 @@ export class OpsComponent implements OnInit {
 
     this._Router.navigateByUrl('OPS/customer/listcustomer');
     if(this._Router.url != '/OPS/customer/listcustomer'){
-      console.log('Customer');
       this._spinnerService.setActive(true);
     }
   }

@@ -87,11 +87,12 @@ export class ListCustomerComponent implements OnInit {
         this.getPageData()
       }
     }))
-    this._spinnerService.setActive(false);
+
   }
 
   ngAfterViewInit() {
     this.subscriptions.push(this.paginator.page.subscribe(() => this.getPageData()));
+    this._spinnerService.setActive(false);
   }
 
   //gestion du pager
