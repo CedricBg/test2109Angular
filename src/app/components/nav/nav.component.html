@@ -5,9 +5,9 @@
 
   <div class="login" >
 
-    <button *ngIf="!isConnected" (click)="Login()" type="button">CONNEXION<mat-icon fontIcon="menu"></mat-icon></button>
+    <button *ngIf="!isConnected" (click)="login()" type="button">CONNEXION<mat-icon fontIcon="menu"></mat-icon></button>
 
-    <button *ngIf="isConnected" (click)=" OpenDialog()" type="button"  aria-label="Boutton déconnexion">
+    <button *ngIf="isConnected" (click)=" openDialog()" type="button"  aria-label="Boutton déconnexion">
       {{name| uppercase }}
       <mat-icon fontIcon="menu"></mat-icon></button>
       <hr>

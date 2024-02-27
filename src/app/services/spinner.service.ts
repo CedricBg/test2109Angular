@@ -5,16 +5,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SpinnerService {
-
-  isActive: boolean = false;
-  spinner : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.isActive);
+  spinner : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor() { }
 
-
   setActive(isActive: boolean) {
-    this.isActive = isActive;
-    this.spinner.next(this.isActive);
+    this.spinner.next(isActive);
   }
 }
 

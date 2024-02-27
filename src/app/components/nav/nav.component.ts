@@ -1,3 +1,4 @@
+import { Subscription } from 'rxjs';
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
@@ -21,6 +22,7 @@ import { ThemePalette } from '@angular/material/core';
 export class NavComponent implements OnInit {
   load:boolean = false;
   isConnected : boolean;
+  subscription : Subscription[] = [];
 
   name! : string;
   title: string = 'Shield Connect';
@@ -29,18 +31,17 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void
   {
-    this._spinnerService.spinner.subscribe((data : boolean) => this.load = data)
-    console.log(this.load)
-    this._authService.connectedSubject.subscribe
+    this.subscription.push(this._spinnerService.spinner.subscribe((data : boolean) => this.load = data))
+    this.subscription.push(this._authService.connectedSubject.subscribe
     ({
       next : (data : boolean) => {
         this.isConnected = data
         this.name = sessionStorage.getItem('firstName')
       }
-    })
+    }))
   }
 
-  Login()
+  login()
   {
     const diallogConfig = new MatDialogConfig;
     diallogConfig.disableClose = false;
@@ -53,7 +54,7 @@ export class NavComponent implements OnInit {
 
   }
 
-  OpenDialog()
+  openDialog()
   {
     const diallogConfig = new MatDialogConfig;
     diallogConfig.disableClose = false;
@@ -62,6 +63,10 @@ export class NavComponent implements OnInit {
     diallogConfig.height = '100px';
     diallogConfig.width = '200px';
     const dialogRef = this.dialog.open(UserProfileComponent,diallogConfig);
+  }
+
+  ngOnDestroy(){
+    this.subscription.forEach(sub => sub.unsubscribe());
   }
 
 }

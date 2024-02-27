@@ -66,7 +66,6 @@ constructor(private _rondeService : RondeService,private _SnackBar: SnackBarServ
   GetSite()
   {
     this.rfid = this.listRfid.find(elt=>elt.location === this.selectedValue);
-    console.log(this.rfid)
     this.form()
   }
 
