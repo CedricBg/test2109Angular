@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'OPS',  title: 'Opérations' ,  loadChildren: ()=> import('./app/components/operations/operations.routes')},
   { path: 'agent', title: sessionStorage.getItem('firstName'), loadChildren: ()=> import('./app/components/agent/agent.route')},
   { path: 'ronde', title: 'Gestion des rondes',   loadChildren: ()=> import('./app/components/ronde/ronde.routes')},
+  { path: 'planning', title: 'Gestion des plannings', loadChildren: ()=> import('./app/components/planning/planning.routes')},
   { path: '', redirectTo : 'auth', pathMatch : 'full'},
 ];
 

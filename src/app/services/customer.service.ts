@@ -73,8 +73,6 @@ export class CustomerService {
     return this.customerSubject.asObservable();
   }
 
-
-
   GetOneforsiteCustomer(id: number)
   {
     this.subscription.push(this._httpClient.get<Customers>(environment.baseAdres+'customer/'+id).subscribe({

@@ -69,9 +69,15 @@ export class OpsComponent implements OnInit {
 
   Customers(chemin: string)
   {
-
     this._Router.navigateByUrl('OPS/customer/listcustomer');
     if(this._Router.url != '/OPS/customer/listcustomer'){
+      this._spinnerService.setActive(true);
+    }
+  }
+
+  planning(){
+    this._Router.navigateByUrl('OPS/planning');
+    if(this._Router.url != '/OPS/planning'){
       this._spinnerService.setActive(true);
     }
   }

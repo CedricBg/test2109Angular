@@ -14,6 +14,7 @@ export default [
       canActivate: [OPSGuard]},
       { path: 'ronde',   loadChildren: ()=> import('./../ronde/ronde.routes'),
       canActivate: [OPSGuard]},
+      {path: 'planning',   loadChildren: ()=> import('./../planning/planning.routes'),}
     ]
   } ,
   { path : '**', redirectTo : 'employee', pathMatch : 'full'}
