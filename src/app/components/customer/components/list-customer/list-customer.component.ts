@@ -52,7 +52,6 @@ export class ListCustomerComponent implements OnInit {
     this.subscriptions.push(this._CustService.getAllCustomersSubject().pipe(first()).subscribe({
       next : (data: Customers[])=>{
         this.listCustomers = data
-        console.log(this.listCustomers)
         this.getPageData()
       }
     }))

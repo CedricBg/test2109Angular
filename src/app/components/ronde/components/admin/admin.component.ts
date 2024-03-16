@@ -27,9 +27,9 @@ client!: string;
 action!: string;
 siteId: number;
 
-constructor(private _activetdedRoute : ActivatedRoute, private _builder : FormBuilder, private _router : Router, private _spinnerService : SpinnerService){}
+constructor(private _activatdedRoute : ActivatedRoute, private _builder : FormBuilder, private _router : Router, private _spinnerService : SpinnerService){}
   ngOnInit(): void {
-    this.subscription.push(this._activetdedRoute.data.subscribe({
+    this.subscription.push(this._activatdedRoute.data.subscribe({
       next : (data : Customers[]) => {
         this.listCustomers = data
       }

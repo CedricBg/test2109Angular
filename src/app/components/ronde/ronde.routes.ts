@@ -1,6 +1,6 @@
 import { Routes } from "@angular/router";
 import { listAllCustomerResolver } from "src/app/resolvers/Customer-resolver.resolver";
-import { ListRfidResolver, ListRoundsResolver } from "src/app/resolvers/ronde-resolver.resolver";
+import { ListRoundsResolver } from "src/app/resolvers/ronde-resolver.resolver";
 
 
 
